@@ -1,0 +1,25 @@
+**/*/log/*
+**/*/tmp/*
+*~
+coverage/*
+*.sqlite3
+.bundle
+rdoc/*
+pkg
+log
+test/tmp/*
+
+###########################
+# Archivos con contraseñas
+database.yml
+.ftpquota
+
+###########################
+# en general los comprimidos no van y los backup tampoco
+*~
+*.rar
+*.zip
+*.tar.gz
+*.tar
+*\(copia\)*
+*.bak
