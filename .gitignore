@@ -8,6 +8,7 @@ rdoc/*
 pkg
 log
 test/tmp/*
+tmp/*/*
 
 ###########################
 # Archivos con contraseñas

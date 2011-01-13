@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '~> 3.0.3'
 gem 'squeezer'
 gem 'largentinas'
 gem "will_paginate", "~> 3.0.pre2"
@@ -14,3 +14,6 @@ gem "inherited_resources"
 gem "mysql"
 gem "meta_search"
 gem "builder"
+
+# agregado por eloy
+gem "mysql2"
