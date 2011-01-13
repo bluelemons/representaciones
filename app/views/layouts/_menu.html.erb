@@ -1,0 +1,36 @@
+<div id="menu">
+<ul class="tabs">
+   <li class="hasmore"><a href="#"><span>ABM</span></a>
+     <ul class="dropdown">
+       <li><a href="#">Operadoras</a></li>
+       <li><a href="#">Programas</a></li>
+       <li class="last"><%= link_to 'Localidades', localidads_path%></li>
+     </ul>
+   
+   <li><a href="#"><span>Históricos</span></a></li>
+   <li><a href="#"><span>Reservas</span></a></li>
+   <li><a href="#"><span>Consultas</span></a></li>
+   <li><a href="#"><span>Informes</span></a></li>
+   <li><a href="#"><span>Útiles</span></a></li>
+
+	<li class="hasmore"><a href="#"><span>Recent</span></a>
+		<ul class="dropdown">
+			<li><a href="#">Menu item 1</a></li>
+			<li><a href="#">Menu item 2</a></li>
+			<li><a href="#">Menu item 3</a></li>
+			<li><a href="#">Menu item 4</a></li>
+
+			<li><a href="#">Menu item 5</a></li>
+			<li class="last"><a href="#">Menu item 6</a></li>
+		</ul>
+	</li>
+	
+	<% if user_signed_in? %>  
+     <li><%= link_to "Sign out", destroy_user_session_path %></li>  
+   <% else %>  
+     <li><%= link_to "Sign up", new_user_registration_path %></li>     
+     <li><%= link_to "Sign in", new_user_session_path %></li>
+   <% end %> 
+</ul>
+
+</div>

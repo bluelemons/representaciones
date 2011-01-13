@@ -1,0 +1,27 @@
+= javascript_include_tag  'jquery.layout.min-1.2.0' 
+.ui-layout-center
+  #tabs
+    %ul
+  #content
+    = yield 
+
+.ui-layout-north
+  = render :partial => 'layouts/login' 
+  = render :partial => 'layouts/msn' 
+  
+  #container
+    #flash_notice{:style=>"display:none"}
+    = content_tag :h1, yield(:title) if show_title? 
+  
+  = yield :north 
+
+.ui-layout-south
+  = yield :south     
+
+.ui-layout-east
+  = render :partial => 'layouts/sidebar'
+  = yield :east 
+   
+.ui-layout-west 
+  = yield :west 
+

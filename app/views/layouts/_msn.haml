@@ -1,0 +1,12 @@
+-if flash[:notice]
+  .ui-widget
+    .ui-state-highlight.ui-corner-all{:style=>"margin-top: 20px; padding: 0pt 0.7em;"}
+      %p
+        .ui-icon.ui-icon-info{:style=>"float: left; margin-right: 0.3em;"}
+        =flash[:notice]
+-if flash[:error]
+  .ui-widget
+    .ui-state-error.ui-corner-all{:style=>"margin-top: 20px; padding: 0pt 0.7em;"}
+      %p
+        .ui-icon.ui-icon-alert{:style=>"float: left; margin-right: 0.3em;"}
+        =flash[:error]
