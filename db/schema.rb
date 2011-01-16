@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112132540) do
+ActiveRecord::Schema.define(:version => 20110115204748) do
+
+  create_table "agencias", :force => true do |t|
+    t.string   "name"
+    t.integer  "direccion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -35,9 +42,34 @@ ActiveRecord::Schema.define(:version => 20110112132540) do
     t.datetime "updated_at"
   end
 
+  create_table "direccions", :force => true do |t|
+    t.string   "direccion"
+    t.integer  "cuit"
+    t.string   "telefono"
+    t.string   "legajo"
+    t.string   "email"
+    t.string   "web"
+    t.integer  "localidad_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "localidads", :force => true do |t|
     t.string   "name"
     t.integer  "departamento_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "monedas", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "operadoras", :force => true do |t|
+    t.string   "name"
+    t.integer  "direccion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +83,23 @@ ActiveRecord::Schema.define(:version => 20110112132540) do
     t.datetime "updated_at"
   end
 
+  create_table "pagos", :force => true do |t|
+    t.date     "fecha"
+    t.float    "monto"
+    t.integer  "moneda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pasajeros", :force => true do |t|
+    t.integer  "doc"
+    t.string   "name"
+    t.date     "nacimiento"
+    t.integer  "tdoc_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", :force => true do |t|
     t.integer  "comment_id"
     t.text     "body"
@@ -60,8 +109,38 @@ ActiveRecord::Schema.define(:version => 20110112132540) do
     t.datetime "updated_at"
   end
 
+  create_table "programas", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "provincias", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reserva_pasajeros", :force => true do |t|
+    t.integer  "reserva_id"
+    t.integer  "pasajero_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reservas", :force => true do |t|
+    t.date     "fecha"
+    t.date     "salida"
+    t.integer  "activa"
+    t.string   "reservado"
+    t.string   "hotel"
+    t.integer  "periodo"
+    t.string   "regimen"
+    t.text     "obs"
+    t.integer  "thabitacion_id"
+    t.integer  "programa_id"
+    t.integer  "operadora_id"
+    t.integer  "agencia_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -95,6 +174,38 @@ ActiveRecord::Schema.define(:version => 20110112132540) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tarifa_pagos", :force => true do |t|
+    t.integer  "tarifa_id"
+    t.integer  "pago_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tarifas", :force => true do |t|
+    t.float    "iva"
+    t.integer  "impuesto"
+    t.float    "monto"
+    t.float    "comision"
+    t.float    "efectivo"
+    t.float    "anticipo"
+    t.string   "obs"
+    t.integer  "reserva_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tdocs", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "thabitacions", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
