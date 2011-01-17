@@ -1,0 +1,24 @@
+= form_for(@agencia,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @agencia.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@agencia.errors.count, 'error')} prohibited this agencia from being saved:"
+  
+        %ul
+          - @agencia.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Name
+      %br
+      = f.text_field :name
+    
+    .field
+      = f.label :Direccion_id
+      %br
+      = f.text_field :direccion_id
+    
+    
+    .actions
+      = f.submit 

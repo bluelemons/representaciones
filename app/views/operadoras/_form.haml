@@ -1,0 +1,24 @@
+= form_for(@operadora,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @operadora.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@operadora.errors.count, 'error')} prohibited this operadora from being saved:"
+  
+        %ul
+          - @operadora.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Name
+      %br
+      = f.text_field :name
+    
+    .field
+      = f.label :Direccion_id
+      %br
+      = f.text_field :direccion_id
+    
+    
+    .actions
+      = f.submit 

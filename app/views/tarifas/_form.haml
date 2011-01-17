@@ -1,0 +1,59 @@
+= form_for(@tarifa,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @tarifa.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@tarifa.errors.count, 'error')} prohibited this tarifa from being saved:"
+  
+        %ul
+          - @tarifa.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Iva
+      %br
+      = f.text_field :iva
+    
+    .field
+      = f.label :Impuesto
+      %br
+      = f.text_field :impuesto
+    
+    .field
+      = f.label :Monto
+      %br
+      = f.text_field :monto
+    
+    .field
+      = f.label :Comision
+      %br
+      = f.text_field :comision
+    
+    .field
+      = f.label :Efectivo
+      %br
+      = f.text_field :efectivo
+    
+    .field
+      = f.label :Anticipo
+      %br
+      = f.text_field :anticipo
+    
+    .field
+      = f.label :Comision
+      %br
+      = f.text_field :comision
+    
+    .field
+      = f.label :Obs
+      %br
+      = f.text_field :obs
+    
+    .field
+      = f.label :Reserva_id
+      %br
+      = f.text_field :reserva_id
+    
+    
+    .actions
+      = f.submit 

@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_<%= file_name%>_path,:remote =>true
+    = link_to 'Editar', edit_<%= file_name%>_path(@<%= file_name%>),:remote =>true
+    = link_to 'Todos', <%= plural_name%>_path ,:remote =>true
+=render '<%= file_name %>'

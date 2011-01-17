@@ -1,6 +1,16 @@
+GIT
+  remote: git://github.com/sandal/prawn
+  revision: 89ba0ebf7ac3705756330a25ab4c88e4c71e36d8
+  tag: 0.10.2
+  submodules: true
+  specs:
+    prawn (0.10.2)
+      pdf-reader (>= 0.8.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
+    Ascii85 (1.0.0)
     abstract (1.0.0)
     actionmailer (3.0.3)
       actionpack (= 3.0.3)
@@ -28,6 +38,8 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    acts_as_versioned (0.6.0)
+      activerecord (~> 3.0.0.beta4)
     arel (2.0.6)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
@@ -65,6 +77,8 @@ GEM
     paperclip (2.3.8)
       activerecord
       activesupport
+    pdf-reader (0.9.1)
+      Ascii85 (>= 0.9)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -112,6 +126,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_versioned
   builder
   cancan
   devise (~> 1.1.rc2)
@@ -124,6 +139,7 @@ DEPENDENCIES
   mysql2
   nifty-generators
   paperclip
+  prawn!
   rails (~> 3.0.3)
   rspec-rails
   squeezer

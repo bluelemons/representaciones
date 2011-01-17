@@ -1,0 +1,19 @@
+= form_for(@thabitacion,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @thabitacion.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@thabitacion.errors.count, 'error')} prohibited this thabitacion from being saved:"
+  
+        %ul
+          - @thabitacion.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Name
+      %br
+      = f.text_field :name
+    
+    
+    .actions
+      = f.submit 

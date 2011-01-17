@@ -1,0 +1,43 @@
+=will_paginate @direccions
+
+#direccions_grid
+  %table#migrilla.togrid
+    %tr
+    
+      %th Direccion
+    
+      %th Cuit
+    
+      %th Telefono
+    
+      %th Legajo
+    
+      %th Email
+    
+      %th Web
+    
+      %th Localidad_id
+    
+
+      
+    - for direccion in @direccions   
+      %tr
+        
+        %td= direccion.try(:direccion) 
+        
+        %td= direccion.try(:cuit) 
+        
+        %td= direccion.try(:telefono) 
+        
+        %td= direccion.try(:legajo) 
+        
+        %td= direccion.try(:email) 
+        
+        %td= direccion.try(:web) 
+        
+        %td= direccion.try(:localidad_id) 
+        
+        %td
+          = link_to 'Show', direccion,:remote=>true 
+          = link_to 'Edit', edit_direccion_path(direccion),:remote=>true  
+          = link_to 'Destroy', direccion, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

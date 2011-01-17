@@ -1,0 +1,17 @@
+#versions.ui-widget
+  .ui-widget-header Historia
+  .ui-widget-content
+    %p
+      %b Version:
+      = @tdoc.version
+      %br
+      %b Modificado:
+      = @tdoc.updated_at
+      %br
+      %b Usuario:
+      %br
+      - if @tdoc.version > 1 
+        = link_to "Version anterior - #{@tdoc.version - 1}",{:version=>(@tdoc.version - 1)},:remote =>true
+       
+      - if params[:version]
+        = link_to "Version Actual",@tdoc, :remote=>true 

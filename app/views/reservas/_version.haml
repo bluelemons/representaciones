@@ -1,0 +1,17 @@
+#versions.ui-widget
+  .ui-widget-header Historia
+  .ui-widget-content
+    %p
+      %b Version:
+      = @reserva.version
+      %br
+      %b Modificado:
+      = @reserva.updated_at
+      %br
+      %b Usuario:
+      %br
+      - if @reserva.version > 1 
+        = link_to "Version anterior - #{@reserva.version - 1}",{:version=>(@reserva.version - 1)},:remote =>true
+       
+      - if params[:version]
+        = link_to "Version Actual",@reserva, :remote=>true 

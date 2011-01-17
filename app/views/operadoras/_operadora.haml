@@ -1,0 +1,17 @@
+.ui-widget
+  %h3.ui-widget-header operadora  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_operadora_path(@operadora),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Name:
+    = @operadora.name
+  
+  %p
+    %b Direccion_id:
+    = @operadora.direccion_id
+  

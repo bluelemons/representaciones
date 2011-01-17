@@ -1,0 +1,17 @@
+#versions.ui-widget
+  .ui-widget-header Historia
+  .ui-widget-content
+    %p
+      %b Version:
+      = @programa.version
+      %br
+      %b Modificado:
+      = @programa.updated_at
+      %br
+      %b Usuario:
+      %br
+      - if @programa.version > 1 
+        = link_to "Version anterior - #{@programa.version - 1}",{:version=>(@programa.version - 1)},:remote =>true
+       
+      - if params[:version]
+        = link_to "Version Actual",@programa, :remote=>true 

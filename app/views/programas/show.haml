@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_programa_path,:remote =>true
+    = link_to 'Editar', edit_programa_path(@programa),:remote =>true
+    = link_to 'Todos', programas_path ,:remote =>true
+=render 'programa'

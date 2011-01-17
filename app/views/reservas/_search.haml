@@ -1,0 +1,69 @@
+%div{:style=>'width:49%; float:left'}
+  %h3.ui-widget-header Busqueda
+  = form_for @search,  :html => {:method => :get,:id => 'reservas_search'} do |f|
+     
+    = f.label :fecha
+    %br 
+    = f.text_field :fecha_contains
+    %br
+     
+    = f.label :salida
+    %br 
+    = f.text_field :salida_contains
+    %br
+     
+    = f.label :activa
+    %br 
+    = f.text_field :activa_contains
+    %br
+     
+    = f.label :reservado
+    %br 
+    = f.text_field :reservado_contains
+    %br
+     
+    = f.label :hotel
+    %br 
+    = f.text_field :hotel_contains
+    %br
+     
+    = f.label :periodo
+    %br 
+    = f.text_field :periodo_contains
+    %br
+     
+    = f.label :regimen
+    %br 
+    = f.text_field :regimen_contains
+    %br
+     
+    = f.label :obs
+    %br 
+    = f.text_field :obs_contains
+    %br
+     
+    = f.label :thabitacion_id
+    %br 
+    = f.text_field :thabitacion_id_contains
+    %br
+     
+    = f.label :programa_id
+    %br 
+    = f.text_field :programa_id_contains
+    %br
+     
+    = f.label :operadora_id
+    %br 
+    = f.text_field :operadora_id_contains
+    %br
+     
+    = f.label :agencia_id
+    %br 
+    = f.text_field :agencia_id_contains
+    %br
+    
+    =f.label 'Baja'
+    %br
+    = f.check_box :hidden_eq
+    %br
+    = f.submit('Buscar') 

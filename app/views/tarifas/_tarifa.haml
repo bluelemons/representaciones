@@ -1,0 +1,45 @@
+.ui-widget
+  %h3.ui-widget-header tarifa  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_tarifa_path(@tarifa),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Iva:
+    = @tarifa.iva
+  
+  %p
+    %b Impuesto:
+    = @tarifa.impuesto
+  
+  %p
+    %b Monto:
+    = @tarifa.monto
+  
+  %p
+    %b Comision:
+    = @tarifa.comision
+  
+  %p
+    %b Efectivo:
+    = @tarifa.efectivo
+  
+  %p
+    %b Anticipo:
+    = @tarifa.anticipo
+  
+  %p
+    %b Comision:
+    = @tarifa.comision
+  
+  %p
+    %b Obs:
+    = @tarifa.obs
+  
+  %p
+    %b Reserva_id:
+    = @tarifa.reserva_id
+  

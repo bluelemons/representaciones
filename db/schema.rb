@@ -10,13 +10,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110115204748) do
+ActiveRecord::Schema.define(:version => 20110117210004) do
+
+  create_table "agencia_versions", :force => true do |t|
+    t.integer  "agencia_id"
+    t.integer  "version"
+    t.string   "name"
+    t.integer  "direccion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "agencia_versions", ["agencia_id"], :name => "index_agencia_versions_on_agencia_id"
 
   create_table "agencias", :force => true do |t|
     t.string   "name"
     t.integer  "direccion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "blogs", :force => true do |t|
@@ -42,6 +58,24 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.datetime "updated_at"
   end
 
+  create_table "direccion_versions", :force => true do |t|
+    t.integer  "direccion_id"
+    t.integer  "version"
+    t.string   "direccion"
+    t.integer  "cuit"
+    t.string   "telefono"
+    t.string   "legajo"
+    t.string   "email"
+    t.string   "web"
+    t.integer  "localidad_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "direccion_versions", ["direccion_id"], :name => "index_direccion_versions_on_direccion_id"
+
   create_table "direccions", :force => true do |t|
     t.string   "direccion"
     t.integer  "cuit"
@@ -52,6 +86,9 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.integer  "localidad_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "localidads", :force => true do |t|
@@ -61,17 +98,48 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.datetime "updated_at"
   end
 
+  create_table "moneda_versions", :force => true do |t|
+    t.integer  "moneda_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "moneda_versions", ["moneda_id"], :name => "index_moneda_versions_on_moneda_id"
+
   create_table "monedas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
+
+  create_table "operadora_versions", :force => true do |t|
+    t.integer  "operadora_id"
+    t.integer  "version"
+    t.string   "name"
+    t.integer  "direccion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "operadora_versions", ["operadora_id"], :name => "index_operadora_versions_on_operadora_id"
 
   create_table "operadoras", :force => true do |t|
     t.string   "name"
     t.integer  "direccion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "pages", :force => true do |t|
@@ -83,13 +151,45 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.datetime "updated_at"
   end
 
+  create_table "pago_versions", :force => true do |t|
+    t.integer  "pago_id"
+    t.integer  "version"
+    t.date     "fecha"
+    t.float    "monto"
+    t.integer  "moneda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "pago_versions", ["pago_id"], :name => "index_pago_versions_on_pago_id"
+
   create_table "pagos", :force => true do |t|
     t.date     "fecha"
     t.float    "monto"
     t.integer  "moneda_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
+
+  create_table "pasajero_versions", :force => true do |t|
+    t.integer  "pasajero_id"
+    t.integer  "version"
+    t.integer  "doc"
+    t.string   "name"
+    t.date     "nacimiento"
+    t.integer  "tdoc_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",      :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "pasajero_versions", ["pasajero_id"], :name => "index_pasajero_versions_on_pasajero_id"
 
   create_table "pasajeros", :force => true do |t|
     t.integer  "doc"
@@ -98,6 +198,9 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.integer  "tdoc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "posts", :force => true do |t|
@@ -109,10 +212,25 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.datetime "updated_at"
   end
 
+  create_table "programa_versions", :force => true do |t|
+    t.integer  "programa_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",      :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "programa_versions", ["programa_id"], :name => "index_programa_versions_on_programa_id"
+
   create_table "programas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "provincias", :force => true do |t|
@@ -121,12 +239,28 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.datetime "updated_at"
   end
 
-  create_table "reserva_pasajeros", :force => true do |t|
+  create_table "reserva_versions", :force => true do |t|
     t.integer  "reserva_id"
-    t.integer  "pasajero_id"
+    t.integer  "version"
+    t.date     "fecha"
+    t.date     "salida"
+    t.integer  "activa"
+    t.string   "reservado"
+    t.string   "hotel"
+    t.integer  "periodo"
+    t.string   "regimen"
+    t.text     "obs"
+    t.integer  "thabitacion_id"
+    t.integer  "programa_id"
+    t.integer  "operadora_id"
+    t.integer  "agencia_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",         :default => false
+    t.integer  "user_id"
   end
+
+  add_index "reserva_versions", ["reserva_id"], :name => "index_reserva_versions_on_reserva_id"
 
   create_table "reservas", :force => true do |t|
     t.date     "fecha"
@@ -143,6 +277,9 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.integer  "agencia_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",         :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "roles", :force => true do |t|
@@ -178,12 +315,24 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.datetime "updated_at"
   end
 
-  create_table "tarifa_pagos", :force => true do |t|
+  create_table "tarifa_versions", :force => true do |t|
     t.integer  "tarifa_id"
-    t.integer  "pago_id"
+    t.integer  "version"
+    t.float    "iva"
+    t.integer  "impuesto"
+    t.float    "monto"
+    t.float    "comision"
+    t.float    "efectivo"
+    t.float    "anticipo"
+    t.string   "obs"
+    t.integer  "reserva_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
   end
+
+  add_index "tarifa_versions", ["tarifa_id"], :name => "index_tarifa_versions_on_tarifa_id"
 
   create_table "tarifas", :force => true do |t|
     t.float    "iva"
@@ -196,18 +345,51 @@ ActiveRecord::Schema.define(:version => 20110115204748) do
     t.integer  "reserva_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
+
+  create_table "tdoc_versions", :force => true do |t|
+    t.integer  "tdoc_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "tdoc_versions", ["tdoc_id"], :name => "index_tdoc_versions_on_tdoc_id"
 
   create_table "tdocs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
+
+  create_table "thabitacion_versions", :force => true do |t|
+    t.integer  "thabitacion_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",         :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "thabitacion_versions", ["thabitacion_id"], :name => "index_thabitacion_versions_on_thabitacion_id"
 
   create_table "thabitacions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "users", :force => true do |t|

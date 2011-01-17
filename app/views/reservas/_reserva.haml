@@ -1,0 +1,57 @@
+.ui-widget
+  %h3.ui-widget-header reserva  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Fecha:
+    = @reserva.fecha
+  
+  %p
+    %b Salida:
+    = @reserva.salida
+  
+  %p
+    %b Activa:
+    = @reserva.activa
+  
+  %p
+    %b Reservado:
+    = @reserva.reservado
+  
+  %p
+    %b Hotel:
+    = @reserva.hotel
+  
+  %p
+    %b Periodo:
+    = @reserva.periodo
+  
+  %p
+    %b Regimen:
+    = @reserva.regimen
+  
+  %p
+    %b Obs:
+    = @reserva.obs
+  
+  %p
+    %b Thabitacion_id:
+    = @reserva.thabitacion_id
+  
+  %p
+    %b Programa_id:
+    = @reserva.programa_id
+  
+  %p
+    %b Operadora_id:
+    = @reserva.operadora_id
+  
+  %p
+    %b Agencia_id:
+    = @reserva.agencia_id
+  

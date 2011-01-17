@@ -1,0 +1,21 @@
+.ui-widget
+  %h3.ui-widget-header pago  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_pago_path(@pago),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Fecha:
+    = @pago.fecha
+  
+  %p
+    %b Monto:
+    = @pago.monto
+  
+  %p
+    %b Moneda_id:
+    = @pago.moneda_id
+  

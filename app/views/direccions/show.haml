@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_direccion_path,:remote =>true
+    = link_to 'Editar', edit_direccion_path(@direccion),:remote =>true
+    = link_to 'Todos', direccions_path ,:remote =>true
+=render 'direccion'

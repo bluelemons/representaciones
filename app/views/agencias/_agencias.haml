@@ -1,0 +1,23 @@
+=will_paginate @agencias
+
+#agencias_grid
+  %table#migrilla.togrid
+    %tr
+    
+      %th Name
+    
+      %th Direccion_id
+    
+
+      
+    - for agencia in @agencias   
+      %tr
+        
+        %td= agencia.try(:name) 
+        
+        %td= agencia.try(:direccion_id) 
+        
+        %td
+          = link_to 'Show', agencia,:remote=>true 
+          = link_to 'Edit', edit_agencia_path(agencia),:remote=>true  
+          = link_to 'Destroy', agencia, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

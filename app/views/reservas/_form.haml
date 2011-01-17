@@ -1,0 +1,74 @@
+= form_for(@reserva,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @reserva.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@reserva.errors.count, 'error')} prohibited this reserva from being saved:"
+  
+        %ul
+          - @reserva.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Fecha
+      %br
+      = f.text_field :fecha
+    
+    .field
+      = f.label :Salida
+      %br
+      = f.text_field :salida
+    
+    .field
+      = f.label :Activa
+      %br
+      = f.text_field :activa
+    
+    .field
+      = f.label :Reservado
+      %br
+      = f.text_field :reservado
+    
+    .field
+      = f.label :Hotel
+      %br
+      = f.text_field :hotel
+    
+    .field
+      = f.label :Periodo
+      %br
+      = f.text_field :periodo
+    
+    .field
+      = f.label :Regimen
+      %br
+      = f.text_field :regimen
+    
+    .field
+      = f.label :Obs
+      %br
+      = f.text_field :obs
+    
+    .field
+      = f.label :Thabitacion_id
+      %br
+      = f.text_field :thabitacion_id
+    
+    .field
+      = f.label :Programa_id
+      %br
+      = f.text_field :programa_id
+    
+    .field
+      = f.label :Operadora_id
+      %br
+      = f.text_field :operadora_id
+    
+    .field
+      = f.label :Agencia_id
+      %br
+      = f.text_field :agencia_id
+    
+    
+    .actions
+      = f.submit 

@@ -1,0 +1,13 @@
+.ui-widget
+  %h3.ui-widget-header programa  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_programa_path(@programa),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Name:
+    = @programa.name
+  

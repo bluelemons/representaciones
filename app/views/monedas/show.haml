@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_moneda_path,:remote =>true
+    = link_to 'Editar', edit_moneda_path(@moneda),:remote =>true
+    = link_to 'Todos', monedas_path ,:remote =>true
+=render 'moneda'

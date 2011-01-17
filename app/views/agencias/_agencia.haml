@@ -1,0 +1,17 @@
+.ui-widget
+  %h3.ui-widget-header agencia  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_agencia_path(@agencia),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Name:
+    = @agencia.name
+  
+  %p
+    %b Direccion_id:
+    = @agencia.direccion_id
+  

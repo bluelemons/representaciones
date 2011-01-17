@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_reserva_path,:remote =>true
+    = link_to 'Editar', edit_reserva_path(@reserva),:remote =>true
+    = link_to 'Todos', reservas_path ,:remote =>true
+=render 'reserva'

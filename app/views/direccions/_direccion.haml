@@ -1,0 +1,37 @@
+.ui-widget
+  %h3.ui-widget-header direccion  
+  .left{:style=>'float:right'}
+    .action_bar
+      = link_to 'Editar', edit_direccion_path(@direccion),:remote=>true,:width =>'200px'
+    %br
+  = render :partial => "version"
+  
+  
+  %p
+    %b Direccion:
+    = @direccion.direccion
+  
+  %p
+    %b Cuit:
+    = @direccion.cuit
+  
+  %p
+    %b Telefono:
+    = @direccion.telefono
+  
+  %p
+    %b Legajo:
+    = @direccion.legajo
+  
+  %p
+    %b Email:
+    = @direccion.email
+  
+  %p
+    %b Web:
+    = @direccion.web
+  
+  %p
+    %b Localidad_id:
+    = @direccion.localidad_id
+  

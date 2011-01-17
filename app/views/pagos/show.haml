@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_pago_path,:remote =>true
+    = link_to 'Editar', edit_pago_path(@pago),:remote =>true
+    = link_to 'Todos', pagos_path ,:remote =>true
+=render 'pago'

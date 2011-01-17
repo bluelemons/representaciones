@@ -1,0 +1,49 @@
+= form_for(@direccion,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @direccion.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@direccion.errors.count, 'error')} prohibited this direccion from being saved:"
+  
+        %ul
+          - @direccion.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Direccion
+      %br
+      = f.text_field :direccion
+    
+    .field
+      = f.label :Cuit
+      %br
+      = f.text_field :cuit
+    
+    .field
+      = f.label :Telefono
+      %br
+      = f.text_field :telefono
+    
+    .field
+      = f.label :Legajo
+      %br
+      = f.text_field :legajo
+    
+    .field
+      = f.label :Email
+      %br
+      = f.text_field :email
+    
+    .field
+      = f.label :Web
+      %br
+      = f.text_field :web
+    
+    .field
+      = f.label :Localidad_id
+      %br
+      = f.text_field :localidad_id
+    
+    
+    .actions
+      = f.submit 

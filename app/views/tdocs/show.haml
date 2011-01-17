@@ -1,0 +1,8 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    = link_to 'Nuevo', new_tdoc_path,:remote =>true
+    = link_to 'Editar', edit_tdoc_path(@tdoc),:remote =>true
+    = link_to 'Todos', tdocs_path ,:remote =>true
+=render 'tdoc'

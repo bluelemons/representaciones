@@ -1,0 +1,19 @@
+=will_paginate @thabitacions
+
+#thabitacions_grid
+  %table#migrilla.togrid
+    %tr
+    
+      %th Name
+    
+
+      
+    - for thabitacion in @thabitacions   
+      %tr
+        
+        %td= thabitacion.try(:name) 
+        
+        %td
+          = link_to 'Show', thabitacion,:remote=>true 
+          = link_to 'Edit', edit_thabitacion_path(thabitacion),:remote=>true  
+          = link_to 'Destroy', thabitacion, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

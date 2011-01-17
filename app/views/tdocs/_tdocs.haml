@@ -1,0 +1,19 @@
+=will_paginate @tdocs
+
+#tdocs_grid
+  %table#migrilla.togrid
+    %tr
+    
+      %th Name
+    
+
+      
+    - for tdoc in @tdocs   
+      %tr
+        
+        %td= tdoc.try(:name) 
+        
+        %td
+          = link_to 'Show', tdoc,:remote=>true 
+          = link_to 'Edit', edit_tdoc_path(tdoc),:remote=>true  
+          = link_to 'Destroy', tdoc, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

@@ -1,0 +1,14 @@
+%div{:style=>'width:49%; float:left'}
+  %h3.ui-widget-header Busqueda
+  = form_for @search,  :html => {:method => :get,:id => 'programas_search'} do |f|
+     
+    = f.label :name
+    %br 
+    = f.text_field :name_contains
+    %br
+    
+    =f.label 'Baja'
+    %br
+    = f.check_box :hidden_eq
+    %br
+    = f.submit('Buscar') 

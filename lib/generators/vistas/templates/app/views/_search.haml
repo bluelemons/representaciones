@@ -1,0 +1,13 @@
+.half.left
+  %h3.ui-widget-header Busqueda
+  = form_for @search,  :html => {:method => :get,:id => '<%= plural_name %>_search'} do |f|
+    <% for attribute in @model_attributes %> 
+    = f.label :<%= attribute.name %>
+    %br 
+    = f.text_field :<%= attribute.name %>_<%if attribute.type == "string" %>contains<% else %>eq<%end%>
+    %br<% end %>
+    =f.label 'Baja'
+    %br
+    = f.check_box :hidden_eq
+    %br
+    = f.submit('Buscar') 

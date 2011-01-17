@@ -1,3 +1,16 @@
+.action_bar{
+  padding-top:4px;
+  padding-bottom:4px;
+}
+.left{
+  float:left
+}
+.right{
+  float:right
+}
+.half{
+  width:50%
+}
 .ui-layout-north{
   height: 40px;
 }

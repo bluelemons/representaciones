@@ -1,0 +1,19 @@
+=will_paginate @<%= plural_name %>
+
+#<%= plural_name %>_grid
+  %table#migrilla.togrid
+    %tr
+    <% for attribute in @model_attributes %>
+      %th <%= attribute.name.capitalize %>
+    <% end %>
+
+      
+    - for <%= file_name %> in @<%= plural_name %>   
+      %tr
+        <% for attribute in @model_attributes %>
+        %td= <%= file_name %>.try(:<%= attribute.name %>) 
+        <% end %>
+        %td
+          = link_to 'Show', <%= file_name %>,:remote=>true 
+          = link_to 'Edit', edit_<%= file_name %>_path(<%= file_name %>),:remote=>true  
+          = link_to 'Destroy', <%= file_name %>, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
