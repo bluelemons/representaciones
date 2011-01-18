@@ -1,6 +1,6 @@
 .half.left
   %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:id => '<%= plural_name %>_search'} do |f|
+  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
     <% for attribute in @model_attributes %> 
     = f.label :<%= attribute.name %>
     %br 
