@@ -9,6 +9,7 @@ pkg
 log
 test/tmp/*
 tmp/*/*
+Gemfile.lock
 
 ###########################
 # Archivos con contraseñas
