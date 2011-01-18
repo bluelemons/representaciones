@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tdocs/new.html.erb" do
+describe "tdocs/new.haml" do
   before(:each) do
     assign(:tdoc, stub_model(Tdoc,
       :name => "MyString"
@@ -11,7 +11,7 @@ describe "tdocs/new.html.erb" do
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "form", :action => tdocs_path, :method => "post" do
+    assert_select "form", :action => tdocs_path, :method => "post",:format =>:haml do
       assert_select "input#tdoc_name", :name => "tdoc[name]"
     end
   end

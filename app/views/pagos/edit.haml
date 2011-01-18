@@ -1,0 +1,10 @@
+.ui-widget
+  %h1.ui-widget-header Pago
+  
+  .action_bar
+    = link_to 'Nuevo', pagos_path,:remote => true 
+  #pago.half.right
+  
+    = render :partial => "edit"
+  
+  #pagos.half.left

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "reservas/new.html.erb" do
+describe "reservas/new.haml" do
   before(:each) do
     assign(:reserva, stub_model(Reserva,
       :activa => 1,

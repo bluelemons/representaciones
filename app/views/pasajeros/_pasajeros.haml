@@ -1,31 +1,35 @@
-=will_paginate @pasajeros
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @pasajeros
 
-#pasajeros_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Doc
-    
-      %th Name
-    
-      %th Nacimiento
-    
-      %th Tdoc_id
-    
-
-      
-    - for pasajero in @pasajeros   
+  #pasajeros_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Doc
+      
+        %th Name
+      
+        %th Nacimiento
+      
+        %th Tdoc_id
+      
+      %th Acciones
+  
         
-        %td= pasajero.try(:doc) 
-        
-        %td= pasajero.try(:name) 
-        
-        %td= pasajero.try(:nacimiento) 
-        
-        %td= pasajero.try(:tdoc_id) 
-        
-        %td
-          = link_to 'Show', pasajero,:remote=>true 
-          = link_to 'Edit', edit_pasajero_path(pasajero),:remote=>true  
-          = link_to 'Destroy', pasajero, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for pasajero in @pasajeros   
+        %tr
+          
+          %td= pasajero.try(:doc) 
+          
+          %td= pasajero.try(:name) 
+          
+          %td= pasajero.try(:nacimiento) 
+          
+          %td= pasajero.try(:tdoc_id) 
+          
+          %td
+            = link_to 'Show', pasajero,:remote=>true 
+            = link_to 'Edit', edit_pasajero_path(pasajero),:remote=>true  
+            = link_to 'Destroy', pasajero, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

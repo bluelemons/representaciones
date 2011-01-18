@@ -1,27 +1,23 @@
-%div{:style=>'width:49%; float:left'}
+.half.left
   %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:id => 'pasajeros_search'} do |f|
+  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
      
     = f.label :doc
     %br 
-    = f.text_field :doc_contains
-    %br
-     
+    = f.text_field :doc_eq
+    %br 
     = f.label :name
     %br 
-    = f.text_field :name_contains
-    %br
-     
+    = f.text_field :name_eq
+    %br 
     = f.label :nacimiento
     %br 
-    = f.text_field :nacimiento_contains
-    %br
-     
+    = f.text_field :nacimiento_eq
+    %br 
     = f.label :tdoc_id
     %br 
-    = f.text_field :tdoc_id_contains
+    = f.text_field :tdoc_id_eq
     %br
-    
     =f.label 'Baja'
     %br
     = f.check_box :hidden_eq

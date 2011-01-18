@@ -1,0 +1,10 @@
+.ui-widget
+  %h1.ui-widget-header Direccion
+  
+  .action_bar
+    = link_to 'Nuevo', direccions_path,:remote => true 
+  #direccion.half.right
+  
+    = render :partial => "edit"
+  
+  #direccions.half.left

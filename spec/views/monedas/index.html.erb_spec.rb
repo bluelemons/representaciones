@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "monedas/index.html.erb" do
+describe "monedas/index.haml" do
   before(:each) do
     assign(:monedas, [
       stub_model(Moneda,

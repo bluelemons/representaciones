@@ -1,42 +1,35 @@
-%div{:style=>'width:49%; float:left'}
+.half.left
   %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:id => 'direccions_search'} do |f|
+  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
      
     = f.label :direccion
     %br 
-    = f.text_field :direccion_contains
-    %br
-     
+    = f.text_field :direccion_eq
+    %br 
     = f.label :cuit
     %br 
-    = f.text_field :cuit_contains
-    %br
-     
+    = f.text_field :cuit_eq
+    %br 
     = f.label :telefono
     %br 
-    = f.text_field :telefono_contains
-    %br
-     
+    = f.text_field :telefono_eq
+    %br 
     = f.label :legajo
     %br 
-    = f.text_field :legajo_contains
-    %br
-     
+    = f.text_field :legajo_eq
+    %br 
     = f.label :email
     %br 
-    = f.text_field :email_contains
-    %br
-     
+    = f.text_field :email_eq
+    %br 
     = f.label :web
     %br 
-    = f.text_field :web_contains
-    %br
-     
+    = f.text_field :web_eq
+    %br 
     = f.label :localidad_id
     %br 
-    = f.text_field :localidad_id_contains
+    = f.text_field :localidad_id_eq
     %br
-    
     =f.label 'Baja'
     %br
     = f.check_box :hidden_eq

@@ -1,0 +1,10 @@
+.ui-widget
+  %h1.ui-widget-header Programa
+  
+  .action_bar
+    = link_to 'Nuevo', programas_path,:remote => true 
+  #programa.half.right
+  
+    = render :partial => "edit"
+  
+  #programas.half.left

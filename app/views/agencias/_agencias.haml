@@ -1,24 +1,27 @@
-=will_paginate @agencias
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @agencias
 
-#agencias_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Name
-    
-      %th Direccion_id
-
-      %th acciones    
-
-      
-    - for agencia in @agencias   
+  #agencias_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Name
+      
+        %th Direccion_id
+      
+      %th Acciones
+  
         
-        %td= agencia.try(:name) 
-        
-        %td= agencia.try(:direccion_id) 
-        
-        %td
-          = link_to 'Show', agencia,:remote=>true 
-          = link_to 'Edit', edit_agencia_path(agencia),:remote=>true  
-          = link_to 'Destroy', agencia, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for agencia in @agencias   
+        %tr
+          
+          %td= agencia.try(:name) 
+          
+          %td= agencia.try(:direccion_id) 
+          
+          %td
+            = link_to 'Show', agencia,:remote=>true 
+            = link_to 'Edit', edit_agencia_path(agencia),:remote=>true  
+            = link_to 'Destroy', agencia, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

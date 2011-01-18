@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tdocs/edit.html.erb" do
+describe "tdocs/edit.haml" do
   before(:each) do
     @tdoc = assign(:tdoc, stub_model(Tdoc,
       :name => "MyString"

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tarifas/index.html.erb" do
+describe "tarifas/index.haml" do
   before(:each) do
     assign(:tarifas, [
       stub_model(Tarifa,

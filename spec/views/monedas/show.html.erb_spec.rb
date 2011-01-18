@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "monedas/show.html.erb" do
+describe "monedas/show.haml" do
   before(:each) do
     @moneda = assign(:moneda, stub_model(Moneda,
       :name => "Name"

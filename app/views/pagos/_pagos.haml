@@ -1,27 +1,31 @@
-=will_paginate @pagos
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @pagos
 
-#pagos_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Fecha
-    
-      %th Monto
-    
-      %th Moneda_id
-    
-
-      
-    - for pago in @pagos   
+  #pagos_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Fecha
+      
+        %th Monto
+      
+        %th Moneda_id
+      
+      %th Acciones
+  
         
-        %td= pago.try(:fecha) 
-        
-        %td= pago.try(:monto) 
-        
-        %td= pago.try(:moneda_id) 
-        
-        %td
-          = link_to 'Show', pago,:remote=>true 
-          = link_to 'Edit', edit_pago_path(pago),:remote=>true  
-          = link_to 'Destroy', pago, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for pago in @pagos   
+        %tr
+          
+          %td= pago.try(:fecha) 
+          
+          %td= pago.try(:monto) 
+          
+          %td= pago.try(:moneda_id) 
+          
+          %td
+            = link_to 'Show', pago,:remote=>true 
+            = link_to 'Edit', edit_pago_path(pago),:remote=>true  
+            = link_to 'Destroy', pago, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

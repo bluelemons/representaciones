@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "direccions/new.html.erb" do
+describe "direccions/new.haml" do
   before(:each) do
     assign(:direccion, stub_model(Direccion,
       :direccion => "MyString",

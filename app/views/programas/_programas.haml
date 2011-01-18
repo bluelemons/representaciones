@@ -1,19 +1,23 @@
-=will_paginate @programas
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @programas
 
-#programas_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Name
-    
-
-      
-    - for programa in @programas   
+  #programas_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Name
+      
+      %th Acciones
+  
         
-        %td= programa.try(:name) 
-        
-        %td
-          = link_to 'Show', programa,:remote=>true 
-          = link_to 'Edit', edit_programa_path(programa),:remote=>true  
-          = link_to 'Destroy', programa, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for programa in @programas   
+        %tr
+          
+          %td= programa.try(:name) 
+          
+          %td
+            = link_to 'Show', programa,:remote=>true 
+            = link_to 'Edit', edit_programa_path(programa),:remote=>true  
+            = link_to 'Destroy', programa, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

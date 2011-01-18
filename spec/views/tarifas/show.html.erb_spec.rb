@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tarifas/show.html.erb" do
+describe "tarifas/show.haml" do
   before(:each) do
     @tarifa = assign(:tarifa, stub_model(Tarifa,
       :iva => 1.5,

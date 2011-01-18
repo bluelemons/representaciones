@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "programas/edit.html.erb" do
+describe "programas/edit.haml" do
   before(:each) do
     @programa = assign(:programa, stub_model(Programa,
       :name => "MyString"

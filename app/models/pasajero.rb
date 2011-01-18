@@ -12,7 +12,7 @@ class Pasajero < ActiveRecord::Base
   #validates :tdoc_id, :presence => true
   #scopes
   scope :baja, where(:hidden=>0)
-  
+ 
   #metodos
   
 end

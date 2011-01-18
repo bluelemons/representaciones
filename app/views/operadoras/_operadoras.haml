@@ -1,23 +1,27 @@
-=will_paginate @operadoras
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @operadoras
 
-#operadoras_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Name
-    
-      %th Direccion_id
-    
-
-      
-    - for operadora in @operadoras   
+  #operadoras_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Name
+      
+        %th Direccion_id
+      
+      %th Acciones
+  
         
-        %td= operadora.try(:name) 
-        
-        %td= operadora.try(:direccion_id) 
-        
-        %td
-          = link_to 'Show', operadora,:remote=>true 
-          = link_to 'Edit', edit_operadora_path(operadora),:remote=>true  
-          = link_to 'Destroy', operadora, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for operadora in @operadoras   
+        %tr
+          
+          %td= operadora.try(:name) 
+          
+          %td= operadora.try(:direccion_id) 
+          
+          %td
+            = link_to 'Show', operadora,:remote=>true 
+            = link_to 'Edit', edit_operadora_path(operadora),:remote=>true  
+            = link_to 'Destroy', operadora, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

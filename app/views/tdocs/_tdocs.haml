@@ -1,19 +1,23 @@
-=will_paginate @tdocs
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @tdocs
 
-#tdocs_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Name
-    
-
-      
-    - for tdoc in @tdocs   
+  #tdocs_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Name
+      
+      %th Acciones
+  
         
-        %td= tdoc.try(:name) 
-        
-        %td
-          = link_to 'Show', tdoc,:remote=>true 
-          = link_to 'Edit', edit_tdoc_path(tdoc),:remote=>true  
-          = link_to 'Destroy', tdoc, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for tdoc in @tdocs   
+        %tr
+          
+          %td= tdoc.try(:name) 
+          
+          %td
+            = link_to 'Show', tdoc,:remote=>true 
+            = link_to 'Edit', edit_tdoc_path(tdoc),:remote=>true  
+            = link_to 'Destroy', tdoc, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

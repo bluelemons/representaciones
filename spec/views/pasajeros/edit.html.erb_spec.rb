@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "pasajeros/edit.html.erb" do
+describe "pasajeros/edit.haml" do
   before(:each) do
     @pasajero = assign(:pasajero, stub_model(Pasajero,
       :doc => 1,

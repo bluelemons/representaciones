@@ -1,19 +1,23 @@
-=will_paginate @monedas
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @monedas
 
-#monedas_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Name
-    
-
-      
-    - for moneda in @monedas   
+  #monedas_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Name
+      
+      %th Acciones
+  
         
-        %td= moneda.try(:name) 
-        
-        %td
-          = link_to 'Show', moneda,:remote=>true 
-          = link_to 'Edit', edit_moneda_path(moneda),:remote=>true  
-          = link_to 'Destroy', moneda, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for moneda in @monedas   
+        %tr
+          
+          %td= moneda.try(:name) 
+          
+          %td
+            = link_to 'Show', moneda,:remote=>true 
+            = link_to 'Edit', edit_moneda_path(moneda),:remote=>true  
+            = link_to 'Destroy', moneda, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

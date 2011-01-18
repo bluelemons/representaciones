@@ -1,0 +1,10 @@
+.ui-widget
+  %h1.ui-widget-header Moneda
+  
+  .action_bar
+    = link_to 'Nuevo', monedas_path,:remote => true 
+  #moneda.half.right
+  
+    = render :partial => "edit"
+  
+  #monedas.half.left

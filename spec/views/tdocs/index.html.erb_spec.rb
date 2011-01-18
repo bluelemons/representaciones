@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "tdocs/index.html.erb" do
+describe "tdocs/index.haml" do
   before(:each) do
     assign(:tdocs, [
       stub_model(Tdoc,

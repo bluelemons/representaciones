@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "agencias/index.html.erb" do
+describe "agencias/index.haml" do
   before(:each) do
     assign(:agencias, [
       stub_model(Agencia,

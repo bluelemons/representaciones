@@ -1,63 +1,67 @@
-=will_paginate @reservas
+= render :partial => "search"
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @reservas
 
-#reservas_grid
-  %table#migrilla.togrid
-    %tr
-    
-      %th Fecha
-    
-      %th Salida
-    
-      %th Activa
-    
-      %th Reservado
-    
-      %th Hotel
-    
-      %th Periodo
-    
-      %th Regimen
-    
-      %th Obs
-    
-      %th Thabitacion_id
-    
-      %th Programa_id
-    
-      %th Operadora_id
-    
-      %th Agencia_id
-    
-
-      
-    - for reserva in @reservas   
+  #reservas_grid
+    %table#migrilla.togrid
       %tr
+      
+        %th Fecha
+      
+        %th Salida
+      
+        %th Activa
+      
+        %th Reservado
+      
+        %th Hotel
+      
+        %th Periodo
+      
+        %th Regimen
+      
+        %th Obs
+      
+        %th Thabitacion_id
+      
+        %th Programa_id
+      
+        %th Operadora_id
+      
+        %th Agencia_id
+      
+      %th Acciones
+  
         
-        %td= reserva.try(:fecha) 
-        
-        %td= reserva.try(:salida) 
-        
-        %td= reserva.try(:activa) 
-        
-        %td= reserva.try(:reservado) 
-        
-        %td= reserva.try(:hotel) 
-        
-        %td= reserva.try(:periodo) 
-        
-        %td= reserva.try(:regimen) 
-        
-        %td= reserva.try(:obs) 
-        
-        %td= reserva.try(:thabitacion_id) 
-        
-        %td= reserva.try(:programa_id) 
-        
-        %td= reserva.try(:operadora_id) 
-        
-        %td= reserva.try(:agencia_id) 
-        
-        %td
-          = link_to 'Show', reserva,:remote=>true 
-          = link_to 'Edit', edit_reserva_path(reserva),:remote=>true  
-          = link_to 'Destroy', reserva, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+      - for reserva in @reservas   
+        %tr
+          
+          %td= reserva.try(:fecha) 
+          
+          %td= reserva.try(:salida) 
+          
+          %td= reserva.try(:activa) 
+          
+          %td= reserva.try(:reservado) 
+          
+          %td= reserva.try(:hotel) 
+          
+          %td= reserva.try(:periodo) 
+          
+          %td= reserva.try(:regimen) 
+          
+          %td= reserva.try(:obs) 
+          
+          %td= reserva.try(:thabitacion_id) 
+          
+          %td= reserva.try(:programa_id) 
+          
+          %td= reserva.try(:operadora_id) 
+          
+          %td= reserva.try(:agencia_id) 
+          
+          %td
+            = link_to 'Show', reserva,:remote=>true 
+            = link_to 'Edit', edit_reserva_path(reserva),:remote=>true  
+            = link_to 'Destroy', reserva, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "pagos/new.html.erb" do
+describe "pagos/new.haml" do
   before(:each) do
     assign(:pago, stub_model(Pago,
       :monto => 1.5,

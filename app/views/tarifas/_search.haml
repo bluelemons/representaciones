@@ -1,52 +1,43 @@
-%div{:style=>'width:49%; float:left'}
+.half.left
   %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:id => 'tarifas_search'} do |f|
+  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
      
     = f.label :iva
     %br 
-    = f.text_field :iva_contains
-    %br
-     
+    = f.text_field :iva_eq
+    %br 
     = f.label :impuesto
     %br 
-    = f.text_field :impuesto_contains
-    %br
-     
+    = f.text_field :impuesto_eq
+    %br 
     = f.label :monto
     %br 
-    = f.text_field :monto_contains
-    %br
-     
+    = f.text_field :monto_eq
+    %br 
     = f.label :comision
     %br 
-    = f.text_field :comision_contains
-    %br
-     
+    = f.text_field :comision_eq
+    %br 
     = f.label :efectivo
     %br 
-    = f.text_field :efectivo_contains
-    %br
-     
+    = f.text_field :efectivo_eq
+    %br 
     = f.label :anticipo
     %br 
-    = f.text_field :anticipo_contains
-    %br
-     
+    = f.text_field :anticipo_eq
+    %br 
     = f.label :comision
     %br 
-    = f.text_field :comision_contains
-    %br
-     
+    = f.text_field :comision_eq
+    %br 
     = f.label :obs
     %br 
-    = f.text_field :obs_contains
-    %br
-     
+    = f.text_field :obs_eq
+    %br 
     = f.label :reserva_id
     %br 
-    = f.text_field :reserva_id_contains
+    = f.text_field :reserva_id_eq
     %br
-    
     =f.label 'Baja'
     %br
     = f.check_box :hidden_eq
