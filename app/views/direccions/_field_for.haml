@@ -1,0 +1,43 @@
+= fields_for @direccion do |fa| 
+  - if @direccion.errors.any? 
+    #error_explanation
+      %h2="#{pluralize(@direccion.errors.count, 'error')} prohibited this direccion from being saved:"
+  
+      %ul
+        - @direccion.errors.full_messages.each do |msg| 
+          %li= msg 
+  .field
+    = fa.label :Calle
+    %br
+    = fa.text_field :calle
+  
+  .field
+    = fa.label :Cuit
+    %br
+    = fa.text_field :cuit
+  
+  .field
+    = fa.label :Telefono
+    %br
+    = fa.text_field :telefono
+  
+  .field
+    = fa.label :Legajo
+    %br
+    = fa.text_field :legajo
+  
+  .field
+    = fa.label :Email
+    %br
+    = fa.text_field :email
+  
+  .field
+    = fa.label :Web
+    %br
+    = fa.text_field :web
+  
+  .field
+    = fa.label :Localidad_id
+    %br
+    = fa.text_field :localidad_id
+

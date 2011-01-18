@@ -14,11 +14,7 @@
       %br
       = f.text_field :name
     
-    .field
-      = f.label :Direccion_id
-      %br
-      = f.text_field :direccion_id
-    
+    = render :partial => "direccions/field_for"
     
     .actions
       = f.submit 

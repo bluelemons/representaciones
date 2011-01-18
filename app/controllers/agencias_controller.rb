@@ -20,6 +20,11 @@ class AgenciasController < InheritedResources::Base
     
   end
   
+  def new
+    @direccion = Direccion.new
+    new!
+  end  
+  
   def show
     @agencia = Agencia.find(params[:id])
     @agencia.revert_to(params[:version].to_i) if params[:version]
@@ -44,9 +49,16 @@ class AgenciasController < InheritedResources::Base
 
   def create
     @agencia = Agencia.new(params[:agencia])
+    @direccion = Direccion.new(params[:direccion])
     @agencia.user = current_user
-    if @agencia.save
-      redirect_to :action => 'show', :id => @agencia, :format =>'js'
+    @direccion.user = current_user
+    if @direccion.save
+      @agencia.direccion = @direccion
+      if @agencia.save
+        redirect_to :action => 'show', :id => @agencia, :format =>'js'
+      else
+        render 'new.js'
+      end
     else
       render 'new.js'
     end

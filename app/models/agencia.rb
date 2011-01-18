@@ -3,7 +3,8 @@ class Agencia < ActiveRecord::Base
   acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
-  belongs_to :direccion  
+  belongs_to :direccion
+#  accepts_nested_attributes_for :direccion, :allow_destroy => true 
   has_many :reservas
   #validaciones
   validates :name, :presence => true

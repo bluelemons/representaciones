@@ -10,8 +10,5 @@
   %p
     %b Name:
     = @agencia.name
-  
-  %p
-    %b Direccion_id:
-    = @agencia.direccion_id
-  
+  =render :partial =>'direccions/dir',:locals =>{:dir =>@agencia.direccion}
+

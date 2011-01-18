@@ -7,7 +7,7 @@
     %table#migrilla.togrid
       %tr
       
-        %th Direccion
+        %th Calle
       
         %th Cuit
       
@@ -27,7 +27,7 @@
       - for direccion in @direccions   
         %tr
           
-          %td= direccion.try(:direccion) 
+          %td= direccion.try(:calle) 
           
           %td= direccion.try(:cuit) 
           

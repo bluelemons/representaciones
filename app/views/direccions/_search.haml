@@ -2,9 +2,9 @@
   %h3.ui-widget-header Busqueda
   = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
      
-    = f.label :direccion
+    = f.label :calle
     %br 
-    = f.text_field :direccion_eq
+    = f.text_field :calle_eq
     %br 
     = f.label :cuit
     %br 
