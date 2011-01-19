@@ -2,7 +2,8 @@
   %h1.ui-widget-header Thabitacion
   
   .action_bar
-    = link_to 'Nuevo', thabitacions_path,:remote => true 
+    -if can? :new, Thabitacion
+      = link_to 'Nuevo', thabitacions_path,:remote => true 
   #thabitacion.half.right
   
     = render :partial => "edit"

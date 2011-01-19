@@ -2,9 +2,9 @@
   %h3.ui-widget-header pasajero  
   .left{:style=>'float:right'}
     .action_bar
-      = link_to 'Editar', edit_pasajero_path(@pasajero),:remote=>true,:width =>'200px'
+      -if can? :edit, @pasajero 
+        = link_to 'Editar', edit_pasajero_path(@pasajero),:remote=>true,:width =>'200px'
     %br
-  = render :partial => "version"
   
   
   %p
@@ -23,3 +23,4 @@
     %b Tdoc_id:
     = @pasajero.tdoc_id
   
+    = render :partial => "version"

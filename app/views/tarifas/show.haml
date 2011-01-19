@@ -2,7 +2,9 @@
 
 .ui-widget
   .action_bar
-    = link_to 'Nuevo', new_tarifa_path,:remote =>true
-    = link_to 'Editar', edit_tarifa_path(@tarifa),:remote =>true
+    -if can? :new, Tarifa
+      = link_to 'Nuevo', new_tarifa_path,:remote =>true
+    -if can? :edit, @tarifa 
+      = link_to 'Editar', edit_tarifa_path(@tarifa),:remote =>true
     = link_to 'Todos', tarifas_path ,:remote =>true
 =render 'tarifa'

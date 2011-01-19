@@ -2,12 +2,13 @@
   %h3.ui-widget-header thabitacion  
   .left{:style=>'float:right'}
     .action_bar
-      = link_to 'Editar', edit_thabitacion_path(@thabitacion),:remote=>true,:width =>'200px'
+      -if can? :edit, @thabitacion 
+        = link_to 'Editar', edit_thabitacion_path(@thabitacion),:remote=>true,:width =>'200px'
     %br
-  = render :partial => "version"
   
   
   %p
     %b Name:
     = @thabitacion.name
   
+    = render :partial => "version"

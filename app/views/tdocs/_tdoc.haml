@@ -2,12 +2,13 @@
   %h3.ui-widget-header tdoc  
   .left{:style=>'float:right'}
     .action_bar
-      = link_to 'Editar', edit_tdoc_path(@tdoc),:remote=>true,:width =>'200px'
+      -if can? :edit, @tdoc 
+        = link_to 'Editar', edit_tdoc_path(@tdoc),:remote=>true,:width =>'200px'
     %br
-  = render :partial => "version"
   
   
   %p
     %b Name:
     = @tdoc.name
   
+    = render :partial => "version"

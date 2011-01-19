@@ -2,7 +2,9 @@
 
 .ui-widget
   .action_bar
-    = link_to 'Nuevo', new_thabitacion_path,:remote =>true
-    = link_to 'Editar', edit_thabitacion_path(@thabitacion),:remote =>true
+    -if can? :new, Thabitacion
+      = link_to 'Nuevo', new_thabitacion_path,:remote =>true
+    -if can? :edit, @thabitacion 
+      = link_to 'Editar', edit_thabitacion_path(@thabitacion),:remote =>true
     = link_to 'Todos', thabitacions_path ,:remote =>true
 =render 'thabitacion'

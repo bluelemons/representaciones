@@ -2,9 +2,11 @@
   %h1.ui-widget-header Pasajeros
   
   .action_bar
-    = link_to 'Nuevo Pasajero', new_pasajero_path,:remote => true 
+    -if can? :new, Pasajero
+      = link_to 'Nuevo Pasajero', new_pasajero_path,:remote => true 
     = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
   #pasajero.half.right
   
+  = render :partial => "search"
   #pasajeros
     =render 'pasajeros'

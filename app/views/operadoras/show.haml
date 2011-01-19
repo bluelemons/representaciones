@@ -2,7 +2,9 @@
 
 .ui-widget
   .action_bar
-    = link_to 'Nuevo', new_operadora_path,:remote =>true
-    = link_to 'Editar', edit_operadora_path(@operadora),:remote =>true
+    -if can? :new, Operadora
+      = link_to 'Nuevo', new_operadora_path,:remote =>true
+    -if can? :edit, @operadora 
+      = link_to 'Editar', edit_operadora_path(@operadora),:remote =>true
     = link_to 'Todos', operadoras_path ,:remote =>true
 =render 'operadora'

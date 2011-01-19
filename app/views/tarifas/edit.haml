@@ -2,7 +2,8 @@
   %h1.ui-widget-header Tarifa
   
   .action_bar
-    = link_to 'Nuevo', tarifas_path,:remote => true 
+    -if can? :new, Tarifa
+      = link_to 'Nuevo', tarifas_path,:remote => true 
   #tarifa.half.right
   
     = render :partial => "edit"

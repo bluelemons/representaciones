@@ -2,7 +2,8 @@
   %h1.ui-widget-header Reserva
   
   .action_bar
-    = link_to 'Nuevo', reservas_path,:remote => true 
+    -if can? :new, Reserva
+      = link_to 'Nuevo', reservas_path,:remote => true 
   #reserva.half.right
   
     = render :partial => "edit"

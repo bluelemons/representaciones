@@ -1,3 +1,4 @@
+= javascript_include_tag('jq-autocomplete/autocomplete') 
 = fields_for @direccion do |fa| 
   - if @direccion.errors.any? 
     #error_explanation
@@ -10,6 +11,13 @@
     = fa.label :Calle
     %br
     = fa.text_field :calle
+  .field
+    = fa.label :Localidad_id
+    %br
+    = fa.text_field :localidad_id, :size =>6
+    <input id='localidad_name' class='autocomplete' table='localidad'value="
+    = @direccion.try(:localidad).try(:name)
+    " />    
   
   .field
     = fa.label :Cuit
@@ -36,8 +44,5 @@
     %br
     = fa.text_field :web
   
-  .field
-    = fa.label :Localidad_id
-    %br
-    = fa.text_field :localidad_id
+
 

@@ -2,9 +2,9 @@
   %h3.ui-widget-header reserva  
   .left{:style=>'float:right'}
     .action_bar
-      = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
+      -if can? :edit, @reserva 
+        = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
     %br
-  = render :partial => "version"
   
   
   %p
@@ -55,3 +55,4 @@
     %b Agencia_id:
     = @reserva.agencia_id
   
+    = render :partial => "version"

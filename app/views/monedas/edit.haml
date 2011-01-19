@@ -2,7 +2,8 @@
   %h1.ui-widget-header Moneda
   
   .action_bar
-    = link_to 'Nuevo', monedas_path,:remote => true 
+    -if can? :new, Moneda
+      = link_to 'Nuevo', monedas_path,:remote => true 
   #moneda.half.right
   
     = render :partial => "edit"

@@ -2,7 +2,8 @@
   %h1.ui-widget-header Operadora
   
   .action_bar
-    = link_to 'Nuevo', operadoras_path,:remote => true 
+    -if can? :new, Operadora
+      = link_to 'Nuevo', operadoras_path,:remote => true 
   #operadora.half.right
   
     = render :partial => "edit"

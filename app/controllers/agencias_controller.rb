@@ -1,4 +1,5 @@
 class AgenciasController < InheritedResources::Base
+  load_and_authorize_resource
   
   respond_to :html, :xml,:js
   def index
@@ -25,6 +26,11 @@ class AgenciasController < InheritedResources::Base
     new!
   end  
   
+  def edit
+    @direccion = @agencia.direccion
+    edit!
+  end
+  
   def show
     @agencia = Agencia.find(params[:id])
     @agencia.revert_to(params[:version].to_i) if params[:version]
@@ -39,8 +45,11 @@ class AgenciasController < InheritedResources::Base
   
   def update
     @agencia = Agencia.find(params[:id])
+    @direccion = @agencia.direccion
     @agencia.user = current_user
+    @direccion.user = current_user
     if @agencia.update_attributes(params[:agencia])
+      @direccion.update_attributes(params[:direccion])
       redirect_to :action => 'show', :id => @agencia, :format =>'js'
     else
       render 'edit.js'

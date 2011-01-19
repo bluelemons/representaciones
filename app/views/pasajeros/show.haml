@@ -2,7 +2,9 @@
 
 .ui-widget
   .action_bar
-    = link_to 'Nuevo', new_pasajero_path,:remote =>true
-    = link_to 'Editar', edit_pasajero_path(@pasajero),:remote =>true
+    -if can? :new, Pasajero
+      = link_to 'Nuevo', new_pasajero_path,:remote =>true
+    -if can? :edit, @pasajero 
+      = link_to 'Editar', edit_pasajero_path(@pasajero),:remote =>true
     = link_to 'Todos', pasajeros_path ,:remote =>true
 =render 'pasajero'

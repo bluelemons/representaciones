@@ -1,4 +1,3 @@
-= render :partial => "search"
 .half.left
   %h3.ui-widget-header Listado
   =will_paginate @tdocs
@@ -19,5 +18,7 @@
           
           %td
             = link_to 'Show', tdoc,:remote=>true 
-            = link_to 'Edit', edit_tdoc_path(tdoc),:remote=>true  
-            = link_to 'Destroy', tdoc, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+            -if can? :edit, tdoc
+              = link_to 'Edit', edit_tdoc_path(tdoc),:remote=>true  
+            -if can? :destroy, tdoc
+              = link_to 'Destroy', tdoc, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

@@ -1,27 +1,27 @@
 %p
   %b Calle:
-  = dir.calle
-
+  = dir.try(:calle)
+%p
+  %b
+  = dir.try(:localidad).try(:name)
 %p
   %b Cuit:
-  = dir.cuit
+  = dir.try(:cuit)
 
 %p
   %b Telefono:
-  = dir.telefono
+  = dir.try(:telefono)
 
 %p
   %b Legajo:
-  = dir.legajo
+  = dir.try(:legajo)
 
 %p
   %b Email:
-  = dir.email
+  = dir.try(:email)
 
 %p
   %b Web:
-  = dir.web
+  = dir.try(:web)
 
-%p
-  %b Localidad_id:
-  = dir.localidad_id  
+

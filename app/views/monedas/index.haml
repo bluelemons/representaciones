@@ -2,9 +2,11 @@
   %h1.ui-widget-header Monedas
   
   .action_bar
-    = link_to 'Nuevo Moneda', new_moneda_path,:remote => true 
+    -if can? :new, Moneda
+      = link_to 'Nuevo Moneda', new_moneda_path,:remote => true 
     = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
   #moneda.half.right
   
+  = render :partial => "search"
   #monedas
     =render 'monedas'

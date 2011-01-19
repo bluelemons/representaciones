@@ -2,7 +2,8 @@
   %h1.ui-widget-header Pasajero
   
   .action_bar
-    = link_to 'Nuevo', pasajeros_path,:remote => true 
+    -if can? :new, Pasajero
+      = link_to 'Nuevo', pasajeros_path,:remote => true 
   #pasajero.half.right
   
     = render :partial => "edit"

@@ -2,12 +2,13 @@
   %h3.ui-widget-header moneda  
   .left{:style=>'float:right'}
     .action_bar
-      = link_to 'Editar', edit_moneda_path(@moneda),:remote=>true,:width =>'200px'
+      -if can? :edit, @moneda 
+        = link_to 'Editar', edit_moneda_path(@moneda),:remote=>true,:width =>'200px'
     %br
-  = render :partial => "version"
   
   
   %p
     %b Name:
     = @moneda.name
   
+    = render :partial => "version"
