@@ -12,12 +12,13 @@
     .field
       = f.label :Fecha
       %br
-      = f.text_field :fecha
+      = f.text_field :fecha,{:class =>'datepicker'}
+      <script>$(function() {$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });});</script>
     
     .field
       = f.label :Salida
       %br
-      = f.text_field :salida
+      = f.text_field :salida,{:class =>'datepicker'}
     
     .field
       = f.label :Activa
@@ -27,7 +28,7 @@
     .field
       = f.label :Reservado
       %br
-      = f.text_field :reservado
+      = f.check_box :reservado
     
     .field
       = f.label :Hotel
@@ -47,27 +48,27 @@
     .field
       = f.label :Obs
       %br
-      = f.text_field :obs
+      = f.text_area :obs
     
     .field
       = f.label :Thabitacion_id
       %br
-      = f.text_field :thabitacion_id
+      = collection_select(:reserva, :thabitacion_id, Thabitacion.all, :id, :name, :prompt => false) 
     
     .field
       = f.label :Programa_id
       %br
-      = f.text_field :programa_id
+      = collection_select(:reserva, :programa_id, Programa.all, :id, :name, :prompt => false) 
     
     .field
       = f.label :Operadora_id
       %br
-      = f.text_field :operadora_id
+      = collection_select(:reserva, :operadora_id, Operadora.all, :id, :name, :prompt => false) 
     
     .field
       = f.label :Agencia_id
       %br
-      = f.text_field :agencia_id
+      = collection_select(:reserva, :agencia_id, Agencia.all, :id, :name, :prompt => false)       
     
     
     .actions
