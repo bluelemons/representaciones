@@ -1,5 +1,6 @@
 class Reserva < ActiveRecord::Base
   #clases
+
   acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica

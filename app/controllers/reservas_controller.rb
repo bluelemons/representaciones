@@ -50,18 +50,20 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-
-#    for pasajero in params[:reserva][:pasajeros_ids]
-#      if existe
-#        existe = Pasajero.find(pasajero)
-#      end
-#    flash[:notice]=existe
-#    end
-    render 'alerta.js'
-    
-    
-    
-    @reserva = Reserva.new(params[:reserva].delete(:pasajeros_ids))
+    #@reserva = pasajero?(5)
+    existe=true
+    for pasajero in params[:reserva][:pasajero_ids]
+      if existe
+        existe=pasajero?(pasajero)
+      end
+    end
+    if existe
+      @reserva = "existe todos"
+    else
+      @reserva = "alguno no existe"
+    end
+      render 'alerta.js'
+#    @reserva = Reserva.new(params[:reserva])
 
     
      # render 'alerta.js'
@@ -74,5 +76,14 @@ class ReservasController < InheritedResources::Base
     #    end 
 
   end 
-  
+
+  # FIX this later, should be on the model or something like that :)
+  private
+  def pasajero?(id)
+    if Pasajero.where(:id=>id).size >0
+      true
+    else
+      false
+    end
+  end
 end
