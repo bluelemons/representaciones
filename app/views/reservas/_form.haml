@@ -69,7 +69,19 @@
       = f.label :Agencia_id
       %br
       = collection_select(:reserva, :agencia_id, Agencia.all, :id, :name, :prompt => false)       
-    
+
+    - f.fields_for :pasajeros do |builder| 
+      %table
+        %tr
+          %th  
+            = builder.label :doc, "DNI"
+          %th  
+            = builder.label :name, "Pasajero" 
+        %tr
+          %td    
+            = builder.text_field :doc
+          %td
+            = builder.text_field :name
     
     .actions
       = f.submit 

@@ -3,7 +3,7 @@ class CreateDireccions < ActiveRecord::Migration
 
     create_table :direccions do |t|
           
-      t.string :direccion
+      t.string :calle
           
       t.integer :cuit
           

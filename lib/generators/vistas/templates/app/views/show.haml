@@ -2,7 +2,9 @@
 
 .ui-widget
   .action_bar
-    = link_to 'Nuevo', new_<%= file_name%>_path,:remote =>true
-    = link_to 'Editar', edit_<%= file_name%>_path(@<%= file_name%>),:remote =>true
+    -if can? :new, <%= file_name_c %>
+      = link_to 'Nuevo', new_<%= file_name%>_path,:remote =>true
+    -if can? :edit, @<%= file_name%> 
+      = link_to 'Editar', edit_<%= file_name%>_path(@<%= file_name%>),:remote =>true
     = link_to 'Todos', <%= plural_name%>_path ,:remote =>true
 =render '<%= file_name %>'

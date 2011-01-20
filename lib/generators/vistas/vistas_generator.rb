@@ -47,9 +47,11 @@ class VistasGenerator < Rails::Generators::Base
       #form
       template "app/views/_form.haml", "app/views/#{plural_name}/_form.haml"    
       #new
+      template "app/views/new.haml", "app/views/#{plural_name}/new.haml"          
       template "app/views/_new.haml", "app/views/#{plural_name}/_new.haml"    
       template "app/views/new.js.erb", "app/views/#{plural_name}/new.js.erb"    
       #edit
+      template "app/views/edit.haml", "app/views/#{plural_name}/edit.haml"          
       template "app/views/_edit.haml", "app/views/#{plural_name}/_edit.haml"    
       template "app/views/edit.js.erb", "app/views/#{plural_name}/edit.js.erb"        
       

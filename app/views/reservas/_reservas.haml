@@ -10,17 +10,11 @@
       
         %th Salida
       
-        %th Activa
-      
-        %th Reservado
-      
         %th Hotel
       
         %th Periodo
       
         %th Regimen
-      
-        %th Obs
       
         %th Thabitacion_id
       
@@ -39,18 +33,13 @@
           %td= reserva.try(:fecha) 
           
           %td= reserva.try(:salida) 
-          
-          %td= reserva.try(:activa) 
-          
-          %td= reserva.try(:reservado) 
+         
           
           %td= reserva.try(:hotel) 
           
           %td= reserva.try(:periodo) 
           
           %td= reserva.try(:regimen) 
-          
-          %td= reserva.try(:obs) 
           
           %td= reserva.try(:thabitacion_id) 
           

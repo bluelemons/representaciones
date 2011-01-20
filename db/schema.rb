@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110117210004) do
+ActiveRecord::Schema.define(:version => 20110119225917) do
 
   create_table "agencia_versions", :force => true do |t|
     t.integer  "agencia_id"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20110117210004) do
   create_table "direccion_versions", :force => true do |t|
     t.integer  "direccion_id"
     t.integer  "version"
-    t.string   "direccion"
+    t.string   "calle"
     t.integer  "cuit"
     t.string   "telefono"
     t.string   "legajo"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110117210004) do
   add_index "direccion_versions", ["direccion_id"], :name => "index_direccion_versions_on_direccion_id"
 
   create_table "direccions", :force => true do |t|
-    t.string   "direccion"
+    t.string   "calle"
     t.integer  "cuit"
     t.string   "telefono"
     t.string   "legajo"
@@ -174,6 +174,13 @@ ActiveRecord::Schema.define(:version => 20110117210004) do
     t.boolean  "hidden",     :default => false
     t.integer  "user_id"
     t.integer  "version"
+  end
+
+  create_table "pasajeos_reservas", :force => true do |t|
+    t.integer  "pasajero_id"
+    t.integer  "reserva_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pasajero_versions", :force => true do |t|

@@ -1,4 +1,5 @@
 class ReservasController < InheritedResources::Base
+  load_and_authorize_resource
   
   respond_to :html, :xml,:js
   def index
@@ -19,6 +20,10 @@ class ReservasController < InheritedResources::Base
     end
     
   end
+  
+  def new  
+    3.times { @reserva.pasajeros.build }  
+  end  
   
   def show
     @reserva = Reserva.find(params[:id])

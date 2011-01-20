@@ -1,0 +1,11 @@
+.ui-widget
+  %h1.ui-widget-header <%= file_name_c %>
+  
+  .action_bar
+    -if can? :new, <%= file_name_c %>
+      = link_to 'Nuevo', <%= plural_name%>_path,:remote => true 
+  #<%= file_name %>.half.right
+  
+    = render :partial => "edit"
+  
+  #<%= plural_name%>.half.left
