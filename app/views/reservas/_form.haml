@@ -69,19 +69,29 @@
       = f.label :Agencia_id
       %br
       = collection_select(:reserva, :agencia_id, Agencia.all, :id, :name, :prompt => false)       
-
-    - f.fields_for :pasajeros do |builder| 
-      %table
-        %tr
-          %th  
-            = builder.label :doc, "DNI"
-          %th  
-            = builder.label :name, "Pasajero" 
-        %tr
-          %td    
-            = builder.text_field :doc
-          %td
-            = builder.text_field :name
+      -#%div
+      -#  = f.fields_for :pasajeros do |builder|
+      -#    <input id="reserva_pasajero_ids_" type ="text_field" name ="reserva[pasajero_ids][]">
+      -#    <input id="reserva_pasajero_ids_" type ="text_field" name ="reserva[pasajero_ids][]">
+      %br
+      - @reserva.pasajeros.each_with_index do |pasahero, index| 
+        <input id="reserva_pasajero_ids_" type ="text_field" name ="reserva[pasajero_ids][]">
+      -# - f.fields_for :pasajeros do |builder| 
+      -#   %table
+      -#     %tr
+      -#       %th  
+      -#         = builder.label :id, "ID"
+      -#       %th  
+      -#         = builder.label :doc, "DNI"
+      -#       %th  
+      -#         = builder.label :name, "Pasajero" 
+      -#     %tr
+      -#       %td    
+      -#         = builder.text_field :id
+      -#       %td    
+      -#         = builder.text_field :doc
+      -#       %td
+      -#         = builder.text_field :name
     
     .actions
       = f.submit 

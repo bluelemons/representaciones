@@ -9,10 +9,10 @@ class Reserva < ActiveRecord::Base
   belongs_to :operadora
   belongs_to :agencia  
   has_and_belongs_to_many :pasajeros
-  accepts_nested_attributes_for :pasajeros, :reject_if => lambda { |a| a[:name].blank? }  
+  #accepts_nested_attributes_for :pasajeros, :reject_if => lambda { |a| a[:name].blank? }  
   #validaciones
   
-  #validates :fecha, :presence => true
+  validates :fecha, :presence => true
   #validates :salida, :presence => true
   #validates :activa, :presence => true
   #validates :reservado, :presence => true
@@ -28,5 +28,6 @@ class Reserva < ActiveRecord::Base
   scope :baja, where(:hidden=>0)
   
   #metodos
+
   
 end

@@ -5,7 +5,7 @@
   #pasajeros_grid
     %table#migrilla.togrid
       %tr
-      
+        %th ID
         %th Doc
       
         %th Name
@@ -19,7 +19,7 @@
         
       - for pasajero in @pasajeros   
         %tr
-          
+          %td= pasajero.try(:id) 
           %td= pasajero.try(:doc) 
           
           %td= pasajero.try(:name) 

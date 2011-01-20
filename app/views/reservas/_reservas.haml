@@ -5,7 +5,7 @@
   #reservas_grid
     %table#migrilla.togrid
       %tr
-      
+        %th ID
         %th Fecha
       
         %th Salida
@@ -14,41 +14,20 @@
       
         %th Periodo
       
-        %th Regimen
-      
-        %th Thabitacion_id
-      
-        %th Programa_id
-      
-        %th Operadora_id
-      
-        %th Agencia_id
-      
       %th Acciones
   
         
       - for reserva in @reservas   
         %tr
-          
+          %td= reserva.try(:id) 
           %td= reserva.try(:fecha) 
           
           %td= reserva.try(:salida) 
-         
           
           %td= reserva.try(:hotel) 
           
           %td= reserva.try(:periodo) 
-          
-          %td= reserva.try(:regimen) 
-          
-          %td= reserva.try(:thabitacion_id) 
-          
-          %td= reserva.try(:programa_id) 
-          
-          %td= reserva.try(:operadora_id) 
-          
-          %td= reserva.try(:agencia_id) 
-          
+                    
           %td
             = link_to 'Show', reserva,:remote=>true 
             -if can? :edit, reserva

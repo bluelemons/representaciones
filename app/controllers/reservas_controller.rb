@@ -22,7 +22,9 @@ class ReservasController < InheritedResources::Base
   end
   
   def new  
+    @reserva = Reserva.new
     3.times { @reserva.pasajeros.build }  
+    new!
   end  
   
   def show
@@ -48,13 +50,27 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-    @reserva = Reserva.new(params[:reserva])
-    @reserva.user = current_user
-    if @reserva.save
-      redirect_to :action => 'show', :id => @reserva, :format =>'js'
-    else
-      render 'new.js'
+#    existe=true
+#    for pasajero in params[:reserva][:pasajeros_ids]
+#      if existe
+#        existe = Pasajero.find(pasajero)
+#      end
+#    flash[:notice]=existe
+#    end
+#    params[:reserva]=params[:reserva].delete(:pasajeros_ids)
+    begin
+      @reserva = Reserva.new(params[:reserva])
+
+    rescue
+     # render 'alerta.js'
     end
+    #      @reserva.user = current_user
+    #    if @reserva.save 
+    #      redirect_to :action => 'show', :id => @reserva, :format =>'js'
+    #    else
+    #      render 'new.js'
+    #    end 
+
   end 
   
 end
