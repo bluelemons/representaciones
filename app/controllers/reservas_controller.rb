@@ -1,5 +1,5 @@
 class ReservasController < InheritedResources::Base
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   respond_to :html, :xml,:js
   def index
@@ -50,20 +50,22 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-#    existe=true
+
 #    for pasajero in params[:reserva][:pasajeros_ids]
 #      if existe
 #        existe = Pasajero.find(pasajero)
 #      end
 #    flash[:notice]=existe
 #    end
-#    params[:reserva]=params[:reserva].delete(:pasajeros_ids)
-    begin
-      @reserva = Reserva.new(params[:reserva])
+    render 'alerta.js'
+    
+    
+    
+    @reserva = Reserva.new(params[:reserva].delete(:pasajeros_ids))
 
-    rescue
+    
      # render 'alerta.js'
-    end
+    
     #      @reserva.user = current_user
     #    if @reserva.save 
     #      redirect_to :action => 'show', :id => @reserva, :format =>'js'
