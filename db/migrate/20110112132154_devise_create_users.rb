@@ -5,7 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.recoverable
       t.rememberable
       t.trackable
-
+      t.string :password_salt
       # t.confirmable
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
@@ -24,3 +24,4 @@ class DeviseCreateUsers < ActiveRecord::Migration
     drop_table :users
   end
 end
+
