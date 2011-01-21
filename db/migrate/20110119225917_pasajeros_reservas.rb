@@ -8,5 +8,6 @@ class PasajerosReservas < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :pasajeros_reservas
   end
 end

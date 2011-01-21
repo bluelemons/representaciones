@@ -23,7 +23,7 @@ class ReservasController < InheritedResources::Base
   
   def new  
     @reserva = Reserva.new
-    3.times { @reserva.pasajeros.build }  
+    1.times { @reserva.pasajeros.build }  
     new!
   end  
   
@@ -50,40 +50,29 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-    #@reserva = pasajero?(5)
-    existe=true
-    for pasajero in params[:reserva][:pasajero_ids]
-      if existe
-        existe=pasajero?(pasajero)
+    
+    if params[:reserva][:pasajero_ids]
+      params[:reserva][:pasajero_ids].each do |pasajero|
+        pasajero?(pasajero)
       end
     end
-    if existe
-      @reserva = "existe todos"
+    @reserva = Reserva.new(params[:reserva])
+    @reserva.user = current_user
+    if @reserva.save 
+      redirect_to :action => 'show', :id => @reserva, :format =>'js'
     else
-      @reserva = "alguno no existe"
-    end
-      render 'alerta.js'
-#    @reserva = Reserva.new(params[:reserva])
-
-    
-     # render 'alerta.js'
-    
-    #      @reserva.user = current_user
-    #    if @reserva.save 
-    #      redirect_to :action => 'show', :id => @reserva, :format =>'js'
-    #    else
-    #      render 'new.js'
-    #    end 
+      render 'new.js'
+    end 
 
   end 
 
   # FIX this later, should be on the model or something like that :)
   private
+  
   def pasajero?(id)
-    if Pasajero.where(:id=>id).size >0
-      true
-    else
-      false
+    if !(Pasajero.where(:id=>id).size >0)
+      #crear pasajero
+      Pasajero.new(params[:reserva][:pasajeros_names]).save
     end
   end
 end
