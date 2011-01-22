@@ -22,9 +22,16 @@ class PasajerosController < InheritedResources::Base
   end
   
   def show
-    @pasajero = Pasajero.find(params[:id])
-    @pasajero.revert_to(params[:version].to_i) if params[:version]
-    show! 
+    if params[:doc]
+      @pasajero = Pasajero.where(:doc =>params[:doc])
+    else
+      @pasajero = Pasajero.find(params[:id])
+      @pasajero.revert_to(params[:version].to_i) if params[:version]
+    end
+    show! do |format|
+      format.html 
+      format.xml { render :xml => @pasajero }
+    end
   end
 
   def restore

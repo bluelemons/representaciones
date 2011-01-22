@@ -23,7 +23,7 @@ class ReservasController < InheritedResources::Base
   
   def new  
     @reserva = Reserva.new
-    1.times { @reserva.pasajeros.build }  
+    3.times { @reserva.pasajeros.build }  
     new!
   end  
   
@@ -50,11 +50,11 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-    
-    if params[:reserva][:pasajero_ids]
-      params[:reserva][:pasajero_ids].each do |pasajero|
-        pasajero?(pasajero)
-      end
+    #por cada pasajero que se agrega en el alta de reservas
+    i=0
+    for pasajero in params[:reserva][:pasajeros_attributes] 
+      pasajero?(pasajero[1][:doc],i)
+      i+=1
     end
     @reserva = Reserva.new(params[:reserva])
     @reserva.user = current_user
@@ -69,10 +69,23 @@ class ReservasController < InheritedResources::Base
   # FIX this later, should be on the model or something like that :)
   private
   
-  def pasajero?(id)
-    if !(Pasajero.where(:id=>id).size >0)
-      #crear pasajero
-      Pasajero.new(params[:reserva][:pasajeros_names]).save
+  def pasajero?(doc,i)
+    #busca el pasajero con documento igual a doc
+    pasa = Pasajero.where(:doc =>doc).limit(1).all
+    if pasa.size > 0 #si el pasajero ya existe,
+    #  #agrega el id, p.id al arreglo params[:reservas][:pasajeros_ids]
+      if !params[:reserva][:pasajero_ids]
+        params[:reserva] = params[:reserva].merge(:pasajero_ids => [])
+      end
+      
+      params[:reserva][:pasajero_ids].push(pasa[0].id)
+      # borra el pasajero de pasajeros_attributes para que no haga el alta.
+    else#si el pasajero no existe, tiene que crealo
+      @pasajero = Pasajero.new(params[:reserva][:pasajeros_attributes][i.to_s])
+      @pasajero.save
+      #lo agrego el id para que cuando haga el alta tambien guarde la relacion.
+      params[:reserva][:pasajero_ids].push(@pasajero.id)
     end
   end
+  
 end

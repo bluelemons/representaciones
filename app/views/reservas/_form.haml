@@ -1,4 +1,4 @@
-= javascript_include_tag('jq-autocomplete/autocomplete') 
+= javascript_include_tag('jq-autocomplete/autocompletePersona') 
 = form_for(@reserva,:remote=>true) do |f| 
   .ui-widget.ui-widget-content
     - if @reserva.errors.any? 
@@ -71,23 +71,26 @@
       %br
       = collection_select(:reserva, :agencia_id, Agencia.all, :id, :name, :prompt => false)       
       %br
-      - @reserva.pasajeros.each_with_index do |pasajero, index| 
-        <input id="reserva_pasajero_ids_" type ="text_field" name ="reserva[pasajero_ids][]">
-      %br
-      = f.fields_for :pasajeros do |builder| 
-        %table
+      -#- @reserva.pasajeros.each_with_index do |pasajero, index| 
+      -#  <input id="reserva_pasajero_ids_" type ="text_field" name ="reserva[pasajero_ids][]" index=
+      -#  =index
+      -#  >
+      -#%br
+      %table
+        -i=0
+        = f.fields_for :pasajeros do |builder|   
           %tr
             %th  
               = builder.label :doc, "DNI"
             %th  
               = builder.label :name, "Pasajero" 
           %tr
-
             %td    
-              = builder.text_field :doc
-              <input id='pasajero_name' class='autocomplete' table='pasajero' value="" />    
+              = builder.text_field :doc,:size=>8,:class=>'autocomplete_persona',:i=>i
             %td
-              = builder.text_field :name
+              = builder.text_field :name, :class=>'autocomplete',:table=>'pasajero',:i=>i
+          -i=i+1
+          
     
     .actions
       = f.submit 
