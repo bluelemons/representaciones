@@ -1,4 +1,4 @@
-.ui-widget
+.ui-widget.ui-widget-content
   %h3.ui-widget-header programa  
   .left{:style=>'float:right'}
     .action_bar
@@ -10,5 +10,9 @@
   %p
     %b Name:
     = @programa.name
-  
-    = render :partial => "version"
+  %p
+    %b Observaciones
+    = @programa.obs
+
+  %br
+  = render :partial => "layouts/version",:locals=>{:model=>@programa,:controller=>:programas}

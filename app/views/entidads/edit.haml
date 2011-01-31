@@ -1,0 +1,11 @@
+.ui-widget
+  %h1.ui-widget-header Entidad
+  
+  .action_bar
+    -if can? :new, Entidad
+      = link_to 'Nuevo', entidads_path,:remote => true 
+  #entidad_form.half.right
+  
+    = render :partial => "edit"
+  
+  #entidads.half.left

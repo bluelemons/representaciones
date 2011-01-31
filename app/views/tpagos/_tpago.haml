@@ -1,0 +1,14 @@
+.ui-widget.ui-widget-content
+  %h3.ui-widget-header tpago  
+  .left{:style=>'float:right'}
+    .action_bar
+      -if can? :edit, @tpago 
+        = link_to 'Editar', edit_tpago_path(@tpago),:remote=>true,:width =>'200px'
+    %br
+  
+  
+  %p
+    %b Name:
+    = @tpago.name
+  
+    = render :partial => "layouts/version",:locals=>{:model=>@tpago,:controller=>:tpagos}

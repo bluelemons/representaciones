@@ -4,7 +4,7 @@ class CreateProgramas < ActiveRecord::Migration
     create_table :programas do |t|
           
       t.string :name
-      
+      t.text :obs
 
       t.timestamps
     end

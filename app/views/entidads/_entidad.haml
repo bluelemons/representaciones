@@ -1,0 +1,38 @@
+.ui-widget.ui-widget-content
+  %h3.ui-widget-header  
+    =@entidad.try(:tentidad).try(:name)
+  .left{:style=>'float:right'}
+    .action_bar
+      -if can? :edit, @entidad 
+        = link_to 'Editar', edit_entidad_path(@entidad),:remote=>true,:width =>'200px'
+    %br
+  
+  %p
+    %b Nombre:
+    = @entidad.try(:name) 
+  %p
+    %b Calle:
+    = @entidad.calle
+    = @entidad.localidad.try(:name)
+  %p
+    %b Cuit:
+    = @entidad.cuit
+  
+  %p
+    %b Telefono:
+    = @entidad.telefono
+  
+  %p
+    %b Legajo:
+    = @entidad.legajo
+  
+  %p
+    %b Email:
+    = @entidad.email
+  
+  %p
+    %b Web:
+    = @entidad.web
+    
+      
+  = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}

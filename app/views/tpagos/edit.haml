@@ -1,0 +1,11 @@
+.ui-widget
+  %h1.ui-widget-header Tpago
+  
+  .action_bar
+    -if can? :new, Tpago
+      = link_to 'Nuevo', tpagos_path,:remote => true 
+  #tpago.half.right
+  
+    = render :partial => "edit"
+  
+  #tpagos.half.left

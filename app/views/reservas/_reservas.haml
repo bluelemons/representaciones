@@ -1,12 +1,11 @@
 .half.left
-  %h3.ui-widget-header Listado
   =will_paginate @reservas
 
   #reservas_grid
     %table#migrilla.togrid
       %tr
         %th ID
-        %th Fecha
+        %th Titular
       
         %th Salida
       
@@ -20,7 +19,7 @@
       - for reserva in @reservas   
         %tr
           %td= reserva.try(:id) 
-          %td= reserva.try(:fecha) 
+          %td=# reserva.try(:pasajero).try(:name)
           
           %td= reserva.try(:salida) 
           

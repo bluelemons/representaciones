@@ -7,14 +7,9 @@
         %ul
           - @agencia.errors.full_messages.each do |msg| 
             %li= msg 
-    
-    
-    .field
-      = f.label :Name
-      %br
-      = f.text_field :name
-    
-    = render :partial => "direccions/field_for"
+
+
+    = render :partial => "direccions/field_for",:locals=>{:f=>f}
     
     .actions
       = f.submit 

@@ -12,18 +12,26 @@
     .field
       = f.label :Fecha
       %br
-      = f.text_field :fecha
+      = f.text_field :fecha,:class =>'datepicker',:size =>10
+    .field
+      = f.label :Reserva
+      %br
+      = f.text_field :reserva_id,:size=>10
     
     .field
       = f.label :Monto
       %br
-      = f.text_field :monto
-    
+      = f.text_field :monto,:size =>10
+      = collection_select(:pago, :moneda_id, Moneda.all, :id, :simbolo, :prompt => false)
     .field
-      = f.label :Moneda_id
+      = f.label :Entidad
       %br
-      = f.text_field :moneda_id
-    
+      = collection_select(:pago, :tentidad_id, Tentidad.all, :id, :name, :prompt => false)
+    .field
+      = f.label :Tipo_de_pago
+      %br
+      = collection_select(:pago, :tpago_id, Tpago.all, :id, :name, :prompt => false)                  
+      = f.text_field :numero,:size=>10
     
     .actions
       = f.submit 

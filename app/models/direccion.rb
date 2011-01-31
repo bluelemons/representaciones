@@ -6,16 +6,15 @@ class Direccion < ActiveRecord::Base
   belongs_to :localidad  
   #validaciones
   
-  #validates :direccion, :presence => true
+  validates :calle, :presence => true
   #validates :cuit, :presence => true
   #validates :telefono, :presence => true
   #validates :legajo, :presence => true
   #validates :email, :presence => true
   #validates :web, :presence => true
-  #validates :localidad_id, :presence => true
+  validates :localidad_id, :presence => true
   #scopes
   scope :baja, where(:hidden=>0)
-  
   #metodos
   
 end

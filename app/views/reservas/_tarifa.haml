@@ -1,0 +1,26 @@
+%h2 Tarifa
+%table
+  %tr
+    %td
+      = f.label :iva
+    %td
+      = f.text_field :iva
+  %tr
+    %td
+      = f.label :impuesto
+    %td
+      = f.text_field :impuesto
+  %tr
+    %td
+      = f.label :seguro
+    %td
+      = f.text_field :seguro
+  %tr
+    %td
+      = f.label :monto
+    %td
+      = f.text_field :monto
+.field
+  = f.label :Observaciones
+  %br
+  = f.text_area :obs,:rows=>3,:cols=>80

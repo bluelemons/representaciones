@@ -1,0 +1,73 @@
+%table.wide
+  %tr
+    %td
+      = f.label :Fecha
+    %td
+      = f.text_field :fecha,{:class =>'datepicker',:size =>10}
+    %td
+      = f.label :Salida
+    %td
+      = f.text_field :salida,{:class =>'datepicker',:size =>10}  
+    %td
+      = f.label :referencia
+      = f.text_field :referencia
+
+= f.label :Agencia_id
+-#.agencia_button.change_button.mybutton Nuevo
+%br
+.agencia_field
+  =collection_select(:reserva, :agencia_id, Entidad.agencia.all, :id, :name, :prompt => false)
+-#-if action_name!="edit"
+-#  .agencia_field.hide
+-#    = f.fields_for :agencia do |a| 
+-#
+-#      = render :partial => "direccions/field_for",:locals=>{:f=>a}
+= f.label :Operadora_id
+-#.operadora_button.change_button.mybutton Nuevo
+%br
+.operadora_field
+  = collection_select(:reserva, :operadora_id, Entidad.operadora.all, :id, :name, :prompt => false)
+-#  = collection_select(:reserva, :operadora_id, Direccion.all, :id, :name, :prompt => false)
+-#.operadora_field.hide
+-#  = f.fields_for :operadora do |o| 
+-#
+-#    = render :partial => "direccions/field_for",:locals=>{:f=>o}
+%p      
+  Hoteles
+%p
+  = f.text_area :hotel,:rows=>2,:cols=>80
+%table
+  %tr
+    %td 
+      = f.label :Reservado
+    %td
+      = f.text_field :reservado
+    %td 
+      = f.label :Operado
+    %td
+      = f.text_field :operado
+  %tr
+    %td
+      = f.label :Programa_id
+    %td
+      = collection_select(:reserva, :programa_id, Programa.all, :id, :name, :prompt => false)     
+    %td
+      = f.label :Periodo
+    %td
+      = f.text_field :periodo          
+      
+  %tr
+    %td
+      = f.label :Regimen
+    %td
+      = f.text_field :regimen
+      
+    %td
+      = f.label :Habitacion
+    %td
+      = collection_select(:reserva, :thabitacion_id, Thabitacion.all, :id, :name, :prompt => false)
+%br
+= render :partial => "tarifa",:locals=>{:f=>f}
+  
+%br
+= render :partial => "pasajeros",:locals=>{:f=>f}

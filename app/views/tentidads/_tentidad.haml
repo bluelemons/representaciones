@@ -1,0 +1,14 @@
+.ui-widget.ui-widget-content
+  %h3.ui-widget-header tentidad  
+  .left{:style=>'float:right'}
+    .action_bar
+      -if can? :edit, @tentidad 
+        = link_to 'Editar', edit_tentidad_path(@tentidad),:remote=>true,:width =>'200px'
+    %br
+  
+  
+  %p
+    %b Name:
+    = @tentidad.name
+  
+    = render :partial => "layouts/version",:locals=>{:model=>@tentidad,:controller=>:tentidads}

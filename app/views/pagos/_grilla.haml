@@ -1,0 +1,36 @@
+#pagos_grid
+  %table.togrid{:id=>"pagos_#{Time.now}"}
+    %tr
+      %th Fecha
+      %th Operacion
+      %th Monto
+      %th Acciones
+
+    -total=0
+    - for pago in @pagos   
+      %tr
+        
+        %td= pago.try(:fecha) 
+        %td
+          = pago.try(:tpago).try(:name)
+          = pago.try(:numero) 
+        %td
+          = pago.try(:moneda).try(:simbolo)
+          = pago.try(:monto) 
+          -total+=pago.try(:monto) 
+
+        
+        %td
+          = link_to 'Show', pago,:remote=>true 
+          -if can? :edit, pago
+            = link_to 'Edit', edit_pago_path(pago),:remote=>true  
+          -if can? :destroy, pago
+            = link_to 'Destroy', pago, :confirm => 'Are you sure?', :method => :delete,:remote=>true 
+    %tr
+      %td
+
+      %td
+        %b Total
+      %td
+        %b=total
+      %td

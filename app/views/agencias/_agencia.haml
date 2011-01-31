@@ -1,14 +1,2 @@
-.ui-widget
-  %h3.ui-widget-header agencia  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @agencia
-        = link_to 'Editar', edit_agencia_path(@agencia),:remote=>true,:width =>'200px'
-    %br
-  
-  %p
-    %b Name:
-    = @agencia.name
-  =render :partial =>'direccions/dir',:locals =>{:dir =>@agencia.direccion}
-
-  = render :partial => "version"
+#direccion_form
+  =render :partial =>'direccions/direccion',:locals =>{:@direccion =>@agencia.direccion}

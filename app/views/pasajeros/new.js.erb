@@ -1,2 +1,6 @@
-$('#pasajero').html('<%= raw escape_javascript(render("new")) %>');
+$('#pasajero_form').html('<%= raw escape_javascript(render("new")) %>').show();
 skin();
+// en @ultimo guardo el pasajero que se acaba de guardad
+//habria que insertarlo en la tabla.
+$('#console').html('el nuevo pasajero es <%= @ultimo %>, <%= @ultimo.try(:name) %>');
+

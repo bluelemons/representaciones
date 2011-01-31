@@ -4,7 +4,7 @@ class CreateMonedas < ActiveRecord::Migration
     create_table :monedas do |t|
           
       t.string :name
-      
+      t.string :simbolo
 
       t.timestamps
     end

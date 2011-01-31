@@ -1,0 +1,24 @@
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @tpagos
+
+  #tpagos_grid
+    %table#migrilla.togrid
+      %tr
+      
+        %th Name
+      
+      %th Acciones
+  
+        
+      - for tpago in @tpagos   
+        %tr
+          
+          %td= tpago.try(:name) 
+          
+          %td
+            = link_to 'Show', tpago,:remote=>true 
+            -if can? :edit, tpago
+              = link_to 'Edit', edit_tpago_path(tpago),:remote=>true  
+            -if can? :destroy, tpago
+              = link_to 'Destroy', tpago, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

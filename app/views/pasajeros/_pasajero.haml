@@ -1,4 +1,4 @@
-.ui-widget
+.ui-widget.ui-widget-content
   %h3.ui-widget-header pasajero  
   .left{:style=>'float:right'}
     .action_bar
@@ -10,7 +10,7 @@
   %p
     %b Doc:
     = @pasajero.doc
-  
+    = @pasajero.try(:tdoc).try(:name)
   %p
     %b Name:
     = @pasajero.name
@@ -19,8 +19,9 @@
     %b Nacimiento:
     = @pasajero.nacimiento
   
-  %p
-    %b Tdoc_id:
-    = @pasajero.tdoc_id
   
-    = render :partial => "version"
+    = render :partial => "layouts/version",:locals=>{:model=>@pasajero,:controller=>:pasajeros}
+    
+  %h2 Reservas de este pasajero
+
+  =render :partial =>'reservas/reservas'

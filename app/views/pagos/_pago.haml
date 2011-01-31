@@ -13,10 +13,15 @@
   
   %p
     %b Monto:
+    = @pago.moneda.simbolo
     = @pago.monto
-  
   %p
-    %b Moneda_id:
-    = @pago.moneda_id
+    %b Reserva
+    =@pago.reserva_id
+  %p
+    %b
+      =@pago.tentidad.name
+    =@pago.get_entidad.name
   
-    = render :partial => "version"
+  
+    = render :partial => "layouts/version",:locals=>{:model=>@pago,:controller=>:pagos}

@@ -17,7 +17,7 @@
       - for agencia in @agencias   
         %tr
           %td= agencia.id
-          %td= agencia.try(:name) 
+          %td= agencia.try(:direccion).try(:name) 
           %td= agencia.try(:direccion).try(:calle)
           %td= agencia.try(:direccion).try(:cuit)
           %td= agencia.try(:direccion).try(:telefono)

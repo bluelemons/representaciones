@@ -4,19 +4,16 @@
      
     = f.label :doc
     %br 
-    = f.text_field :doc_eq
+    = collection_select(:pasajero, :tdoc_id_eq, Tdoc.all, :id, :name, :prompt => true)     
+    = f.text_field :doc_eq    
     %br 
     = f.label :name
     %br 
-    = f.text_field :name_eq
+    = f.text_field :name_sw
     %br 
     = f.label :nacimiento
     %br 
-    = f.text_field :nacimiento_eq
-    %br 
-    = f.label :tdoc_id
-    %br 
-    = f.text_field :tdoc_id_eq
+    = f.text_field :nacimiento_gt
     %br
     =f.label 'Baja'
     %br

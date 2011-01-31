@@ -2,8 +2,7 @@ class CreateOperadoras < ActiveRecord::Migration
   def self.up
 
     create_table :operadoras do |t|
-          
-      t.string :name
+
           
       t.integer :direccion_id
       

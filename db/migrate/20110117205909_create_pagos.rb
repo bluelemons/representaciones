@@ -8,7 +8,10 @@ class CreatePagos < ActiveRecord::Migration
       t.float :monto
           
       t.integer :moneda_id
-      
+      t.integer :tpago_id
+      t.integer :tentidad_id
+      t.integer :reserva_id
+      t.integer :numero
 
       t.timestamps
     end

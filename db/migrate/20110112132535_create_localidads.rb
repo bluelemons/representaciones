@@ -1,14 +1,13 @@
 class CreateLocalidads < ActiveRecord::Migration
   def self.up
-    create_table :localidads do |t|
-      t.string :name
-      t.integer :departamento_id
-
-      t.timestamps
-    end
+   # create_table :localidads do |t|
+   #   t.string :name
+   #   t.integer :departamento_id
+   #   t.timestamps
+   # end
   end
 
   def self.down
-    drop_table :localidads
+    #drop_table :localidads
   end
 end

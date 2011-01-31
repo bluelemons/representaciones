@@ -3,8 +3,6 @@ class CreateAgencias < ActiveRecord::Migration
 
     create_table :agencias do |t|
           
-      t.string :name
-          
       t.integer :direccion_id
       
 

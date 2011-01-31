@@ -22,10 +22,10 @@ class OperadorasController < InheritedResources::Base
   end
   
   def new
-    @direccion = Direccion.new
+    @operadora.build_direccion
     new!
-  end  
-  
+  end
+ 
   def edit
     @direccion = @operadora.direccion
     edit!
@@ -45,11 +45,8 @@ class OperadorasController < InheritedResources::Base
   
   def update
     @operadora = Operadora.find(params[:id])
-    @direccion = @operadora.direccion
     @operadora.user = current_user
-    @direccion.user = current_user
     if @operadora.update_attributes(params[:operadora])
-      @direccion.update_attributes(params[:direccion])    
       redirect_to :action => 'show', :id => @operadora, :format =>'js'
     else
       render 'edit.js'
@@ -58,19 +55,14 @@ class OperadorasController < InheritedResources::Base
 
   def create
     @operadora = Operadora.new(params[:operadora])
-    @direccion = Direccion.new(params[:direccion])
     @operadora.user = current_user
-    @direccion.user = current_user
-    if @direccion.save
-      @operadora.direccion = @direccion
-      if @operadora.save
-        redirect_to :action => 'show', :id => @operadora, :format =>'js'
-      else
-        render 'new.js'
-      end
+
+    if @operadora.save
+      redirect_to :action => 'show', :id => @operadora, :format =>'js'
     else
       render 'new.js'
     end
+
   end 
   
 end

@@ -1,58 +1,139 @@
-.ui-widget
-  %h3.ui-widget-header reserva  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @reserva 
-        = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
-    %br
+#tabs
+  %ul
+    %li
+      %a{:href=>"#tabs-1"} Reserva
+    %li
+      %a{:href=>"#tabs-2"} Tarifa
+    %li
+      %a{:href=>"#tabs-3"} Pasajeros
+    %li
+      %a{:href=>"#tabs-4"} Pagos
+      
+  #tabs-1.ui-widget.ui-widget-content
+    .left{:style=>'float:right'}
+      .action_bar
+        -if can? :edit, @reserva 
+          = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
   
+    -if @reserva.activa?
+      .green
+        La Reserva está activa
+    -else
+      .red
+        La Reserva NO está activa      
+    %table.wide
+      %tr
+        %td
+          %b Fecha:
+        %td
+          = @reserva.fecha
+   
+        %td
+          %b Salida:
+        %td
+          = @reserva.salida
+    
+    %table
+      %tr
+        %td
+          %b Reservado:
+        %td
+          = @reserva.reservado
+    
+      %tr
+        %td
+          %b Hotel:
+        %td
+          = @reserva.hotel
+      %tr  
+        %td      
+          %b Periodo:
+        %td
+          = @reserva.periodo
+      %tr  
+        %td
+          %b Regimen:
+        %td
+          = @reserva.regimen
+      %tr  
+        %td
+          %b Tipo de habitacion:
+        %td
+          = @reserva.thabitacion.try(:name)
+        
+    %p
+      %b Programa:
+      =@reserva.programa.try(:name)
+    %p    
+      =link_to @reserva.programa.try(:name), @reserva.programa,:remote =>true,:class=>'show_button mybutton'
+      -if can? :edit, @reserva.programa
+        =link_to 'Editar', edit_programa_path(@reserva.programa),:remote=>true,:class=>'edit_button mybutton' 
+      #programa_form.tohide    
   
-  %p
-    %b Fecha:
-    = @reserva.fecha
-  
-  %p
-    %b Salida:
-    = @reserva.salida
-  
-  %p
-    %b Activa:
-    = @reserva.activa
-  
-  %p
-    %b Reservado:
-    = @reserva.reservado
-  
-  %p
-    %b Hotel:
-    = @reserva.hotel
-  
-  %p
-    %b Periodo:
-    = @reserva.periodo
-  
-  %p
-    %b Regimen:
-    = @reserva.regimen
-  
-  %p
-    %b Obs:
-    = @reserva.obs
-  
-  %p
-    %b Thabitacion_id:
-    = @reserva.thabitacion_id
-  
-  %p
-    %b Programa_id:
-    = @reserva.programa_id
-  
-  %p
-    %b Operadora_id:
-    = @reserva.operadora_id
-  
-  %p
-    %b Agencia_id:
-    = @reserva.agencia_id
-  
-    = render :partial => "version"
+      
+    %p
+      %b Operadora:
+      =@reserva.operadora.try(:name)
+    %p
+      =link_to @reserva.operadora.try(:name), @reserva.operadora,:remote =>true,:class=>'show_button mybutton'
+      -if can? :edit, @reserva.operadora
+        =link_to 'Editar', edit_entidad_path(@reserva.operadora),:remote=>true,:class=>'edit_button mybutton'
+      #operadora_form.tohide
+    %p
+      %b Agencia:
+      =@reserva.agencia.try(:name)
+    %p
+      =link_to @reserva.agencia.try(:name), @reserva.agencia,:remote=>true,:class=>'show_button mybutton'
+      -if can? :edit, @reserva.agencia
+        =link_to 'Editar', edit_entidad_path(@reserva.agencia),:remote=>true,:class=>'edit_button mybutton'
+      #entidad_form.tohide
+    %p
+      %b Obs:
+      = @reserva.obs 
+    %p
+      = render :partial => "layouts/version",:locals=>{:model=>@reserva,:controller=>:reservas}     
+  #tabs-2.ui-widget.ui-widget-content      
+    %p
+      %table
+        %tr
+          %td
+            %b IVA
+          %td
+            =@reserva.iva
+        %tr
+          %td
+            %b Impuesto
+          %td
+            =@reserva.impuesto
+        %tr
+          %td
+            %b Seguro
+          %td
+            =@reserva.seguro
+        %tr
+          %td
+            %b Monto total
+          %td
+            =@reserva.monto
+        %tr
+          %td
+            %b Deuda de la agencia
+          %td
+            =@reserva.agencia_deuda
+        %tr
+          %td
+            %b Deuda de la operadora 
+          %td
+            =@reserva.operadora_deuda            
+                   
+
+    
+      
+  #tabs-3.ui-widget.ui-widget-content
+    =render :partial=>'pasajeros/grilla',:locals=>{:@pasajeros=>@reserva.pasajeros}
+
+  #tabs-4.ui-widget.ui-widget-content
+    %h2="Pagos de agencia #{@reserva.try(:agencia).try(:name)}"
+    =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@reserva.pagos.pagencia}
+    %h2="Pagos de operadora #{@reserva.try(:operadora).try(:name)}"
+    =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@reserva.pagos.poperadora}

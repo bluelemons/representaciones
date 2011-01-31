@@ -1,0 +1,34 @@
+%h2 Pasajeros
+.pasajeros
+  =link_to_function 'Agregar',:class=>'new'
+  %table
+    %tr
+      %th
+      %th Documento
+      %th Nombre   
+      %th Nacimiento    
+    -@reserva.pasajeros.each do |pasajero|
+      %tr
+        %td
+          =pasajero.id
+        %td
+          =pasajero.doc
+        %td
+          =pasajero.name
+        %td
+          =pasajero.nacimiento
+        %td
+          = check_box_tag "reserva[pasajero_ids][]",pasajero.id, @reserva.pasajeros.include?(pasajero)     
+         
+    -for i in 0..6
+      %tr
+        %td.pasajeros_fields
+          %input{:class=>"reserva_pasajero_#{i}_ids_",:size=>3,:type=>'text',:name=>'reserva[pasajero_ids][]'}
+        %td
+          %input.autocomplete_persona{:id=>"reserva_pasajero_#{i}_doc",:i=>i,:AUTOCOMPLETE=>'OFF'}
+        %td
+          %input.autocomplete_persona.autocomplete{:id=>"reserva_pasajero_#{i}_name",:i=>i,:table=>'pasajero',:AUTOCOMPLETE=>'OFF'}
+        %td
+          %input{:id=>"reserva_pasajero_#{i}_nacimiento"}   
+        %td        
+          =link_to_function 'Eliminar'

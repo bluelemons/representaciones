@@ -6,7 +6,7 @@
   #direccions_grid
     %table#migrilla.togrid
       %tr
-      
+        %th Nombre
         %th Calle
       
         %th Cuit
@@ -21,12 +21,12 @@
       
         %th Localidad_id
       
-      %th Acciones
+        %th Acciones
   
         
       - for direccion in @direccions   
         %tr
-          
+          %td= direccion.try(:name) 
           %td= direccion.try(:calle) 
           
           %td= direccion.try(:cuit) 

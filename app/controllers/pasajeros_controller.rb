@@ -23,10 +23,11 @@ class PasajerosController < InheritedResources::Base
   
   def show
     if params[:doc]
-      @pasajero = Pasajero.where(:doc =>params[:doc])
+      @pasajero = Pasajero.where(:doc =>params[:doc]).limit(1)
     else
       @pasajero = Pasajero.find(params[:id])
       @pasajero.revert_to(params[:version].to_i) if params[:version]
+      @reservas = @pasajero.reservas.paginate :page => params[:page], :per_page =>10
     end
     show! do |format|
       format.html 
@@ -54,9 +55,13 @@ class PasajerosController < InheritedResources::Base
     @pasajero = Pasajero.new(params[:pasajero])
     @pasajero.user = current_user
     if @pasajero.save
-      redirect_to :action => 'show', :id => @pasajero, :format =>'js'
+      #que vuelva para cargar otro pasajero.
+      #redirect_to :action => 'show',:controller=>'pasajeros', :id => @pasajero, :format =>'js'
+      @ultimo = @pasajero #guardo ultimo en otra variable para que en new.js.erb pueda guardarlo en la tabla.
+      @pasajero = Pasajero.new()#asì me pone el formulario en blanco
+      render 'pasajeros/new.js'
     else
-      render 'new.js'
+      render 'pasajeros/new.js'
     end
   end 
   

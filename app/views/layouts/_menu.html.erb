@@ -4,13 +4,14 @@
 <ul class="tabs">
    <li class="hasmore"><a href="#"><span>ABM</span></a>
      <ul class="dropdown">
-       <li><%= link_to 'Operadoras',operadoras_path %></li>
-       <li><%= link_to 'Agencias',agencias_path %></li>
+       <li><%= link_to 'Operadoras','/operadoras' %></li>
+       <li><%= link_to 'Agencias','/agencias' %></li>
        <li><%= link_to 'Programas',programas_path %></li>
+       <li><%= link_to 'Pasajeros',pasajeros_path %></li>
        <li class="last"><%= link_to 'Localidades', localidads_path%></li>
      </ul>
    
-   <li><a href="#"><span>Históricos</span></a></li>
+   <li><%= link_to '<span>Pagos</span>'.html_safe,pagos_path %></li>
    <li><%= link_to '<span>Reservas</span>'.html_safe,reservas_path %></li>
    <li><a href="#"><span>Consultas</span></a></li>
    <li><a href="#"><span>Informes</span></a></li>

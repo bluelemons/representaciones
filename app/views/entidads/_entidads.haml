@@ -1,0 +1,29 @@
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @entidads
+
+  #entidads_grid
+    %table#migrilla.togrid
+      %tr
+        %th ID
+        %th Name
+        %th Direccion
+        %th CUIT
+        %th Telefono
+        %th Acciones
+  
+        
+      - for entidad in @entidads   
+        %tr
+          %td= entidad.id
+          %td= entidad.try(:name) 
+          %td= entidad.try(:calle)
+          %td= entidad.try(:cuit)
+          %td= entidad.try(:telefono)
+          
+          %td
+            = link_to 'Show', entidad,:remote=>true 
+            -if can? :edit, entidad
+              = link_to 'Edit', edit_entidad_path(entidad),:remote=>true  
+            -if can? :destroy, entidad
+              = link_to 'Destroy', entidad, :confirm => 'Are you sure?', :method => :delete,:remote=>true  

@@ -1,16 +1,17 @@
-.ui-widget
+.ui-widget.ui-widget-content
   %h3.ui-widget-header direccion  
   .left{:style=>'float:right'}
     .action_bar
       = link_to 'Editar', edit_direccion_path(@direccion),:remote=>true,:width =>'200px'
-    %br
-  = render :partial => "version"
-  
-  
+
+  %p
+    %b Nombre:
+    = @direccion.calle
+    = @direccion.try(:name) 
   %p
     %b Calle:
     = @direccion.calle
-  
+    = @direccion.localidad.try(:name)
   %p
     %b Cuit:
     = @direccion.cuit
@@ -31,7 +32,4 @@
     %b Web:
     = @direccion.web
   
-  %p
-    %b Localidad_id:
-    = @direccion.localidad_id
-  
+  = render :partial => "layouts/version",:locals=>{:model=>@direccion,:controller=>:direccions}

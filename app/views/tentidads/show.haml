@@ -1,0 +1,10 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    -if can? :new, Tentidad
+      = link_to 'Nuevo', new_tentidad_path,:remote =>true
+    -if can? :edit, @tentidad 
+      = link_to 'Editar', edit_tentidad_path(@tentidad),:remote =>true
+    = link_to 'Todos', tentidads_path ,:remote =>true
+=render 'tentidad'

@@ -16,7 +16,7 @@
       - for operadora in @operadoras   
         %tr
           
-          %td= operadora.try(:name) 
+          %td= operadora.try(:direccion).try(:name) 
           
           %td= operadora.try(:direccion_id) 
           

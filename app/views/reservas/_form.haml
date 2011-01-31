@@ -10,87 +10,10 @@
             %li= msg 
     
     
-    .field
-      = f.label :Fecha
-      %br
-      = f.text_field :fecha,{:class =>'datepicker'}
-      <script>$(function() {$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });});</script>
-    
-    .field
-      = f.label :Salida
-      %br
-      = f.text_field :salida,{:class =>'datepicker'}
-    
-    .field
-      = f.label :Activa
-      %br
-      = f.text_field :activa
-    
-    .field
-      = f.label :Reservado
-      %br
-      = f.check_box :reservado
-    
-    .field
-      = f.label :Hotel
-      %br
-      = f.text_field :hotel
-    
-    .field
-      = f.label :Periodo
-      %br
-      = f.text_field :periodo
-    
-    .field
-      = f.label :Regimen
-      %br
-      = f.text_field :regimen
-    
-    .field
-      = f.label :Obs
-      %br
-      = f.text_area :obs
-    
-    .field
-      = f.label :Thabitacion_id
-      %br
-      = collection_select(:reserva, :thabitacion_id, Thabitacion.all, :id, :name, :prompt => false) 
-    
-    .field
-      = f.label :Programa_id
-      %br
-      = collection_select(:reserva, :programa_id, Programa.all, :id, :name, :prompt => false) 
-    
-    .field
-      = f.label :Operadora_id
-      %br
-      = collection_select(:reserva, :operadora_id, Operadora.all, :id, :name, :prompt => false) 
-    
-    .field
-      = f.label :Agencia_id
-      %br
-      = collection_select(:reserva, :agencia_id, Agencia.all, :id, :name, :prompt => false)       
-      %br
-      -#- @reserva.pasajeros.each_with_index do |pasajero, index| 
-      -#  <input id="reserva_pasajero_ids_" type ="text_field" name ="reserva[pasajero_ids][]" index=
-      -#  =index
-      -#  >
-      -#%br
-      %table
-        -i=0
-        = f.fields_for :pasajeros do |builder|   
-          %tr
-            %th  
-              = builder.label :doc, "DNI"
-            %th  
-              = builder.label :name, "Pasajero" 
-          %tr
-            %td    
-              = builder.text_field :doc,:size=>8,:class=>'autocomplete_persona',:i=>i
-            %td
-              = builder.text_field :name, :class=>'autocomplete',:table=>'pasajero',:i=>i
-          -i=i+1
-          
-    
+    = render :partial => "fields",:locals=>{:f=>f}
+
     .actions
       = f.submit 
+
+#pasajero_form
+  =render :partial=>'pasajeros/form'

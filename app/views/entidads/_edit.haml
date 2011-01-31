@@ -1,0 +1,5 @@
+%h2.ui-widget-header="Modificando #{@entidad.try(:tentidad).try(:name)}"
+.action_bar{:style=>'float:right'}
+    = link_to 'Mostrar', entidad_path(@entidad),:remote=>true
+= render 'form'
+

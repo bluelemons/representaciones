@@ -20,15 +20,9 @@ class AgenciasController < InheritedResources::Base
     end
     
   end
-  
   def new
-    @direccion = Direccion.new
+    @agencia.build_direccion
     new!
-  end  
-  
-  def edit
-    @direccion = @agencia.direccion
-    edit!
   end
   
   def show
@@ -45,11 +39,9 @@ class AgenciasController < InheritedResources::Base
   
   def update
     @agencia = Agencia.find(params[:id])
-    @direccion = @agencia.direccion
+
     @agencia.user = current_user
-    @direccion.user = current_user
     if @agencia.update_attributes(params[:agencia])
-      @direccion.update_attributes(params[:direccion])
       redirect_to :action => 'show', :id => @agencia, :format =>'js'
     else
       render 'edit.js'
@@ -58,19 +50,14 @@ class AgenciasController < InheritedResources::Base
 
   def create
     @agencia = Agencia.new(params[:agencia])
-    @direccion = Direccion.new(params[:direccion])
     @agencia.user = current_user
-    @direccion.user = current_user
-    if @direccion.save
-      @agencia.direccion = @direccion
-      if @agencia.save
-        redirect_to :action => 'show', :id => @agencia, :format =>'js'
-      else
-        render 'new.js'
-      end
+
+    if @agencia.save
+      redirect_to :action => 'show', :id => @agencia.id, :format =>'js'
     else
       render 'new.js'
     end
+
   end 
   
 end

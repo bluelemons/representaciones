@@ -8,42 +8,7 @@
           - @direccion.errors.full_messages.each do |msg| 
             %li= msg 
     
-    
-    .field
-      = f.label :Calle
-      %br
-      = f.text_field :calle
-    
-    .field
-      = f.label :Cuit
-      %br
-      = f.text_field :cuit
-    
-    .field
-      = f.label :Telefono
-      %br
-      = f.text_field :telefono
-    
-    .field
-      = f.label :Legajo
-      %br
-      = f.text_field :legajo
-    
-    .field
-      = f.label :Email
-      %br
-      = f.text_field :email
-    
-    .field
-      = f.label :Web
-      %br
-      = f.text_field :web
-    
-    .field
-      = f.label :Localidad_id
-      %br
-      = f.text_field :localidad_id
-    
-    
+    =render :partial =>'direccions/datos',:locals=>{:direccion=>f}
+        
     .actions
       = f.submit 
