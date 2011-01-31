@@ -50,20 +50,20 @@
           %td 
             = f.label :Tipo_de_habitacion
             %br 
-            = collection_select(:reserva, :thabitacion_id_eq, Thabitacion.all, :id, :name, :prompt => true)     
+            = collection_select(:search, :thabitacion_id_eq, Thabitacion.all, :id, :name, :prompt => true)     
           %td 
             = f.label :programa_id
             %br 
-            = collection_select(:reserva, :prograna_id_eq, Programa.all, :id, :name, :prompt => true) 
+            = collection_select(:search, :programa_id_eq, Programa.all, :id, :name, :prompt => true) 
         %tr
           %td 
             = f.label :operadora_id
             %br 
-            = collection_select(:reserva, :operadora_id_eq, Direccion.all, :id, :name, :prompt => true) 
+            = collection_select(:search, :operadora_id_eq, Entidad.agencia.all, :id, :name, :prompt => true) 
           %td 
             = f.label :agencia_id
             %br 
-            = collection_select(:reserva, :agencia_id_eq, Direccion.all, :id, :name, :prompt => true)     
+            = collection_select(:search, :agencia_id_eq, Entidad.operadora.all, :id, :name, :prompt => true)     
       %br
 
       =f.label 'Baja'

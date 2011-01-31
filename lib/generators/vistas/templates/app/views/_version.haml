@@ -1,17 +1,20 @@
-#versions.ui-widget
-  .ui-widget-header Historia
-  .ui-widget-content
-    %p
-      %b Version:
-      = @<%= file_name %>.version
-      %br
-      %b Modificado:
-      = @<%= file_name %>.updated_at
-      %br
-      %b Usuario:
-      %br
-      - if @<%= file_name %>.version > 1 
-        = link_to "Version anterior - #{@<%= file_name %>.version - 1}",{:version=>(@<%= file_name %>.version - 1)},:remote =>true
-       
-      - if params[:version]
-        = link_to "Version Actual",@<%= file_name %>, :remote=>true 
+.ui-widget
+  .ui-widget-content.version
+    %table.wide
+      %tr
+        %td
+          %b Version:
+          = model.version
+        %td
+          %b Modificado
+          = model.updated_at
+        %td
+          %b=model.try(:user).try(:username)
+        %td
+          - if model.version > 1 
+            = link_to "Version anterior - #{model.version - 1}",{:controller=>controller,
+              :action=>'show',:id=>model.id,
+              :version=>(model.version - 1)},:remote =>true
+           
+          - if params[:version]
+            = link_to "Version Actual",model, :remote=>true 

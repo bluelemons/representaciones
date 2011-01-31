@@ -6,6 +6,13 @@ require 'spec_helper'
 
 describe PagosController do
 
+  def setup
+    @ability = double(CanCan::Ability)
+    # TODO can do everything
+    @ability.stub(:can) { true }
+    controller.stub(:current_ability).returns(@ability)
+  end
+  
   def mock_pago(stubs={})
     @mock_pago ||= mock_model(Pago, stubs).as_null_object
   end

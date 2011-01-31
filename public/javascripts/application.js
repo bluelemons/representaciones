@@ -3,9 +3,10 @@ function togrid(){
                                       // si lo arrglan en el futuro.
     tableToGrid($(".togrid"),{
       datatype: "local",
+      width:750,
       //onSelectRow: function(id){$('#togrid').getCell(id, 'ID');},
       //onSelectRow: function(id){$.getScript('contribuyentes/' + $('#togrid').getCell(id, 'ID') + '.js');}, 
-      caption: "Nombre de la tabla"
+      caption: "Listado"
      });  
   //});
   
@@ -13,11 +14,22 @@ function togrid(){
   }
 function skin(){
   $('.action_bar *').button({icons: {primary: "ui-icon-pencil"},text: true});
+  $('.new_button').button({icons: {primary: "ui-icon-plus"},text: false});
+  $('.show_button').button({icons: {primary: "ui-icon-search"},text: false});
+  $('.change_button').button({icons: {primary: "ui-icon-transferthick-e-w"},text: false});  
+  $('.edit_button').button({icons: {primary: "ui-icon-pencil"},text: false});
+  $('.tohide').live('dblclick',function(){
+    $(this).hide();
+  });
+
+  $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  $( "#tabs" ).tabs();
+
   togrid();
 }
 
 $(function() {
-  
+
   $('.pagination a').live('click', function () {  
     $.getScript(this.href, togrid ); 
     return false; 

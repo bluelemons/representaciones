@@ -1,4 +1,10 @@
 Representaciones::Application.routes.draw do
+  resources :entidads
+
+  resources :tpagos
+
+  resources :tentidads
+
   resources :tdocs
 
   resources :direccions
@@ -6,10 +12,12 @@ Representaciones::Application.routes.draw do
   resources :pagos
 
   resources :pasajeros
-
-  resources :agencias
-
-  resources :operadoras
+  match 'pasajeros_dni/:doc' => 'pasajeros#show' #Busca el pasajoer por DNI en /pasajeros_din/:doc
+  
+  match "operadoras" => redirect("/entidads/?search[tentidad_id_eq]=2")
+  match "agencias" => redirect("/entidads/?search[tentidad_id_eq]=1")
+  #resources :agencias
+  #resources :operadoras
 
   resources :monedas
 

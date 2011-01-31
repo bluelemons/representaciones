@@ -25,12 +25,12 @@ class VistasGenerator < Rails::Generators::Base
     end
     
     #controlador
-    if !options.controller?
+    if options.controller?
       template "app/controller/controller.rb", "app/controllers/#{plural_name}_controller.rb"
     end
     
     #modelo    
-    if !options.model?
+    if options.model?
       template "app/model/model.rb", "app/models/#{file_name}.rb"
     end
 
@@ -43,7 +43,9 @@ class VistasGenerator < Rails::Generators::Base
       template "app/views/lista.haml", "app/views/#{plural_name}/_#{plural_name}.haml"
       #show
       template "app/views/single.haml", "app/views/#{plural_name}/_#{file_name}.haml"
-      template "app/views/_version.haml", "app/views/#{plural_name}/_version.haml"    
+      #template "app/views/_version.haml", "app/views/#{plural_name}/_version.haml"    
+      #saque el version y lo puse en el layout
+      template "app/views/_version.haml", "app/views/layouts/_version.haml"
       #form
       template "app/views/_form.haml", "app/views/#{plural_name}/_form.haml"    
       #new
@@ -60,12 +62,12 @@ class VistasGenerator < Rails::Generators::Base
       template "app/views/show.js.erb", "app/views/#{plural_name}/show.js.erb"        
     end
     #pdf 
-    if !options.pdf?
+    if options.pdf?
       template "app/reports/index_report.rb", "app/reports/#{file_name}_report.rb"
     end
       
     #migration
-    if !options.migration?
+    if options.migration?
       migration_template 'db/migration_create.rb', "db/migrate/create_#{plural_name}.rb"
       sleep 1
       migration_template 'db/migration_globales.rb', "db/migrate/add_globals_#{plural_name}.rb"
@@ -74,11 +76,11 @@ class VistasGenerator < Rails::Generators::Base
     end
     
     #javascript
-    if !options.javascript?
+    if options.javascript?
       template "public/applications.js", "public/javascripts/application.js"
     end
     #routes
-    if !options.route?
+    if options.route?
       route "resources :#{plural_name}"
     end
     

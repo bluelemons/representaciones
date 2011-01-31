@@ -4,7 +4,7 @@ describe "direccions/index.haml" do
   before(:each) do
     assign(:direccions, [
       stub_model(Direccion,
-        :direccion => "Direccion",
+        :calle => "Direccion",
         :cuit => 1,
         :telefono => "Telefono",
         :legajo => "Legajo",
@@ -13,7 +13,7 @@ describe "direccions/index.haml" do
         :localidad_id => 1
       ),
       stub_model(Direccion,
-        :direccion => "Direccion",
+        :calle => "Direccion",
         :cuit => 1,
         :telefono => "Telefono",
         :legajo => "Legajo",

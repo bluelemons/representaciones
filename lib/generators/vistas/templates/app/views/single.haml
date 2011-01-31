@@ -1,4 +1,4 @@
-.ui-widget
+.ui-widget.ui-widget-content
   %h3.ui-widget-header <%= file_name %>  
   .left{:style=>'float:right'}
     .action_bar
@@ -11,4 +11,4 @@
     %b <%= attribute.name.capitalize %>:
     = @<%= file_name %>.<%= attribute.name %>
   <% end %>
-    = render :partial => "version"
+    = render :partial => "layouts/version",:locals=>{:model=>@<%= file_name %>,:controller=>:<%= plural_name %>}

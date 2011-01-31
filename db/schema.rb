@@ -10,30 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121151856) do
-
-  create_table "agencia_versions", :force => true do |t|
-    t.integer  "agencia_id"
-    t.integer  "version"
-    t.string   "name"
-    t.integer  "direccion_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",       :default => false
-    t.integer  "user_id"
-  end
-
-  add_index "agencia_versions", ["agencia_id"], :name => "index_agencia_versions_on_agencia_id"
-
-  create_table "agencias", :force => true do |t|
-    t.string   "name"
-    t.integer  "direccion_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",       :default => false
-    t.integer  "user_id"
-    t.integer  "version"
-  end
+ActiveRecord::Schema.define(:version => 20110131051950) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -58,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.datetime "updated_at"
   end
 
-  create_table "direccion_versions", :force => true do |t|
-    t.integer  "direccion_id"
+  create_table "entidad_versions", :force => true do |t|
+    t.integer  "entidad_id"
     t.integer  "version"
     t.string   "calle"
     t.integer  "cuit"
@@ -68,15 +45,17 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.string   "email"
     t.string   "web"
     t.integer  "localidad_id"
+    t.string   "name"
+    t.integer  "tentidad_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",       :default => false
     t.integer  "user_id"
   end
 
-  add_index "direccion_versions", ["direccion_id"], :name => "index_direccion_versions_on_direccion_id"
+  add_index "entidad_versions", ["entidad_id"], :name => "index_entidad_versions_on_entidad_id"
 
-  create_table "direccions", :force => true do |t|
+  create_table "entidads", :force => true do |t|
     t.string   "calle"
     t.integer  "cuit"
     t.string   "telefono"
@@ -84,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.string   "email"
     t.string   "web"
     t.integer  "localidad_id"
+    t.string   "name"
+    t.integer  "tentidad_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",       :default => false
@@ -102,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.integer  "moneda_id"
     t.integer  "version"
     t.string   "name"
+    t.string   "simbolo"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",     :default => false
@@ -112,32 +94,10 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
 
   create_table "monedas", :force => true do |t|
     t.string   "name"
+    t.string   "simbolo"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
-    t.integer  "version"
-  end
-
-  create_table "operadora_versions", :force => true do |t|
-    t.integer  "operadora_id"
-    t.integer  "version"
-    t.string   "name"
-    t.integer  "direccion_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",       :default => false
-    t.integer  "user_id"
-  end
-
-  add_index "operadora_versions", ["operadora_id"], :name => "index_operadora_versions_on_operadora_id"
-
-  create_table "operadoras", :force => true do |t|
-    t.string   "name"
-    t.integer  "direccion_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",       :default => false
     t.integer  "user_id"
     t.integer  "version"
   end
@@ -157,9 +117,13 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.date     "fecha"
     t.float    "monto"
     t.integer  "moneda_id"
+    t.integer  "tpago_id"
+    t.integer  "tentidad_id"
+    t.integer  "reserva_id"
+    t.integer  "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
+    t.boolean  "hidden",      :default => false
     t.integer  "user_id"
   end
 
@@ -169,9 +133,13 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.date     "fecha"
     t.float    "monto"
     t.integer  "moneda_id"
+    t.integer  "tpago_id"
+    t.integer  "tentidad_id"
+    t.integer  "reserva_id"
+    t.integer  "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
+    t.boolean  "hidden",      :default => false
     t.integer  "user_id"
     t.integer  "version"
   end
@@ -204,8 +172,8 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
   end
 
   create_table "pasajeros_reservas", :id => false, :force => true do |t|
-    t.integer  "pasajero_id"
     t.integer  "reserva_id"
+    t.integer  "pasajero_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -223,6 +191,7 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.integer  "programa_id"
     t.integer  "version"
     t.string   "name"
+    t.text     "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",      :default => false
@@ -233,6 +202,7 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
 
   create_table "programas", :force => true do |t|
     t.string   "name"
+    t.text     "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",     :default => false
@@ -251,9 +221,9 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.integer  "version"
     t.date     "fecha"
     t.date     "salida"
-    t.integer  "activa"
     t.string   "reservado"
-    t.string   "hotel"
+    t.string   "operado"
+    t.text     "hotel"
     t.integer  "periodo"
     t.string   "regimen"
     t.text     "obs"
@@ -261,6 +231,11 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.integer  "programa_id"
     t.integer  "operadora_id"
     t.integer  "agencia_id"
+    t.float    "iva"
+    t.float    "impuesto"
+    t.float    "seguro"
+    t.float    "monto"
+    t.string   "referencia"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false
@@ -272,9 +247,9 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
   create_table "reservas", :force => true do |t|
     t.date     "fecha"
     t.date     "salida"
-    t.integer  "activa"
     t.string   "reservado"
-    t.string   "hotel"
+    t.string   "operado"
+    t.text     "hotel"
     t.integer  "periodo"
     t.string   "regimen"
     t.text     "obs"
@@ -282,6 +257,11 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.integer  "programa_id"
     t.integer  "operadora_id"
     t.integer  "agencia_id"
+    t.float    "iva"
+    t.float    "impuesto"
+    t.float    "seguro"
+    t.float    "monto"
+    t.string   "referencia"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false
@@ -322,41 +302,6 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.datetime "updated_at"
   end
 
-  create_table "tarifa_versions", :force => true do |t|
-    t.integer  "tarifa_id"
-    t.integer  "version"
-    t.float    "iva"
-    t.integer  "impuesto"
-    t.float    "monto"
-    t.float    "comision"
-    t.float    "efectivo"
-    t.float    "anticipo"
-    t.string   "obs"
-    t.integer  "reserva_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
-  end
-
-  add_index "tarifa_versions", ["tarifa_id"], :name => "index_tarifa_versions_on_tarifa_id"
-
-  create_table "tarifas", :force => true do |t|
-    t.float    "iva"
-    t.integer  "impuesto"
-    t.float    "monto"
-    t.float    "comision"
-    t.float    "efectivo"
-    t.float    "anticipo"
-    t.string   "obs"
-    t.integer  "reserva_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
-    t.integer  "version"
-  end
-
   create_table "tdoc_versions", :force => true do |t|
     t.integer  "tdoc_id"
     t.integer  "version"
@@ -370,6 +315,27 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
   add_index "tdoc_versions", ["tdoc_id"], :name => "index_tdoc_versions_on_tdoc_id"
 
   create_table "tdocs", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
+  end
+
+  create_table "tentidad_versions", :force => true do |t|
+    t.integer  "tentidad_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",      :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "tentidad_versions", ["tentidad_id"], :name => "index_tentidad_versions_on_tentidad_id"
+
+  create_table "tentidads", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -399,10 +365,30 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.integer  "version"
   end
 
+  create_table "tpago_versions", :force => true do |t|
+    t.integer  "tpago_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "tpago_versions", ["tpago_id"], :name => "index_tpago_versions_on_tpago_id"
+
+  create_table "tpagos", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt"
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -411,6 +397,7 @@ ActiveRecord::Schema.define(:version => 20110121151856) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"

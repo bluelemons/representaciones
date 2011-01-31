@@ -2,15 +2,21 @@
   padding-top:4px;
   padding-bottom:4px;
 }
-.left{
-  float:left
+.version{
+  font-size:0.7em;
 }
-.right{
-  float:right
+.mybutton{
+  font-size:0.8em !important;
 }
-.half{
-  width:49%
-}
+.red{color:red;}
+.green{color:green;}
+
+.hide{ display: none;}
+.left{float:left}
+.right{float:right}
+.half{width:49%}
+.wide{width:100%}
+
 .ui-layout-north{
   height: 40px;
 }

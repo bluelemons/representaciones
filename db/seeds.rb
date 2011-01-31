@@ -1,23 +1,153 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed {or created alongside the db with db:setup}.
-#
-# Examples:
-#
-#   cities = City.create{[{ :name => 'Chicago' }, { :name => 'Copenhagen' }]}
-#   Mayor.create{:name => 'Daley', :city => cities.first}
-Tdoc.create{[{:name => 'DNI'}, {:name => 'LE'}, {:name => 'LC'}]}
-Pasajero.create([{:doc=>28684242,:name =>"Oldani Pablo",:nacimiento=>"1981-10-4"},
- {:doc=>31257560,:name =>"Dosso Liza",:nacimiento=>"1984-10-15"},
- {:doc=>32454325,:name =>"Espinaco Eloy",:nacimiento=>"1985-06-14"}])
-Agencia.create ([{:name=>'Pirulo'}, {:name=>'Mengano'}])
-Programa.create ([{:name => "Bariloche"},{:name => "Brasil"}])
-Thabitacion.create({:name =>"Simple"})
-Thabitacion.create({:name =>"Doble"})
-Operadora.create({:name =>"Daniel"})
-Operadora.create({:name =>"Cristina"})
-Role.create ({:name=>'Admin',:desc=>'Es el Rol de administrador'})
-#Usuarios
-User.create ({:username=>'olvap',:email=>'youre-mail@mail.com',:password_confirmation=>'admin6',:password=>'admin6', :role_ids=>[1]})
-User.create ({:username=>'eloy',:email=>'eloy-mail@mail.com',:password_confirmation=>'admin8',:password=>'admin8', :role_ids=>[1]})
-Site.create ({:name =>'Squeezer',:slogan=>'Porque a nadie le gusta exprimir pero a todos les gusta la limonada',:style=>'squeezer'})
+# coding: utf-8
 
+Pago.create({
+  :fecha=>"2011-01-30",
+  :reserva_id =>1,
+  :monto => 22.41,
+  :moneda_id =>1,
+  :tentidad_id=>1,
+  :tpago_id=>1,
+  :numero =>123123
+})
+
+Tpago.create([{
+  :name =>'Deposito'
+  },{
+  :name =>'Factura'
+  }
+])
+Tentidad.create([{
+  :name =>'Agencia'
+  },{
+  :name =>'Operadora'
+  }
+])
+
+Moneda.create([{
+  :name =>'Pesos',
+  :simbolo =>'$'
+  },{
+  :name =>'Dolares',
+  :simbolo=>'u$s'
+  },{
+  :name =>'Euros',
+  :simbolo=>'€'  
+  }
+])
+
+Tdoc.create([{
+  :name => 'DNI'
+  },{
+  :name => 'LE'
+  },{
+  :name => 'LC'
+  }
+])
+
+
+Pasajero.create([{
+  :doc=>28684242,
+  :name =>"Oldani Pablo",
+  :tdoc_id=>1,
+  :nacimiento=>"1981-10-4"
+  },{
+  :doc=>31257560,
+  :name =>"Dosso Liza",
+  :tdoc_id=>1,
+  :nacimiento=>"1984-10-15"
+  },{
+  :doc=>32454325,
+  :name =>"Espinaco Eloy",
+  :tdoc_id=>1,  
+  :nacimiento=>"1985-06-14"
+  }
+])
+Entidad.create([{
+  :name =>"Daniel",
+  :localidad_id=>4807,
+  :calle=>'Saavedra 2854 dto 3',
+  :tentidad_id=>2
+  },{
+  :name =>"Cristina",    
+  :localidad_id=>4807,
+  :calle=>'Crespo 3054 dpto 3',
+  :tentidad_id=>2
+  },{
+  
+  :name=>'Pirulo',  
+  :cuit =>'23-28787872-9',
+  :legajo=>'4d',
+  :telefono=>'4584274',
+  :email=>'pirulo@mail.com.ar',
+  :web=>'http://pirulo.com.ar',
+  :calle=>'Francia 2110',
+  :localidad_id=>4807,
+  :tentidad_id=>1
+  },{
+  :name=>'Mengano',
+  :cuit =>'23-28783472-9',
+  :legajo=>'3f',
+  :telefono=>'4334274',
+  :email=>'mengano@mail.com.ar',
+  :web=>'http://mengano.com.ar',    
+  :calle=>'Urquiza 1757 2b',
+  :localidad_id=>3422,
+  :tentidad_id=>1
+  }
+
+])
+
+Programa.create([{
+  :name => "Bariloche",
+  :obs=>'Mucha joda a la noche'
+  },{
+  :name => "Brasil",
+  :obs=>'Execelente para vacacionar con la familia'
+  }
+])
+
+Thabitacion.create([{
+  :name =>"Simple"
+  },{
+  :name =>"Doble"
+  }])
+
+
+
+Role.create({
+  :name=>'Admin',
+  :desc=>'Es el Rol de administrador'
+})
+
+User.create([{
+  :username=>'olvap',
+  :email=>'youre-mail@mail.com',
+  :password_confirmation=>'admin6',
+  :password=>'admin6',
+  :role_ids=>[1]
+  },{
+  :username=>'eloy',
+  :email=>'eloy-mail@mail.com',
+  :password_confirmation=>'admin8',
+  :password=>'admin8',
+  :role_ids=>[1]
+  }
+])
+
+Reserva.create(
+  :hotel =>'Central Park',
+  :reservado =>'Pablo',
+  :regimen =>'All',
+  :periodo => '6 Noches',
+  :fecha => '2011-01-24',
+  :salida=>'2011-03-21',
+  :agencia_id=>3,
+  :programa_id =>1,
+  :operadora_id =>1,
+  :thabitacion_id =>1,
+  :pasajero_ids=>[1,2],
+  :iva => 18.19,
+  :impuesto =>20.01,
+  :seguro => 0,
+  :monto =>3500
+  )

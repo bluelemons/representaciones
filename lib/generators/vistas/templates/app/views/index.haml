@@ -5,7 +5,7 @@
     -if can? :new, <%= file_name_c %>
       = link_to 'Nuevo <%= file_name_c %>', new_<%= file_name %>_path,:remote => true 
     = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
-  #<%= file_name %>.half.right
+  #<%= file_name %>_form.half.right
   
   = render :partial => "search"
   #<%= plural_name %>
