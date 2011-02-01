@@ -1,4 +1,8 @@
 Representaciones::Application.routes.draw do
+  resources :depositos
+
+  resources :tdepositos
+
   resources :entidads
 
   resources :tpagos

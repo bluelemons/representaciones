@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110131051950) do
+ActiveRecord::Schema.define(:version => 20110201140807) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -33,6 +33,33 @@ ActiveRecord::Schema.define(:version => 20110131051950) do
     t.integer  "provincia_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "deposito_versions", :force => true do |t|
+    t.integer  "deposito_id"
+    t.integer  "version"
+    t.integer  "tpago_id"
+    t.integer  "numero"
+    t.integer  "entidad_id"
+    t.integer  "movimiento_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",        :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "deposito_versions", ["deposito_id"], :name => "index_deposito_versions_on_deposito_id"
+
+  create_table "depositos", :force => true do |t|
+    t.integer  "tpago_id"
+    t.integer  "numero"
+    t.integer  "entidad_id"
+    t.integer  "movimiento_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",        :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "entidad_versions", :force => true do |t|
@@ -102,6 +129,14 @@ ActiveRecord::Schema.define(:version => 20110131051950) do
     t.integer  "version"
   end
 
+  create_table "movimientos", :force => true do |t|
+    t.date     "fecha"
+    t.float    "monto"
+    t.integer  "moneda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", :force => true do |t|
     t.string   "title"
     t.text     "body"
@@ -114,32 +149,24 @@ ActiveRecord::Schema.define(:version => 20110131051950) do
   create_table "pago_versions", :force => true do |t|
     t.integer  "pago_id"
     t.integer  "version"
-    t.date     "fecha"
-    t.float    "monto"
-    t.integer  "moneda_id"
-    t.integer  "tpago_id"
-    t.integer  "tentidad_id"
+    t.integer  "entidad_id"
     t.integer  "reserva_id"
-    t.integer  "numero"
+    t.integer  "movimiento_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",      :default => false
+    t.boolean  "hidden",        :default => false
     t.integer  "user_id"
   end
 
   add_index "pago_versions", ["pago_id"], :name => "index_pago_versions_on_pago_id"
 
   create_table "pagos", :force => true do |t|
-    t.date     "fecha"
-    t.float    "monto"
-    t.integer  "moneda_id"
-    t.integer  "tpago_id"
-    t.integer  "tentidad_id"
+    t.integer  "entidad_id"
     t.integer  "reserva_id"
-    t.integer  "numero"
+    t.integer  "movimiento_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",      :default => false
+    t.boolean  "hidden",        :default => false
     t.integer  "user_id"
     t.integer  "version"
   end
@@ -283,6 +310,13 @@ ActiveRecord::Schema.define(:version => 20110131051950) do
     t.datetime "updated_at"
   end
 
+  create_table "saldo", :force => true do |t|
+    t.float    "monto"
+    t.integer  "moneda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sites", :force => true do |t|
     t.string   "name"
     t.string   "slogan"
@@ -300,6 +334,27 @@ ActiveRecord::Schema.define(:version => 20110131051950) do
     t.datetime "icon_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tdeposito_versions", :force => true do |t|
+    t.integer  "tdeposito_id"
+    t.integer  "version"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",       :default => false
+    t.integer  "user_id"
+  end
+
+  add_index "tdeposito_versions", ["tdeposito_id"], :name => "index_tdeposito_versions_on_tdeposito_id"
+
+  create_table "tdepositos", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "hidden",     :default => false
+    t.integer  "user_id"
+    t.integer  "version"
   end
 
   create_table "tdoc_versions", :force => true do |t|

@@ -1,0 +1,11 @@
+.ui-widget
+  %h1.ui-widget-header Tdeposito
+  
+  .action_bar
+    -if can? :new, Tdeposito
+      = link_to 'Nuevo', tdepositos_path,:remote => true 
+  #tdeposito.half.right
+  
+    = render :partial => "edit"
+  
+  #tdepositos.half.left

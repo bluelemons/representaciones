@@ -20,8 +20,7 @@
     =@pago.reserva_id
   %p
     %b
-      =@pago.tentidad.name
-    =@pago.get_entidad.name
+      =@pago.entidad.name
   
   
     = render :partial => "layouts/version",:locals=>{:model=>@pago,:controller=>:pagos}

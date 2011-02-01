@@ -1,0 +1,12 @@
+.ui-widget
+  %h1.ui-widget-header Tdepositos
+  
+  .action_bar
+    -if can? :new, Tdeposito
+      = link_to 'Nuevo Tdeposito', new_tdeposito_path,:remote => true 
+    = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
+  #tdeposito_form.half.right
+  
+  = render :partial => "search"
+  #tdepositos
+    =render 'tdepositos'

@@ -1,0 +1,19 @@
+= form_for(@tdeposito,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @tdeposito.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@tdeposito.errors.count, 'error')} prohibited this tdeposito from being saved:"
+  
+        %ul
+          - @tdeposito.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Name
+      %br
+      = f.text_field :name
+    
+    
+    .actions
+      = f.submit 

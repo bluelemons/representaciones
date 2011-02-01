@@ -1,14 +1,14 @@
 # coding: utf-8
 
-Pago.create({
-  :fecha=>"2011-01-30",
-  :reserva_id =>1,
-  :monto => 22.41,
-  :moneda_id =>1,
-  :tentidad_id=>1,
-  :tpago_id=>1,
-  :numero =>123123
-})
+#Pago.create({
+#  :fecha=>"2011-01-30",
+#  :reserva_id =>1,
+#  :monto => 22.41,
+#  :moneda_id =>1,
+#  :entidad_id=>3,
+#  :tpago_id=>1,
+#  :numero =>123123
+#})
 
 Tpago.create([{
   :name =>'Deposito'

@@ -3,15 +3,9 @@ class CreatePagos < ActiveRecord::Migration
 
     create_table :pagos do |t|
           
-      t.date :fecha
-          
-      t.float :monto
-          
-      t.integer :moneda_id
-      t.integer :tpago_id
-      t.integer :tentidad_id
+      t.integer :entidad_id
       t.integer :reserva_id
-      t.integer :numero
+      t.integer :movimiento_id
 
       t.timestamps
     end

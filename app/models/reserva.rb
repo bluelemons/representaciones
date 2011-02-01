@@ -38,12 +38,13 @@ class Reserva < ActiveRecord::Base
   def agencia_pago
     total=0
     
-    pagos.pagencia.each do |pago|
+    pagos.where(:entidad_id=>agencia).each do |pago|
       total+=pago.monto
     end
     
     total
   end
+  
   def agencia_deuda
     monto - agencia_pago
   end
@@ -51,7 +52,7 @@ class Reserva < ActiveRecord::Base
   def operadora_pago
     total=0
     
-    pagos.poperadora.each do |pago|
+    pagos.where(:entidad_id=>operadora).each do |pago|
       total+=pago.monto
     end
     

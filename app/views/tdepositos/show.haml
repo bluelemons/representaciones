@@ -1,0 +1,10 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    -if can? :new, Tdeposito
+      = link_to 'Nuevo', new_tdeposito_path,:remote =>true
+    -if can? :edit, @tdeposito 
+      = link_to 'Editar', edit_tdeposito_path(@tdeposito),:remote =>true
+    = link_to 'Todos', tdepositos_path ,:remote =>true
+=render 'tdeposito'

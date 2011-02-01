@@ -1,0 +1,14 @@
+.ui-widget.ui-widget-content
+  %h3.ui-widget-header tdeposito  
+  .left{:style=>'float:right'}
+    .action_bar
+      -if can? :edit, @tdeposito 
+        = link_to 'Editar', edit_tdeposito_path(@tdeposito),:remote=>true,:width =>'200px'
+    %br
+  
+  
+  %p
+    %b Name:
+    = @tdeposito.name
+  
+    = render :partial => "layouts/version",:locals=>{:model=>@tdeposito,:controller=>:tdepositos}
