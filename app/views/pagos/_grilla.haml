@@ -2,7 +2,6 @@
   %table.togrid{:id=>"pagos_#{Time.now}"}
     %tr
       %th Fecha
-      %th Operacion
       %th Monto
       %th Acciones
 
@@ -11,9 +10,7 @@
       %tr
         
         %td= pago.try(:fecha) 
-        %td
-          = pago.try(:tpago).try(:name)
-          = pago.try(:numero) 
+
         %td
           = pago.try(:moneda).try(:simbolo)
           = pago.try(:monto) 
@@ -29,7 +26,6 @@
     %tr
       %td
 
-      %td
         %b Total
       %td
         %b=total

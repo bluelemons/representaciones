@@ -10,20 +10,27 @@
 #  :numero =>123123
 #})
 
-Tpago.create([{
+puts Tpago.create([{
   :name =>'Deposito'
   },{
-  :name =>'Factura'
+  :name =>'Pago'
   }
 ])
-Tentidad.create([{
+
+puts Tdeposito.create([{
+  :name =>'Factura'
+  },{
+  :name =>'Banco'
+  }
+])
+puts Tentidad.create([{
   :name =>'Agencia'
   },{
   :name =>'Operadora'
   }
 ])
 
-Moneda.create([{
+puts Moneda.create([{
   :name =>'Pesos',
   :simbolo =>'$'
   },{
@@ -35,7 +42,7 @@ Moneda.create([{
   }
 ])
 
-Tdoc.create([{
+puts Tdoc.create([{
   :name => 'DNI'
   },{
   :name => 'LE'
@@ -45,7 +52,7 @@ Tdoc.create([{
 ])
 
 
-Pasajero.create([{
+puts Pasajero.create([{
   :doc=>28684242,
   :name =>"Oldani Pablo",
   :tdoc_id=>1,
@@ -62,7 +69,7 @@ Pasajero.create([{
   :nacimiento=>"1985-06-14"
   }
 ])
-Entidad.create([{
+puts Entidad.create([{
   :name =>"Daniel",
   :localidad_id=>4807,
   :calle=>'Saavedra 2854 dto 3',
@@ -96,8 +103,36 @@ Entidad.create([{
   }
 
 ])
+puts Saldo.create([{
+  :entidad_id=>1,
+  :moneda_id=>1
+  },{
+  :entidad_id=>1,
+  :moneda_id=>2
+  },{
+  :entidad_id=>1,
+  :moneda_id=>3
+  },{
+  :entidad_id=>2,
+  :moneda_id=>1
+  },{
+  :entidad_id=>2,
+  :moneda_id=>2
+  },{
+  :entidad_id=>2,
+  :moneda_id=>3
+  },{
+  :entidad_id=>3,
+  :moneda_id=>1
+  },{
+  :entidad_id=>3,
+  :moneda_id=>2
+  },{
+  :entidad_id=>3,
+  :moneda_id=>3  
+  }])
 
-Programa.create([{
+puts Programa.create([{
   :name => "Bariloche",
   :obs=>'Mucha joda a la noche'
   },{
@@ -106,7 +141,7 @@ Programa.create([{
   }
 ])
 
-Thabitacion.create([{
+puts Thabitacion.create([{
   :name =>"Simple"
   },{
   :name =>"Doble"
@@ -114,12 +149,12 @@ Thabitacion.create([{
 
 
 
-Role.create({
+puts Role.create({
   :name=>'Admin',
   :desc=>'Es el Rol de administrador'
 })
 
-User.create([{
+puts User.create([{
   :username=>'olvap',
   :email=>'youre-mail@mail.com',
   :password_confirmation=>'admin6',
@@ -134,7 +169,7 @@ User.create([{
   }
 ])
 
-Reserva.create(
+puts Reserva.create(
   :hotel =>'Central Park',
   :reservado =>'Pablo',
   :regimen =>'All',

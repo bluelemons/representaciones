@@ -134,6 +134,6 @@
 
   #tabs-4.ui-widget.ui-widget-content
     %h2="Pagos de agencia #{@reserva.try(:agencia).try(:name)}"
-    =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@reserva.pagos.where(:entidad_id=>@reserva.agencia_id)}
+    =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@reserva.pagos.pagos.where(:entidad_id=>@reserva.agencia_id)}
     %h2="Pagos de operadora #{@reserva.try(:operadora).try(:name)}"
-    =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@reserva.pagos.where(:entidad_id=>@reserva.operadora_id)}
+    =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@reserva.pagos.pagos.where(:entidad_id=>@reserva.operadora_id)}

@@ -59,6 +59,10 @@ class Reserva < ActiveRecord::Base
     total
   end
   
+  def operadora_deuda
+    monto - agencia_pago
+  end
+  
   def activa?
     (agencia_deuda <= 0)
   end

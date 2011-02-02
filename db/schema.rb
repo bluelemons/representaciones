@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.date     "fecha"
     t.float    "monto"
     t.integer  "moneda_id"
+    t.integer  "tpago"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,10 +152,14 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.integer  "version"
     t.integer  "entidad_id"
     t.integer  "reserva_id"
-    t.integer  "movimiento_id"
+    t.integer  "tpago_id"
+    t.integer  "tdeposito_id"
+    t.integer  "moneda_id"
+    t.date     "fecha"
+    t.float    "monto"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",        :default => false
+    t.boolean  "hidden",       :default => false
     t.integer  "user_id"
   end
 
@@ -163,10 +168,14 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
   create_table "pagos", :force => true do |t|
     t.integer  "entidad_id"
     t.integer  "reserva_id"
-    t.integer  "movimiento_id"
+    t.integer  "tpago_id"
+    t.integer  "tdeposito_id"
+    t.integer  "moneda_id"
+    t.date     "fecha"
+    t.float    "monto"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",        :default => false
+    t.boolean  "hidden",       :default => false
     t.integer  "user_id"
     t.integer  "version"
   end
@@ -310,8 +319,9 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.datetime "updated_at"
   end
 
-  create_table "saldo", :force => true do |t|
-    t.float    "monto"
+  create_table "saldos", :force => true do |t|
+    t.integer  "entidad_id"
+    t.float    "monto",      :default => 0.0
     t.integer  "moneda_id"
     t.datetime "created_at"
     t.datetime "updated_at"

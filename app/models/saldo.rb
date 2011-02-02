@@ -1,11 +1,11 @@
 class Saldo < ActiveRecord::Base
   #clases
   #asociaciones
-  belongs_to :moneda #es el usuario que lo crea o modifica
-      
+
+  belongs_to :entidad
+  belongs_to :moneda
   #validacioness
-  validates :monto, :presence => true  
-  validates :moneda, :presence => true
+  validates :entidad, :presence => true
   #scopes
   
   #metodos

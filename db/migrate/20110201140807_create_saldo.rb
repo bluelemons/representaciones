@@ -1,9 +1,10 @@
 class CreateSaldo < ActiveRecord::Migration
   def self.up
 
-    create_table :saldo do |t|
+    create_table :saldos do |t|
           
-      t.float :monto
+      t.integer :entidad_id
+      t.float :monto,:default=>0
       t.integer :moneda_id
 
       t.timestamps
@@ -11,6 +12,6 @@ class CreateSaldo < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :movimientos
+    drop_table :saldos
   end
 end

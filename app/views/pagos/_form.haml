@@ -28,10 +28,12 @@
       %br
       = collection_select(:pago, :entidad_id, Entidad.all, :id, :name, :prompt => false)
     .field
-      = f.label :Tipo_de_pago
+      = f.label :Tipo_de_deposito
       %br
-      = collection_select(:pago, :tpago_id, Tpago.all, :id, :name, :prompt => false)                  
-      = f.text_field :numero,:size=>10
+      = collection_select(:pago, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)                  
+      =# f.text_field :numero,:size=>10
+      %br
+      = collection_select(:pago, :tpago_id, Tpago.all, :id, :name, :prompt => false)
     
     .actions
       = f.submit 

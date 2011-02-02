@@ -33,6 +33,18 @@
   %p
     %b Web:
     = @entidad.web
+  %br
+  %h4.ui-widget-header Dinero depositado
+  %table.half
+    -@entidad.saldos.each do |saldo|
+      %tr
+        %td
+          %b=saldo.moneda.simbolo
+        %td=saldo.monto
     
-      
+  
+  %h2 Pagos 
+  =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@entidad.pagos.where(:entidad_id=>@entidad.id)}
+    
   = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
+  

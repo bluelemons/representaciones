@@ -44,19 +44,14 @@ class PagosController < InheritedResources::Base
   end
 
   def create
-    #cada vez que se hace un pago tambien se hace un deposito.
-    #el y el deposito no tienen el mismo monto.
-    #hay que evaluar si la dueda se cancela con un valor menor.
-    #si es así el pago de hace con la diferencia a la canelacion de la deuda
-    #el deposito es siempre igual al monto en el formulario
     @pago = Pago.new(params[:pago])
-    
-    #busco la reserva
-    #@reserva = Reserva.find(params[:pago][:reserva_id])
-    
-    
     @pago.user = current_user
     if @pago.save
+      if @pago.tpago_id==1
+        @pago.entidad.deposit(@pago.monto,params[:pago][:moneda_id])
+      else
+        @pago.entidad.withdraw(@pago.monto,params[:pago][:moneda_id])
+      end
       redirect_to :action => 'show', :id => @pago, :format =>'js'
     else
       render 'new.js'
