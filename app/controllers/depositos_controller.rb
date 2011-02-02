@@ -56,17 +56,20 @@ class DepositosController < InheritedResources::Base
       @pago = Pago.new()
       @pago.reserva=@reserva
       @pago.entidad = @deposito.entidad
-      if @reserva.tentidad_id==1 #agencia
-        deuda=@reserva.deuda_agencia
+      if @deposito.try(:entidad).try(:tentidad_id)==1 #agencia
+        deuda=@reserva.agencia_deuda
       else
-        deuda=@reserva.deuda_operadora
+        deuda=@reserva.operadora_deuda
       end
 
-      if @deposito.monto <= @reserva.deuda
+      if @deposito.movimiento.monto <= deuda
         @pago.movimiento = @deposito.movimiento
       else
-        #nuevo movimiento con @pago.monto = @reserva.deuda_agencia
+        @pago.build_movimiento
+        @pago.movimiento = @deposito.movimiento
+        @pago.movimiento.monto = deuda
         #el resto va a el saldo.
+        #@deposito.entidad.saldo
       end
                 
       @pago.save
