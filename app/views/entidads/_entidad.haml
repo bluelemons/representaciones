@@ -39,8 +39,8 @@
     -@entidad.saldos.each do |saldo|
       %tr
         %td
-          %b=saldo.moneda.simbolo
-        %td=saldo.monto
+          %b=saldo.try(:moneda).try(:simbolo)
+        %td=saldo.try(:monto).try(:valor)
     
   
   %h2 Pagos 

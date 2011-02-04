@@ -8,7 +8,8 @@
       %th Entidad
       %th Monto
 
-    -total=0
+    - total = Array.new(3,0)
+
     - for pago in @pagos   
       %tr
         
@@ -22,16 +23,19 @@
         %td
           = pago.try(:monto).try(:moneda).try(:simbolo)
           = pago.try(:monto).try(:valor)  
-          -total+=pago.try(:monto)         
-
+          -total[pago.try(:monto).try(:moneda_id)-1] += pago.try(:monto).try(:valor)
+  %table.wide
     %tr
       %td
+        Pesos $
+        %b
+          =total[0]
       %td
+        Dolares u$s
+        %b
+          =total[1]
       %td
-      %td
-      %td
-
-        %b Total
-      %td
-        %b=total
+        Euros €
+        %b
+          =total[2]
 
