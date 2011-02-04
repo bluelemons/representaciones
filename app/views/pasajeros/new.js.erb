@@ -2,5 +2,6 @@ $('#pasajero_form').html('<%= raw escape_javascript(render("new")) %>').show();
 skin();
 // en @ultimo guardo el pasajero que se acaba de guardad
 //habria que insertarlo en la tabla.
+fila = $('.pasajeros tr:last').clone().find('input').val("<%= @ultimo.id %>").first().closest("tr").appendTo($('.pasajeros tbody:last'));
 $('#console').html('el nuevo pasajero es <%= @ultimo %>, <%= @ultimo.try(:name) %>');
 
