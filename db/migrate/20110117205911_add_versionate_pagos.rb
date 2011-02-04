@@ -5,7 +5,7 @@ class AddVersionatePagos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :pago_versions
+    drop_table :movimiento_versions
   end
   
 end

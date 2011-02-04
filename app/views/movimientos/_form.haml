@@ -1,0 +1,38 @@
+= form_for(@movimiento,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @movimiento.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@movimiento.errors.count, 'error')} prohibited this movimiento from being saved:"
+  
+        %ul
+          - @movimiento.errors.full_messages.each do |msg| 
+            %li= msg 
+    
+    
+    .field
+      = f.label :Fecha
+      %br
+      = f.text_field :fecha,:class =>'datepicker',:size =>10
+    .field
+      = f.label :Reserva
+      %br
+      = f.text_field :reserva_id,:size=>10
+    
+    %table
+      %tr
+        =render :partial =>'montos/form',:locals=>{:f=>f}
+        
+    .field
+      = f.label :Entidad
+      %br
+      = collection_select(:movimiento, :entidad_id, Entidad.all, :id, :name, :prompt => false)
+    .field
+      = f.label :Tipo_de_deposito
+      %br
+      = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)                  
+      =# f.text_field :numero,:size=>10
+      %br
+      = collection_select(:movimiento, :tmovimiento_id, Tmovimiento.all, :id, :name, :prompt => false)
+    
+    .actions
+      = f.submit 

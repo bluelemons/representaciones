@@ -1,7 +1,7 @@
 class CreatePagos < ActiveRecord::Migration
   def self.up
 
-    create_table :pagos do |t|
+    create_table :movimientos do |t|
           
       t.integer :entidad_id
       t.integer :reserva_id
@@ -15,6 +15,6 @@ class CreatePagos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :pagos
+    drop_table :movimientos
   end
 end

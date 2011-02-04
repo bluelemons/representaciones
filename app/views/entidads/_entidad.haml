@@ -44,7 +44,7 @@
     
   
   %h2 Pagos 
-  =render :partial=>'pagos/grilla',:locals=>{:@pagos=>@entidad.pagos.where(:entidad_id=>@entidad.id)}
+  =render :partial=>'pagos/grilla',:locals=>{:@movimientos=>@entidad.movimientos.where(:entidad_id=>@entidad.id)}
     
   = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
   

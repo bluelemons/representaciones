@@ -1,0 +1,26 @@
+.ui-widget
+  %h3.ui-widget-header movimiento  
+  .left{:style=>'float:right'}
+    .action_bar
+      -if can? :edit, @movimiento 
+        = link_to 'Editar', edit_movimiento_path(@movimiento),:remote=>true,:width =>'200px'
+    %br
+  
+  
+  %p
+    %b Fecha:
+    = @movimiento.fecha
+  
+  %p
+    %b Monto:
+    = @movimiento.moneda.simbolo
+    = @movimiento.monto
+  %p
+    %b Reserva
+    =@movimiento.reserva_id
+  %p
+    %b
+      =@movimiento.entidad.name
+  
+  
+    = render :partial => "layouts/version",:locals=>{:model=>@movimiento,:controller=>:movimientos}

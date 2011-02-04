@@ -1,0 +1,10 @@
+%p#notice= notice 
+
+.ui-widget
+  .action_bar
+    -if can? :new, movimiento
+      = link_to 'Nuevo', new_movimiento_path,:remote =>true
+    -if can? :edit, @movimiento 
+      = link_to 'Editar', edit_movimiento_path(@movimiento),:remote =>true
+    = link_to 'Todos', movimientos_path ,:remote =>true
+=render 'movimiento'

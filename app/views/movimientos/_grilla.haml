@@ -1,0 +1,41 @@
+#movimientos_grid
+  %table.togrid{:id=>"movimientos_#{Time.now}"}
+    %tr
+      %th Fecha
+      %th Reserva
+      %th Titular
+      %th Operacion
+      %th Entidad
+      %th Monto
+
+    - total = Array.new(3,0)
+
+    - for movimiento in @movimientos   
+      %tr
+        
+        %td= movimiento.try(:fecha) 
+        %td= movimiento.try(:reserva_id)
+        %td= movimiento.reserva.pasajeros.first.name
+        %td= movimiento.try(:tmovimiento).try(:name)
+        %td
+          =movimiento.try(:entidad).try(:tentidad).try(:name)
+          =movimiento.try(:entidad).try(:name)
+        %td
+          = movimiento.try(:monto).try(:moneda).try(:simbolo)
+          = movimiento.try(:monto).try(:valor)  
+          -total[movimiento.try(:monto).try(:moneda_id)-1] += movimiento.try(:monto).try(:valor)
+  %table.wide
+    %tr
+      %td
+        Pesos $
+        %b
+          =total[0]
+      %td
+        Dolares u$s
+        %b
+          =total[1]
+      %td
+        Euros €
+        %b
+          =total[2]
+

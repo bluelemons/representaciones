@@ -38,14 +38,13 @@ class Reserva < ActiveRecord::Base
   
   #metodos
   def agencia_pago
-    total=0
-
+    array = Array.new(3,0)
     
     pagos.where(:entidad_id=>agencia).pagos.each do |pago|
-      total+=pago.monto
+      array[pago.monto.moneda_id-1]+=pago.monto.valor
     end
     
-    total
+    array
   end
   
   def agencia_deuda
@@ -54,13 +53,13 @@ class Reserva < ActiveRecord::Base
   end
 
   def operadora_pago
-    total=0
+    array = Array.new(3,0)
     
     pagos.where(:entidad_id=>operadora).pagos.each do |pago|
-      total+=pago.monto
+      array[pago.monto.moneda_id-1]+=pago.monto.valor
     end
     
-    total
+    array
   end
   
   def operadora_deuda
@@ -69,8 +68,7 @@ class Reserva < ActiveRecord::Base
   end
   
   def activa?
-    true
-    #(agencia_deuda <= 0)
+    (agencia_deuda <= 0)
   end
   
   def operadora_deuda

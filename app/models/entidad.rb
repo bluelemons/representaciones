@@ -38,7 +38,11 @@ class Entidad < ActiveRecord::Base
   #retira dinero de la cuenta
   def withdraw(monto)
     s = saldos.where(:moneda_id=>monto.moneda_id).limit(1)[0]
-    s.monto.valor -= monto.valor
+    if s.monto.valor >monto.valor
+      s.monto.valor -= monto.valor
+    else
+      s.monto.valor=0
+    end
     s.save
     s.monto.valor
   end
