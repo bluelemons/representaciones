@@ -32,7 +32,7 @@
       = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)                  
       =# f.text_field :numero,:size=>10
       %br
-      = collection_select(:movimiento, :tmovimiento_id, Tmovimiento.all, :id, :name, :prompt => false)
+      = collection_select(:movimiento, :tpago_id, Tpago.all, :id, :name, :prompt => false)
     
     .actions
       = f.submit 

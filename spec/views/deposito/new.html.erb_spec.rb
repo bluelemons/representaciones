@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "pagos/index.html.erb" do
+describe "deposito/new.html.erb" do
   pending "add some examples to (or delete) #{__FILE__}"
 end

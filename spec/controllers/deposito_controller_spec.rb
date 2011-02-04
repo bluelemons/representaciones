@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PagosController do
+describe DepositoController do
 
   describe "GET 'index'" do
     it "should be successful" do
