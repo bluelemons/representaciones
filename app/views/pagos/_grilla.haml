@@ -2,31 +2,36 @@
   %table.togrid{:id=>"pagos_#{Time.now}"}
     %tr
       %th Fecha
+      %th Reserva
+      %th Titular
+      %th Operacion
+      %th Entidad
       %th Monto
-      %th Acciones
 
     -total=0
     - for pago in @pagos   
       %tr
         
         %td= pago.try(:fecha) 
-
+        %td= pago.try(:reserva_id)
+        %td= pago.reserva.pasajeros.first.name
+        %td= pago.try(:tpago).try(:name)
         %td
-          = pago.try(:moneda).try(:simbolo)
-          = pago.try(:monto) 
-          -total+=pago.try(:monto) 
-
-        
+          =pago.try(:entidad).try(:tentidad).try(:name)
+          =pago.try(:entidad).try(:name)
         %td
-          = link_to 'Show', pago,:remote=>true 
-          -if can? :edit, pago
-            = link_to 'Edit', edit_pago_path(pago),:remote=>true  
-          -if can? :destroy, pago
-            = link_to 'Destroy', pago, :confirm => 'Are you sure?', :method => :delete,:remote=>true 
+          = pago.try(:monto).try(:moneda).try(:simbolo)
+          = pago.try(:monto).try(:valor)  
+          -total+=pago.try(:monto)         
+
     %tr
+      %td
+      %td
+      %td
+      %td
       %td
 
         %b Total
       %td
         %b=total
-      %td
+

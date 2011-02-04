@@ -4,7 +4,7 @@ class CreateSaldo < ActiveRecord::Migration
     create_table :saldos do |t|
           
       t.integer :entidad_id
-      t.float :monto,:default=>0
+      t.integer :monto_id
       t.integer :moneda_id
 
       t.timestamps

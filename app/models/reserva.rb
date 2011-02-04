@@ -8,6 +8,8 @@ class Reserva < ActiveRecord::Base
   belongs_to :pasajero #es el pasajero titular
   belongs_to :thabitacion
   belongs_to :programa
+  belongs_to :monto  
+  accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
 
   belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id"
   belongs_to :agencia, :class_name => "Entidad",:foreign_key=>'agencia_id' 
@@ -37,8 +39,9 @@ class Reserva < ActiveRecord::Base
   #metodos
   def agencia_pago
     total=0
+
     
-    pagos.where(:entidad_id=>agencia).each do |pago|
+    pagos.where(:entidad_id=>agencia).pagos.each do |pago|
       total+=pago.monto
     end
     
@@ -46,13 +49,14 @@ class Reserva < ActiveRecord::Base
   end
   
   def agencia_deuda
-    monto - agencia_pago
+    33
+    #monto - agencia_pago
   end
 
   def operadora_pago
     total=0
     
-    pagos.where(:entidad_id=>operadora).each do |pago|
+    pagos.where(:entidad_id=>operadora).pagos.each do |pago|
       total+=pago.monto
     end
     
@@ -60,11 +64,13 @@ class Reserva < ActiveRecord::Base
   end
   
   def operadora_deuda
-    monto - agencia_pago
+    33
+    #monto - agencia_pago
   end
   
   def activa?
-    (agencia_deuda <= 0)
+    true
+    #(agencia_deuda <= 0)
   end
   
   def operadora_deuda

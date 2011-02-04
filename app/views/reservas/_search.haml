@@ -3,7 +3,6 @@
   = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
   
     .left{:style =>"padding:10px"}
-    
       %table
         %tr
           %td
@@ -20,11 +19,6 @@
             = f.label :hotel
           %td
             = f.text_field :hotel_sw
-        %tr
-          %td
-            = f.label :periodo
-          %td
-            = f.text_field :periodo_gte
         %tr
           %td
             = f.label :regimen

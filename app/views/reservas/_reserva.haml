@@ -114,17 +114,18 @@
           %td
             %b Monto total
           %td
-            =@reserva.monto
+            =@reserva.try(:monto).try(:moneda).try(:simbolo)
+            =@reserva.try(:monto).try(:valor)
         %tr
           %td
             %b Deuda de la agencia
           %td
-            =@reserva.agencia_deuda
+            =#@reserva.agencia_deuda
         %tr
           %td
             %b Deuda de la operadora 
           %td
-            =@reserva.operadora_deuda            
+            =#@reserva.operadora_deuda
                    
 
     

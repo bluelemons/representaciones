@@ -20,7 +20,10 @@ class PagosController < InheritedResources::Base
     end
     
   end
-  
+  def new
+    @pago.build_monto
+    new!
+  end
   def show
     @pago = Pago.find(params[:id])
     @pago.revert_to(params[:version].to_i) if params[:version]
@@ -48,11 +51,11 @@ class PagosController < InheritedResources::Base
     @pago.user = current_user
     if @pago.save
       if @pago.tpago_id==1
-        @pago.entidad.deposit(@pago.monto,params[:pago][:moneda_id])
+        @pago.entidad.deposit(@pago.monto)
       else
-        @pago.entidad.withdraw(@pago.monto,params[:pago][:moneda_id])
+        @pago.entidad.withdraw(@pago.monto)
       end
-      redirect_to :action => 'show', :id => @pago, :format =>'js'
+      redirect_to :action => 'new', :id => @pago, :format =>'js'
     else
       render 'new.js'
     end

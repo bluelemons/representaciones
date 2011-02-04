@@ -12,6 +12,9 @@
         %th Hotel
       
         %th Periodo
+        
+        %th Agencia$
+        %th Operadora$
       
       %th Acciones
   
@@ -19,13 +22,17 @@
       - for reserva in @reservas   
         %tr
           %td= reserva.try(:id) 
-          %td=# reserva.try(:pasajero).try(:name)
+          %td= reserva.try(:pasajeros).first.try(:name)
           
           %td= reserva.try(:salida) 
           
           %td= reserva.try(:hotel) 
           
           %td= reserva.try(:periodo) 
+          %td
+            = reserva.agencia_pago
+          %td
+            = reserva.operadora_pago
                     
           %td
             = link_to 'Show', reserva,:remote=>true 

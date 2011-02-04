@@ -18,11 +18,10 @@
       %br
       = f.text_field :reserva_id,:size=>10
     
-    .field
-      = f.label :Monto
-      %br
-      = f.text_field :monto,:size =>10
-      = collection_select(:pago, :moneda_id, Moneda.all, :id, :simbolo, :prompt => false)
+    %table
+      %tr
+        =render :partial =>'montos/form',:locals=>{:f=>f}
+        
     .field
       = f.label :Entidad
       %br

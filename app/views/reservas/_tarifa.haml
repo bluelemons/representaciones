@@ -16,10 +16,7 @@
     %td
       = f.text_field :seguro
   %tr
-    %td
-      = f.label :monto
-    %td
-      = f.text_field :monto
+    =render :partial => 'montos/form',:locals=>{:f=>f}
 .field
   = f.label :Observaciones
   %br

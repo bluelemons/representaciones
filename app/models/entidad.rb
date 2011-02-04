@@ -25,27 +25,21 @@ class Entidad < ActiveRecord::Base
   #metodos
   
   #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
-  def deposit(amount,moneda_id)
-    if amount >0 
-      s = saldos.where(:moneda_id=>moneda_id).limit(1)[0]
-      s.monto+=amount
+  def deposit(monto)
+    if monto.valor >0 
+      s = saldos.where(:moneda_id=>monto.moneda_id).limit(1)[0]
+      s.monto.valor += monto.valor
       s.save
     end
     
-    amount
+    monto.valor
   end
   
   #retira dinero de la cuenta
-  def withdraw(amount,moneda_id)
-    s = saldos.where(:moneda_id=>moneda_id).limit(1)[0]
-
-    if s.monto > amount #se fija que halla el suficiente dinero
-      amount = s.monto
-      s.monto=0
-      s.save
-    end
-    
-    amount
+  def withdraw(monto)
+    s = saldos.where(:moneda_id=>monto.moneda_id).limit(1)[0]
+    s.monto.valor -= monto.valor
+    s.save
+    s.monto.valor
   end
-  
 end

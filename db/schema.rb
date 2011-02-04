@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201140807) do
+ActiveRecord::Schema.define(:version => 20110204130234) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.boolean  "open"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cotizacions", :force => true do |t|
+    t.date     "fecha"
+    t.integer  "moneda_id"
+    t.float    "compra"
+    t.float    "venta"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,6 +138,13 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.integer  "version"
   end
 
+  create_table "montos", :force => true do |t|
+    t.float    "valor"
+    t.integer  "moneda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "movimientos", :force => true do |t|
     t.date     "fecha"
     t.float    "monto"
@@ -154,9 +170,8 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.integer  "reserva_id"
     t.integer  "tpago_id"
     t.integer  "tdeposito_id"
-    t.integer  "moneda_id"
+    t.integer  "monto_id"
     t.date     "fecha"
-    t.float    "monto"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",       :default => false
@@ -170,9 +185,8 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.integer  "reserva_id"
     t.integer  "tpago_id"
     t.integer  "tdeposito_id"
-    t.integer  "moneda_id"
+    t.integer  "monto_id"
     t.date     "fecha"
-    t.float    "monto"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",       :default => false
@@ -260,7 +274,7 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.string   "reservado"
     t.string   "operado"
     t.text     "hotel"
-    t.integer  "periodo"
+    t.string   "periodo"
     t.string   "regimen"
     t.text     "obs"
     t.integer  "thabitacion_id"
@@ -270,7 +284,7 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.float    "iva"
     t.float    "impuesto"
     t.float    "seguro"
-    t.float    "monto"
+    t.integer  "monto_id"
     t.string   "referencia"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -286,7 +300,7 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.string   "reservado"
     t.string   "operado"
     t.text     "hotel"
-    t.integer  "periodo"
+    t.string   "periodo"
     t.string   "regimen"
     t.text     "obs"
     t.integer  "thabitacion_id"
@@ -296,7 +310,7 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
     t.float    "iva"
     t.float    "impuesto"
     t.float    "seguro"
-    t.float    "monto"
+    t.integer  "monto_id"
     t.string   "referencia"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -321,7 +335,7 @@ ActiveRecord::Schema.define(:version => 20110201140807) do
 
   create_table "saldos", :force => true do |t|
     t.integer  "entidad_id"
-    t.float    "monto",      :default => 0.0
+    t.integer  "monto_id"
     t.integer  "moneda_id"
     t.datetime "created_at"
     t.datetime "updated_at"

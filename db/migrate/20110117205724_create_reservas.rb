@@ -6,7 +6,7 @@ class CreateReservas < ActiveRecord::Migration
       t.string :reservado
       t.string :operado
       t.text :hotel
-      t.integer :periodo
+      t.string :periodo
       t.string :regimen
       t.text :obs
       t.integer :thabitacion_id
@@ -16,7 +16,7 @@ class CreateReservas < ActiveRecord::Migration
       t.float :iva
       t.float :impuesto
       t.float :seguro
-      t.float :monto
+      t.integer :monto_id
       t.string :referencia
       t.timestamps
     end

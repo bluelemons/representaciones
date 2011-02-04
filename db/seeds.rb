@@ -10,6 +10,29 @@
 #  :numero =>123123
 #})
 
+puts Cotizacion.create([{
+  :fecha =>'2011-01-01',
+  :compra =>3.98,
+  :venta =>4.00,
+  :moneda_id =>2
+  },{
+  :fecha =>'2011-01-02',
+  :compra =>3.99,
+  :venta =>4.01,
+  :moneda_id =>2
+  },{
+  :fecha =>'2011-01-03',
+  :compra =>4.00,
+  :venta =>4.02,
+  :moneda_id =>2
+  },{
+  :fecha =>'2011-01-04',
+  :compra =>4.01,
+  :venta =>4.03,
+  :moneda_id =>2
+  }
+])
+
 puts Tpago.create([{
   :name =>'Deposito'
   },{
@@ -103,34 +126,7 @@ puts Entidad.create([{
   }
 
 ])
-puts Saldo.create([{
-  :entidad_id=>1,
-  :moneda_id=>1
-  },{
-  :entidad_id=>1,
-  :moneda_id=>2
-  },{
-  :entidad_id=>1,
-  :moneda_id=>3
-  },{
-  :entidad_id=>2,
-  :moneda_id=>1
-  },{
-  :entidad_id=>2,
-  :moneda_id=>2
-  },{
-  :entidad_id=>2,
-  :moneda_id=>3
-  },{
-  :entidad_id=>3,
-  :moneda_id=>1
-  },{
-  :entidad_id=>3,
-  :moneda_id=>2
-  },{
-  :entidad_id=>3,
-  :moneda_id=>3  
-  }])
+
 
 puts Programa.create([{
   :name => "Bariloche",
@@ -184,5 +180,74 @@ puts Reserva.create(
   :iva => 18.19,
   :impuesto =>20.01,
   :seguro => 0,
-  :monto =>3500
+  :monto_attributes =>{
+    :valor =>3500,
+    :moneda_id =>1
+    }
   )
+  
+  
+puts Saldo.create([{
+  :entidad_id=>1,
+  :moneda_id=>1,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>1
+    }
+  },{
+  :entidad_id=>1,
+  :moneda_id=>2,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>2
+    }
+  },{
+  :entidad_id=>1,
+  :moneda_id=>3,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>3
+    }
+  },{
+  :entidad_id=>2,
+  :moneda_id=>1,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>1
+    }
+  },{
+  :entidad_id=>2,
+  :moneda_id=>2,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>2
+    }
+  },{
+  :entidad_id=>2,
+  :moneda_id=>3,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>3
+    }
+  },{
+  :entidad_id=>3,
+  :moneda_id=>1,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>1
+    }
+  },{
+  :entidad_id=>3,
+  :moneda_id=>2,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>2
+    }
+  },{
+  :entidad_id=>3,
+  :moneda_id=>3,
+  :monto_attributes =>{
+    :valor=>0,
+    :moneda_id =>3
+    }  
+  }])

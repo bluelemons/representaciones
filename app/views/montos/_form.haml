@@ -1,0 +1,6 @@
+= f.fields_for :monto do |m|
+  %td
+    Monto
+  %td
+    =m.text_field :valor
+    =m.collection_select(:moneda_id, Moneda.all, :id, :simbolo, :prompt => false)

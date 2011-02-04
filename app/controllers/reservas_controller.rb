@@ -23,8 +23,7 @@ class ReservasController < InheritedResources::Base
   
   def new
     @reserva = Reserva.new
-    #@reserva.build_operadora.build_direccion    
-    #@reserva.build_agencia.build_direccion
+    @reserva.build_monto
     @pasajero = Pasajero.new
 
     new!
@@ -61,10 +60,10 @@ class ReservasController < InheritedResources::Base
     @reserva = Reserva.new(params[:reserva])
     @reserva.user = current_user
 
-    @reserva.pasajero_id = 1
     if @reserva.save 
       redirect_to :action => 'show', :id => @reserva, :format =>'js'
     else
+      @reserva.build_monto
       #@reserva.build_operadora.build_direccion    
       #@reserva.build_agencia.build_direccion
       @pasajero = Pasajero.new
