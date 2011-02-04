@@ -6,7 +6,7 @@ class Entidad < ActiveRecord::Base
   belongs_to :localidad
   belongs_to :tentidad  
   has_many :saldos
-  has_many :pagos
+  has_many :movimientos
   #validaciones
   
   #validates :calle, :presence => true
