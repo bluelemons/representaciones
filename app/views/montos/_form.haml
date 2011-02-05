@@ -2,5 +2,5 @@
   %td
     Monto
   %td
-    =m.text_field :valor
+    =m.text_field :valor,:size =>9
     =m.collection_select(:moneda_id, Moneda.all, :id, :simbolo, :prompt => false)

@@ -2,6 +2,12 @@ class MovimientosController < InheritedResources::Base
   load_and_authorize_resource
   
   respond_to :html, :xml,:js
+  
+  def depositos
+    @movimiento = Movimiento.new
+    @movimiento.build_monto
+  end
+  
   def index
     if params[:search]
       @search = Movimiento.search(params[:search])
@@ -21,8 +27,18 @@ class MovimientosController < InheritedResources::Base
     
   end
   def new
+    if params[:search]
+      @search = Reserva.search(params[:search])
+    else
+      @search = Reserva.baja.search()
+    end
+    @reservas = @search.paginate :page => params[:page], :per_page =>10
     @movimiento.build_monto
-    new!
+    if params[:t]=="deposito"
+      render "deposito"
+    elsif params[:t]=="pago"
+      render "pago"
+    end
   end
   def show
     @movimiento = Movimiento.find(params[:id])

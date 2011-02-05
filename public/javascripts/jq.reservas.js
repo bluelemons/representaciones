@@ -1,4 +1,8 @@
-$(function() {
+var i=99
+function unico(){
+  return i+=1;
+}
+$(function() { 
   $( ".agencia_button" ).live('click',function(){
     $('.agencia_field').toggle();
     //$('#reserva_agencia_attributes_name').val('')
@@ -14,12 +18,5 @@ $(function() {
     //$(this).parent().hide();
     alert("modifica esta funcion en javascript/jq.reservas.js");
   });
-  
-  $(".pasajeros .new").live('click',function(){
-    //esta funcion se activa cuando se hace click en el link de agregar un pasajero
-    //tiene que agregar un renglon mas para introducir otro pasajero.
-    alert("modifica esta funcion en javascript/jq.reservas.js");
-  });
-
     
 });

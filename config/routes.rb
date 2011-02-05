@@ -1,12 +1,4 @@
 Representaciones::Application.routes.draw do
-  get "pagos/index"
-
-  get "pagos/new"
-
-  get "depositos/index"
-
-  get "depositos/new"
-
   resources :entidads
 
   resources :tpagos
@@ -15,7 +7,11 @@ Representaciones::Application.routes.draw do
 
   resources :tdocs
 
-  resources :movimientos 
+  resources :movimientos do
+    member do
+      get :depositos
+    end
+  end
   
   resources :pasajeros
   match 'pasajeros_dni/:doc' => 'pasajeros#show' #Busca el pasajoer por DNI en /pasajeros_din/:doc

@@ -1,19 +1,19 @@
-class MovmimientosController < InheritedResources::Base
+class PasajerosController < InheritedResources::Base
   
   respond_to :html, :xml,:js
   def index
     if params[:search]
-      @search = Movimiento.search(params[:search])
+      @search = Pasajero.search(params[:search])
     else
-      @search = Movimiento.baja.search()
+      @search = Pasajero.baja.search()
     end
-      @movimientos = @search.paginate :page => params[:page], :per_page =>10
+      @pasajeros = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
       format.js 
       format.xml
       format.html
       format.pdf do
-        output = MovimientoReport.new.to_pdf(@search)
+        output = PasajeroReport.new.to_pdf(@search)
         send_data output, :filename => "index_report.pdf", 
                          :type => "application/pdf"
       end
@@ -23,7 +23,7 @@ class MovmimientosController < InheritedResources::Base
   
   def show
     if params[:doc]
-      @movimiento = Movimiento.where(:doc =>params[:doc]).limit(1)
+      @pasajero = Pasajero.where(:doc =>params[:doc]).limit(1)
     else
       @pasajero = Pasajero.find(params[:id])
       @pasajero.revert_to(params[:version].to_i) if params[:version]

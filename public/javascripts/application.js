@@ -5,7 +5,7 @@ function togrid(){
       datatype: "local",
       width:750,
       //onSelectRow: function(id){$('#togrid').getCell(id, 'ID');},
-      //onSelectRow: function(id){$.getScript('contribuyentes/' + $('#togrid').getCell(id, 'ID') + '.js');}, 
+      onSelectRow: function(id){$.getScript('reservas/' + $('#togrid').getCell(id, 'ID') + '.js');}, 
       caption: "Listado"
      });  
   //});

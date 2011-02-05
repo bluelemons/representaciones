@@ -9,23 +9,13 @@
             %li= msg 
     
     
-    .field
-      = f.label :Fecha
-      %br
-      = f.text_field :fecha,:class =>'datepicker',:size =>10
-    .field
-      = f.label :Reserva
-      %br
-      = f.text_field :reserva_id,:size=>10
+    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
     
     %table
       %tr
         =render :partial =>'montos/form',:locals=>{:f=>f}
         
-    .field
-      = f.label :Entidad
-      %br
-      = collection_select(:movimiento, :entidad_id, Entidad.all, :id, :name, :prompt => false)
+
     .field
       = f.label :Tipo_de_deposito
       %br

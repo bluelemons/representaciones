@@ -1,4 +1,4 @@
-= form_for(@movimiento,:remote=>true) do |f| 
+= form_for(@movimiento) do |f| 
   .ui-widget.ui-widget-content
     - if @movimiento.errors.any? 
       #error_explanation
@@ -7,32 +7,20 @@
         %ul
           - @movimiento.errors.full_messages.each do |msg| 
             %li= msg 
+
+    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
     
-    
-    .field
-      = f.label :Fecha
-      %br
-      = f.text_field :fecha,:class =>'datepicker',:size =>10
-    .field
-      = f.label :Reserva
-      %br
-      = f.text_field :reserva_id,:size=>10
-    
+    =f.hidden_field :tpago_id,:value=>1
     %table
       %tr
         =render :partial =>'montos/form',:locals=>{:f=>f}
         
-    .field
-      = f.label :Entidad
-      %br
-      = collection_select(:movimiento, :entidad_id, Entidad.all, :id, :name, :prompt => false)
-    .field
-      = f.label :Tipo_de_deposito
-      %br
-      = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)                  
-      =# f.text_field :numero,:size=>10
-      %br
-      = collection_select(:movimiento, :tpago, Tpago.all, :id, :name, :prompt => false)
+
+    = f.label :Tipo_de_deposito
+    %br
+    = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
+    
+    = f.text_field :numero,:size=>10
     
     .actions
       = f.submit 

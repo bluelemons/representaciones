@@ -1,26 +1,27 @@
-.ui-widget
-  %h3.ui-widget-header movimiento  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @movimiento 
-        = link_to 'Editar', edit_movimiento_path(@movimiento),:remote=>true,:width =>'200px'
+= form_for(@movimiento,:remote=>true) do |f| 
+  .ui-widget.ui-widget-content
+    - if @movimiento.errors.any? 
+      #error_explanation
+        %h2="#{pluralize(@movimiento.errors.count, 'error')} prohibited this movimiento from being saved:"
+  
+        %ul
+          - @movimiento.errors.full_messages.each do |msg| 
+            %li= msg 
+
+    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
+    
+    =f.hidden_field :tpago_id,:value=>2
+    %table
+      %tr
+        =render :partial =>'montos/form',:locals=>{:f=>f}
+        
+
+    = f.label :Tipo_de_deposito
     %br
-  
-  
-  %p
-    %b Fecha:
-    = @movimiento.fecha
-  
-  %p
-    %b Monto:
-    = @movimiento.moneda.simbolo
-    = @movimiento.monto
-  %p
-    %b Reserva
-    =@movimiento.reserva_id
-  %p
-    %b
-      =@movimiento.entidad.name
-  
-  
-    = render :partial => "layouts/version",:locals=>{:model=>@movimiento,:controller=>:movimientos}
+    = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
+    
+    = f.text_field :numero,:size=>10
+    
+    .actions
+      = f.submit 
+      
