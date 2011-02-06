@@ -1,16 +1,6 @@
-.field
-  = f.label :Fecha
-  %br
-  = f.text_field :fecha,:class =>'datepicker',:size =>10
-  
-.field
-  = f.label :Entidad
-  %br
-  = collection_select(:movimiento, :entidad_id, Entidad.all, :id, :name, :prompt => false)
-  
-#reservas_form{:style=>'height:250px'}
-  =render :partial =>'reservas/reservas'
-.field
-  = f.label :Reserva
-  %br
-  = f.text_field :reserva_id,:size=>10
+%table.wide
+  %tr
+    %td= f.label :Fecha
+    %td= f.text_field :fecha,:class =>'datepicker',:size =>10
+    %td= f.label :Entidad
+    %td= collection_select(:movimiento, :entidad_id, Entidad.all, :id, :name, :prompt => false)

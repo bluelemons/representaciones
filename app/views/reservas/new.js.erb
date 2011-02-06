@@ -1,4 +1,4 @@
-$('#reserva').html('<%= raw escape_javascript(render("new")) %>');
+$('#reserva_form').html('<%= raw escape_javascript(render("new")) %>');
 
 $(".pasajeros .new").live('click',function(){
   $('.new_pasajero_row').replaceWith('<%= raw escape_javascript(render("reservas/pasajero_field",:i=>4,:m=>true)) %>');

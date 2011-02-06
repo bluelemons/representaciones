@@ -1,0 +1,8 @@
+%h3.ui-widget-header Busqueda
+= form_for @search,:html => {:method => :get,:class => 'qs_search'} do |f|
+  = f.label :Pasajero
+  
+  = f.text_field :pasajeros_name_sw
+  = f.hidden_field :operadora_id_or_agencia_id_eq
+  %br
+  = f.submit('Buscar') 

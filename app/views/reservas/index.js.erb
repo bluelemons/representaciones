@@ -1,2 +1,16 @@
-$("#reservas").html('<%= raw escape_javascript(render("reservas")) %>');
+$("#reservas").html('<%= raw escape_javascript(render("reservas/reservas")) %>');
+
+<% if params[:qs] %>
+  $("#reservas_search").html('<%= raw escape_javascript(render("reservas/qsearch")) %>');
+
+  $('.qs_search input').bind("keyup",function (){
+    request = $.get("/reservas.js","search[pasajeros_name_sw]="+$("#search_pasajeros_name_sw").val(), togrid, 'script');
+  });
+
+<% end %>
 skin();     
+
+
+
+
+

@@ -27,12 +27,12 @@ class MovimientosController < InheritedResources::Base
     
   end
   def new
-    if params[:search]
-      @search = Reserva.search(params[:search])
-    else
-      @search = Reserva.baja.search()
-    end
-    @reservas = @search.paginate :page => params[:page], :per_page =>10
+   # if params[:search]
+   #   @search = Reserva.search(params[:search])
+   # else
+   #   @search = Reserva.baja.search()
+   # end
+   # @reservas = @search.paginate :page => params[:page], :per_page =>10
     @movimiento.build_monto
     if params[:t]=="deposito"
       render "deposito"

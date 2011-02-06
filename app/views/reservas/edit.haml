@@ -4,7 +4,7 @@
   .action_bar
     -if can? :new, Reserva
       = link_to 'Nuevo', reservas_path,:remote => true 
-  #reserva.half.right
+  #reserva_form.half.right
   
     = render :partial => "edit"
   

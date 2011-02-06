@@ -9,6 +9,18 @@
             %li= msg 
 
     = render :partial => "movimientos/comunes",:locals=>{:f=>f}
+    -#.search
+    -#  = render :partial => "reservas/qsearch"
+    -##reservas_form{:style=>'height:350px'}
+    -#  =render :partial =>'reservas/reservas'
+    
+    #reservas_search.qs_search
+    #reservas{:style=>'height:350px'}
+      =link_to 'nuevo',{:controller=>'reservas',:action=>'index',:qs=>true},:remote=>true
+    .field
+      = f.label :Reserva
+      %br
+      = f.text_field :reserva_id,:size=>10    
     
     =f.hidden_field :tpago_id,:value=>2
     %table
