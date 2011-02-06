@@ -13,27 +13,17 @@
    
    <li><%= link_to '<span>Pagos</span>'.html_safe,movimientos_path %></li>
    <li><%= link_to '<span>Reservas</span>'.html_safe,reservas_path %></li>
-   <li><a href="#"><span>Consultas</span></a></li>
-   <li><a href="#"><span>Informes</span></a></li>
-   <li><a href="#"><span>Útiles</span></a></li>
-
-	<li class="hasmore"><a href="#"><span>Recent</span></a>
-		<ul class="dropdown">
-			<li><a href="#">Menu item 1</a></li>
-			<li><a href="#">Menu item 2</a></li>
-			<li><a href="#">Menu item 3</a></li>
-			<li><a href="#">Menu item 4</a></li>
-
-			<li><a href="#">Menu item 5</a></li>
-			<li class="last"><a href="#">Menu item 6</a></li>
-		</ul>
-	</li>
+   <li class="hasmore"><a href="#"><span>Administracion</span></a>
+     <ul class="dropdown">
+       <li><%= link_to 'Usuarios','/users' %></li>
+       <li><%= link_to 'Roles','/roles' %></li>       
+     </ul>
 	
 	<% if user_signed_in? %>  
-     <li><%= link_to "Sign out", destroy_user_session_path %></li>  
+     <li><%= link_to "Cerrar", destroy_user_session_path %></li>  
    <% else %>  
-     <li><%= link_to "Sign up", new_user_registration_path %></li>     
-     <li><%= link_to "Sign in", new_user_session_path %></li>
+     <li><%= link_to "Nuevo Usuario", new_user_registration_path %></li>     
+     <li><%= link_to "Conectarse", new_user_session_path %></li>
    <% end %> 
 </ul>
 
