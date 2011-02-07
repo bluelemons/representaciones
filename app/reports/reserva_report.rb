@@ -21,15 +21,11 @@ class ReservaReport < Prawn::Document
       end       
     end
     
-    myrow = [["ID"",fecha" ",salida" ",activa" ",reservado" ",hotel" ",periodo" ",regimen" ",obs" ",thabitacion_id" ",programa_id" ",operadora_id" ",agencia_id" ]]
+    myrow = [["ID","fecha","salida","activa","reservado","hotel","periodo","regimen","obs","thabitacion_id", "programa", "operadora","agencia" ]]
     object.each do |r|
-      myrow += [["#{r.id}"",#{r.fecha}" ",#{r.salida}" ",#{r.activa}" ",#{r.reservado}" ",#{r.hotel}" ",#{r.periodo}" ",#{r.regimen}" ",#{r.obs}" ",#{r.thabitacion_id}" ",#{r.programa_id}" ",#{r.operadora_id}" ",#{r.agencia_id}" ]]
+      myrow += [["#{r.id}","#{r.fecha}", "#{r.salida}", "#{r.activa?}", "#{r.reservado}", "#{r.hotel}", "#{r.periodo}", "#{r.regimen}", "#{r.obs}", "#{r.thabitacion_id}", "#{r.programa_id}", "#{r.operadora_id}", "#{r.agencia_id}" ]]
     end
 
-     
-
-
-    
     bounding_box [0,690], :width => 500 do
     move_down 10
     table(myrow,:row_colors => %w[cccccc ffffff])do
@@ -43,10 +39,7 @@ class ReservaReport < Prawn::Document
       line bounds.top_left, bounds.top_right
       line bounds.bottom_left, bounds.bottom_right
       
-    end
-    
-    
-    
+    end 
 
     
   end

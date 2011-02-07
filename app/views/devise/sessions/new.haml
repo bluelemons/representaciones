@@ -1,0 +1,25 @@
+.left{:style=>"margin-left:40%;padding:20px;"}
+  %h2.ui-widget-header Conectarse
+  
+  .ui-widget-content{:style=>"padding:20px"}
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      %p
+        = f.label :Usuario
+        %br
+        = f.text_field :username
+    
+      %p
+        = f.label :Contraseña
+        %br
+        = f.password_field :password 
+    
+      - if devise_mapping.rememberable? 
+        %p
+          = f.check_box :remember_me 
+          = f.label :recordarme 
+    
+    
+      %p= f.submit "Conectar" 
+    
+    
+    = render :partial => "devise/shared/links" 
