@@ -1,10 +1,11 @@
-
+request = $.ajax();
+  
 function togrid(){
   //$(".togrid").each(function(index) { // este each es un fix porque el tabletogrid no funciona con ".togrid" hay que ver
                                       // si lo arrglan en el futuro.
     tableToGrid($(".togrid"),{
       datatype: "local",
-      width:750,
+      width:700,
       //onSelectRow: function(id){$('#togrid').getCell(id, 'ID');},
       //onSelectRow: function(id){$.getScript('reservas/' + $('#togrid').getCell(id, 'ID') + '.js');}, 
       onSelectRow: function(id){$("input[id$=_reserva_id]").val($('#reserva_grid').getCell(id, 'ID'));},
@@ -26,13 +27,13 @@ function skin(){
 
   $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
   $( "#tabs" ).tabs();
+  $( ".mytabs" ).tabs();  
 
   togrid();
 }
 
 $(function() {
 
-  request = $.ajax();
   $("body").ajaxStart(function() {
     request.abort();
   });

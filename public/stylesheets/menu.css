@@ -12,7 +12,7 @@
 body
 {
 	font: 14px/21px Georgia, serif;
-	color: #370707;
+	color: #6d90d5;
 	background: #e3d79b url(/images/mainbg.jpg) left 40px repeat-x;
 }
 
@@ -139,7 +139,8 @@ ul.dropdown li a
 
 #menu ul li a
 {
-	color: #9b2021;
+	color: #0d2453;
+	// color de la letras del menu
 	padding-left: 4px;
 }
 

@@ -1,6 +1,13 @@
 <%= javascript_include_tag "menu" %>    
 <%= stylesheet_link_tag "menu" %>
 <div id="menu">
+  <div class="left" style="height:40px">
+    <%= image_tag 'logo_SOL.png' %>
+  </div>
+  <div class="right" style="height:40px">
+    <%= image_tag 'blue-lemons.png' %>
+  </div>
+  
 <ul class="tabs">
    <li class="hasmore"><a href="#"><span>ABM</span></a>
      <ul class="dropdown">
@@ -20,11 +27,13 @@
      </ul>
 	
 	<% if user_signed_in? %>  
-     <li><%= link_to "Cerrar", destroy_user_session_path %></li>  
+     <li><%= link_to "<span>Cerrar</span>".html_safe, destroy_user_session_path %></li>  
    <% else %>  
-     <li><%= link_to "Nuevo Usuario", new_user_registration_path %></li>     
-     <li><%= link_to "Conectarse", new_user_session_path %></li>
+     <li><%= link_to "<span>Nuevo Usuario</span>".html_safe, new_user_registration_path %></li>     
+     <li><%= link_to "<span>Conectarse</span>".html_safe, new_user_session_path %></li>
    <% end %> 
+   
+
 </ul>
 
 </div>
