@@ -4,19 +4,14 @@
     %tr
       %th ID
       %th Titular
-    
       %th Salida
-    
       %th Hotel
-    
       %th Periodo
-      
       %th Agencia$
       %th Operadora$
-    
+
     %th Acciones
 
-      
     - for reserva in @reservas   
       %tr
         %td= reserva.try(:id) 
