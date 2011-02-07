@@ -1,14 +1,14 @@
-#tabs
+.mytabs
   %ul
     %li
-      %a{:href=>"#tabs-1"}
+      %a{:href=>"#tabs-entidad-1"}
         =@entidad.try(:tentidad).try(:name)
     %li
-      %a{:href=>"#tabs-2"} Saldo
+      %a{:href=>"#tabs-entidad-2"} Saldo
     %li
-      %a{:href=>"#tabs-3"} Pagos
+      %a{:href=>"#tabs-entidad-3"} Pagos
       
-  #tabs-1.ui-widget.ui-widget-content
+  #tabs-entidad-1.ui-widget.ui-widget-content
     %h3.ui-widget-header  
       =@entidad.try(:tentidad).try(:name)
     .left{:style=>'float:right'}
@@ -45,7 +45,7 @@
       = @entidad.web
     %br
     = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
-  #tabs-2
+  #tabs-entidad-2
     %h4.ui-widget-header Dinero depositado
     %table.half
       -@entidad.saldos.each do |saldo|
@@ -54,7 +54,7 @@
             %b=saldo.try(:moneda).try(:simbolo)
           %td=saldo.try(:monto).try(:valor)
       
-  #tabs-3
+  #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.movimientos.where(:entidad_id=>@entidad.id)}
       

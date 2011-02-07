@@ -1,67 +1,64 @@
-.left
-  %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
-  
-    .left{:style =>"padding:10px"}
-      %table
-        %tr
-          %td
-            = f.label :Pasajero
-          %td
-            = f.text_field :pasajeros_name_sw
-        %tr
-          %td
-            = f.label :reservado
-          %td
-            = f.text_field :reservado_sw
-        %tr
-          %td
-            = f.label :hotel
-          %td
-            = f.text_field :hotel_sw
-        %tr
-          %td
-            = f.label :regimen
-          %td
-            = f.text_field :regimen_sw      
-      %br
-      = f.submit('Buscar') 
-    .right{:style =>"padding:10px"}
-      = f.label :fecha
-      Mayor
-      = f.text_field :fecha_gt,:class =>'datepicker',:size =>10
-      Menor
-      = f.text_field :fecha_lt,:class =>'datepicker',:size =>10
-      %br 
-      = f.label :salida 
-      Mayor
-      = f.text_field :salida_eq,:class =>'datepicker',:size =>10
-      Menor
-      = f.text_field :salida_lt,:class =>'datepicker',:size =>10
-      
-      %table.wide
-        %tr
-          %td 
-            = f.label :Tipo_de_habitacion
-            %br 
-            = collection_select(:search, :thabitacion_id_eq, Thabitacion.all, :id, :name, :prompt => true)     
-          %td 
-            = f.label :programa_id
-            %br 
-            = collection_select(:search, :programa_id_eq, Programa.all, :id, :name, :prompt => true) 
-        %tr
-          %td 
-            = f.label :operadora_id
-            %br 
-            = collection_select(:search, :operadora_id_eq, Entidad.agencia.all, :id, :name, :prompt => true) 
-          %td 
-            = f.label :agencia_id
-            %br 
-            = collection_select(:search, :agencia_id_eq, Entidad.operadora.all, :id, :name, :prompt => true)     
-      %br
+%h3.ui-widget-header Busqueda
+= form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
 
-      =f.label 'Baja'
-
-      = f.check_box :hidden_eq
-      %br
+  .left{:style =>"padding:10px"}
+    %table
+      %tr
+        %td
+          = f.label :Pasajero
+        %td
+          = f.text_field :pasajeros_name_sw
+      %tr
+        %td
+          = f.label :reservado
+        %td
+          = f.text_field :reservado_sw
+      %tr
+        %td
+          = f.label :hotel
+        %td
+          = f.text_field :hotel_sw
+      %tr
+        %td
+          = f.label :regimen
+        %td
+          = f.text_field :regimen_sw      
+    %br
+  .div{:style =>"padding:10px"}
+    = f.label :fecha
+    Mayor
+    = f.text_field :fecha_gt,:class =>'datepicker',:size =>10
+    Menor
+    = f.text_field :fecha_lt,:class =>'datepicker',:size =>10
+    %br 
+    = f.label :salida 
+    Mayor
+    = f.text_field :salida_eq,:class =>'datepicker',:size =>10
+    Menor
+    = f.text_field :salida_lt,:class =>'datepicker',:size =>10
+    
+    %table.wide
+      %tr
+        %td 
+          = f.label :Tipo_de_habitacion
+          %br 
+          = collection_select(:search, :thabitacion_id_eq, Thabitacion.all, :id, :name, :prompt => true)     
+        %td 
+          = f.label :programa_id
+          %br 
+          = collection_select(:search, :programa_id_eq, Programa.all, :id, :name, :prompt => true) 
+      %tr
+        %td 
+          = f.label :operadora_id
+          %br 
+          = collection_select(:search, :operadora_id_eq, Entidad.agencia.all, :id, :name, :prompt => true) 
+        %td 
+          = f.label :agencia_id
+          %br 
+          = collection_select(:search, :agencia_id_eq, Entidad.operadora.all, :id, :name, :prompt => true)     
+    %br
+    =f.label 'Baja'
+    = f.check_box :hidden_eq
+    %br
+    = f.submit('Buscar') 
    

@@ -5,8 +5,18 @@
     -if can? :new, Programa
       = link_to 'Nuevo Programa', new_programa_path,:remote => true 
     = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
-  #programa_form.half.right
+  .mytabs
+    %ul
+      %li
+        %a{:href=>"#tabs-programas-1"} Programas
+      %li
+        %a{:href=>"#tabs-programas-2"} Formulario
+    #tabs-programas-1
+      = render :partial => "search"
+      #programas
+        =render 'programas'
+    
+    #tabs-programas-2
+      #programa_form
   
-  = render :partial => "search"
-  #programas
-    =render 'programas'
+

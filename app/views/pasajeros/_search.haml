@@ -1,22 +1,21 @@
-.half.left
-  %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
-     
-    = f.label :doc
-    %br 
-    = collection_select(:pasajero, :tdoc_id_eq, Tdoc.all, :id, :name, :prompt => true)     
-    = f.text_field :doc_eq    
-    %br 
-    = f.label :name
-    %br 
-    = f.text_field :name_sw
-    %br 
-    = f.label :nacimiento
-    %br 
-    = f.text_field :nacimiento_gt
-    %br
-    =f.label 'Baja'
-    %br
-    = f.check_box :hidden_eq
-    %br
-    = f.submit('Buscar') 
+%h3.ui-widget-header Busqueda
+= form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
+   
+  = f.label :doc
+  %br 
+  = collection_select(:pasajero, :tdoc_id_eq, Tdoc.all, :id, :name, :prompt => true)     
+  = f.text_field :doc_eq    
+  %br 
+  = f.label :name
+  %br 
+  = f.text_field :name_sw
+  %br 
+  = f.label :nacimiento
+  %br 
+  = f.text_field :nacimiento_gt
+  %br
+  =f.label 'Baja'
+  %br
+  = f.check_box :hidden_eq
+  %br
+  = f.submit('Buscar') 
