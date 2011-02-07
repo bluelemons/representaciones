@@ -9,6 +9,7 @@
             %li= msg 
 
     = render :partial => "movimientos/comunes",:locals=>{:f=>f}
+    = f.collection_select(:entidad_id, Entidad.all, :id, :name, :prompt => false)
     
     =f.hidden_field :tpago_id,:value=>1
     %table

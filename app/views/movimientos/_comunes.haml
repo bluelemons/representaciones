@@ -2,5 +2,4 @@
   %tr
     %td= f.label :Fecha
     %td= f.text_field :fecha,:class =>'datepicker',:size =>10
-    %td= f.label :Entidad
-    %td= collection_select(:movimiento, :entidad_id, Entidad.all, :id, :name, :prompt => false)
+

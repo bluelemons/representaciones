@@ -1,2 +1,3 @@
 $('#movimiento').html('<%= raw escape_javascript(render("pago")) %>');
 skin(); 
+$.get("/reservas.js","qs=true", togrid, 'script');
