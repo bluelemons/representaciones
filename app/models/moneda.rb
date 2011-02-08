@@ -3,7 +3,8 @@ class Moneda < ActiveRecord::Base
   acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
-  has_many :pagos
+  has_many :montos
+  has_many :cotizacions
       
   #validacioness
   validates :name, :presence => true

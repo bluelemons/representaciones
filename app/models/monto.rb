@@ -1,5 +1,8 @@
 class Monto < ActiveRecord::Base
   belongs_to :moneda
+  has_many :pagos
+  has_many :reservas
+  has_many :saldos
   
   def to_pesos(date)
     monto=valor  

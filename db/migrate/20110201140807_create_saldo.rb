@@ -5,7 +5,6 @@ class CreateSaldo < ActiveRecord::Migration
           
       t.integer :entidad_id
       t.integer :monto_id
-      t.integer :moneda_id
 
       t.timestamps
     end

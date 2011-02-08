@@ -3,7 +3,7 @@ class Saldo < ActiveRecord::Base
   #asociaciones
 
   belongs_to :entidad
-  belongs_to :moneda
+  belongs_to :moneda, :through => :monto
   belongs_to :monto
   
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
