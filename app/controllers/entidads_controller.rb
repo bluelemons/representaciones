@@ -1,6 +1,8 @@
 class EntidadsController < InheritedResources::Base
-  
+
   respond_to :html, :xml,:js
+
+
   def index
     if params[:search]
       @search = Entidad.search(params[:search])
@@ -9,22 +11,22 @@ class EntidadsController < InheritedResources::Base
     end
       @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js 
+      format.js
       format.html
       format.pdf do
         output = EntidadReport.new.to_pdf(@search)
-        send_data output, :filename => "index_report.pdf", 
+        send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end
     end
-    
+
   end
-  
+
   def show
     @entidad = Entidad.find(params[:id])
     #@entidad.deposit(5,1)
     @entidad.revert_to(params[:version].to_i) if params[:version]
-    show! 
+    show!
   end
 
   def restore
@@ -32,7 +34,7 @@ class EntidadsController < InheritedResources::Base
     @entidad.revert_to! params[:version_id]
 	  redirect_to :action => 'show', :id => @entidad
   end
-  
+
   def update
     @entidad = Entidad.find(params[:id])
     @entidad.user = current_user
@@ -55,6 +57,7 @@ class EntidadsController < InheritedResources::Base
     else
       render 'new.js'
     end
-  end 
-  
+  end
+
 end
+

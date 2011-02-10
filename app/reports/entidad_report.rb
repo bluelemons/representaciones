@@ -1,57 +1,44 @@
+include Layout
 class EntidadReport < Prawn::Document
-    
-  def to_pdf(object)    
-    
+
+  def to_pdf(datos)
+
+    #tamaño de la fuente por defecto para el reporte
     self.font_size = 8
-    
-    repeat :all do
-      font_size 10 do 
-        draw_text "titulo", :at => [0,720.10]
-        draw_text "Listado de entidads", :at => [0,710]
-        stroke do
-          line bounds.bottom_left, bounds.bottom_right          
-        end
-      end
-      
-      font_size 6 do
-        draw_text "Impreso: #{Date.today}",:at => [0,5]
-        draw_text "Litado de entidads",:at => [100,5]
-        number_pages "<page> de <total>", [bounds.right - 50, 5] 
-        draw_text "power by Blue Lemons",:at => [bounds.right - 150, 5] 
-      end       
-    end
-    
-    myrow = [["ID"",calle" ",cuit" ",telefono" ",legajo" ",email" ",web" ",localidad_id" ",name" ",tentidad_id" ]]
-    object.each do |r|
-      myrow += [["#{r.id}"",#{r.calle}" ",#{r.cuit}" ",#{r.telefono}" ",#{r.legajo}" ",#{r.email}" ",#{r.web}" ",#{r.localidad_id}" ",#{r.name}" ",#{r.tentidad_id}" ]]
+
+    #imprime el header del reporte
+    header("Entidades")
+
+    #renglon de la tabla que tiene los nombre de la columnas
+    myrow = [["ID","Nombre" ,"cuit","telefono" ,"legajo" ,"email" ,"web" ,"localidad_id" ,"calle" ,"tentidad_id" ]]
+
+    #a cada uno de los datos enviados por el controlador los pongo en el array myrow
+    datos.each do |r|
+      myrow += [["#{r.id}","#{r.name}" ,"#{r.cuit}" ,"#{r.telefono}" ,"#{r.legajo}" ,"#{r.email}" ,"#{r.web}" ,"#{r.localidad_id}" ,"#{r.calle}" ,"#{r.tentidad_id}" ]]
     end
 
-     
-
-
-    
+    #hago una tabla con los datos
     bounding_box [0,690], :width => 500 do
-    move_down 10
-    table(myrow,:row_colors => %w[cccccc ffffff])do
-    
-    row(0).style :background_color => '000000', :text_color => 'ffffff'
-    cells.style :borders => []
-  end
-  
-    move_down 10
-    stroke do
-      line bounds.top_left, bounds.top_right
-      line bounds.bottom_left, bounds.bottom_right
-      
-    end
-    
-    
-    
+      move_down 10
 
-    
-  end
-     
+      table(myrow,:row_colors => %w[cccccc ffffff])do
+
+        row(0).style :background_color => '000000', :text_color => 'ffffff'
+        cells.style :borders => []
+
+      end
+
+      move_down 10
+      stroke do
+        line bounds.top_left, bounds.top_right
+        line bounds.bottom_left, bounds.bottom_right
+
+      end
+
+    end
+
 
     render
   end
 end
+
