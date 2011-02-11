@@ -16,6 +16,7 @@ gem "builder"
 gem "acts_as_versioned"
 gem 'prawn', :git => "git://github.com/sandal/prawn", :tag => '0.10.2', :submodules => true
 gem "mysql2"
+gem 'formtastic', '~> 1.1.0'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.4"
