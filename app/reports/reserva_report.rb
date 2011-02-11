@@ -1,50 +1,38 @@
+#Generado con vistas generator 2011-02-10 19:32:11 -0300 'lib/generators/vistas'
+include Layout
 class ReservaReport < Prawn::Document
-    
-  def to_pdf(object)    
-    
+
+  def to_pdf(datos)
+
     self.font_size = 8
-    
-    repeat :all do
-      font_size 10 do 
-        draw_text "titulo", :at => [0,720.10]
-        draw_text "Listado de reservas", :at => [0,710]
-        stroke do
-          line bounds.bottom_left, bounds.bottom_right          
-        end
-      end
-      
-      font_size 6 do
-        draw_text "Impreso: #{Date.today}",:at => [0,5]
-        draw_text "Litado de reservas",:at => [100,5]
-        number_pages "<page> de <total>", [bounds.right - 50, 5] 
-        draw_text "power by Blue Lemons",:at => [bounds.right - 150, 5] 
-      end       
-    end
-    
-    myrow = [["ID","fecha","salida","activa","reservado","hotel","periodo","regimen","obs","thabitacion_id", "programa", "operadora","agencia" ]]
-    object.each do |r|
-      myrow += [["#{r.id}","#{r.fecha}", "#{r.salida}", "#{r.activa?}", "#{r.reservado}", "#{r.hotel}", "#{r.periodo}", "#{r.regimen}", "#{r.obs}", "#{r.thabitacion_id}", "#{r.programa_id}", "#{r.operadora_id}", "#{r.agencia_id}" ]]
+
+    header
+
+    myrow = [["ID","agencia_id" ,"operadora_id" ]]
+
+    datos.each do |r|
+      myrow += [["#{r.id}","#{r.agencia_id}" ,"#{r.operadora_id}" ]]
     end
 
     bounding_box [0,690], :width => 500 do
-    move_down 10
-    table(myrow,:row_colors => %w[cccccc ffffff])do
-    
-    row(0).style :background_color => '000000', :text_color => 'ffffff'
-    cells.style :borders => []
-  end
-  
-    move_down 10
-    stroke do
-      line bounds.top_left, bounds.top_right
-      line bounds.bottom_left, bounds.bottom_right
-      
-    end 
+      move_down 10
+      table(myrow,:row_colors => %w[cccccc ffffff])do
 
-    
-  end
-     
+        row(0).style :background_color => '000000', :text_color => 'ffffff'
+        cells.style :borders => []
+      end
+
+      move_down 10
+      stroke do
+        line bounds.top_left, bounds.top_right
+        line bounds.bottom_left, bounds.bottom_right
+
+      end
+
+    end
+
 
     render
   end
 end
+
