@@ -2,7 +2,7 @@
   = form.inputs do
     = form.inputs :name,:cuit,:calle,:legajo
 
-    = render :partial => "layouts/labelgrid",:locals=>{:data=>@entidad,:model=>:entidad,:labelname=>'Localidad',:fieldname=>"localidad"}
+    = render :partial => "layouts/labelgrid",:locals=>{:data=>@entidad,:label=>'Localidad',:field=>"localidad"}
 
     = form.input :telefono,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
     = form.input :web,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
