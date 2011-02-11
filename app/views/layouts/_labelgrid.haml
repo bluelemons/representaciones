@@ -1,0 +1,9 @@
+%fieldset
+  %ol
+    %li.string.optional
+      %label=labelname
+      = text_field model,:"#{fieldname}_id".to_sym, :size =>6
+      = javascript_include_tag('jq-autocomplete/autocomplete')
+      %input.autocomplete{:id=>"#{fieldname}_name",:table => fieldname,:AUTOCOMPLETE =>"OFF",
+        :value=> if action_name == "edit";data.try(fieldname).try(:name);end}
+
