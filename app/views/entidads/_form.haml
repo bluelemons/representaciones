@@ -1,15 +1,20 @@
 = semantic_form_for @entidad do |form|
   = form.inputs do
     = form.inputs :name,:cuit,:calle,:legajo
+    -#TODO:hacer un helper (labelname, fieldname)
 
-    = text_field :entidad,:localidad_id, :size =>6
-    = javascript_include_tag('jq-autocomplete/autocomplete')
-    %input#localidad_name.autocomplete{:table => 'localidad',:AUTOCOMPLETE =>"OFF",
-      :value=> if action_name == "edit";@entidad.try(:localidad).try(:name);end}
+    %fieldset
+      %ol
+        %li.string.optional
+          %label Localidad
+          = text_field :entidad,:localidad_id, :size =>6
+          = javascript_include_tag('jq-autocomplete/autocomplete')
+          %input#localidad_name.autocomplete{:table => 'localidad',:AUTOCOMPLETE =>"OFF",
+            :value=> if action_name == "edit";@entidad.try(:localidad).try(:name);end}
 
-    = form.input :telefono,:as=>:text
-    = form.input :web,:as=>:text
-    = form.input :email,:as=>:text
+    = form.input :telefono,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
+    = form.input :web,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
+    = form.input :email,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
 
   = form.buttons
 
