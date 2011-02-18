@@ -1,19 +1,22 @@
-= javascript_include_tag('jq-autocomplete/autocompletePersona') 
-= form_for(@reserva,:remote=>true) do |f| 
-  .ui-widget.ui-widget-content
-    - if @reserva.errors.any? 
-      #error_explanation
-        %h2="#{pluralize(@reserva.errors.count, 'error')} prohibited this reserva from being saved:"
-  
-        %ul
-          - @reserva.errors.full_messages.each do |msg| 
-            %li= msg 
-    
-    
-    = render :partial => "fields",:locals=>{:f=>f}
+= javascript_include_tag('jq-autocomplete/autocompletePersona')
 
-    .actions
-      = f.submit 
+= semantic_form_for @reserva,:remote=>true do |form|
+  = form.inputs do
+    = form.input :fecha, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+    = form.input :salida, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+    = form.input :referencia, :input_html => {:rows => 3}
+    = form.input :agencia
+    = form.input :reservado
+    = form.input :operadora
+    = form.input :operado
+    = form.input :hotel, :input_html => {:rows => 3}
+    = form.input :programa
+    = form.input :periodo
+    = form.input :regimen
+    = form.input :thabitacion
+
+    = render :partial => "tarifa",:locals=>{:form=>form}
 
 #pasajero_form
   =render :partial=>'pasajeros/form'
+
