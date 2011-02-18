@@ -38,6 +38,13 @@ module Representaciones
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # To config what generators do use this code
+    # config.generators do |g|
+    #   g.orm             :active_record
+    #   g.template_engine :haml
+    #   g.test_framework  :rspec, :fixture => true
+    # end
   end
 end
 
