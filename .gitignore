@@ -1,0 +1,39 @@
+###########################
+# logs
+**/*/log/*
+log/*.log
+
+###########################
+# temporales
+test/tmp/*
+tmp/*/*
+Gemfile.lock
+**/*/tmp/*
+*~
+
+###########################
+# datos
+coverage/*
+.bundle
+rdoc/*
+db/*.sqlite3
+
+###########################
+# Archivos con contraseñas
+database.yml
+.ftpquota
+
+###########################
+# backups
+*.rar
+*.zip
+*.tar.gz
+*.tar
+*\(copia\)*
+*.bak
+
+###########################
+# No están bien
+# log
+# pkg
+
