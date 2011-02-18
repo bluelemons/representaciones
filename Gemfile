@@ -5,7 +5,11 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# Database
 gem 'mysql2'
+
+# views
+gem "haml-rails"
 
 # Use unicorn as the web server
 # gem 'unicorn'
