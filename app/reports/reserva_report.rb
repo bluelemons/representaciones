@@ -6,7 +6,7 @@ class ReservaReport < Prawn::Document
 
     self.font_size = 8
 
-    header
+    header "listado de " + Reserva.human_name.pluralize
 
     myrow = [["ID","agencia_id" ,"operadora_id" ]]
 
