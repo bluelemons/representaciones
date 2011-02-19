@@ -1,12 +1,11 @@
-= semantic_form_for @entidad do |form|
+= semantic_form_for @entidad,:remote=>true do |form|
   = form.inputs do
     = form.inputs :name,:cuit,:calle,:legajo
 
     = render :partial => "layouts/labelgrid",:locals=>{:model=>:entidad, :data=>@entidad, :label=>'Localidad', :field=>"localidad"}
 
-    = form.input :telefono,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
-    = form.input :web,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
-    = form.input :email,:as=>:text,:input_html => {:cols=>4, :rows => 3 }
-
+    = form.input :telefono,:as=>:text
+    = form.input :web,:as=>:text
+    = form.input :email,:as=>:text
   = form.buttons
 

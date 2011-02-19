@@ -1,6 +1,12 @@
 %h2 Tarifa
-= form.inputs :iva,:impuesto,:seguro
-= form.input :obs, :input_html => {:rows => 3}
+
+%table.wide
+  %tr
+    %td= form.input :iva,:input_html => {:size=>8}
+    %td= form.input :impuesto,:input_html => {:size=>8}
+    %td= form.input :seguro,:input_html => {:size=>8}
+
+= form.input :obs
 
 = render :partial => "pasajeros"
 
