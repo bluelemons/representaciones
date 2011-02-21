@@ -1,32 +1,18 @@
-= form_for(@pasajero,:remote=>true) do |f| 
-  .ui-widget.ui-widget-content
-    - if @pasajero.errors.any? 
-      #error_explanation
-        %h2="#{pluralize(@pasajero.errors.count, 'error')} prohibited this pasajero from being saved:"
-  
-        %ul
-          - @pasajero.errors.full_messages.each do |msg| 
-            %li= msg 
-    
-    
-    %table
-      %tr
-      
-        %td
-    
-          = f.label :Doc
-        %td
-          = collection_select(:pasajero, :tdoc_id, Tdoc.all, :id, :name, :prompt => false)     
-          = f.text_field :doc,:size =>10
-      %tr
-        %td
-          = f.label :Name
-        %td
-          = f.text_field :name
-      %tr        
-        %td
-          = f.label :Nacimiento
-        %td
-          = f.text_field :nacimiento,:size =>10,:class=>'datepicker'
-    .actions
-      = f.submit 
+.action_bar
+  =link_to "Resetear",new_pasajero_path,:remote=>true
+
+= semantic_form_for @pasajero,:remote=>true do |form|
+  = form.inputs do
+    = error_message(@pasajero)
+
+    = form.input :name
+
+    = form.input :tdoc
+
+    = form.input :doc
+
+    = form.input :nacimiento, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+
+  %input{:type=>"CHECKBOX",:name=>"another_one"} seguir creando
+  = form.buttons
+

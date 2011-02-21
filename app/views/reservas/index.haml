@@ -1,25 +1,19 @@
 =javascript("jq.reservas")
 .ui-widget
   %h1.ui-widget-header Reservas
-  
-  .action_bar
-    -if can? :new, Reserva
-      = link_to 'Nuevo Reserva', new_reserva_path,:remote => true 
-    = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
-    
-  .mytabs
+
+  #tabs-reservas.mytabs
     %ul
       %li
         %a{:href=>"#tabs-reservas-1"} Reservas
-      %li
-        %a{:href=>"#tabs-reservas-2"} Formulario
-        
+      -if can? :new,Reserva
+        %li
+          %a#reserva_new{:href=>"#tabs-reservas-2"} Alta
+
+    #tabs-reservas-2
+      #reserva_form
     #tabs-reservas-1
       = render :partial => "search"
       #reservas
         =render 'reservas'
-    
-    #tabs-reservas-2
-      #reserva_form
-  
-  
+

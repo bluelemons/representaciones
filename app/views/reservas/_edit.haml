@@ -1,5 +1,5 @@
 %h2.ui-widget-header Modificando reserva
-.action_bar{:style=>'float:right'}
-    = link_to 'Mostrar', reserva_path(@reserva),:remote=>true
+.action_bar
+  = link_to 'Mostrar', reserva_path(@reserva),:remote=>true
 = render 'form'
 

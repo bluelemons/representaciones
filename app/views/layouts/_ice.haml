@@ -3,10 +3,6 @@
 
   = render :partial => 'layouts/msn'
 
-  #container
-    #flash_notice{:style=>"display:none"}
-    = content_tag :h1, yield(:title) if show_title?
-
   = yield :north
 
 .ui-layout-center

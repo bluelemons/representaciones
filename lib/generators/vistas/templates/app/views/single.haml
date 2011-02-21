@@ -1,14 +1,14 @@
 .ui-widget.ui-widget-content
-  %h3.ui-widget-header <%= file_name %>  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @<%= file_name%> 
-        = link_to 'Editar', edit_<%= file_name %>_path(@<%= file_name %>),:remote=>true,:width =>'200px'
+  %h3.ui-widget-header <%= file_name %>
+  .action_bar
+    -if can? :edit, @<%= file_name%>
+      = link_to 'Editar', edit_<%= file_name %>_path(@<%= file_name %>),:remote=>true,:width =>'200px'
     %br
-  
+
   <% for attribute in @model_attributes %>
   %p
     %b <%= attribute.name.capitalize %>:
     = @<%= file_name %>.<%= attribute.name %>
   <% end %>
     = render :partial => "layouts/version",:locals=>{:model=>@<%= file_name %>,:controller=>:<%= plural_name %>}
+

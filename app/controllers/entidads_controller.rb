@@ -1,5 +1,5 @@
 class EntidadsController < InheritedResources::Base
-
+  load_and_authorize_resource
   respond_to :html, :xml,:js
 
 
@@ -23,8 +23,6 @@ class EntidadsController < InheritedResources::Base
   end
 
   def show
-    @entidad = Entidad.find(params[:id])
-    #@entidad.deposit(5,1)
     @entidad.revert_to(params[:version].to_i) if params[:version]
     show!
   end
@@ -49,11 +47,19 @@ class EntidadsController < InheritedResources::Base
     @entidad = Entidad.new(params[:entidad])
     @entidad.user = current_user
     if @entidad.save
+      flash[:notice]="Entidad guardada!"
       #creo el saldo para cada tipo de moneda
       Moneda.all.each do |moneda|
-        Saldo.create({:entidad_id=>@entidad.id,:moneda_id=>moneda.id})
+        monto = Monto.create(:valor=>0,:moneda=>moneda)
+        Saldo.create({:entidad_id=>@entidad.id,:moneda_id=>moneda.id,:monto=>monto})
       end
-      redirect_to :action => 'show', :id => @entidad, :format =>'js'
+
+      if params[:another_one]
+        redirect_to :action => 'new', :format =>'js'
+      else
+        redirect_to :action => 'show', :id => @entidad, :format =>'js'
+      end
+
     else
       render 'new.js'
     end

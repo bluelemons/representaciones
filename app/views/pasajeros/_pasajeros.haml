@@ -1,3 +1,23 @@
 =will_paginate @pasajeros
 
-= render :partial => "grilla"
+#pasajeros_grid
+  %table#migrilla.togrid
+    %tr
+      %th Name
+      %th Tdoc_id
+      %th Doc
+      %th Nacimiento
+    %th Acciones
+    - for pasajero in @pasajeros
+      %tr
+        %td= pasajero.try(:name)
+        %td= pasajero.try(:tdoc_id)
+        %td= pasajero.try(:doc)
+        %td= pasajero.try(:nacimiento)
+        %td
+          = link_to 'Show', pasajero,:remote=>true
+          -if can? :edit, pasajero
+            = link_to 'Edit', edit_pasajero_path(pasajero),:remote=>true
+          -if can? :destroy, pasajero
+            = link_to 'Destroy', pasajero, :confirm => 'Are you sure?', :method => :delete,:remote=>true
+

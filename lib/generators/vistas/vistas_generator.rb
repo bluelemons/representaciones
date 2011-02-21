@@ -35,7 +35,7 @@ class VistasGenerator < Rails::Generators::Base
     end
 
     #vistas
-    if !options.views?
+    if options.views?
       #index
       template "app/views/index.haml", "app/views/#{plural_name}/index.haml"
       template "app/views/index.js.erb", "app/views/#{plural_name}/index.js.erb"
@@ -43,22 +43,15 @@ class VistasGenerator < Rails::Generators::Base
       template "app/views/lista.haml", "app/views/#{plural_name}/_#{plural_name}.haml"
       #show
       template "app/views/single.haml", "app/views/#{plural_name}/_#{file_name}.haml"
-      #template "app/views/_version.haml", "app/views/#{plural_name}/_version.haml"
-      #saque el version y lo puse en el layout
-      template "app/views/_version.haml", "app/views/layouts/_version.haml"
       #form
       template "app/views/_form.haml", "app/views/#{plural_name}/_form.haml"
       #new
-      template "app/views/new.haml", "app/views/#{plural_name}/new.haml"
       template "app/views/_new.haml", "app/views/#{plural_name}/_new.haml"
       template "app/views/new.js.erb", "app/views/#{plural_name}/new.js.erb"
       #edit
-      template "app/views/edit.haml", "app/views/#{plural_name}/edit.haml"
       template "app/views/_edit.haml", "app/views/#{plural_name}/_edit.haml"
       template "app/views/edit.js.erb", "app/views/#{plural_name}/edit.js.erb"
-
       #show
-      template "app/views/show.haml", "app/views/#{plural_name}/show.haml"
       template "app/views/show.js.erb", "app/views/#{plural_name}/show.js.erb"
     end
     #pdf

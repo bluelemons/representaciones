@@ -1,64 +1,22 @@
-= form_for(@entidad,:remote=>true) do |f| 
-  .ui-widget.ui-widget-content
-    - if @entidad.errors.any? 
-      #error_explanation
-        %h2="#{pluralize(@entidad.errors.count, 'error')} prohibited this entidad from being saved:"
-  
-        %ul
-          - @entidad.errors.full_messages.each do |msg| 
-            %li= msg 
-    
-    
-    %table
-      -if action_name !="edit"
-        %tr
-          %td
-          = collection_select(:entidad, :tentidad_id, Tentidad.all, :id, :name, :prompt => false)     
-      %tr
-        %td
-          = f.label :Nombre 
-        %td
-          = f.text_field :name
-      %tr
-        %td
-          = f.label :Cuit      
-        %td
-          = f.text_field :cuit
-      %tr      
-        %td
-          = f.label :Direccion
-        %td
-          = f.text_field :calle
-      %tr
-        %td
-          = f.label :Localidad_id
-        %td
-          
-          = f.text_field :localidad_id, :size =>6
-          = javascript_include_tag('jq-autocomplete/autocomplete')
-          %input#localidad_name.autocomplete{:table => 'localidad',:AUTOCOMPLETE =>"OFF",
-            :value=> if action_name == "edit";@entidad.try(:localidad).try(:name);end}
-      %tr
-        %td
-          = f.label :Legajo
-        %td
-          = f.text_field :legajo   
-          
-    .field      
-      = f.label :Telefono
-      %br
-      = f.text_area :telefono,:rows=>3
-     
-    .field
-      = f.label :Email
-      %br
-      = f.text_area :email,:rows=>3
-    
-    .field
-      = f.label :Web
-      %br
-      = f.text_area :web,:rows=>3
-    
-    
-    .actions
-      = f.submit 
+.action_bar
+
+  =link_to "Resertear",new_entidad_path,:remote=>true
+= semantic_form_for @entidad,:remote=>true do |form|
+  = form.inputs do
+    = error_message(@entidad)
+    = form.input :name
+    = form.input :cuit
+    = form.input :calle
+    = form.input :legajo
+    = form.input :tentidad_id
+
+    = render :partial => "layouts/labelgrid",:locals=>{:model=>:entidad, :data=>@entidad, :label=>'Localidad', :field=>:localidad_id,:f=>form,}
+
+
+    = form.input :telefono,:as=>:text
+    = form.input :web,:as=>:text
+    = form.input :email,:as=>:text
+
+    %input{:type=>"CHECKBOX",:name=>"another_one"} seguir creando
+  = form.buttons
+

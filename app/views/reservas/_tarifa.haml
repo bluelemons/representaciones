@@ -1,23 +1,13 @@
 %h2 Tarifa
-%table
+
+%table.wide
   %tr
-    %td
-      = f.label :iva
-    %td
-      = f.text_field :iva
+    %td= form.input :iva,:input_html => {:size=>8}
+    %td= form.input :impuesto,:input_html => {:size=>8}
+    %td= form.input :seguro,:input_html => {:size=>8}
   %tr
-    %td
-      = f.label :impuesto
-    %td
-      = f.text_field :impuesto
-  %tr
-    %td
-      = f.label :seguro
-    %td
-      = f.text_field :seguro
-  %tr
-    =render :partial => 'montos/form',:locals=>{:f=>f}
-.field
-  = f.label :Observaciones
-  %br
-  = f.text_area :obs,:rows=>3,:cols=>80
+    =render :partial =>'montos/form',:locals=>{:f=>form}
+= form.input :obs
+
+= render :partial => "pasajeros"
+

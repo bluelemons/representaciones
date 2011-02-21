@@ -168,7 +168,7 @@ es-AR:
       messages:
         taken: "ya ha sido tomado"
         record_invalid: "La validación falló: %{errors}"
-        <<: *errors_messages
+
 
       full_messages:
         format: "%{attribute}%{message}"

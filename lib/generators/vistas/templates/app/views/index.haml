@@ -1,12 +1,19 @@
 .ui-widget
   %h1.ui-widget-header <%= plural_name.capitalize %>
-  
-  .action_bar
-    -if can? :new, <%= file_name_c %>
-      = link_to 'Nuevo <%= file_name_c %>', new_<%= file_name %>_path,:remote => true 
-    = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
-  #<%= file_name %>_form.half.right
-  
-  = render :partial => "search"
-  #<%= plural_name %>
-    =render '<%= plural_name %>'
+
+  #tabs-<%= plural_name %>.mytabs
+    %ul
+      %li
+        %a{:href=>"#tabs-<%= plural_name %>-1"} <%= file_name.capitalize %>
+
+      -if can? :new,<%= file_name.capitalize %>
+        %li
+          %a#<%= file_name %>_new{:href=>"#tabs-<%= plural_name %>-2"} Alta
+
+    #tabs-<%= plural_name %>-1
+      = render :partial => "search"
+      #<%= plural_name %>
+        =render '<%= plural_name %>'
+    #tabs-<%= plural_name %>-2
+      #<%= file_name %>_form
+

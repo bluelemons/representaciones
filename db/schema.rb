@@ -328,8 +328,8 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
 
   create_table "saldos", :force => true do |t|
     t.integer  "entidad_id"
-    t.integer  "monto_id"
     t.integer  "moneda_id"
+    t.integer  "monto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

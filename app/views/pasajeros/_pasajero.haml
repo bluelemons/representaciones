@@ -1,27 +1,23 @@
 .ui-widget.ui-widget-content
-  %h3.ui-widget-header pasajero  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @pasajero 
-        = link_to 'Editar', edit_pasajero_path(@pasajero),:remote=>true,:width =>'200px'
+  %h3.ui-widget-header pasajero
+  .action_bar
+    -if can? :edit, @pasajero
+      = link_to 'Editar', edit_pasajero_path(@pasajero),:remote=>true,:width =>'200px'
     %br
-  
-  
-  %p
-    %b Doc:
-    = @pasajero.doc
-    = @pasajero.try(:tdoc).try(:name)
+
+
   %p
     %b Name:
     = @pasajero.name
-  
+
+  %p
+    %b Doc:
+    = @pasajero.tdoc.try(:name)
+    = @pasajero.doc
+
   %p
     %b Nacimiento:
     = @pasajero.nacimiento
-  
-  
-    = render :partial => "layouts/version",:locals=>{:model=>@pasajero,:controller=>:pasajeros}
-    
-  %h2 Reservas de este pasajero
 
-  =render :partial =>'reservas/reservas'
+    = render :partial => "layouts/version",:locals=>{:model=>@pasajero,:controller=>:pasajeros}
+

@@ -1,18 +1,14 @@
 .ui-widget.ui-widget-content
-  %h3.ui-widget-header programa  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @programa 
-        = link_to 'Editar', edit_programa_path(@programa),:remote=>true,:width =>'200px'
+  %h3.ui-widget-header programa
+  .action_bar
+    -if can? :edit, @programa
+      = link_to 'Editar', edit_programa_path(@programa),:remote=>true,:width =>'200px'
     %br
-  
+
   
   %p
     %b Name:
     = @programa.name
-  %p
-    %b Observaciones
-    = @programa.obs
+  
+    = render :partial => "layouts/version",:locals=>{:model=>@programa,:controller=>:programas}
 
-  %br
-  = render :partial => "layouts/version",:locals=>{:model=>@programa,:controller=>:programas}

@@ -12,24 +12,22 @@
 
     %th Acciones
 
-    - for reserva in @reservas   
+    - for reserva in @reservas
       %tr
-        %td= reserva.try(:id) 
+        %td= reserva.try(:id)
         %td= reserva.try(:pasajeros).first.try(:name)
-        
-        %td= reserva.try(:salida) 
-        
-        %td= reserva.try(:hotel) 
-        
-        %td= reserva.try(:periodo) 
+        %td= reserva.try(:salida)
+        %td= reserva.try(:hotel)
+        %td= reserva.try(:periodo)
         %td
           = reserva.agencia_pago
         %td
           = reserva.operadora_pago
-                  
+
         %td
-          = link_to 'Show', reserva,:remote=>true 
+          = link_to 'Show', reserva,:remote=>true
           -if can? :edit, reserva
-            = link_to 'Edit', edit_reserva_path(reserva),:remote=>true  
+            = link_to 'Edit', edit_reserva_path(reserva),:remote=>true
           -if can? :destroy, reserva
-            = link_to 'Destroy', reserva, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+            = link_to 'Destroy', reserva, :confirm => 'Are you sure?', :method => :delete,:remote=>true
+
