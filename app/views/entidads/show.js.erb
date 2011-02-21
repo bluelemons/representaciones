@@ -1,2 +1,6 @@
-$('#entidad_form').html('<%= raw escape_javascript(render("entidad")) %>').show();
+addTab("entidad","<%=@entidad.id%>","<%=@entidad.name%>");
+
+$('#entidad_form<%=@entidad.id%>').html('<%= raw escape_javascript(render("entidad")) %>');
+
 skin();
+

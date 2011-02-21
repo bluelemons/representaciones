@@ -1,82 +1,60 @@
-#tabs
+.mytabs
   %ul
     %li
-      %a{:href=>"#tabs-1"} Reserva
+      %a{:href=>"#tabs-reserva-1"} Reserva
     %li
-      %a{:href=>"#tabs-2"}
-        =@reserva.try(:agencia).try(:name)
+      %a{:href=>"#tabs-reserva-2"}=@reserva.try(:agencia).try(:name)
     %li
-      %a{:href=>"#tabs-3"}
-        =@reserva.try(:operadora).try(:name)
+      %a{:href=>"#tabs-reserva-3"}=@reserva.try(:operadora).try(:name)
     %li
-      %a{:href=>"#tabs-4"} Tarifa      
+      %a{:href=>"#tabs-reserva-4"} Tarifa
     %li
-      %a{:href=>"#tabs-5"} Pasajeros
+      %a{:href=>"#tabs-reserva-5"} Pasajeros
     %li
-      %a{:href=>"#tabs-6"} Pagos
-      
-  #tabs-1.ui-widget.ui-widget-content
-    .left{:style=>'float:right'}
-      .action_bar
-        -if can? :edit, @reserva 
-          = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
-  
+      %a{:href=>"#tabs-reserva-6"} Pagos
+
+  #tabs-reserva-1.ui-widget.ui-widget-content
+    .action_bar
+      -if can? :edit, @reserva
+        = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
+
     -if @reserva.activa?
-      .green
-        La Reserva está activa
+      .green La Reserva está activa
     -else
-      .red
-        La Reserva NO está activa      
+      .red La Reserva NO está activa
     %table.wide
       %tr
         %td
           %b Fecha:
-        %td
-          = @reserva.fecha
-   
+        %td= @reserva.fecha
+
         %td
           %b Salida:
-        %td
-          = @reserva.salida
-    
-    %table
+        %td= @reserva.salida
       %tr
         %td
           %b Reservado:
-        %td
-          = @reserva.reservado
-    
+        %td= @reserva.reservado
       %tr
         %td
           %b Hotel:
+        %td= @reserva.hotel
+      %tr
         %td
-          = @reserva.hotel
-      %tr  
-        %td      
           %b Periodo:
-        %td
-          = @reserva.periodo
-      %tr  
+        %td= @reserva.periodo
+      %tr
         %td
           %b Regimen:
-        %td
-          = @reserva.regimen
-      %tr  
+        %td= @reserva.regimen
+      %tr
         %td
           %b Tipo de habitacion:
-        %td
-          = @reserva.thabitacion.try(:name)
-        
+        %td= @reserva.thabitacion.try(:name)
+
     %p
       %b Programa:
       =@reserva.programa.try(:name)
-    %p    
-      =link_to @reserva.programa.try(:name), @reserva.programa,:remote =>true,:class=>'show_button mybutton'
-      -if can? :edit, @reserva.programa
-        =link_to 'Editar', edit_programa_path(@reserva.programa),:remote=>true,:class=>'edit_button mybutton' 
-      #programa_form.tohide    
-  
-      
     %p
       %b Operadora:
       =@reserva.operadora.try(:name)
@@ -85,33 +63,32 @@
       =@reserva.agencia.try(:name)
     %p
       %b Obs:
-      = @reserva.obs 
+      = @reserva.obs
     %p
-      = render :partial => "layouts/version",:locals=>{:model=>@reserva,:controller=>:reservas}     
-      
-  #tabs-2.ui-widget.ui-widget-content
-    = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.agencia}
-  #tabs-3.ui-widget.ui-widget-content
-    = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.operadora}
-    
-  #tabs-4.ui-widget.ui-widget-content
+      = render :partial => "layouts/version",:locals=>{:model=>@reserva,:controller=>:reservas}
+
+  #tabs-reserva-2.ui-widget.ui-widget-content
+    .div{:id=>"entidad_form#{@reserva.agencia.id}"}
+      = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.agencia}
+  #tabs-reserva-3.ui-widget.ui-widget-content
+    .div{:id=>"entidad_form#{@reserva.operadora.id}"}
+      = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.operadora}
+
+  #tabs-reserva-4.ui-widget.ui-widget-content
     %p
       %table
         %tr
           %td
             %b IVA
-          %td
-            =@reserva.iva
+          %td=@reserva.iva
         %tr
           %td
             %b Impuesto
-          %td
-            =@reserva.impuesto
+          %td=@reserva.impuesto
         %tr
           %td
             %b Seguro
-          %td
-            =@reserva.seguro
+          %td=@reserva.seguro
         %tr
           %td
             %b Monto total
@@ -121,22 +98,18 @@
         %tr
           %td
             %b Deuda de la agencia
-          %td
-            =#@reserva.agencia_deuda
+          %td=#@reserva.agencia_deuda
         %tr
           %td
-            %b Deuda de la operadora 
-          %td
-            =#@reserva.operadora_deuda
-                   
+            %b Deuda de la operadora
+          %td=#@reserva.operadora_deuda
 
-    
-      
-  #tabs-5.ui-widget.ui-widget-content
+  #tabs-reserva-5.ui-widget.ui-widget-content
     =render :partial=>'pasajeros/grilla',:locals=>{:@pasajeros=>@reserva.pasajeros}
 
-  #tabs-6.ui-widget.ui-widget-content
+  #tabs-reserva-6.ui-widget.ui-widget-content
     %h2="Pagos de agencia #{@reserva.try(:agencia).try(:name)}"
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.movimientos.pagos.where(:entidad_id=>@reserva.agencia_id)}
     %h2="Pagos de operadora #{@reserva.try(:operadora).try(:name)}"
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.movimientos.pagos.where(:entidad_id=>@reserva.operadora_id)}
+

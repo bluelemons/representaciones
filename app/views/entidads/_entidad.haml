@@ -1,25 +1,24 @@
 .mytabs
   %ul
     %li
-      %a{:href=>"#tabs-entidad-1"}
-        =@entidad.try(:tentidad).try(:name)
+      %a{:href=>"#tabs-entidad-1"}=@entidad.try(:tentidad).try(:name)
     %li
       %a{:href=>"#tabs-entidad-2"} Saldo
     %li
       %a{:href=>"#tabs-entidad-3"} Pagos
-      
+
   #tabs-entidad-1.ui-widget.ui-widget-content
-    %h3.ui-widget-header  
+    %h3.ui-widget-header
       =@entidad.try(:tentidad).try(:name)
-    .left{:style=>'float:right'}
-      .action_bar
-        -if can? :edit, @entidad 
-          = link_to 'Editar', edit_entidad_path(@entidad),:remote=>true,:width =>'200px'
-      %br
-    
+
+    .action_bar
+      -if can? :edit, @entidad
+        = link_to 'Editar', edit_entidad_path(@entidad),:remote=>true,:width =>'200px'
+    %br
+
     %p
       %b Nombre:
-      = @entidad.try(:name) 
+      = @entidad.try(:name)
     %p
       %b Calle:
       = @entidad.calle
@@ -27,19 +26,19 @@
     %p
       %b Cuit:
       = @entidad.cuit
-    
+
     %p
       %b Telefono:
       = @entidad.telefono
-    
+
     %p
       %b Legajo:
       = @entidad.legajo
-    
+
     %p
       %b Email:
       = @entidad.email
-    
+
     %p
       %b Web:
       = @entidad.web
@@ -53,10 +52,8 @@
           %td
             %b=saldo.try(:moneda).try(:simbolo)
           %td=saldo.try(:monto).try(:valor)
-      
+
   #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.movimientos.where(:entidad_id=>@entidad.id)}
-      
-    
-  
+

@@ -1,2 +1,6 @@
-$('#pasajero_form').html('<%= raw escape_javascript(render("edit")) %>').show();
+addTab("pasajero","<%=@pasajero.id%>","<%=@pasajero.name%>");
+
+$('#pasajero_form<%=@pasajero.id%>').html('<%= raw escape_javascript(render("edit")) %>');
+
 skin();
+

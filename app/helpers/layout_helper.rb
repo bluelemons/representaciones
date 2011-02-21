@@ -6,7 +6,7 @@ module LayoutHelper
       html << "<div id= 'error_explanation'>"
       html << "<h2>#{pluralize(model.errors.count, 'error')} no permitieron guardar estos cambios:</h2>"
       html << "<ul>"
-      @reserva.errors.full_messages.each do |msg|
+      model.errors.full_messages.each do |msg|
         html <<"<li>#{msg}</li>"
       end
       html <<"</ul></div>"

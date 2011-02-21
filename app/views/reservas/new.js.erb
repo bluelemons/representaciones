@@ -8,15 +8,16 @@ $(".pasajeros .new").live('click',function(){
   $(".reserva_pasajero_4_doc").removeClass("reserva_pasajero_4_doc").addClass("reserva_pasajero_"+i+"_doc")
   $(".reserva_pasajero_4_name").removeClass("reserva_pasajero_4_name").addClass("reserva_pasajero_"+i+"_name")
   $(".reserva_pasajero_4_nacimiento").removeClass("reserva_pasajero_4_nacimiento").addClass("reserva_pasajero_"+i+"_nacimiento")
-  
+
   $(".reserva_pasajero_"+i+"_ids_").attr("i",i);
   $(".reserva_pasajero_"+i+"_doc").attr("i",i);
   $(".reserva_pasajero_"+i+"_name").attr("i",i);
-  $(".reserva_pasajero_"+i+"_nacimiento").attr("i",i);      
-  
+  $(".reserva_pasajero_"+i+"_nacimiento").attr("i",i);
+
   autocomplete();
   skin();
 });
 
 skin();
 autocomplete();
+

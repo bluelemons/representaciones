@@ -1,2 +1,6 @@
-$('#programa_form').html('<%= raw escape_javascript(render("programa")) %>').show();
+addTab("programa","<%=@programa.id%>","<%=@programa.name%>");
+
+$('#programa_form<%=@programa.id%>').html('<%= raw escape_javascript(render("programa")) %>').show();
+
 skin();
+

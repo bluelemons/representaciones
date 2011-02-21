@@ -1,21 +1,20 @@
 %h3.ui-widget-header Busqueda
-= form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
-   
-  = f.label :doc
-  %br 
-  = collection_select(:pasajero, :tdoc_id_eq, Tdoc.all, :id, :name, :prompt => true)     
-  = f.text_field :doc_eq    
-  %br 
-  = f.label :name
-  %br 
-  = f.text_field :name_sw
-  %br 
-  = f.label :nacimiento
-  %br 
-  = f.text_field :nacimiento_gt
-  %br
-  =f.label 'Baja'
-  %br
-  = f.check_box :hidden_eq
-  %br
-  = f.submit('Buscar') 
+= semantic_form_for @search do |form|
+  =form.inputs do
+    %table
+
+      %tr
+        %td=form.input :name_eq
+
+      %tr
+        %td=form.input :tdoc_id_eq
+
+      %tr
+        %td=form.input :doc_eq
+
+      %tr
+        %td=form.input :nacimiento_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+
+      %tr
+        %td=form.input :hidden_eq,:as=> :boolean
+

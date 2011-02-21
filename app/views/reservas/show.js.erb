@@ -1,2 +1,6 @@
-$('#reserva_form').html('<%= raw escape_javascript(render("reserva")) %>');
+addTab("reserva","<%=@reserva.id%>","Reserva");
+
+$('#reserva_form<%=@reserva.id%>').html('<%= raw escape_javascript(render("reserva")) %>');
+
 skin();
+
