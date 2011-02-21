@@ -98,11 +98,11 @@
         %tr
           %td
             %b Deuda de la agencia
-          %td=#@reserva.agencia_deuda
+          %td=@reserva.agencia_deuda
         %tr
           %td
             %b Deuda de la operadora
-          %td=#@reserva.operadora_deuda
+          %td=@reserva.operadora_deuda
 
   #tabs-reserva-5.ui-widget.ui-widget-content
     =render :partial=>'pasajeros/grilla',:locals=>{:@pasajeros=>@reserva.pasajeros}

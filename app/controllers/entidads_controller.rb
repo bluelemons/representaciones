@@ -50,7 +50,8 @@ class EntidadsController < InheritedResources::Base
       flash[:notice]="Entidad guardada!"
       #creo el saldo para cada tipo de moneda
       Moneda.all.each do |moneda|
-        Saldo.create({:entidad_id=>@entidad.id,:moneda_id=>moneda.id})
+        monto = Monto.create(:valor=>0,:moneda=>moneda)
+        Saldo.create({:entidad_id=>@entidad.id,:moneda_id=>moneda.id,:monto=>monto})
       end
 
       if params[:another_one]

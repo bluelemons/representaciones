@@ -5,7 +5,8 @@
     %td= form.input :iva,:input_html => {:size=>8}
     %td= form.input :impuesto,:input_html => {:size=>8}
     %td= form.input :seguro,:input_html => {:size=>8}
-
+  %tr
+    =render :partial =>'montos/form',:locals=>{:f=>form}
 = form.input :obs
 
 = render :partial => "pasajeros"
