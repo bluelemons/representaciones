@@ -1,19 +1,12 @@
-= form_for(@<%= file_name %>,:remote=>true) do |f| 
-  .ui-widget.ui-widget-content
-    - if @<%= file_name %>.errors.any? 
-      #error_explanation
-        %h2="#{pluralize(@<%= file_name %>.errors.count, 'error')} prohibited this <%= file_name %> from being saved:"
-  
-        %ul
-          - @<%= file_name %>.errors.full_messages.each do |msg| 
-            %li= msg 
-    
-    <% for attribute in @model_attributes %>
-    .field
-      = f.label :<%= attribute.name.capitalize %>
-      %br
-      = f.text_field :<%= attribute.name %>
-    <% end %>
-    
-    .actions
-      = f.submit 
+.action_bar
+  =link_to "Resetear",new_<%= file_name %>_path,:remote=>true
+
+= semantic_form_for @<%= file_name %>,:remote=>true do |form|
+  = form.inputs do
+    = error_message(@<%= file_name %>)
+  <% for attribute in @model_attributes %>
+    = form.input :<%= attribute.name %>
+  <% end %>
+  %input{:type=>"CHECKBOX",:name=>"another_one"} seguir creando
+  = form.buttons
+

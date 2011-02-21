@@ -1,2 +1,6 @@
-$('#<%= file_name%>_form').html('<%%= raw escape_javascript(render("<%= file_name%>")) %>').show();
+addTab("<%= file_name %>","<%%=@<%= file_name %>.id%>","<%%=@<%= file_name %>.name%>");
+
+$('#<%= file_name%>_form<%%=@<%= file_name %>.id%>').html('<%%= raw escape_javascript(render("<%= file_name%>")) %>').show();
+
 skin();
+
