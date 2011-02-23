@@ -10,6 +10,7 @@ gem 'mysql2'
 
 # views
 gem "haml-rails"
+gem "rails3-generators"
 
 # Use unicorn as the web server
 # gem 'unicorn'
