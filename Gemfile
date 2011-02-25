@@ -10,6 +10,10 @@ gem 'mysql2'
 
 # views
 gem "haml-rails"
+gem "formtastic"
+gem "jquery-rails"
+
+#temporal for generators
 gem "rails3-generators"
 
 # Use unicorn as the web server

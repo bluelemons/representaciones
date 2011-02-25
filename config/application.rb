@@ -40,11 +40,11 @@ module Representaciones
     config.filter_parameters += [:password]
 
     # To config what generators do use this code
-    # config.generators do |g|
-    #   g.orm             :active_record
-    #   g.template_engine :haml
-    #   g.test_framework  :rspec, :fixture => true
-    # end
+    config.generators do |g|
+      g.orm             :active_record
+      g.template_engine :haml
+      g.test_framework  :rspec, :fixture => true
+      g.form_builder    :formtastic
+    end
   end
 end
-
