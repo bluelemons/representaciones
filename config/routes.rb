@@ -1,4 +1,14 @@
 Representaciones::Application.routes.draw do
+  resources :movimientos
+
+  resources :cotizaciones
+
+  resources :entidades
+
+  resources :pasajeros
+
+  resources :reservas
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

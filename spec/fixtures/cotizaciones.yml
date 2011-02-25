@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fecha: 2011-02-25
+  compra: 1.5
+  moneda_id: 1
+  venta: 1.5
+
+two:
+  fecha: 2011-02-25
+  compra: 1.5
+  moneda_id: 1
+  venta: 1.5

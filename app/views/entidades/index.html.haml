@@ -1,0 +1,35 @@
+%h1 Listing entidades
+
+%table
+  %tr
+    %th Calle
+    %th Cuit
+    %th Telefono
+    %th Legajo
+    %th Email
+    %th Web
+    %th Localidad
+    %th Name
+    %th Tentidad
+    %th
+    %th
+    %th
+
+  - @entidades.each do |entidad|
+    %tr
+      %td= entidad.calle
+      %td= entidad.cuit
+      %td= entidad.telefono
+      %td= entidad.legajo
+      %td= entidad.email
+      %td= entidad.web
+      %td= entidad.localidad_id
+      %td= entidad.name
+      %td= entidad.tentidad_id
+      %td= link_to 'Show', entidad
+      %td= link_to 'Edit', edit_entidad_path(entidad)
+      %td= link_to 'Destroy', entidad, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Entidad', new_entidad_path

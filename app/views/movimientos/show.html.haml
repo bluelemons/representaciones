@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Reserva:
+  = @movimiento.reserva_id
+%p
+  %b Entidad:
+  = @movimiento.entidad_id
+%p
+  %b Tpago:
+  = @movimiento.tpago_id
+%p
+  %b Tdeposito:
+  = @movimiento.tdeposito_id
+%p
+  %b Fecha:
+  = @movimiento.fecha
+%p
+  %b Monto:
+  = @movimiento.monto_id
+
+= link_to 'Edit', edit_movimiento_path(@movimiento)
+\|
+= link_to 'Back', movimientos_path

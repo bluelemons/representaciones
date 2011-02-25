@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  calle: MyString
+  cuit: 1
+  telefono: MyString
+  legajo: MyString
+  email: MyString
+  web: MyString
+  localidad_id: 1
+  name: MyString
+  tentidad_id: 1
+
+two:
+  calle: MyString
+  cuit: 1
+  telefono: MyString
+  legajo: MyString
+  email: MyString
+  web: MyString
+  localidad_id: 1
+  name: MyString
+  tentidad_id: 1

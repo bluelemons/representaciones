@@ -1,0 +1,1676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox" name="passed_checkbox" type="checkbox" checked onchange="apply_filters()" value="1"> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox" name="failed_checkbox" type="checkbox" checked onchange="apply_filters()" value="2"> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked onchange="apply_filters()" value="3"> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&nbsp;</p>
+    <p id="duration">&nbsp;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">MovimientosHelper</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_1');</script>
+    <script type="text/javascript">makeYellow('example_group_1');</script>
+    <script type="text/javascript">moveProgressBar('0.5');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/helpers/movimientos_helper_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_2" class="passed">PasajerosHelper</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_2');</script>
+    <script type="text/javascript">makeYellow('example_group_2');</script>
+    <script type="text/javascript">moveProgressBar('1.1');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/helpers/pasajeros_helper_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_3" class="passed">CotizacionesHelper</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_3');</script>
+    <script type="text/javascript">makeYellow('example_group_3');</script>
+    <script type="text/javascript">moveProgressBar('1.7');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/helpers/cotizaciones_helper_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_4" class="passed">EntidadesHelper</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_4');</script>
+    <script type="text/javascript">makeYellow('example_group_4');</script>
+    <script type="text/javascript">moveProgressBar('2.3');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/helpers/entidades_helper_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_5" class="passed">ReservasHelper</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_5');</script>
+    <script type="text/javascript">makeYellow('example_group_5');</script>
+    <script type="text/javascript">moveProgressBar('2.9');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/helpers/reservas_helper_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_6" class="passed">ReservasController</dt>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_7" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('3.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all reservas as @reservas</span></dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_8" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('4.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested reserva as @reserva</span></dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_9" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('4.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new reserva as @reserva</span></dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_10" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('5.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested reserva as @reserva</span></dd>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_11" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_12" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('5.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created reserva as @reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('6.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created reserva</span></dd>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_13" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('7.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved reserva as @reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('7.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'new' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_14" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_15" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('8.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('8.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested reserva as @reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('9.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the reserva</span></dd>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_16" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('10.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the reserva as @reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('10.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'edit' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_17" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('11.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('11.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the reservas list</span></dd>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_18" class="passed">MovimientosController</dt>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_19" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('12.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all movimientos as @movimientos</span></dd>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_20" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('12.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested movimiento as @movimiento</span></dd>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_21" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('13.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new movimiento as @movimiento</span></dd>
+  </dl>
+</div>
+<div id="div_group_22" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_22" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('14.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested movimiento as @movimiento</span></dd>
+  </dl>
+</div>
+<div id="div_group_23" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_23" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_24" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_24" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('14.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created movimiento as @movimiento</span></dd>
+    <script type="text/javascript">moveProgressBar('15.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created movimiento</span></dd>
+  </dl>
+</div>
+<div id="div_group_25" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_25" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('15.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved movimiento as @movimiento</span></dd>
+    <script type="text/javascript">moveProgressBar('16.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'new' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_26" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_26" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_27" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_27" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('17.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested movimiento</span></dd>
+    <script type="text/javascript">moveProgressBar('17.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested movimiento as @movimiento</span></dd>
+    <script type="text/javascript">moveProgressBar('18.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the movimiento</span></dd>
+  </dl>
+</div>
+<div id="div_group_28" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_28" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('18.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the movimiento as @movimiento</span></dd>
+    <script type="text/javascript">moveProgressBar('19.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'edit' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_29" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_29" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('20.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested movimiento</span></dd>
+    <script type="text/javascript">moveProgressBar('20.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the movimientos list</span></dd>
+  </dl>
+</div>
+<div id="div_group_30" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_30" class="passed">PasajerosController</dt>
+  </dl>
+</div>
+<div id="div_group_31" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_31" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('21.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all pasajeros as @pasajeros</span></dd>
+  </dl>
+</div>
+<div id="div_group_32" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_32" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('21.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested pasajero as @pasajero</span></dd>
+  </dl>
+</div>
+<div id="div_group_33" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_33" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('22.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new pasajero as @pasajero</span></dd>
+  </dl>
+</div>
+<div id="div_group_34" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_34" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('22.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested pasajero as @pasajero</span></dd>
+  </dl>
+</div>
+<div id="div_group_35" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_35" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_36" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_36" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('23.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created pasajero as @pasajero</span></dd>
+    <script type="text/javascript">moveProgressBar('24.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created pasajero</span></dd>
+  </dl>
+</div>
+<div id="div_group_37" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_37" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('24.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved pasajero as @pasajero</span></dd>
+    <script type="text/javascript">moveProgressBar('25.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'new' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_38" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_38" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_39" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_39" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('25.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested pasajero</span></dd>
+    <script type="text/javascript">moveProgressBar('26.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested pasajero as @pasajero</span></dd>
+    <script type="text/javascript">moveProgressBar('27.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the pasajero</span></dd>
+  </dl>
+</div>
+<div id="div_group_40" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_40" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('27.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the pasajero as @pasajero</span></dd>
+    <script type="text/javascript">moveProgressBar('28.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'edit' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_41" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_41" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('28.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested pasajero</span></dd>
+    <script type="text/javascript">moveProgressBar('29.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the pasajeros list</span></dd>
+  </dl>
+</div>
+<div id="div_group_42" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_42" class="passed">EntidadesController</dt>
+  </dl>
+</div>
+<div id="div_group_43" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_43" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('30.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all entidades as @entidades</span></dd>
+  </dl>
+</div>
+<div id="div_group_44" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_44" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('30.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested entidad as @entidad</span></dd>
+  </dl>
+</div>
+<div id="div_group_45" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_45" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('31.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new entidad as @entidad</span></dd>
+  </dl>
+</div>
+<div id="div_group_46" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_46" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('31.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested entidad as @entidad</span></dd>
+  </dl>
+</div>
+<div id="div_group_47" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_47" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_48" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_48" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('32.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created entidad as @entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('32.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created entidad</span></dd>
+  </dl>
+</div>
+<div id="div_group_49" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_49" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('33.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved entidad as @entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('34.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'new' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_50" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_50" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_51" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_51" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('34.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('35.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested entidad as @entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('35.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the entidad</span></dd>
+  </dl>
+</div>
+<div id="div_group_52" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_52" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('36.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the entidad as @entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('37.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'edit' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_53" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_53" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('37.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('38.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the entidades list</span></dd>
+  </dl>
+</div>
+<div id="div_group_54" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_54" class="passed">CotizacionesController</dt>
+  </dl>
+</div>
+<div id="div_group_55" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_55" class="passed">GET index</dt>
+    <script type="text/javascript">moveProgressBar('38.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns all cotizaciones as @cotizaciones</span></dd>
+  </dl>
+</div>
+<div id="div_group_56" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_56" class="passed">GET show</dt>
+    <script type="text/javascript">moveProgressBar('39.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested cotizacion as @cotizacion</span></dd>
+  </dl>
+</div>
+<div id="div_group_57" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_57" class="passed">GET new</dt>
+    <script type="text/javascript">moveProgressBar('40.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a new cotizacion as @cotizacion</span></dd>
+  </dl>
+</div>
+<div id="div_group_58" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_58" class="passed">GET edit</dt>
+    <script type="text/javascript">moveProgressBar('40.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested cotizacion as @cotizacion</span></dd>
+  </dl>
+</div>
+<div id="div_group_59" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_59" class="passed">POST create</dt>
+  </dl>
+</div>
+<div id="div_group_60" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_60" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('41.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created cotizacion as @cotizacion</span></dd>
+    <script type="text/javascript">moveProgressBar('41.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the created cotizacion</span></dd>
+  </dl>
+</div>
+<div id="div_group_61" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_61" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('42.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved cotizacion as @cotizacion</span></dd>
+    <script type="text/javascript">moveProgressBar('42.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'new' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_62" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_62" class="passed">PUT update</dt>
+  </dl>
+</div>
+<div id="div_group_63" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_63" class="passed">with valid params</dt>
+    <script type="text/javascript">moveProgressBar('43.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">updates the requested cotizacion</span></dd>
+    <script type="text/javascript">moveProgressBar('44.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the requested cotizacion as @cotizacion</span></dd>
+    <script type="text/javascript">moveProgressBar('44.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the cotizacion</span></dd>
+  </dl>
+</div>
+<div id="div_group_64" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_64" class="passed">with invalid params</dt>
+    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">assigns the cotizacion as @cotizacion</span></dd>
+    <script type="text/javascript">moveProgressBar('45.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">re-renders the 'edit' template</span></dd>
+  </dl>
+</div>
+<div id="div_group_65" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_65" class="passed">DELETE destroy</dt>
+    <script type="text/javascript">moveProgressBar('46.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">destroys the requested cotizacion</span></dd>
+    <script type="text/javascript">moveProgressBar('47.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">redirects to the cotizaciones list</span></dd>
+  </dl>
+</div>
+<div id="div_group_66" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_66" class="passed">Thabitacion</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_66');</script>
+    <script type="text/javascript">makeYellow('example_group_66');</script>
+    <script type="text/javascript">moveProgressBar('47.6');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/thabitacion_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_67" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_67" class="passed">Programa</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_67');</script>
+    <script type="text/javascript">makeYellow('example_group_67');</script>
+    <script type="text/javascript">moveProgressBar('48.2');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/programa_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_68" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_68" class="passed">Cotizacion</dt>
+    <script type="text/javascript">moveProgressBar('48.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to moneda</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_68');</script>
+    <script type="text/javascript">makeYellow('example_group_68');</script>
+    <script type="text/javascript">moveProgressBar('49.4');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add examples about methods #a la fecha, etc (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_69" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_69" class="passed">Entidad</dt>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to localidad</span></dd>
+    <script type="text/javascript">moveProgressBar('50.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to tentidad</span></dd>
+    <script type="text/javascript">moveProgressBar('51.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many saldos</span></dd>
+    <script type="text/javascript">moveProgressBar('51.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many movimientos</span></dd>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_69');</script>
+    <script type="text/javascript">makeYellow('example_group_69');</script>
+    <script type="text/javascript">moveProgressBar('52.3');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/entidad_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_70" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_70" class="passed">Tpago</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_70');</script>
+    <script type="text/javascript">makeYellow('example_group_70');</script>
+    <script type="text/javascript">moveProgressBar('52.9');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/tpago_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_71" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_71" class="passed">Movimiento</dt>
+    <script type="text/javascript">moveProgressBar('53.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to reserva</span></dd>
+    <script type="text/javascript">moveProgressBar('54.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to entidad</span></dd>
+    <script type="text/javascript">moveProgressBar('54.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to monto</span></dd>
+    <script type="text/javascript">moveProgressBar('55.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to tpago</span></dd>
+    <script type="text/javascript">moveProgressBar('55.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to tdeposito</span></dd>
+  </dl>
+</div>
+<div id="div_group_72" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_72" class="passed">Tentidad</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_72');</script>
+    <script type="text/javascript">makeYellow('example_group_72');</script>
+    <script type="text/javascript">moveProgressBar('56.4');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/tentidad_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_73" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_73" class="passed">Tdoc</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_73');</script>
+    <script type="text/javascript">makeYellow('example_group_73');</script>
+    <script type="text/javascript">moveProgressBar('57.0');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/tdoc_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_74" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_74" class="passed">Reserva</dt>
+    <script type="text/javascript">moveProgressBar('57.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to thabitacion</span></dd>
+    <script type="text/javascript">moveProgressBar('58.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to programa</span></dd>
+    <script type="text/javascript">moveProgressBar('58.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to monto</span></dd>
+    <script type="text/javascript">moveProgressBar('59.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to operadora</span></dd>
+    <script type="text/javascript">moveProgressBar('60.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to agencia</span></dd>
+    <script type="text/javascript">moveProgressBar('60.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have many movimientos</span></dd>
+    <script type="text/javascript">moveProgressBar('61.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should have and belong to many pasajeros</span></dd>
+  </dl>
+</div>
+<div id="div_group_75" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_75" class="passed">Pasajero</dt>
+    <script type="text/javascript">moveProgressBar('61.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to tdoc</span></dd>
+  </dl>
+</div>
+<div id="div_group_76" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_76" class="passed">Localidad</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_76');</script>
+    <script type="text/javascript">makeYellow('example_group_76');</script>
+    <script type="text/javascript">moveProgressBar('62.3');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/localidad_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_77" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_77" class="passed">Moneda</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_77');</script>
+    <script type="text/javascript">makeYellow('example_group_77');</script>
+    <script type="text/javascript">moveProgressBar('62.9');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/moneda_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_78" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_78" class="passed">Tdeposito</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_78');</script>
+    <script type="text/javascript">makeYellow('example_group_78');</script>
+    <script type="text/javascript">moveProgressBar('63.5');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/tdeposito_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_79" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_79" class="passed">Monto</dt>
+    <script type="text/javascript">moveProgressBar('64.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">should belong to moneda</span></dd>
+  </dl>
+</div>
+<div id="div_group_80" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_80" class="passed">Saldo</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_80');</script>
+    <script type="text/javascript">makeYellow('example_group_80');</script>
+    <script type="text/javascript">moveProgressBar('64.7');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/eloyesp/rails/representaciones/spec/models/saldo_spec.rb (PENDING: Not Yet Implemented)</span></dd>
+  </dl>
+</div>
+<div id="div_group_81" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_81" class="passed">Pasajeros</dt>
+  </dl>
+</div>
+<div id="div_group_82" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_82" class="passed">GET /pasajeros</dt>
+    <script type="text/javascript">moveProgressBar('65.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span></dd>
+  </dl>
+</div>
+<div id="div_group_83" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_83" class="passed">Cotizaciones</dt>
+  </dl>
+</div>
+<div id="div_group_84" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_84" class="passed">GET /cotizaciones</dt>
+    <script type="text/javascript">moveProgressBar('65.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span></dd>
+  </dl>
+</div>
+<div id="div_group_85" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_85" class="passed">Entidades</dt>
+  </dl>
+</div>
+<div id="div_group_86" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_86" class="passed">GET /entidades</dt>
+    <script type="text/javascript">moveProgressBar('66.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span></dd>
+  </dl>
+</div>
+<div id="div_group_87" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_87" class="passed">Reservas</dt>
+  </dl>
+</div>
+<div id="div_group_88" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_88" class="passed">GET /reservas</dt>
+    <script type="text/javascript">moveProgressBar('67.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span></dd>
+  </dl>
+</div>
+<div id="div_group_89" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_89" class="passed">Movimientos</dt>
+  </dl>
+</div>
+<div id="div_group_90" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_90" class="passed">GET /movimientos</dt>
+    <script type="text/javascript">moveProgressBar('67.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span></dd>
+  </dl>
+</div>
+<div id="div_group_91" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_91" class="passed">CotizacionesController</dt>
+  </dl>
+</div>
+<div id="div_group_92" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_92" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('68.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #index</span></dd>
+    <script type="text/javascript">moveProgressBar('68.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #new</span></dd>
+    <script type="text/javascript">moveProgressBar('69.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #show</span></dd>
+    <script type="text/javascript">moveProgressBar('70.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #edit</span></dd>
+    <script type="text/javascript">moveProgressBar('70.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #create</span></dd>
+    <script type="text/javascript">moveProgressBar('71.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #update</span></dd>
+    <script type="text/javascript">moveProgressBar('71.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #destroy</span></dd>
+  </dl>
+</div>
+<div id="div_group_93" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_93" class="passed">EntidadesController</dt>
+  </dl>
+</div>
+<div id="div_group_94" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_94" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('72.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #index</span></dd>
+    <script type="text/javascript">moveProgressBar('72.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #new</span></dd>
+    <script type="text/javascript">moveProgressBar('73.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #show</span></dd>
+    <script type="text/javascript">moveProgressBar('74.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #edit</span></dd>
+    <script type="text/javascript">moveProgressBar('74.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #create</span></dd>
+    <script type="text/javascript">moveProgressBar('75.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #update</span></dd>
+    <script type="text/javascript">moveProgressBar('75.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #destroy</span></dd>
+  </dl>
+</div>
+<div id="div_group_95" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_95" class="passed">PasajerosController</dt>
+  </dl>
+</div>
+<div id="div_group_96" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_96" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('76.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #index</span></dd>
+    <script type="text/javascript">moveProgressBar('77.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #new</span></dd>
+    <script type="text/javascript">moveProgressBar('77.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #show</span></dd>
+    <script type="text/javascript">moveProgressBar('78.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #edit</span></dd>
+    <script type="text/javascript">moveProgressBar('78.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #create</span></dd>
+    <script type="text/javascript">moveProgressBar('79.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #update</span></dd>
+    <script type="text/javascript">moveProgressBar('80.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #destroy</span></dd>
+  </dl>
+</div>
+<div id="div_group_97" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_97" class="passed">MovimientosController</dt>
+  </dl>
+</div>
+<div id="div_group_98" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_98" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('80.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #index</span></dd>
+    <script type="text/javascript">moveProgressBar('81.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #new</span></dd>
+    <script type="text/javascript">moveProgressBar('81.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #show</span></dd>
+    <script type="text/javascript">moveProgressBar('82.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #edit</span></dd>
+    <script type="text/javascript">moveProgressBar('82.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #create</span></dd>
+    <script type="text/javascript">moveProgressBar('83.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #update</span></dd>
+    <script type="text/javascript">moveProgressBar('84.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #destroy</span></dd>
+  </dl>
+</div>
+<div id="div_group_99" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_99" class="passed">ReservasController</dt>
+  </dl>
+</div>
+<div id="div_group_100" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_100" class="passed">routing</dt>
+    <script type="text/javascript">moveProgressBar('84.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #index</span></dd>
+    <script type="text/javascript">moveProgressBar('85.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #new</span></dd>
+    <script type="text/javascript">moveProgressBar('85.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #show</span></dd>
+    <script type="text/javascript">moveProgressBar('86.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #edit</span></dd>
+    <script type="text/javascript">moveProgressBar('87.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #create</span></dd>
+    <script type="text/javascript">moveProgressBar('87.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #update</span></dd>
+    <script type="text/javascript">moveProgressBar('88.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">recognizes and generates #destroy</span></dd>
+  </dl>
+</div>
+<div id="div_group_101" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_101" class="passed">movimientos/new.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('88.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders new movimiento form</span></dd>
+  </dl>
+</div>
+<div id="div_group_102" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_102" class="passed">movimientos/index.html.haml</dt>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_102');</script>
+    <script type="text/javascript">makeRed('example_group_102');</script>
+    <script type="text/javascript">moveProgressBar('89.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders a list of movimientos</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>expected following output to contain a &lt;tr&gt;td&gt;1&lt;/tr&gt;td&gt; tag:
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/REC-html40/loose.dtd&quot;&gt;
+&lt;html&gt;&lt;body&gt;
+&lt;h1&gt;Listing movimientos&lt;/h1&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;Reserva&lt;/th&gt;
+&lt;th&gt;Entidad&lt;/th&gt;
+&lt;th&gt;Tpago&lt;/th&gt;
+&lt;th&gt;Tdeposito&lt;/th&gt;
+&lt;th&gt;Fecha&lt;/th&gt;
+&lt;th&gt;Monto&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/movimientos/1077&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/movimientos/1077/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/movimientos/1077&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/movimientos/1078&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/movimientos/1078/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/movimientos/1078&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;&lt;a href=&quot;/movimientos/new&quot;&gt;New Movimiento&lt;/a&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre></div>
+        <div class="backtrace"><pre>./spec/views/movimientos/index.html.haml_spec.rb:25:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_103" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_103" class="passed">movimientos/edit.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('90.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders the edit movimiento form</span></dd>
+  </dl>
+</div>
+<div id="div_group_104" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_104" class="passed">movimientos/show.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('90.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders attributes in &lt;p&gt;</span></dd>
+  </dl>
+</div>
+<div id="div_group_105" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_105" class="passed">reservas/new.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('91.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders new reserva form</span></dd>
+  </dl>
+</div>
+<div id="div_group_106" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_106" class="passed">reservas/index.html.haml</dt>
+    <script type="text/javascript">makeRed('div_group_106');</script>
+    <script type="text/javascript">makeRed('example_group_106');</script>
+    <script type="text/javascript">moveProgressBar('91.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders a list of reservas</span>
+      <div class="failure" id="failure_2">
+        <div class="message"><pre>expected following output to contain a &lt;tr&gt;td&gt;1&lt;/tr&gt;td&gt; tag:
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/REC-html40/loose.dtd&quot;&gt;
+&lt;html&gt;&lt;body&gt;
+&lt;h1&gt;Listing reservas&lt;/h1&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;Fecha&lt;/th&gt;
+&lt;th&gt;Salida&lt;/th&gt;
+&lt;th&gt;Activa&lt;/th&gt;
+&lt;th&gt;Reservado&lt;/th&gt;
+&lt;th&gt;Hoteles&lt;/th&gt;
+&lt;th&gt;Periodo&lt;/th&gt;
+&lt;th&gt;Regimen&lt;/th&gt;
+&lt;th&gt;Obs&lt;/th&gt;
+&lt;th&gt;Thabitacion&lt;/th&gt;
+&lt;th&gt;Programa&lt;/th&gt;
+&lt;th&gt;Operadora&lt;/th&gt;
+&lt;th&gt;Agencia&lt;/th&gt;
+&lt;th&gt;Operado&lt;/th&gt;
+&lt;th&gt;Iva&lt;/th&gt;
+&lt;th&gt;Impuesto&lt;/th&gt;
+&lt;th&gt;Seguro&lt;/th&gt;
+&lt;th&gt;Monto&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Reservado&lt;/td&gt;
+&lt;td&gt;MyText&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Regimen&lt;/td&gt;
+&lt;td&gt;MyText&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Operado&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/reservas/1082&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/reservas/1082/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/reservas/1082&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Reservado&lt;/td&gt;
+&lt;td&gt;MyText&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Regimen&lt;/td&gt;
+&lt;td&gt;MyText&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Operado&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/reservas/1083&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/reservas/1083/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/reservas/1083&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;&lt;a href=&quot;/reservas/new&quot;&gt;New Reserva&lt;/a&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre></div>
+        <div class="backtrace"><pre>./spec/views/reservas/index.html.haml_spec.rb:45:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_107" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_107" class="passed">reservas/edit.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('92.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders the edit reserva form</span></dd>
+  </dl>
+</div>
+<div id="div_group_108" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_108" class="passed">reservas/show.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('92.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders attributes in &lt;p&gt;</span></dd>
+  </dl>
+</div>
+<div id="div_group_109" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_109" class="passed">entidades/new.html.haml</dt>
+    <script type="text/javascript">makeRed('div_group_109');</script>
+    <script type="text/javascript">makeRed('example_group_109');</script>
+    <script type="text/javascript">moveProgressBar('93.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders new entidad form</span>
+      <div class="failure" id="failure_3">
+        <div class="message"><pre>expected following output to contain a &lt;input#entidad_localidad_id name='entidad[localidad_id]'/&gt; tag:
+&lt;form accept-charset=&quot;UTF-8&quot; action=&quot;/entidades&quot; class=&quot;formtastic entidad&quot; id=&quot;new_entidad&quot; method=&quot;post&quot;&gt;
+&lt;div style=&quot;margin:0;padding:0;display:inline&quot;&gt;&lt;input name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;&amp;#10003;&quot;&gt;&lt;/div&gt;
+&lt;fieldset class=&quot;inputs&quot;&gt;&lt;ol&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_calle_input&quot;&gt;
+&lt;label for=&quot;entidad_calle&quot;&gt;Calle&lt;/label&gt;&lt;input id=&quot;entidad_calle&quot; maxlength=&quot;255&quot; name=&quot;entidad[calle]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;numeric optional&quot; id=&quot;entidad_cuit_input&quot;&gt;
+&lt;label for=&quot;entidad_cuit&quot;&gt;Cuit&lt;/label&gt;&lt;input id=&quot;entidad_cuit&quot; name=&quot;entidad[cuit]&quot; type=&quot;text&quot; value=&quot;1&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_telefono_input&quot;&gt;
+&lt;label for=&quot;entidad_telefono&quot;&gt;Telefono&lt;/label&gt;&lt;input id=&quot;entidad_telefono&quot; maxlength=&quot;255&quot; name=&quot;entidad[telefono]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_legajo_input&quot;&gt;
+&lt;label for=&quot;entidad_legajo&quot;&gt;Legajo&lt;/label&gt;&lt;input id=&quot;entidad_legajo&quot; maxlength=&quot;255&quot; name=&quot;entidad[legajo]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;email optional&quot; id=&quot;entidad_email_input&quot;&gt;
+&lt;label for=&quot;entidad_email&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;entidad_email&quot; maxlength=&quot;255&quot; name=&quot;entidad[email]&quot; type=&quot;email&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_web_input&quot;&gt;
+&lt;label for=&quot;entidad_web&quot;&gt;Web&lt;/label&gt;&lt;input id=&quot;entidad_web&quot; maxlength=&quot;255&quot; name=&quot;entidad[web]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;select optional&quot; id=&quot;entidad_localidad_input&quot;&gt;
+&lt;label for=&quot;entidad_localidad_id&quot;&gt;Localidad&lt;/label&gt;&lt;select id=&quot;entidad_localidad_id&quot; name=&quot;entidad[localidad_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;&lt;/option&gt;&lt;/select&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_name_input&quot;&gt;
+&lt;label for=&quot;entidad_name&quot;&gt;Name&lt;/label&gt;&lt;input id=&quot;entidad_name&quot; maxlength=&quot;255&quot; name=&quot;entidad[name]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;select optional&quot; id=&quot;entidad_tentidad_input&quot;&gt;
+&lt;label for=&quot;entidad_tentidad_id&quot;&gt;Tentidad&lt;/label&gt;&lt;select id=&quot;entidad_tentidad_id&quot; name=&quot;entidad[tentidad_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;&lt;/option&gt;&lt;/select&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/fieldset&gt;
+&lt;fieldset class=&quot;buttons&quot;&gt;&lt;ol&gt;&lt;li class=&quot;commit&quot;&gt;&lt;input class=&quot;create&quot; id=&quot;entidad_submit&quot; name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Create Entidad&quot;&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;
+&lt;/form&gt;</pre></div>
+        <div class="backtrace"><pre>./spec/views/entidades/new.html.haml_spec.rb:28:in `block (3 levels) in <top (required)>'
+./spec/views/entidades/new.html.haml_spec.rb:21:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_110" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_110" class="passed">entidades/index.html.haml</dt>
+    <script type="text/javascript">makeRed('div_group_110');</script>
+    <script type="text/javascript">makeRed('example_group_110');</script>
+    <script type="text/javascript">moveProgressBar('94.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders a list of entidades</span>
+      <div class="failure" id="failure_4">
+        <div class="message"><pre>expected following output to contain a &lt;tr&gt;td&gt;1&lt;/tr&gt;td&gt; tag:
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/REC-html40/loose.dtd&quot;&gt;
+&lt;html&gt;&lt;body&gt;
+&lt;h1&gt;Listing entidades&lt;/h1&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;Calle&lt;/th&gt;
+&lt;th&gt;Cuit&lt;/th&gt;
+&lt;th&gt;Telefono&lt;/th&gt;
+&lt;th&gt;Legajo&lt;/th&gt;
+&lt;th&gt;Email&lt;/th&gt;
+&lt;th&gt;Web&lt;/th&gt;
+&lt;th&gt;Localidad&lt;/th&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Tentidad&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Calle&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Telefono&lt;/td&gt;
+&lt;td&gt;Legajo&lt;/td&gt;
+&lt;td&gt;Email&lt;/td&gt;
+&lt;td&gt;Web&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/entidades/1087&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/entidades/1087/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/entidades/1087&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Calle&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Telefono&lt;/td&gt;
+&lt;td&gt;Legajo&lt;/td&gt;
+&lt;td&gt;Email&lt;/td&gt;
+&lt;td&gt;Web&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/entidades/1088&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/entidades/1088/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/entidades/1088&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;&lt;a href=&quot;/entidades/new&quot;&gt;New Entidad&lt;/a&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre></div>
+        <div class="backtrace"><pre>./spec/views/entidades/index.html.haml_spec.rb:34:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_111" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_111" class="passed">entidades/edit.html.haml</dt>
+    <script type="text/javascript">makeRed('div_group_111');</script>
+    <script type="text/javascript">makeRed('example_group_111');</script>
+    <script type="text/javascript">moveProgressBar('94.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders the edit entidad form</span>
+      <div class="failure" id="failure_5">
+        <div class="message"><pre>expected following output to contain a &lt;input#entidad_localidad_id name='entidad[localidad_id]'/&gt; tag:
+&lt;form accept-charset=&quot;UTF-8&quot; action=&quot;/entidades/1089&quot; class=&quot;formtastic entidad&quot; id=&quot;edit_entidad_1089&quot; method=&quot;post&quot;&gt;
+&lt;div style=&quot;margin:0;padding:0;display:inline&quot;&gt;
+&lt;input name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;&amp;#10003;&quot;&gt;&lt;input name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;put&quot;&gt;
+&lt;/div&gt;
+&lt;fieldset class=&quot;inputs&quot;&gt;&lt;ol&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_calle_input&quot;&gt;
+&lt;label for=&quot;entidad_calle&quot;&gt;Calle&lt;/label&gt;&lt;input id=&quot;entidad_calle&quot; maxlength=&quot;255&quot; name=&quot;entidad[calle]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;numeric optional&quot; id=&quot;entidad_cuit_input&quot;&gt;
+&lt;label for=&quot;entidad_cuit&quot;&gt;Cuit&lt;/label&gt;&lt;input id=&quot;entidad_cuit&quot; name=&quot;entidad[cuit]&quot; type=&quot;text&quot; value=&quot;1&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_telefono_input&quot;&gt;
+&lt;label for=&quot;entidad_telefono&quot;&gt;Telefono&lt;/label&gt;&lt;input id=&quot;entidad_telefono&quot; maxlength=&quot;255&quot; name=&quot;entidad[telefono]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_legajo_input&quot;&gt;
+&lt;label for=&quot;entidad_legajo&quot;&gt;Legajo&lt;/label&gt;&lt;input id=&quot;entidad_legajo&quot; maxlength=&quot;255&quot; name=&quot;entidad[legajo]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;email optional&quot; id=&quot;entidad_email_input&quot;&gt;
+&lt;label for=&quot;entidad_email&quot;&gt;Email&lt;/label&gt;&lt;input id=&quot;entidad_email&quot; maxlength=&quot;255&quot; name=&quot;entidad[email]&quot; type=&quot;email&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_web_input&quot;&gt;
+&lt;label for=&quot;entidad_web&quot;&gt;Web&lt;/label&gt;&lt;input id=&quot;entidad_web&quot; maxlength=&quot;255&quot; name=&quot;entidad[web]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;select optional&quot; id=&quot;entidad_localidad_input&quot;&gt;
+&lt;label for=&quot;entidad_localidad_id&quot;&gt;Localidad&lt;/label&gt;&lt;select id=&quot;entidad_localidad_id&quot; name=&quot;entidad[localidad_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;&lt;/option&gt;&lt;/select&gt;
+&lt;/li&gt;
+&lt;li class=&quot;string optional&quot; id=&quot;entidad_name_input&quot;&gt;
+&lt;label for=&quot;entidad_name&quot;&gt;Name&lt;/label&gt;&lt;input id=&quot;entidad_name&quot; maxlength=&quot;255&quot; name=&quot;entidad[name]&quot; type=&quot;text&quot; value=&quot;MyString&quot;&gt;
+&lt;/li&gt;
+&lt;li class=&quot;select optional&quot; id=&quot;entidad_tentidad_input&quot;&gt;
+&lt;label for=&quot;entidad_tentidad_id&quot;&gt;Tentidad&lt;/label&gt;&lt;select id=&quot;entidad_tentidad_id&quot; name=&quot;entidad[tentidad_id]&quot;&gt;&lt;option value=&quot;&quot;&gt;&lt;/option&gt;&lt;/select&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/fieldset&gt;
+&lt;fieldset class=&quot;buttons&quot;&gt;&lt;ol&gt;&lt;li class=&quot;commit&quot;&gt;&lt;input class=&quot;update&quot; id=&quot;entidad_submit&quot; name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;Update Entidad&quot;&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;
+&lt;/form&gt;</pre></div>
+        <div class="backtrace"><pre>./spec/views/entidades/edit.html.haml_spec.rb:28:in `block (3 levels) in <top (required)>'
+./spec/views/entidades/edit.html.haml_spec.rb:21:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_112" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_112" class="passed">entidades/show.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('95.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders attributes in &lt;p&gt;</span></dd>
+  </dl>
+</div>
+<div id="div_group_113" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_113" class="passed">pasajeros/new.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('95.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders new pasajero form</span></dd>
+  </dl>
+</div>
+<div id="div_group_114" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_114" class="passed">pasajeros/index.html.haml</dt>
+    <script type="text/javascript">makeRed('div_group_114');</script>
+    <script type="text/javascript">makeRed('example_group_114');</script>
+    <script type="text/javascript">moveProgressBar('96.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders a list of pasajeros</span>
+      <div class="failure" id="failure_6">
+        <div class="message"><pre>expected following output to contain a &lt;tr&gt;td&gt;1&lt;/tr&gt;td&gt; tag:
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/REC-html40/loose.dtd&quot;&gt;
+&lt;html&gt;&lt;body&gt;
+&lt;h1&gt;Listing pasajeros&lt;/h1&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;Doc&lt;/th&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Nacimiento&lt;/th&gt;
+&lt;th&gt;Tdoc&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/pasajeros/1092&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/pasajeros/1092/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/pasajeros/1092&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/pasajeros/1093&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/pasajeros/1093/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/pasajeros/1093&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;&lt;a href=&quot;/pasajeros/new&quot;&gt;New Pasajero&lt;/a&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre></div>
+        <div class="backtrace"><pre>./spec/views/pasajeros/index.html.haml_spec.rb:21:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_115" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_115" class="passed">pasajeros/edit.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('97.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders the edit pasajero form</span></dd>
+  </dl>
+</div>
+<div id="div_group_116" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_116" class="passed">pasajeros/show.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('97.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders attributes in &lt;p&gt;</span></dd>
+  </dl>
+</div>
+<div id="div_group_117" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_117" class="passed">cotizaciones/new.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('98.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders new cotizacion form</span></dd>
+  </dl>
+</div>
+<div id="div_group_118" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_118" class="passed">cotizaciones/index.html.haml</dt>
+    <script type="text/javascript">makeRed('div_group_118');</script>
+    <script type="text/javascript">makeRed('example_group_118');</script>
+    <script type="text/javascript">moveProgressBar('98.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">renders a list of cotizaciones</span>
+      <div class="failure" id="failure_7">
+        <div class="message"><pre>expected following output to contain a &lt;tr&gt;td&gt;1.5&lt;/tr&gt;td&gt; tag:
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/REC-html40/loose.dtd&quot;&gt;
+&lt;html&gt;&lt;body&gt;
+&lt;h1&gt;Listing cotizaciones&lt;/h1&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;Fecha&lt;/th&gt;
+&lt;th&gt;Compra&lt;/th&gt;
+&lt;th&gt;Moneda&lt;/th&gt;
+&lt;th&gt;Venta&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/cotizaciones/1097&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/cotizaciones/1097/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/cotizaciones/1097&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/cotizaciones/1098&quot;&gt;Show&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/cotizaciones/1098/edit&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;/cotizaciones/1098&quot; data-confirm=&quot;Are you sure?&quot; data-method=&quot;delete&quot; rel=&quot;nofollow&quot;&gt;Destroy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br&gt;&lt;a href=&quot;/cotizaciones/new&quot;&gt;New Cotizacion&lt;/a&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre></div>
+        <div class="backtrace"><pre>./spec/views/cotizaciones/index.html.haml_spec.rb:21:in `block (2 levels) in <top (required)>'</pre></div>
+    <pre class="ruby"><code><span class="linenum">27</span>        end
+<span class="linenum">28</span>
+<span class="offending"><span class="linenum">29</span>        raise(RSpec::Expectations::ExpectationNotMetError.new(message))</span>
+<span class="linenum">30</span>      end
+<span class="linenum">31</span>
+<span class="linenum">32</span><span class="comment"># gem install syntax to get syntax highlighting</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_119" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_119" class="passed">cotizaciones/edit.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('99.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders the edit cotizacion form</span></dd>
+  </dl>
+</div>
+<div id="div_group_120" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_120" class="passed">cotizaciones/show.html.haml</dt>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">renders attributes in &lt;p&gt;</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>13.32463932 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "170 examples, 7 failures, 16 pending";</script>
+</div>
+</div>
+</body>
+</html>

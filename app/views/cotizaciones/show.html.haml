@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Fecha:
+  = @cotizacion.fecha
+%p
+  %b Compra:
+  = @cotizacion.compra
+%p
+  %b Moneda:
+  = @cotizacion.moneda_id
+%p
+  %b Venta:
+  = @cotizacion.venta
+
+= link_to 'Edit', edit_cotizacion_path(@cotizacion)
+\|
+= link_to 'Back', cotizaciones_path

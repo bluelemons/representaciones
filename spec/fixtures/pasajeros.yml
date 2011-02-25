@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  doc: 1
+  name: MyString
+  nacimiento: 2011-02-25
+  tdoc_id: 1
+
+two:
+  doc: 1
+  name: MyString
+  nacimiento: 2011-02-25
+  tdoc_id: 1

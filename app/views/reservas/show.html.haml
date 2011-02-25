@@ -1,0 +1,57 @@
+%p#notice= notice
+
+%p
+  %b Fecha:
+  = @reserva.fecha
+%p
+  %b Salida:
+  = @reserva.salida
+%p
+  %b Activa:
+  = @reserva.activa
+%p
+  %b Reservado:
+  = @reserva.reservado
+%p
+  %b Hoteles:
+  = @reserva.hoteles
+%p
+  %b Periodo:
+  = @reserva.periodo
+%p
+  %b Regimen:
+  = @reserva.regimen
+%p
+  %b Obs:
+  = @reserva.obs
+%p
+  %b Thabitacion:
+  = @reserva.thabitacion_id
+%p
+  %b Programa:
+  = @reserva.programa_id
+%p
+  %b Operadora:
+  = @reserva.operadora_id
+%p
+  %b Agencia:
+  = @reserva.agencia_id
+%p
+  %b Operado:
+  = @reserva.operado
+%p
+  %b Iva:
+  = @reserva.iva
+%p
+  %b Impuesto:
+  = @reserva.impuesto
+%p
+  %b Seguro:
+  = @reserva.seguro
+%p
+  %b Monto:
+  = @reserva.monto_id
+
+= link_to 'Edit', edit_reserva_path(@reserva)
+\|
+= link_to 'Back', reservas_path

@@ -10,7 +10,7 @@ tmp/*/*
 Gemfile.lock
 **/*/tmp/*
 *~
-
+\#*#
 ###########################
 # datos
 coverage/*

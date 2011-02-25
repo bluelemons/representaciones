@@ -1,0 +1,25 @@
+%h1 Listing pasajeros
+
+%table
+  %tr
+    %th Doc
+    %th Name
+    %th Nacimiento
+    %th Tdoc
+    %th
+    %th
+    %th
+
+  - @pasajeros.each do |pasajero|
+    %tr
+      %td= pasajero.doc
+      %td= pasajero.name
+      %td= pasajero.nacimiento
+      %td= pasajero.tdoc_id
+      %td= link_to 'Show', pasajero
+      %td= link_to 'Edit', edit_pasajero_path(pasajero)
+      %td= link_to 'Destroy', pasajero, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Pasajero', new_pasajero_path

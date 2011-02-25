@@ -1,0 +1,51 @@
+%h1 Listing reservas
+
+%table
+  %tr
+    %th Fecha
+    %th Salida
+    %th Activa
+    %th Reservado
+    %th Hoteles
+    %th Periodo
+    %th Regimen
+    %th Obs
+    %th Thabitacion
+    %th Programa
+    %th Operadora
+    %th Agencia
+    %th Operado
+    %th Iva
+    %th Impuesto
+    %th Seguro
+    %th Monto
+    %th
+    %th
+    %th
+
+  - @reservas.each do |reserva|
+    %tr
+      %td= reserva.fecha
+      %td= reserva.salida
+      %td= reserva.activa
+      %td= reserva.reservado
+      %td= reserva.hoteles
+      %td= reserva.periodo
+      %td= reserva.regimen
+      %td= reserva.obs
+      %td= reserva.thabitacion_id
+      %td= reserva.programa_id
+      %td= reserva.operadora_id
+      %td= reserva.agencia_id
+      %td= reserva.operado
+      %td= reserva.iva
+      %td= reserva.impuesto
+      %td= reserva.seguro
+      %td= reserva.monto_id
+      %td= link_to 'Show', reserva
+      %td= link_to 'Edit', edit_reserva_path(reserva)
+      %td= link_to 'Destroy', reserva, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Reserva', new_reserva_path

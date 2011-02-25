@@ -37,6 +37,7 @@ gem "rails3-generators"
 # and rake tasks are available in development mode:
 
 group :development, :test do
+  gem "autotest"
   gem "rspec-rails", "~> 2.4"
   gem 'webrat'
   gem 'shoulda-matchers'

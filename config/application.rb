@@ -43,7 +43,7 @@ module Representaciones
     config.generators do |g|
       g.orm             :active_record
       g.template_engine :haml
-      g.test_framework  :rspec, :fixture => true
+      g.test_framework  :rspec, :fixture => true, :webrat => true
       g.form_builder    :formtastic
     end
   end

@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Calle:
+  = @entidad.calle
+%p
+  %b Cuit:
+  = @entidad.cuit
+%p
+  %b Telefono:
+  = @entidad.telefono
+%p
+  %b Legajo:
+  = @entidad.legajo
+%p
+  %b Email:
+  = @entidad.email
+%p
+  %b Web:
+  = @entidad.web
+%p
+  %b Localidad:
+  = @entidad.localidad_id
+%p
+  %b Name:
+  = @entidad.name
+%p
+  %b Tentidad:
+  = @entidad.tentidad_id
+
+= link_to 'Edit', edit_entidad_path(@entidad)
+\|
+= link_to 'Back', entidades_path

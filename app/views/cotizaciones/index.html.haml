@@ -1,0 +1,25 @@
+%h1 Listing cotizaciones
+
+%table
+  %tr
+    %th Fecha
+    %th Compra
+    %th Moneda
+    %th Venta
+    %th
+    %th
+    %th
+
+  - @cotizaciones.each do |cotizacion|
+    %tr
+      %td= cotizacion.fecha
+      %td= cotizacion.compra
+      %td= cotizacion.moneda_id
+      %td= cotizacion.venta
+      %td= link_to 'Show', cotizacion
+      %td= link_to 'Edit', edit_cotizacion_path(cotizacion)
+      %td= link_to 'Destroy', cotizacion, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Cotizacion', new_cotizacion_path

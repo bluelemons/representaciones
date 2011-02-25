@@ -1,0 +1,29 @@
+%h1 Listing movimientos
+
+%table
+  %tr
+    %th Reserva
+    %th Entidad
+    %th Tpago
+    %th Tdeposito
+    %th Fecha
+    %th Monto
+    %th
+    %th
+    %th
+
+  - @movimientos.each do |movimiento|
+    %tr
+      %td= movimiento.reserva_id
+      %td= movimiento.entidad_id
+      %td= movimiento.tpago_id
+      %td= movimiento.tdeposito_id
+      %td= movimiento.fecha
+      %td= movimiento.monto_id
+      %td= link_to 'Show', movimiento
+      %td= link_to 'Edit', edit_movimiento_path(movimiento)
+      %td= link_to 'Destroy', movimiento, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Movimiento', new_movimiento_path

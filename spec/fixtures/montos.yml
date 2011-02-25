@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  valor: 1.5
+  moneda_id: 1
+
+two:
+  valor: 1.5
+  moneda_id: 1

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Doc:
+  = @pasajero.doc
+%p
+  %b Name:
+  = @pasajero.name
+%p
+  %b Nacimiento:
+  = @pasajero.nacimiento
+%p
+  %b Tdoc:
+  = @pasajero.tdoc_id
+
+= link_to 'Edit', edit_pasajero_path(@pasajero)
+\|
+= link_to 'Back', pasajeros_path

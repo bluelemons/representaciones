@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reserva_id: 1
+  entidad_id: 1
+  tpago_id: 1
+  tdeposito_id: 1
+  fecha: 2011-02-25
+  monto_id: 1
+
+two:
+  reserva_id: 1
+  entidad_id: 1
+  tpago_id: 1
+  tdeposito_id: 1
+  fecha: 2011-02-25
+  monto_id: 1
