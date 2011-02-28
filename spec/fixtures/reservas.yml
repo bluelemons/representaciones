@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  fecha: 2011-02-25
-  salida: 2011-02-25
+  fecha: 2011-02-28
+  salida: 2011-02-28
   activa: 1
   reservado: MyString
   hoteles: MyText
@@ -20,8 +20,8 @@ one:
   monto_id: 1
 
 two:
-  fecha: 2011-02-25
-  salida: 2011-02-25
+  fecha: 2011-02-28
+  salida: 2011-02-28
   activa: 1
   reservado: MyString
   hoteles: MyText

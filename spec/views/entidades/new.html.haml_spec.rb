@@ -25,9 +25,9 @@ describe "entidades/new.html.haml" do
       form.should have_selector("input#entidad_legajo", :name => "entidad[legajo]")
       form.should have_selector("input#entidad_email", :name => "entidad[email]")
       form.should have_selector("input#entidad_web", :name => "entidad[web]")
-      form.should have_selector("input#entidad_localidad_id", :name => "entidad[localidad_id]")
+      form.should have_selector("select#entidad_localidad_id", :name => "entidad[localidad_id]")
       form.should have_selector("input#entidad_name", :name => "entidad[name]")
-      form.should have_selector("input#entidad_tentidad_id", :name => "entidad[tentidad_id]")
+      form.should have_selector("select#entidad_tentidad_id", :name => "entidad[tentidad_id]")
     end
   end
 end

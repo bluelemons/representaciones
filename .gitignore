@@ -37,3 +37,4 @@ database.yml
 # log
 # pkg
 
+.#*

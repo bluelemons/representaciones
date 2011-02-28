@@ -3,11 +3,11 @@
 one:
   doc: 1
   name: MyString
-  nacimiento: 2011-02-25
+  nacimiento: 2011-02-28
   tdoc_id: 1
 
 two:
   doc: 1
   name: MyString
-  nacimiento: 2011-02-25
+  nacimiento: 2011-02-28
   tdoc_id: 1

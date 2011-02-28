@@ -6,16 +6,16 @@ rails g scaffold reserva fecha:date salida:date activa:integer           \
   reservado:string hoteles:text periodo:integer regimen:string obs:text	   \
   thabitacion_id:integer programa_id:integer operadora_id:integer	       \
   agencia_id:integer operado:string iva:float impuesto:float seguro:float \
-  monto_id:integer
+  monto_id:integer  --no-migration
 rails g scaffold pasajero doc:integer name:string nacimiento:date	       \
-  tdoc_id:integer
+  tdoc_id:integer --no-migration
 rails g scaffold movimiento reserva_id:integer entidad_id:integer          \
   tpago_id:integer tdeposito_id:integer fecha:date monto_id:integer
 rails g scaffold entidad calle:string cuit:integer telefono:string 	       \
   legajo:string email:string web:string localidad_id:integer name:string  \
-  tentidad_id:integer
+  tentidad_id:integer --no-migration
 rails g scaffold cotizacion fecha:date compra:float moneda_id:integer     \
-  venta:float
+  venta:float --no-migration
 
 # solo el model
 rails g model thabitacion name:string
