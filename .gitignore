@@ -38,3 +38,4 @@ database.yml
 # pkg
 
 .#*
+webrat.log

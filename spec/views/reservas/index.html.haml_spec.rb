@@ -42,20 +42,21 @@ describe "reservas/index.html.haml" do
 
   it "renders a list of reservas" do
     render
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "Reservado".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "MyText".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "Regimen".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "MyText".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "Operado".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.5.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.5.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.5.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => "Reservado".to_s)
+    rendered.should have_selector("tr>td", :content => "MyText".to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => "Regimen".to_s)
+    rendered.should have_selector("tr>td", :content => "MyText".to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => "Operado".to_s)
+    rendered.should have_selector("tr>td", :content => 1.5.to_s)
+    rendered.should have_selector("tr>td", :content => 1.5.to_s)
+    rendered.should have_selector("tr>td", :content => 1.5.to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
   end
 end
+

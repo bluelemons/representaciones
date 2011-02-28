@@ -18,8 +18,9 @@ describe "pasajeros/index.html.haml" do
 
   it "renders a list of pasajeros" do
     render
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => "Name".to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
+    rendered.should have_selector("tr>td", :content => "Name".to_s)
+    rendered.should have_selector("tr>td", :content => 1.to_s)
   end
 end
+

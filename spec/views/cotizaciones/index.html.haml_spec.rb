@@ -18,8 +18,9 @@ describe "cotizaciones/index.html.haml" do
 
   it "renders a list of cotizaciones" do
     render
-    rendered.should have_selector("tr>td", :content => 1.5.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.to_s, :count => 2)
-    rendered.should have_selector("tr>td", :content => 1.5.to_s, :count => 2)
+    rendered.should have_selector("tr>td", :content => "1")
+    rendered.should have_selector("tr>td", :content => "1.5")
+    rendered.should have_selector("tr>td", :content => "1")
   end
 end
+
