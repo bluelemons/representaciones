@@ -5,7 +5,8 @@ class Entidad < ActiveRecord::Base
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
   belongs_to :tentidad
-  has_many :saldos
+  has_many :saldos,:dependent => :destroy
+
   has_many :movimientos
   #validaciones
 
@@ -23,6 +24,15 @@ class Entidad < ActiveRecord::Base
   scope :agencia, where(:tentidad_id=>1)
   scope :operadora, where(:tentidad_id=>2)
   #metodos
+
+  after_save :crear_saldo
+#
+  def crear_saldo
+    Moneda.all.each do |moneda|
+      monto = Monto.create({:valor=>0,:moneda=>moneda})
+      Saldo.create({:entidad_id=>id,:monto => monto})
+    end
+  end
 
   #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
   def deposit(monto)

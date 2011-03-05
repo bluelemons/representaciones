@@ -1,16 +1,19 @@
 $(function() {
   $(".autocomplete").each(function(){
-    var table = $(this).attr("table");
 
-    $("input[id$=" + table + "_id]").keyup(function() {
+    var table = $(this).attr("table");
+    var input_id = "input[id$=" + table + "_id]";
+    var input_name = "input[id$=" + table + "_name]";
+
+    $(input_id).keyup(function() {
 
       $.ajax({
         url: get_url_id(table),
         error: function() {
-          $("input[id$=" + table + "_name]").val("S/V");
+          $(input_name).val("S/V");
         },
         success: function(data) {
-          $("input[id$=" + table + "_name]").val( $(data).find("name").text() );
+          $(input_name).val( $(data).find("name").text() );
         }
       });
     });
@@ -32,11 +35,11 @@ $(function() {
               };
             }).get();
 
-            $( "input[id$=" + table + "_name]" ).autocomplete({
+            $(input_name).autocomplete({
               source: data,
               minLength: 0,
               select: function( event, ui ) {
-                $("input[id$=" + table + "_id]").val(ui.item.id);
+                $(input_id).val(ui.item.id);
               }
             });
           }

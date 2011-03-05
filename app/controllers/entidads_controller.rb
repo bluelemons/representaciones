@@ -50,11 +50,6 @@ class EntidadsController < InheritedResources::Base
     if @entidad.save
       flash[:notice]="Entidad guardada!"
       #creo el saldo para cada tipo de moneda
-      Moneda.all.each do |moneda|
-        monto = Monto.create(:valor=>0,:moneda=>moneda)
-        Saldo.create({:entidad_id=>@entidad.id,:moneda_id=>moneda.id,:monto=>monto})
-      end
-
       if params[:another_one]
         redirect_to :action => 'new', :format =>'js'
       else
