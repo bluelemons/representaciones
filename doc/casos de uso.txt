@@ -4,7 +4,7 @@ Deposito:
   caso normal
     1. La agencia envia datos del deposito o talonario
     2. Se guardan los datos del deposito, moneda, monto y numero de comprobantes
-    3. El sistema aunmenta en saldo de la entidad con el monto correspondiente
+    3. El sistema aumenta el saldo de la entidad con el monto correspondiente
 
 Pago:
   Descripcion:
@@ -32,9 +32,9 @@ Deposito directo:
     2. generar un pago de la operadora
 
 
-Caso general
-  1. la agencia hace un deposito
-  2. se genera un pago de la agencia sobre una reserva
-  3. se genera un depostio en la operadora con el monto del pago
-  4. se genera un pago de la operadora sobre la reserva.
+Ejemplo
+  1. la agencia hace un deposito, aumenta el saldo de esta.
+  2. se genera un pago de la agencia sobre una reserva, disminulle el saldo con el valor del deposito, siempre que la deuda sea mayor igual que este.
+  3. se genera un depostio en la operadora con el monto del pago, aumenta el saldo de la operadora.
+  4. se genera un pago de la operadora sobre la reserva. Disminulle de igual forma que antes el saldo de la operadora.
 
