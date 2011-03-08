@@ -89,6 +89,10 @@ $(function() {
     $.getScript("/reservas/new.js", togrid );
   });
 
+  $('#deposito_new').click(function() {
+    $.getScript("/movimientos/new?t=deposito", togrid );
+  });
+
 
   $('.pagination a').live('click', function () {
     $.getScript(this.href, togrid );
