@@ -1,0 +1,40 @@
+Deposito:
+  descripcion:
+    Se carga dinero en la cuenta de la entidad
+  caso normal
+    1. La agencia envia datos del deposito o talonario
+    2. Se guardan los datos del deposito, moneda, monto y numero de comprobantes
+    3. El sistema aunmenta en saldo de la entidad con el monto correspondiente
+
+Pago:
+  Descripcion:
+    Una entidad liquida parte de su deuda con la reserva.
+  Caso normal.
+    1. Se pide reserva agencia_id, operadora_id, monto y moneda_id
+    2. Se retira el monto del saldo de la entidad.
+      2.1 el monto es menor al pago que se quiere realizar, se avisa y se retorna.
+      2.2 Si el pago es de una agencia se, generar un deposito a la operadora con el monto del pago.
+    3. Se guarda un pago con los datos.
+
+Deposito directo abierto:
+  Descripcion:
+    Una agencia hace un deposito para una operadora pero no se realiza el pago.
+  caso normal
+    1. generar deposito de la agencia
+    2. generar un pago de la agencia
+    3. generar depostio de la operadora
+
+Deposito directo:
+  Descripcion:
+    Una agencia hace un deposito y un pago para una operadora en particular.
+  caso normal
+    1. generar deposito directo abierto
+    2. generar un pago de la operadora
+
+
+Caso general
+  1. la agencia hace un deposito
+  2. se genera un pago de la agencia sobre una reserva
+  3. se genera un depostio en la operadora con el monto del pago
+  4. se genera un pago de la operadora sobre la reserva.
+
