@@ -1,13 +1,13 @@
 class MovimientosController < InheritedResources::Base
   load_and_authorize_resource
-  
+
   respond_to :html, :xml,:js
-  
+
   def depositos
     @movimiento = Movimiento.new
     @movimiento.build_monto
   end
-  
+
   def index
     if params[:search]
       @search = Movimiento.search(params[:search])
@@ -16,23 +16,17 @@ class MovimientosController < InheritedResources::Base
     end
       @movimientos = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js 
+      format.js
       format.html
       format.pdf do
         output = MovimientoReport.new.to_pdf(@search)
-        send_data output, :filename => "index_report.pdf", 
+        send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end
     end
-    
+
   end
   def new
-   # if params[:search]
-   #   @search = Reserva.search(params[:search])
-   # else
-   #   @search = Reserva.baja.search()
-   # end
-   # @reservas = @search.paginate :page => params[:page], :per_page =>10
     @movimiento.build_monto
     if params[:t]=="deposito"
       render "deposito"
@@ -40,10 +34,12 @@ class MovimientosController < InheritedResources::Base
       render "pago"
     end
   end
+
+
   def show
     @movimiento = Movimiento.find(params[:id])
     @movimiento.revert_to(params[:version].to_i) if params[:version]
-    show! 
+    show!
   end
 
   def restore
@@ -51,7 +47,7 @@ class MovimientosController < InheritedResources::Base
     @movimiento.revert_to! params[:version_id]
 	  redirect_to :action => 'show', :id => @pago
   end
-  
+
   def update
     @movimiento = Movimiento.find(params[:id])
     @movimiento.user = current_user
@@ -66,15 +62,17 @@ class MovimientosController < InheritedResources::Base
     @movimiento = Movimiento.new(params[:movimiento])
     @movimiento.user = current_user
     if @movimiento.save
-      if @movimiento.tpago_id==1
-        @movimiento.entidad.deposit(@movimiento.monto)
-      else
-        @movimiento.entidad.withdraw(@movimiento.monto)
-      end
-      redirect_to :action => 'new', :id => @movimiento, :format =>'js'
+      redirect_to :action => 'new', :format =>'js',:t=>"deposito"
+
     else
-      render 'new.js'
+      @movimiento.build_monto
+      if @movimiento.tpago_id==1
+        render "deposito"
+      else
+        render "pago"
+      end
     end
-  end 
-  
+  end
+
 end
+

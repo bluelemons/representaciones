@@ -1,26 +1,28 @@
 .ui-widget
   %h1.ui-widget-header Movimientos
-  
+
   .action_bar
-    = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'} 
-    
+    = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'}
+
   .mytabs
     %ul
       %li
         %a{:href=>"#tabs-movimientos-1"} Movimientos
       %li
-        %a{:href=>"#tabs-movimientos-2"} Formulario
-        
+        %a#deposito_new{:href=>"#tabs-movimientos-2"} Deposito
+      %li
+        %a{:href=>"#tabs-movimientos-3"} Pago
+      %li
+        %a{:href=>"#tabs-movimientos-4"} Directo
+      %li
+        %a{:href=>"#tabs-movimientos-5"} Abierto
+
+
     #tabs-movimientos-1
       = render :partial => "search"
       #movimientos
         =render 'movimientos'
-  
+
     #tabs-movimientos-2
-      .action_bar
-        -if can? :new, Movimiento
-          = link_to 'Deposito y Pago', new_movimiento_path,:remote => true
-          = link_to 'Deposito', {:controller=>'movimientos',:action=>'new',:t=>'deposito'},:remote => true
-          = link_to 'Pago', {:controller=>'movimientos',:action=>'new',:t=>'pago'},:remote => true          
-    
-      #movimiento_form
+      #deposito_form
+

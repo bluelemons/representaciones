@@ -5,7 +5,7 @@ class Entidad < ActiveRecord::Base
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
   belongs_to :tentidad
-  has_many :saldos,:dependent => :destroy
+  has_many :saldos,:dependent => :destroy  #cuando se borra la entidad se borra el saldo.
 
   has_many :movimientos
   #validaciones
@@ -25,7 +25,7 @@ class Entidad < ActiveRecord::Base
   scope :operadora, where(:tentidad_id=>2)
   #metodos
 
-  after_save :crear_saldo
+  after_save :crear_saldo  #cada vez que se crea la entidad tambien se crea el saldo
 #
   def crear_saldo
     Moneda.all.each do |moneda|
@@ -37,24 +37,32 @@ class Entidad < ActiveRecord::Base
   #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
   def deposit(monto)
     if monto.valor >0
-      s = saldos.where(:moneda_id=>monto.moneda_id).limit(1)[0]
+      s = saldo_by_moneda(monto.moneda)
       s.monto.valor += monto.valor
       s.save
     end
-
-    monto.valor
   end
 
-  #retira dinero de la cuenta
   def withdraw(monto)
-    s = saldos.where(:moneda_id=>monto.moneda_id).limit(1)[0]
-    if s.monto.valor >monto.valor
+    s = saldo_by_moneda(monto.moneda)
+    if s.monto.valor > monto.valor
       s.monto.valor -= monto.valor
     else
-      s.monto.valor=0
+      return false
     end
-    s.save
-    s.monto.valor
+    m = s.monto
+    m.save
+    m.valor
+  end
+
+  def saldo_by_moneda(moneda)
+    s = nil
+    saldos.each do |saldo|
+      if saldo.monto.moneda == moneda
+        s = saldo
+      end
+    end
+    s
   end
 end
 
