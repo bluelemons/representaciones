@@ -28,6 +28,9 @@ class Movimiento < ActiveRecord::Base
       entidad.deposit(monto)
     else
       entidad.withdraw(monto)
+      if(entidad.tentidad_id == 1) #si es un pago de una agencia
+        reserva.operadora.deposit(monto) #se aumenta el deposito de la operadora.
+      end
     end
   end
 

@@ -1,5 +1,4 @@
 %h2.ui-widget-header Modificando reserva
-.action_bar
-  = link_to 'Mostrar', reserva_path(@reserva),:remote=>true
+= action_bar(@reserva)
 = render 'form'
 

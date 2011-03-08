@@ -14,56 +14,25 @@
       %a{:href=>"#tabs-reserva-6"} Pagos
 
   #tabs-reserva-1.ui-widget.ui-widget-content
-    .action_bar
-      -if can? :edit, @reserva
-        = link_to 'Editar', edit_reserva_path(@reserva),:remote=>true,:width =>'200px'
-
-    -if @reserva.activa?
-      .green La Reserva está activa
+    =action_bar(@reserva)
+    -if @reserva.liquidada?
+      .green La Reserva está liquidada
     -else
-      .red La Reserva NO está activa
-    %table.wide
-      %tr
-        %td
-          %b Fecha:
-        %td= @reserva.fecha
+      .red La Reserva NO está liquidada
 
-        %td
-          %b Salida:
-        %td= @reserva.salida
-      %tr
-        %td
-          %b Reservado:
-        %td= @reserva.reservado
-      %tr
-        %td
-          %b Hotel:
-        %td= @reserva.hotel
-      %tr
-        %td
-          %b Periodo:
-        %td= @reserva.periodo
-      %tr
-        %td
-          %b Regimen:
-        %td= @reserva.regimen
-      %tr
-        %td
-          %b Tipo de habitacion:
-        %td= @reserva.thabitacion.try(:name)
+    =table_form(@reserva,
+      [{:value =>:fecha},
+      {:value=>:salida},
+      {:value=>:reservado},
+      {:value=>:hotel},
+      {:value=>:periodo},
+      {:name=>"Habitacion",:string=> @reserva.thabitacion.try(:name)},
+      {:name=>"Programa",:string=> @reserva.programa.try(:name)},
+      {:name=>"Agecia",:string=> @reserva.agencia.try(:name)},
+      {:name=>"Operadora",:string=> @reserva.operadora.try(:name)},
+      {:name=>"Observaciones",:value=> :obs},
+      ],:class=>"wide")
 
-    %p
-      %b Programa:
-      =@reserva.programa.try(:name)
-    %p
-      %b Operadora:
-      =@reserva.operadora.try(:name)
-    %p
-      %b Agencia:
-      =@reserva.agencia.try(:name)
-    %p
-      %b Obs:
-      = @reserva.obs
     %p
       = render :partial => "layouts/version",:locals=>{:model=>@reserva,:controller=>:reservas}
 
@@ -76,33 +45,15 @@
 
   #tabs-reserva-4.ui-widget.ui-widget-content
     %p
-      %table
-        %tr
-          %td
-            %b IVA
-          %td=@reserva.iva
-        %tr
-          %td
-            %b Impuesto
-          %td=@reserva.impuesto
-        %tr
-          %td
-            %b Seguro
-          %td=@reserva.seguro
-        %tr
-          %td
-            %b Monto total
-          %td
-            =@reserva.try(:monto).try(:moneda).try(:simbolo)
-            =@reserva.try(:monto).try(:valor)
-        %tr
-          %td
-            %b Deuda de la agencia
-          %td=@reserva.agencia_deuda
-        %tr
-          %td
-            %b Deuda de la operadora
-          %td=@reserva.operadora_deuda
+
+      =table_form(@reserva,
+        [{:value => :iva},
+        {:value => :impuesto},
+        {:value => :seguro},
+        {:name=>"Monto Total",:string => "#{@reserva.moneda} #{@reserva.try(:monto).try(:valor)}"},
+        {:name=>"Deuda de la agencia",:string => "#{@reserva.moneda} #{@reserva.agencia_deuda}"},
+        {:name=>"Deuda de la operadora",:string => "#{@reserva.moneda} #{@reserva.operadora_deuda}"},
+        ],:class=>"wide")
 
   #tabs-reserva-5.ui-widget.ui-widget-content
     =render :partial=>'pasajeros/grilla',:locals=>{:@pasajeros=>@reserva.pasajeros}

@@ -1,6 +1,5 @@
 class Reserva < ActiveRecord::Base
   #clases
-
   acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
@@ -37,37 +36,46 @@ class Reserva < ActiveRecord::Base
   scope :baja, where(:hidden=>0)
 
   #metodos
-  def activa?
+
+  def titular
+    pasajeros.first.try(:name)
+  end
+
+  def moneda
+    try(:monto).try(:moneda).try(:simbolo)
+  end
+
+  def moneda_id
+    try(:monto).try(:moneda_id)
+  end
+  def liquidada?
     (agencia_deuda <= 0)
   end
 
   def agencia_pago
-    array = Array.new(3,0)
+    array = Array.new(4,0)
 
     movimientos.where(:entidad_id=>agencia).pagos.each do |movimiento|
-      array[movimiento.monto.moneda_id-1]+=movimiento.monto.valor
+      array[movimiento.monto.moneda_id]+=movimiento.monto.valor
     end
 
-    array
+    array[moneda_id]
   end
 
   def agencia_deuda
-
-    (monto.valor - agencia_pago[0])
+    monto.valor - agencia_pago
   end
 
   def operadora_pago
-   array = Array.new(3,0)
-   movimientos.where(:entidad_id=>operadora).pagos.each do |movimiento|
-     array[movimiento.monto.moneda_id-1]+=movimiento.monto.valor
-   end
-   array
+    array = Array.new(4,0)
+    movimientos.where(:entidad_id=>operadora).pagos.each do |movimiento|
+      array[movimiento.monto.moneda_id]+=movimiento.monto.valor
+    end
+    array[moneda_id]
   end
 
-
-
   def operadora_deuda
-    monto.valor - operadora_pago[0]
+    monto.valor - operadora_pago
   end
 
   def pasajero #array con los roles del usuario

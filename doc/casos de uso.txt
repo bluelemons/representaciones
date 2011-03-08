@@ -31,6 +31,15 @@ Deposito directo:
     1. generar deposito directo abierto
     2. generar un pago de la operadora
 
+Cambiar Moneda:
+  Descripcion:
+    cambiar parte o la totalidad de la moneda de un saldo en otra moneda.
+  caso normal:
+    1. Se ingresa la entidad
+    2. se elije el saldo a cambiar
+    3. se ingresa cuanto se quiere cambiar y a que moneda
+      3.1 si no esta cargado el valor de cambio para la moneda, se pide cargar.
+    4. se guarda el nuvo saldo.
 
 Ejemplo
   1. la agencia hace un deposito, aumenta el saldo de esta.
