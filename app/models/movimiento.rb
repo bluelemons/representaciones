@@ -12,7 +12,11 @@ class Movimiento < ActiveRecord::Base
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
   #validaciones
   validates :fecha, :presence => true
-  validates :entidad_id, :presence => true
+  validates :entidad, :presence => true
+  validates :monto, :presence => true
+  validates :tpago, :presence => true
+  validate :checksaldo
+
   #validates exista plata en la cuenta cuando es un pago
   #validates que la agencia tenga la reserva y que exista la deuda.
 
@@ -21,6 +25,14 @@ class Movimiento < ActiveRecord::Base
   scope :depositos,where(:tpago_id=>1)
   scope :pagos,where(:tpago_id=>2)
   #metodos
+
+  def checksaldo
+    if ( tpago_id == 2 )
+      unless ( entidad.saldo(monto.moneda) >= monto.valor )
+        errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
+      end
+    end
+  end
 
   after_save :depositar
   def depositar
@@ -33,6 +45,5 @@ class Movimiento < ActiveRecord::Base
       end
     end
   end
-
 end
 
