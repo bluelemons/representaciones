@@ -30,11 +30,13 @@
       {:name=>"Programa",:string=> @reserva.programa.try(:name)},
       {:name=>"Agecia",:string=> @reserva.agencia.try(:name)},
       {:name=>"Operadora",:string=> @reserva.operadora.try(:name)},
-      {:name=>"Observaciones",:value=> :obs},
       ],:class=>"wide")
 
     %p
-      = render :partial => "layouts/version",:locals=>{:model=>@reserva,:controller=>:reservas}
+      %b Observaciones:
+      = @reserva.obs
+    %p
+      = render :partial => "layouts/version",:locals=>{:model=>@reserva}
 
   #tabs-reserva-2.ui-widget.ui-widget-content
     .div{:id=>"entidad_form#{@reserva.agencia.id}"}
@@ -45,7 +47,6 @@
 
   #tabs-reserva-4.ui-widget.ui-widget-content
     %p
-
       =table_form(@reserva,
         [{:value => :iva},
         {:value => :impuesto},

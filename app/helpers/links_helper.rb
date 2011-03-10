@@ -5,6 +5,7 @@ module LinksHelper
       link_to "Nuevo", {:action=>:new,:controller =>model.pluralize.downcase},:remote=>true
     end
   end
+
   def show(model)
     link_to 'Show', model,:remote=>true
   end

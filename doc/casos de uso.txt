@@ -41,9 +41,9 @@ Cambiar Moneda:
       3.1 si no esta cargado el valor de cambio para la moneda, se pide cargar.
     4. se guarda el nuvo saldo.
 
-Ejemplo
+Ejemplo de pago directo.
   1. la agencia hace un deposito, aumenta el saldo de esta.
-  2. se genera un pago de la agencia sobre una reserva, disminulle el saldo con el valor del deposito, siempre que la deuda sea mayor igual que este.
+  2. se genera un pago de la agencia sobre una reserva, disminuye el saldo con el valor del deposito, siempre que la deuda sea mayor igual que este.
   3. se genera un depostio en la operadora con el monto del pago, aumenta el saldo de la operadora.
-  4. se genera un pago de la operadora sobre la reserva. Disminulle de igual forma que antes el saldo de la operadora.
+  4. *** se genera un pago de la operadora sobre la reserva. Disminulle de igual forma que antes el saldo de la operadora.
 
