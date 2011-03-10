@@ -25,3 +25,5 @@ database.yml
 *.tar
 *\(copia\)*
 *.bak
+*#
+webrat.log
