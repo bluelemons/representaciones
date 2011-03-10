@@ -18,7 +18,14 @@ gem 'prawn', :git => "git://github.com/sandal/prawn", :tag => '0.10.2', :submodu
 gem "mysql2"
 gem 'formtastic', '~> 1.2.3'
 
-group :test, :development do
-  gem "rspec-rails", "~> 2.4"
+group :development, :test do
+  gem 'autotest'
+  gem 'rspec-rails', '~> 2.5'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'webrat'
+  gem 'shoulda-matchers'
 end
 

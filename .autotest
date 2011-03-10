@@ -1,0 +1,38 @@
+# ./.autotest
+require 'autotest/timestamp'
+
+Autotest.add_hook(:initialize) { |at|
+  at.add_exception %r{^\.git}  # ignore Version Control System
+  at.add_exception %r{^./tmp}  # ignore temp files, lest autotest will run again, and again...
+  at.add_exception %r{^./log}
+  at.add_exception %r{^./webrat.log}
+    #  at.clear_mappings         # take out the default (test/test*rb)
+  at.add_mapping(%r{^lib/.*\.rb$}) {|f, _|
+    Dir['spec/**/*_spec.rb']
+  }
+  nil
+}
+
+module Autotest::GnomeNotify
+  def self.notify title, msg, img
+    system "notify-send '#{title}' '#{msg}' -i #{img} -t 3000"
+  end
+
+  Autotest.add_hook :ran_command do |at|
+    image_root = "~/.autotest_images"
+    results = [at.results].flatten.join("\n")
+    results.gsub!(/\\e\[\d+m/,'')
+    output = results.slice(/(\d+)\sexamples?,\s(\d+)\sfailures?(,\s(\d+)\spending?|)/)
+    full_sentence, green, failures, garbage, pending = $~.to_a.map(&:to_i)
+    if output
+      if failures > 0
+        notify "FAIL", "#{output}", "face-angry"
+      elsif pending > 0
+        notify "Pending", "#{output}", "face-smile"
+      else
+        notify "Pass", "#{output}", "face-cool"
+      end
+    end
+  end
+end
+
