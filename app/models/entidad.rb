@@ -39,7 +39,7 @@ class Entidad < ActiveRecord::Base
     if monto.valor >0
       s = saldo_by_moneda(monto.moneda)
       s.monto.valor += monto.valor
-      s.save
+      s.monto.valor if s.save
     end
   end
 
@@ -64,5 +64,16 @@ class Entidad < ActiveRecord::Base
     end
     s
   end
+
+  def saldo(moneda)
+    s = nil
+    saldos.each do |saldo|
+      if saldo.monto.moneda == moneda
+        s = saldo
+      end
+    end
+    s.monto.valor
+  end
+
 end
 
