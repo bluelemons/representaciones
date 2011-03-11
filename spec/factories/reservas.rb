@@ -16,6 +16,6 @@ Factory.define :reserva do |f|
   f.iva 1.5
   f.impuesto 1.5
   f.seguro 1.5
-  f.monto nil
+  f.association :monto
 end
 
