@@ -5,8 +5,8 @@ Factory.define :entidad do |f|
   f.cuit 1
   f.telefono "MyString"
   f.legajo "MyString"
-  f.email "MyString"
-  f.web "MyString"
+  f.email "email@email.com"
+  f.web "www.myweb.com"
   f.localidad_id 4
   f.name "MyString"
   f.tentidad_id 1

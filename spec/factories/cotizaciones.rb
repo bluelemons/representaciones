@@ -3,6 +3,7 @@
 Factory.define :cotizacion do |f|
   f.fecha "2011-03-01"
   f.compra 1.5
-  f.moneda nil
+  f.moneda 2
   f.venta 1.5
 end
+
