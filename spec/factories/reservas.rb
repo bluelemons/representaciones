@@ -9,9 +9,9 @@ Factory.define :reserva do |f|
   f.regimen "MyString"
   f.obs "MyText"
   f.association :thabitacion
-  f.programa nil
-  f.association :operadora, :factory => :entidad
-  f.association :agencia, :factory => :entidad
+  f.association :programa
+  f.association :operadora
+  f.association :agencia
   f.operado "MyString"
   f.iva 1.5
   f.impuesto 1.5

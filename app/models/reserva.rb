@@ -29,7 +29,7 @@ class Reserva < ActiveRecord::Base
   #validates :regimen, :presence => true
   #validates :obs, :presence => true
   validates :thabitacion_id, :presence => true
-  #validates :programa_id, :presence => true
+  validates :programa_id, :presence => true
   validates :operadora_id, :presence => true
   validates :agencia_id, :presence => true
   #scopes
