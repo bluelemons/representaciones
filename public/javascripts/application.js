@@ -92,6 +92,9 @@ $(function() {
   $('#deposito_new').click(function() {
     $.getScript("/movimientos/new?t=deposito", togrid );
   });
+  $('#pago_new').click(function() {
+    $.getScript("/movimientos/new?t=pago", togrid );
+  });
 
 
   $('.pagination a').live('click', function () {

@@ -1,3 +1,4 @@
-$('#movimiento_form').html('<%= raw escape_javascript(render("pago")) %>');
-skin(); 
+$('#pago_form').html('<%= raw escape_javascript(render("pago")) %>');
+skin();
 $.get("/reservas.js","qs=true", togrid, 'script');
+
