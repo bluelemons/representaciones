@@ -1,14 +1,14 @@
 Deposito:
-  descripcion:
+  Descripcion:
     Se carga dinero en la cuenta de la entidad
-  caso normal
+  Caso normal
     1. La agencia envia datos del deposito o talonario
     2. Se guardan los datos del deposito, moneda, monto y numero de comprobantes
     3. El sistema aumenta el saldo de la entidad con el monto correspondiente
 
 Pago:
   Descripcion:
-    Una entidad liquida parte de su deuda con la reserva.
+    Una entidad liquida parte de su deuda con la reserva usando saldo.
   Caso normal.
     1. Se pide reserva agencia_id, operadora_id, monto y moneda_id
     2. Se retira el monto del saldo de la entidad.
@@ -16,13 +16,21 @@ Pago:
       2.2 Si el pago es de una agencia se, generar un deposito a la operadora con el monto del pago.
     3. Se guarda un pago con los datos.
 
+Pago directo:
+  Descripcion:
+    Una agencia deposita y paga. Este es el caso que mas ocurre.
+  Caso normal
+    1. se genera el deposito con el monto del pago en la agencia
+    2. se genera un pago sobre la reserva con el monto del pago o con la deuda pendiente si el pago llegase a ser mayor que esta.
+
 Deposito directo abierto:
   Descripcion:
     Una agencia hace un deposito para una operadora pero no se realiza el pago.
   caso normal
     1. generar deposito de la agencia
     2. generar un pago de la agencia
-    3. generar depostio de la operadora
+    # saco este paso porque ya se hace cuando se hace el pago en el punto 2.
+    # 3. generar depostio de la operadora
 
 Deposito directo:
   Descripcion:
@@ -34,14 +42,14 @@ Deposito directo:
 Cambiar Moneda:
   Descripcion:
     cambiar parte o la totalidad de la moneda de un saldo en otra moneda.
-  caso normal:
+  Caso normal:
     1. Se ingresa la entidad
     2. se elije el saldo a cambiar
     3. se ingresa cuanto se quiere cambiar y a que moneda
       3.1 si no esta cargado el valor de cambio para la moneda, se pide cargar.
     4. se guarda el nuvo saldo.
 
-Ejemplo de pago directo.
+Ejemplo de deposito directo.
   1. la agencia hace un deposito, aumenta el saldo de esta.
   2. se genera un pago de la agencia sobre una reserva, disminuye el saldo con el valor del deposito, siempre que la deuda sea mayor igual que este.
   3. se genera un depostio en la operadora con el monto del pago, aumenta el saldo de la operadora.
