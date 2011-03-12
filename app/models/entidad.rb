@@ -37,42 +37,77 @@ class Entidad < ActiveRecord::Base
   #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
   def deposit(monto)
     if monto.valor >0
-      s = saldo_by_moneda(monto.moneda)
-      s.monto.valor += monto.valor
-      s.monto.valor if s.save
+      s = saldos.by_moneda_id(monto.moneda.id).first
+      s.valor += monto.valor
+      s.save
+      s.valor
+    end
+  end
+
+  def saldo_by(operadora,moneda_id)
+    saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(moneda_id).first
+    if saldo
+      saldo.valor
+    else
+      0
+    end
+  end
+
+  def deposit_by(operadora,monto)
+    saldo = saldos.by_moneda_id(monto.moneda_id).by_operadora_id(operadora.id).first
+    if saldo
+      m = saldo.monto
+      m.valor += monto.valor
+      m.save
+    else
+      Saldo.new(:operadora =>operadora,:entidad_id =>id, :monto =>monto).save
+    end
+  end
+
+  def withdraw_by(operadora,monto)
+    saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(monto.moneda_id).first
+    if saldo
+      m = saldo.monto
+      m.valor -= monto.valor
+      m.save
+      m.valor
+    else
+      false
     end
   end
 
   def withdraw(monto)
-    s = saldo_by_moneda(monto.moneda)
-    if s.monto.valor > monto.valor
-      s.monto.valor -= monto.valor
+    s = saldos.by_moneda_id(monto.moneda.id).first
+    if s.valor > monto.valor
+      s.valor -= monto.valor
     else
       return false
     end
-    m = s.monto
+    m = s
     m.save
     m.valor
   end
 
-  def saldo_by_moneda(moneda)
-    s = nil
-    saldos.each do |saldo|
-      if saldo.monto.moneda == moneda
-        s = saldo
-      end
-    end
-    s
-  end
+  #def saldo_by_moneda(moneda)
+  #  s = nil
+  #  saldos.each do |saldo|
+  #    if saldo.monto.moneda == moneda
+  #      s = saldo
+  #    end
+  #  end
+  #  s
+  # saldos.by_moneda(moneda.id).first
+  #end
 
   def saldo(moneda)
-    s = nil
-    saldos.each do |saldo|
-      if saldo.monto.moneda == moneda
-        s = saldo
-      end
-    end
-    s.monto.valor
+  #  s = nil
+  #  saldos.each do |saldo|
+  #    if saldo.monto.moneda == moneda
+  #      s = saldo
+  #    end
+  #  end
+  #  s.monto.valor
+    saldos.by_moneda_id(moneda.id).first.try(:valor)
   end
 
 end

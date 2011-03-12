@@ -1,3 +1,20 @@
+Pago:
+La agencia hace un pago sobre una reserva si hay un sobrante se aumenta el saldo de la agencia.
+
+Pago a la operadora:
+s representaciones liquida su deuda de una reserva con una operadora.
+
+Deposito directo:
+La agencia informa que depositó directamente en la operadora dinero, por una reserva en particular. Se realizan los pagos de ambas entidades, si el deposito es mayor que la deuda, se aumenta el saldo entre agencia y la operadora.
+
+Depostio directo abierto:
+No lo vamos a hacer todavía. pero igual que deposito directo pero no se realiza el pago a la operadora, y se paga otra reserva de otra agencia con esa misma operadora.
+
+La entindad puede realizar pagos haciendo nuevos depositos o utilizando dinero en su saldo.
+
+
+Casos de Uso
+
 Deposito:
   Descripcion:
     Se carga dinero en la cuenta de la entidad
@@ -5,6 +22,7 @@ Deposito:
     1. La agencia envia datos del deposito o talonario
     2. Se guardan los datos del deposito, moneda, monto y numero de comprobantes
     3. El sistema aumenta el saldo de la entidad con el monto correspondiente
+
 
 Pago:
   Descripcion:
@@ -32,7 +50,7 @@ Deposito directo abierto:
     # saco este paso porque ya se hace cuando se hace el pago en el punto 2.
     # 3. generar depostio de la operadora
 
-Deposito directo:
+Deposito directo cerrado:
   Descripcion:
     Una agencia hace un deposito y un pago para una operadora en particular.
   caso normal
