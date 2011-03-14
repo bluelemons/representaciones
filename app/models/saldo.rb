@@ -9,7 +9,8 @@ class Saldo < ActiveRecord::Base
 
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
   #validacioness
-  validates :entidad_id, :presence => true
+  validates :entidad, :presence => true
+  validates :monto, :presence => true
   #scopes
   default_scope select("saldos.*,montos.*").joins("left join montos on (montos.id = monto_id)")
   #ahora podes hacer saldo.moneda o saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
