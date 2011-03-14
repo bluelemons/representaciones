@@ -1,15 +1,22 @@
+###########################
+# logs
 **/*/log/*
-**/*/tmp/*
-*~
-coverage/*
-*.sqlite3
-.bundle
-rdoc/*
-pkg
-log
+log/*.log
+
+###########################
+# temporales
 test/tmp/*
 tmp/*/*
 Gemfile.lock
+**/*/tmp/*
+*~
+\#*#
+###########################
+# datos
+coverage/*
+.bundle
+rdoc/*
+db/*.sqlite3
 
 ###########################
 # Archivos con contraseñas
@@ -17,13 +24,22 @@ database.yml
 .ftpquota
 
 ###########################
-# en general los comprimidos no van y los backup tampoco
-*~
+# backups
 *.rar
 *.zip
 *.tar.gz
 *.tar
 *\(copia\)*
 *.bak
+<<<<<<< HEAD
 *#
+=======
+
+###########################
+# No están bien
+# log
+# pkg
+
+.#*
+>>>>>>> cec116913ea7f780ec4416cb6a018f486c9b93d0
 webrat.log
