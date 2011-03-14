@@ -19,6 +19,7 @@ describe "movimientos/_pago.haml" do
       form.should have_selector("select#movimiento_tdeposito_id", :name => "movimiento[tdeposito_id]")
       form.should have_selector("select#movimiento_monto_attributes_moneda_id", :name => "movimiento[monto_attributes][moneda_id]")
     end
+    rendered.should
   end
 end
 
