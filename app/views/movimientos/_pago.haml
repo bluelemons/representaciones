@@ -9,8 +9,10 @@
     #entidad_form
 
     = f.hidden_field :entidad_id
-    = f.hidden_field :reserva_id
+    = f.text_field :reserva_id
     = f.hidden_field :tpago_id,:value=>2
+
+    #saldos
     %br
     =render :partial =>'montos/form',:locals=>{:f=>f}
 

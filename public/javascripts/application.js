@@ -37,12 +37,12 @@ function togrid(){
       width:700,
       //onSelectRow: function(id){$('#togrid').getCell(id, 'ID');},
       //onSelectRow: function(id){$.getScript('reservas/' + $('#togrid').getCell(id, 'ID') + '.js');},
+      //onSelectRow: getSelectedRow(),
       onSelectRow: function(id){$("input[id$=_reserva_id]").val($('#reserva_grid').getCell(id, 'ID'));},
+
       caption: "Listado"
      });
   //});
-
-
   }
 function skin(){
   $('.action_bar *').button({icons: {primary: "ui-icon-pencil"},text: true});
@@ -62,6 +62,9 @@ function skin(){
 
   //convierte los divisores con .mytabs en tab, sortable permite al usuario ordenarlos.
   $( ".mytabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });;
+
+
+
 
 
 
