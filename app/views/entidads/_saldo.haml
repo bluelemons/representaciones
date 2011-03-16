@@ -1,0 +1,9 @@
+%h4.ui-widget-header Dinero depositado
+%table.half
+  -@entidad.saldos.each do |saldo|
+    %tr
+      %td
+        %b=saldo.try(:moneda).try(:simbolo)
+      %td=saldo.try(:monto).try(:valor)
+      %td=saldo.try(:operadora).try(:name)
+
