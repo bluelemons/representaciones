@@ -1,11 +1,11 @@
-= form_for(@movimiento,:remote=>true) do |f|
+= form_for(@movimiento, :remote => true) do |f|
   .ui-widget.ui-widget-content
     = error_message(@movimiento)
 
-    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
+    = render :partial => "movimientos/comunes", :locals => { :f => f }
 
     #reservas_search.qs_search
-    #reservas{:style=>'height:250px'}
+    #reservas{ :style => 'height:250px' }
     #entidad_form
 
     = f.hidden_field :entidad_id
@@ -14,14 +14,14 @@
 
     #saldos
     %br
-    =render :partial =>'montos/form',:locals=>{:f=>f}
+    = render :partial => 'montos/form', :locals => { :f => f }
 
 
     = f.label :Tipo_de_deposito
     %br
     = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
 
-    = f.text_field :numero,:size=>10
+    = f.text_field :numero, :size => 10
 
     .actions
       = f.submit
