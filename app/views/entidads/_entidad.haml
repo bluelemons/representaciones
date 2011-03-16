@@ -45,7 +45,7 @@
     %br
     = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
   #tabs-entidad-2
-    = render :partial => "saldo"
+    = render :partial => "saldos/saldos",:locals=>{:@saldos=>@entidad.saldos}
   #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.movimientos.where(:entidad_id=>@entidad.id)}

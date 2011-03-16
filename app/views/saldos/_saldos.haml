@@ -1,0 +1,15 @@
+#saldos_grid
+  %table#migrilla.togrid
+    %tr
+      %th ID
+      %th Monto
+      %th Operadora
+
+    -@saldos.each do |saldo|
+      %tr
+        %td=saldo.id
+        %td
+          %b=saldo.try(:moneda).try(:simbolo)
+          =saldo.try(:monto).try(:valor)
+        %td=saldo.try(:operadora).try(:name)
+

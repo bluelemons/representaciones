@@ -1,10 +1,11 @@
 class EntidadsController < InheritedResources::Base
   load_and_authorize_resource
 
-  respond_to :html, :xml,:js
+  respond_to :html, :xml,:js,:json
 
 
   def index
+
     if params[:search]
       @search = Entidad.search(params[:search])
     else

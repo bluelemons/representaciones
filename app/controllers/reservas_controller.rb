@@ -1,14 +1,13 @@
 class ReservasController < InheritedResources::Base
   #load_and_authorize_resource
-
-  respond_to :html, :xml, :js
+  respond_to :html, :xml, :js, :json
   def index
     if params[:search]
       @search = Reserva.search(params[:search])
     else
       @search = Reserva.baja.search()
     end
-      @reservas = @search.paginate :page => params[:page], :per_page =>10
+    @reservas = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
       format.js
       format.html
@@ -18,7 +17,6 @@ class ReservasController < InheritedResources::Base
                          :type => "application/pdf"
       end
     end
-
   end
 
   def new

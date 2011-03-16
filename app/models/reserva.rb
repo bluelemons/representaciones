@@ -33,8 +33,10 @@ class Reserva < ActiveRecord::Base
   validates :operadora_id, :presence => true
   validates :agencia_id, :presence => true
   #scopes
-  scope :baja, where(:hidden=>0)
 
+  default_scope select("reservas.*,montos.moneda_id").joins("left join montos on (montos.id = monto_id)")
+
+  scope :baja, where(:hidden=>0)
   #metodos
 
   def titular
