@@ -33,7 +33,7 @@ class Movimiento < ActiveRecord::Base
 
   def checksaldo
     if ( tpago_id == 2 )
-      unless ( saldo(monto.moneda) >= monto.valor )
+      unless ( saldo.valor >= monto.valor )
         errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
       end
     end

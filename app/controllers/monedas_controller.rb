@@ -1,6 +1,12 @@
 class MonedasController < InheritedResources::Base
-  
+
   respond_to :html, :xml,:js
+
+  protected
+  def begin_of_association_chain
+    @current_user
+  end
+
   def index
     if params[:search]
       @search = Moneda.search(params[:search])
@@ -9,21 +15,21 @@ class MonedasController < InheritedResources::Base
     end
       @monedas = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js 
+      format.js
       format.html
       format.pdf do
         output = MonedaReport.new.to_pdf(@search)
-        send_data output, :filename => "index_report.pdf", 
+        send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end
     end
-    
+
   end
-  
+
   def show
     @moneda = Moneda.find(params[:id])
     @moneda.revert_to(params[:version].to_i) if params[:version]
-    show! 
+    show!
   end
 
   def restore
@@ -31,7 +37,7 @@ class MonedasController < InheritedResources::Base
     @moneda.revert_to! params[:version_id]
 	  redirect_to :action => 'show', :id => @moneda
   end
-  
+
   def update
     @moneda = Moneda.find(params[:id])
     @moneda.user = current_user
@@ -50,6 +56,7 @@ class MonedasController < InheritedResources::Base
     else
       render 'new.js'
     end
-  end 
-  
+  end
+
 end
+
