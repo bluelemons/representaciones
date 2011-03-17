@@ -116,15 +116,16 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.integer  "version"
     t.integer  "entidad_id"
     t.integer  "reserva_id"
-    t.integer  "tpago_id"
     t.integer  "tdeposito_id"
+    t.integer  "saldo_id"
     t.integer  "monto_id"
     t.integer  "numero"
     t.date     "fecha"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",        :default => false
+    t.boolean  "hidden",         :default => false
     t.integer  "user_id"
+    t.integer  "versioned_type"
   end
 
   add_index "movimiento_versions", ["movimiento_id"], :name => "index_movimiento_versions_on_movimiento_id"
@@ -132,8 +133,9 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
   create_table "movimientos", :force => true do |t|
     t.integer  "entidad_id"
     t.integer  "reserva_id"
-    t.integer  "tpago_id"
+    t.integer  "type"
     t.integer  "tdeposito_id"
+    t.integer  "saldo_id"
     t.integer  "monto_id"
     t.integer  "numero"
     t.date     "fecha"
