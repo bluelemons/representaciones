@@ -1,14 +1,14 @@
 .ui-widget
-  %h1.ui-widget-header Entidads
+  %h1.ui-widget-header Agencias
 
   #tabs-entidads.mytabs
     %ul
       %li
-        %a{:href=>"#tabs-entidads-1"} Entidad
+        %a{:href=>"#tabs-entidads-1"} Operadoras
 
-      -if can? :new,Entidad
+      -if can? :new,Agencia
         %li
-          %a#entidad_new{:href=>"#tabs-entidads-2"} Alta
+          %a#operadora_new{:href=>"#tabs-entidads-2"} Alta
 
     #tabs-entidads-2
       #entidad_form

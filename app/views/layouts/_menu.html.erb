@@ -1,4 +1,4 @@
-<%= javascript_include_tag "menu" %>    
+<%= javascript_include_tag "menu" %>
 <%= stylesheet_link_tag "menu" %>
 <div id="menu">
   <div class="left" style="height:40px">
@@ -7,32 +7,33 @@
   <div class="right" style="height:40px">
     <%= image_tag 'blue-lemons.png' %>
   </div>
-  
+
 <ul class="tabs">
    <li class="hasmore"><a href="#"><span>ABM</span></a>
      <ul class="dropdown">
-       <li><%= link_to 'Operadoras','/operadoras' %></li>
-       <li><%= link_to 'Agencias','/agencias' %></li>
+       <li><%= link_to 'Operadoras',operadoras_path %></li>
+       <li><%= link_to 'Agencias',agencias_path %></li>
        <li><%= link_to 'Programas',programas_path %></li>
        <li class="last"><%= link_to 'Pasajeros',pasajeros_path %></li>
      </ul>
-   
+
    <li><%= link_to '<span>Pagos</span>'.html_safe,movimientos_path %></li>
    <li><%= link_to '<span>Reservas</span>'.html_safe,reservas_path %></li>
    <li class="hasmore"><a href="#"><span>Administracion</span></a>
      <ul class="dropdown">
        <li><%= link_to 'Usuarios','/users' %></li>
-       <li><%= link_to 'Roles','/roles' %></li>       
+       <li><%= link_to 'Roles','/roles' %></li>
      </ul>
-	
-	<% if user_signed_in? %>  
-     <li><%= link_to "<span>Cerrar</span>".html_safe, destroy_user_session_path %></li>  
-   <% else %>  
-     <li><%= link_to "<span>Nuevo Usuario</span>".html_safe, new_user_registration_path %></li>     
+
+	<% if user_signed_in? %>
+     <li><%= link_to "<span>Cerrar</span>".html_safe, destroy_user_session_path %></li>
+   <% else %>
+     <li><%= link_to "<span>Nuevo Usuario</span>".html_safe, new_user_registration_path %></li>
      <li><%= link_to "<span>Conectarse</span>".html_safe, new_user_session_path %></li>
-   <% end %> 
-   
+   <% end %>
+
 
 </ul>
 
 </div>
+

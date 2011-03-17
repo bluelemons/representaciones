@@ -30,19 +30,37 @@ function addTab(model,id,name) {
 }
 
 function togrid(){
-  //$(".togrid").each(function(index) { // este each es un fix porque el tabletogrid no funciona con ".togrid" hay que ver
-                                      // si lo arrglan en el futuro.
-    tableToGrid($(".togrid"),{
+  $(".togrid").each(function(index) {
+
+    var i = $(this).attr("id");
+    i=i.substring(0,i.length - 5);//le saco el _grid al nombre de la
+
+    tableToGrid($(this),{
       datatype: "local",
       width:700,
       //onSelectRow: function(id){$('#togrid').getCell(id, 'ID');},
       //onSelectRow: function(id){$.getScript('reservas/' + $('#togrid').getCell(id, 'ID') + '.js');},
       //onSelectRow: getSelectedRow(),
-      onSelectRow: function(id){$("input[id$=_reserva_id]").val($('#reserva_grid').getCell(id, 'ID'));},
+      onSelectRow: function(id){
+        var idx =$('#'+i+'_grid').getCell(id, 'ID');
+        $("input[id$=_"+i+"_id]").val(idx).change();
+        },
 
       caption: "Listado"
      });
+//    var top_rowid = $('#'+i+'_grid tbody:first-child tr:nth-child(2)').attr('id');
+//    $("input[id$=_"+i+"_id]").val(top_rowid);
+
+
+     //var top_rowid = $('#'+i+'_grid').getDataIds()[0];
+
+
   //});
+//    function busca_reserva(idx){
+//      $.getJSON("/reservas/"+idx+".json",function(data){
+//        //alert(data.reserva["id"]);
+//      });
+    });
   }
 function skin(){
   $('.action_bar *').button({icons: {primary: "ui-icon-pencil"},text: true});
@@ -68,8 +86,6 @@ function skin(){
 
 
 
-
-
   togrid();
 }
 
@@ -82,6 +98,11 @@ $(function() {
   $('#entidad_new').click(function() {
     $.getScript("/entidads/new.js", togrid );
   });
+
+  $('#agencia_new').click(function() {
+    $.getScript("/agencias/new.js", togrid );
+  });
+
   $('#programa_new').click(function() {
     $.getScript("/programas/new.js", togrid );
   });
