@@ -4,7 +4,6 @@ class Entidad < ActiveRecord::Base
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
-  belongs_to :tentidad
   has_many :saldos,:dependent => :destroy  #cuando se borra la entidad se borra el saldo.
 
   has_many :movimientos
@@ -21,8 +20,12 @@ class Entidad < ActiveRecord::Base
   validates :tentidad_id, :presence => true
   #scopes
   scope :baja, where(:hidden=>0)
+
+  #lo dejos porque en algun lado debe ser usado todavia
   scope :agencia, where(:tentidad_id=>1)
   scope :operadora, where(:tentidad_id=>2)
+
+
   #metodos
 
   after_save :crear_saldo  #cada vez que se crea la entidad tambien se crea el saldo
