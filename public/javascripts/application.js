@@ -95,10 +95,9 @@ $(function() {
     request.abort();
   });
 
-  $('#entidad_new').click(function() {
+  $('#operadora_new').click(function() {
     $.getScript("/entidads/new.js", togrid );
   });
-
   $('#agencia_new').click(function() {
     $.getScript("/agencias/new.js", togrid );
   });
