@@ -5,9 +5,11 @@ class Movimiento < ActiveRecord::Base
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :reserva
   belongs_to :entidad
+  belongs_to :saldo
   belongs_to :monto
-  belongs_to :tpago       #pago o deposito
-  belongs_to :tdeposito   #por banco o talonario
+  belongs_to :tpago       #pago o deposito, antes del save de pagos y depositos tiene que setear este valor
+
+  belongs_to :tdeposito   #por banco o talonario, solo para depositos
 
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
   #validaciones
@@ -15,6 +17,9 @@ class Movimiento < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto, :presence => true
   validates :tpago, :presence => true
+
+  #solo para pagos
+  validates :saldo, :presence => true
   validate :checksaldo
 
   #validates exista plata en la cuenta cuando es un pago
@@ -28,7 +33,7 @@ class Movimiento < ActiveRecord::Base
 
   def checksaldo
     if ( tpago_id == 2 )
-      unless ( entidad.saldo(monto.moneda) >= monto.valor )
+      unless ( saldo(monto.moneda) >= monto.valor )
         errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
       end
     end
