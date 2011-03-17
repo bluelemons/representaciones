@@ -20,7 +20,7 @@ class Movimiento < ActiveRecord::Base
 
   #solo para pagos
   validates :saldo, :presence => true
-  validate :checksaldo
+#  validate :checksaldo
 
   #validates exista plata en la cuenta cuando es un pago
   #validates que la agencia tenga la reserva y que exista la deuda.
