@@ -17,14 +17,9 @@ class Entidad < ActiveRecord::Base
   #validates :web, :presence => true
   validates :localidad_id, :presence => true
   validates :name, :presence => true
-  validates :tentidad_id, :presence => true
+
   #scopes
   scope :baja, where(:hidden=>0)
-
-  #lo dejos porque en algun lado debe ser usado todavia
-  scope :agencia, where(:tentidad_id=>1)
-  scope :operadora, where(:tentidad_id=>2)
-
 
   #metodos
 
