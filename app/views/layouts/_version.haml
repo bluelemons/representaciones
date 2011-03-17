@@ -12,7 +12,7 @@
           %b=model.try(:user).try(:username)
         %td
           - if model.version > 1
-            = link_to "Version anterior - #{model.version - 1}",{:controller=>model.class.name.pluralize,
+            = link_to "Version anterior - #{model.version - 1}",{:controller=>model.class.name.pluralize.downcase,
               :action=>'show',:id=>model.id,
               :version=>(model.version - 1)},:remote =>true
 
