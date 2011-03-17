@@ -16,8 +16,8 @@
         %td=form.input :salida_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %td=form.input :salida_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
       %tr
-        %td=form.input :agencia_id_eq,:collection => Entidad.agencia.all
-        %td=form.input :operadora_id_eq,:collection => Entidad.operadora.all
+        %td=form.input :agencia_id_eq,:collection => Agencia.all
+        %td=form.input :operadora_id_eq,:collection => Operadora.all
       %tr
         %td=form.input :thabitacion_id_eq,:collection => Thabitacion.all
         %td=form.input :programa_id_eq,:collection => Programa.all
