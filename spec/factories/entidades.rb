@@ -9,14 +9,5 @@ Factory.define :entidad do |f|
   f.web "www.myweb.com"
   f.localidad_id 4
   f.name "MyString"
-  f.tentidad_id 1
-end
-
-Factory.define :agencia, :parent => :entidad do |f|
-  f.tentidad_id 1
-end
-
-Factory.define :operadora, :parent => :entidad do |f|
-  f.tentidad_id 2
 end
 
