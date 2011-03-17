@@ -25,12 +25,12 @@ class VistasGenerator < Rails::Generators::Base
     end
 
     #controlador
-    if !options.controller?
+    if options.controller?
       template "app/controller/controller.rb", "app/controllers/#{plural_name}_controller.rb"
     end
 
     #modelo
-    if !options.model?
+    if options.model?
       template "app/model/model.rb", "app/models/#{file_name}.rb"
     end
 
@@ -73,7 +73,7 @@ class VistasGenerator < Rails::Generators::Base
       template "public/applications.js", "public/javascripts/application.js"
     end
     #routes
-    if !options.route?
+    if options.route?
       route "resources :#{plural_name}"
     end
 
