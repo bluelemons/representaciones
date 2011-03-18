@@ -4,6 +4,7 @@ class Pago < Movimiento
   #Esto es rails 2
   #validates_presence_of :reserva
   validates :reserva, :presence => true
+  validates :saldo, :presence => true
 
   validate :validate_deuda
   validate :saldo_suficiente

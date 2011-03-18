@@ -12,7 +12,7 @@ class Saldo < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto, :presence => true
   #scopes
-  default_scope select("saldos.*,montos.*").joins("left join montos on (montos.id = monto_id)")
+  default_scope select("saldos.*,montos.moneda_id,montos.valor").joins(:monto)
   #ahora podes hacer saldo.moneda o saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
 
   scope :by_moneda_id, lambda { |moneda_id|

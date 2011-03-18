@@ -16,12 +16,9 @@ class Movimiento < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto, :presence => true
 
-  #validates exista plata en la cuenta cuando es un pago
-  #validates que la agencia tenga la reserva y que exista la deuda.
-
   #scopes
   #agrego por default montos, así por ejemplo podes hacer, pago.valor, en lugar de pago.monto.valor
-  default_scope select("movimientos.*,montos.*").joins("left join montos on (montos.id = monto_id)")
+  default_scope select("movimientos.*,montos.moneda_id,montos.valor").joins(:monto)
   scope :baja, where(:hidden=>0)
   #metodos
 
