@@ -1,13 +1,19 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.define :entidad do |f|
-  f.calle "MyString"
-  f.cuit 1
-  f.telefono "MyString"
-  f.legajo "MyString"
-  f.email "email@email.com"
-  f.web "www.myweb.com"
+  f.calle "Aldao 3157"
+  f.cuit 273067515479
+  f.telefono "(0342) 457-71762"
+  f.legajo ""
+  f.email "empresa@email.com"
+  f.web "www.excursiones.com"
   f.localidad_id 4
-  f.name "MyString"
+  f.name "excursiones"
+end
+
+Factory.define :agencia, :parent => :entidad do |f|
+end
+
+Factory.define :operadora, :parent => :entidad do |f|
 end
 
