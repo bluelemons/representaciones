@@ -1,8 +1,8 @@
-= form_for(@movimiento, :remote => true) do |f|
+= form_for(@pago, :remote => true) do |f|
   .ui-widget.ui-widget-content
-    = error_message(@movimiento)
+    = error_message(@pago)
 
-    = render :partial => "movimientos/comunes", :locals => { :f => f }
+    =# render :partial => "movimientos/comunes", :locals => { :f => f }
 
     #reservas_search.qs_search
     #reservas{ :style => 'height:250px' }
@@ -15,7 +15,7 @@
 
     #saldos
     %br
-    = render :partial => 'montos/form', :locals => { :f => f }
+    =# render :partial => 'montos/form', :locals => { :f => f }
 
 
     = f.label :Tipo_de_deposito

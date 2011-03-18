@@ -3,8 +3,9 @@ class PagosController < ApplicationController
   end
 
   def new
-    @movimiento = Movimiento.new
-    @movimiento.build_monto    
+    @pago = Pago.new
+    @pago.build_monto
   end
 
 end
+

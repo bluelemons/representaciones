@@ -1,8 +1,8 @@
-$('#pago_form').html('<%= raw escape_javascript(render("pago")) %>');
+$('#pago_form').html('<%= raw escape_javascript(render("form")) %>');
 skin();
 if($.get("/reservas.js","qs=true", togrid, 'script')){
 
-  $("#movimiento_reserva_id").change(function(){
+  $("#pago_reserva_id").change(function(){
     buscar_saldo();
   });
 
@@ -11,7 +11,7 @@ if($.get("/reservas.js","qs=true", togrid, 'script')){
   });
 
   function buscar_saldo(){
-    var reserva = $("#movimiento_reserva_id").val();
+    var reserva = $("#pago_reserva_id").val();
     var entidad = $("#search_operadora_id_or_agencia_id_eq").val();
     var moneda_id;
 
