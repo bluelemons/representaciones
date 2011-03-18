@@ -35,10 +35,10 @@ class Entidad < ActiveRecord::Base
   #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
   def deposit(monto)
     if monto.valor >0
-      s = saldos.by_moneda_id(monto.moneda.id).first
-      s.valor += monto.valor
-      s.save
-      s.valor
+      m = saldos.by_moneda_id(monto.moneda.id).first.monto
+      m.valor += monto.valor
+      m.save
+      m.valor
     end
   end
 
