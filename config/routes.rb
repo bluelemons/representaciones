@@ -13,11 +13,9 @@ Representaciones::Application.routes.draw do
 
   resources :tdocs
 
-  resources :movimientos do
-    member do
-      get :depositos
-    end
-  end
+  resources :movimientos
+  resources :depositos
+  resources :pagos
 
   resources :pasajeros
   match 'pasajeros_dni/:doc' => 'pasajeros#show' #Busca el pasajoer por DNI en /pasajeros_din/:doc

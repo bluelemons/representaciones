@@ -1,17 +1,18 @@
 = form_for(@deposito,:remote=>true) do |f|
+  =flash[:notice]
   .ui-widget.ui-widget-content
     = error_message(@deposito)
 
-    =# render :partial => "movimientos/comunes",:locals=>{:f=>f}
+    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
     = f.collection_select(:entidad_id, Entidad.all, :id, :name, :prompt => false)
     %table
       %tr
-        =#render :partial =>'montos/form',:locals=>{:f=>f}
+        =render :partial =>'montos/form',:locals=>{:f=>f}
 
 
     = f.label :Tipo_de_deposito
     %br
-    = collection_select(:movimiento, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
+    = collection_select(:deposito, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
 
     = f.text_field :numero,:size=>10
 
