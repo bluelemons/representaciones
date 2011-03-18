@@ -11,9 +11,3 @@ Factory.define :entidad do |f|
   f.name "excursiones"
 end
 
-Factory.define :agencia, :parent => :entidad do |f|
-end
-
-Factory.define :operadora, :parent => :entidad do |f|
-end
-
