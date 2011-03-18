@@ -10,19 +10,19 @@
 
     - total = Array.new(3,0)
 
-    - for movimiento in @movimientos   
+    - for movimiento in @movimientos
       %tr
-        
-        %td= movimiento.try(:fecha) 
+
+        %td= movimiento.try(:fecha)
         %td= movimiento.try(:reserva_id)
         %td= movimiento.try(:reserva).try(:pasajeros).try(:first).try(:name)
-        %td= movimiento.try(:tpago).try(:name)
+        %td= movimiento.type
         %td
-          =movimiento.try(:entidad).try(:tentidad).try(:name)
+          =movimiento.try(:entidad).type
           =movimiento.try(:entidad).try(:name)
         %td
           = movimiento.try(:monto).try(:moneda).try(:simbolo)
-          = movimiento.try(:monto).try(:valor)  
+          = movimiento.try(:monto).try(:valor)
           -if movimiento.try(:monto).try(:moneda_id)
             -total[movimiento.try(:monto).try(:moneda_id)-1] += movimiento.try(:monto).try(:valor)
   %table.wide

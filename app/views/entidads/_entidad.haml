@@ -1,7 +1,7 @@
 .mytabs
   %ul
     %li
-      %a{:href=>"#tabs-entidad-1"}=@entidad.try(:tentidad).try(:name)
+      %a{:href=>"#tabs-entidad-1"}=@entidad.type
     %li
       %a{:href=>"#tabs-entidad-2"} Saldo
     %li
@@ -9,7 +9,7 @@
 
   #tabs-entidad-1.ui-widget.ui-widget-content
     %h3.ui-widget-header
-      =@entidad.try(:tentidad).try(:name)
+      =@entidad.type
 
     .action_bar
       -if can? :edit, @entidad
