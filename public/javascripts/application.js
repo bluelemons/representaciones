@@ -113,10 +113,10 @@ $(function() {
   });
 
   $('#deposito_new').click(function() {
-    $.getScript("/movimientos/new?t=deposito", togrid );
+    $.getScript("/depositos/new.js", togrid );
   });
   $('#pago_new').click(function() {
-    $.getScript("/movimientos/new?t=pago", togrid );
+    $.getScript("/pagos/new.js", togrid );
   });
 
 
