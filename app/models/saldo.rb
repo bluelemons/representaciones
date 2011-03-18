@@ -12,8 +12,10 @@ class Saldo < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto, :presence => true
   #scopes
+  #Permie hacer
+  #     saldo.moneda
+  #     saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
   default_scope select("saldos.*,montos.moneda_id,montos.valor").joins(:monto)
-  #ahora podes hacer saldo.moneda o saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
 
   scope :by_moneda_id, lambda { |moneda_id|
     where("montos.moneda_id =?", moneda_id)
