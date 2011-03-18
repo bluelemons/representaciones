@@ -10,9 +10,9 @@ class Reserva < ActiveRecord::Base
   belongs_to :monto
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
 
-  belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id"
-  belongs_to :agencia, :class_name => "Entidad",:foreign_key=>'agencia_id'
-  has_many :movimientos
+  belongs_to :operadora
+  belongs_to :agencia
+  has_many :pagos
   has_and_belongs_to_many :pasajeros
 
   #accepts_nested_attributes_for :agencia, :reject_if => lambda { |a| a[:name].blank? }
@@ -57,8 +57,8 @@ class Reserva < ActiveRecord::Base
   def agencia_pago
     array = Array.new(4,0)
 
-    movimientos.where(:entidad_id=>agencia).pagos.each do |movimiento|
-      array[movimiento.monto.moneda_id]+=movimiento.monto.valor
+    pagos.where(:entidad_id=>agencia).each do |pago|
+      array[pago.moneda_id]+=pago.valor
     end
 
     array[moneda_id]
@@ -70,8 +70,8 @@ class Reserva < ActiveRecord::Base
 
   def operadora_pago
     array = Array.new(4,0)
-    movimientos.where(:entidad_id=>operadora).pagos.each do |movimiento|
-      array[movimiento.monto.moneda_id]+=movimiento.monto.valor
+    pagos.where(:entidad_id=>operadora).each do |pago|
+      array[pago.moneda_id]+=pago.valor
     end
     array[moneda_id]
   end

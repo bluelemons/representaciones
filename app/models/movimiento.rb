@@ -7,7 +7,6 @@ class Movimiento < ActiveRecord::Base
   belongs_to :entidad
   belongs_to :saldo
   belongs_to :monto
-#  belongs_to :tpago       #pago o deposito, antes del save de pagos y depositos tiene que setear este valor
 
   belongs_to :tdeposito   #por banco o talonario, solo para depositos
 
@@ -21,29 +20,11 @@ class Movimiento < ActiveRecord::Base
   #validates que la agencia tenga la reserva y que exista la deuda.
 
   #scopes
+  #agrego por default montos, así por ejemplo podes hacer, pago.valor, en lugar de pago.monto.valor
+  default_scope select("movimientos.*,montos.*").joins("left join montos on (montos.id = monto_id)")
   scope :baja, where(:hidden=>0)
-  scope :depositos,where(:tpago_id=>1)
-  scope :pagos,where(:tpago_id=>2)
   #metodos
 
-  def checksaldo
-    if ( tpago_id == 2 )
-      unless ( saldo(monto.moneda) >= monto.valor )
-        errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
-      end
-    end
-  end
 
-#  after_save :depositar
-  def depositar
-    if tpago_id==1
-      entidad.deposit(monto)
-    else
-      entidad.withdraw(monto)
-      if(entidad.tentidad_id == 1) #si es un pago de una agencia
-        reserva.operadora.deposit(monto) #se aumenta el deposito de la operadora.
-      end
-    end
-  end
 end
 
