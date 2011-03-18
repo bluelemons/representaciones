@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Deposito do
-  it { should should validate_presence_of(:tdeposito) }
-  it { should should validate_presence_of(:numero) }
+  it { should validate_presence_of(:tdeposito) }
+  it { should validate_presence_of(:numero) }
   
   describe '#save' do
     it 'aumenta el saldo de la entidad' do
