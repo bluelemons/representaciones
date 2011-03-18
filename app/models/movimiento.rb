@@ -7,7 +7,7 @@ class Movimiento < ActiveRecord::Base
   belongs_to :entidad
   belongs_to :saldo
   belongs_to :monto
-  belongs_to :tpago       #pago o deposito, antes del save de pagos y depositos tiene que setear este valor
+#  belongs_to :tpago       #pago o deposito, antes del save de pagos y depositos tiene que setear este valor
 
   belongs_to :tdeposito   #por banco o talonario, solo para depositos
 
@@ -16,11 +16,6 @@ class Movimiento < ActiveRecord::Base
   validates :fecha, :presence => true
   validates :entidad, :presence => true
   validates :monto, :presence => true
-  validates :tpago, :presence => true
-
-  #solo para pagos
-  validates :saldo, :presence => true
-#  validate :checksaldo
 
   #validates exista plata en la cuenta cuando es un pago
   #validates que la agencia tenga la reserva y que exista la deuda.
@@ -39,7 +34,7 @@ class Movimiento < ActiveRecord::Base
     end
   end
 
-  after_save :depositar
+#  after_save :depositar
   def depositar
     if tpago_id==1
       entidad.deposit(monto)
