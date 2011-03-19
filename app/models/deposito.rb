@@ -5,6 +5,6 @@ class Deposito < Movimiento
   # deposito fue registrado.
   after_save :depositar
   def depositar
-    entidad.deposit(monto)
+    self.entidad.deposit(monto)
   end
 end
