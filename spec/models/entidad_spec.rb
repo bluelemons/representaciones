@@ -2,7 +2,6 @@
 require 'spec_helper'
 
 describe Entidad do
-  it { should belong_to(:localidad) }
   it { should have_many(:saldos) }
   it { should have_many(:movimientos) }
 

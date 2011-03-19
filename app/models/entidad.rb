@@ -15,7 +15,7 @@ class Entidad < ActiveRecord::Base
   #validates :legajo, :presence => true
   #validates :email, :presence => true
   #validates :web, :presence => true
-  validates :localidad_id, :presence => true
+  #validates :localidad_id, :presence => true
   validates :name, :presence => true
 
   #scopes
