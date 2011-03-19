@@ -118,6 +118,10 @@ $(function() {
   $('#pago_new').click(function() {
     $.getScript("/pagos/new.js", togrid );
   });
+  $('#directo_new').click(function() {
+    $.getScript("/directos/new.js", togrid );
+  });
+
 
 
   $('.pagination a').live('click', function () {
