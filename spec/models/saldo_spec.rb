@@ -16,5 +16,12 @@ describe Saldo do
     end
   end
 
+  describe '#incrementar(valor)' do
+    it 'aumenta el saldo' do
+      monto = Factory(:monto, :valor => 5000)
+      saldo = Factory(:saldo, :monto => monto)
+      saldo.incrementar(500).should be_true
+      monto.valor.should == 5500
+    end
+  end
 end
-

@@ -38,7 +38,7 @@ class Entidad < ActiveRecord::Base
     # if monto.valor > 0 ## No chequeo porque esto depende de la validación de monto.
     moneda = monto.moneda
     saldo = Saldo.find_or_create_by_entidad_id(self.id, :monto => {:moneda => moneda})
-    saldo + monto.valor
+    saldo.incrementar(monto.valor)
   end
 
   def saldo_by(operadora, moneda_id)
