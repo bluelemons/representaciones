@@ -1,14 +1,14 @@
+# -*- coding: utf-8 -*-
 class Entidad < ActiveRecord::Base
   #clases
   acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
-  has_many :saldos,:dependent => :destroy  #cuando se borra la entidad se borra el saldo.
-
+  has_many :saldos, :dependent => :destroy  #cuando se borra la entidad se borra el saldo.
   has_many :movimientos
-  #validaciones
 
+  #validaciones
   #validates :calle, :presence => true
   #validates :cuit, :presence => true
   #validates :telefono, :presence => true
@@ -22,9 +22,8 @@ class Entidad < ActiveRecord::Base
   scope :baja, where(:hidden=>0)
 
   #metodos
-
-  after_save :crear_saldo  #cada vez que se crea la entidad tambien se crea el saldo
-#
+  #cada vez que se crea la entidad tambien se crea el saldo
+  after_save :crear_saldo
   def crear_saldo
     Moneda.all.each do |moneda|
       monto = Monto.create({:valor=>0,:moneda=>moneda})
@@ -32,17 +31,17 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
+  # Incrementa el saldo de la entidad segun un monto.
+  # Si el saldo no existe es creado.
+  # TODO (incorporar el caso particular deposit_by )
   def deposit(monto)
-    if monto.valor >0
-      m = saldos.by_moneda_id(monto.moneda.id).first.monto
-      m.valor += monto.valor
-      m.save
-      m.valor
-    end
+    # if monto.valor > 0 ## No chequeo porque esto depende de la validación de monto.
+    moneda = monto.moneda
+    saldo = Saldo.find_or_create_by_entidad_id(self.id, :monto => {:moneda => moneda})
+    saldo + monto.valor
   end
 
-  def saldo_by(operadora,moneda_id)
+  def saldo_by(operadora, moneda_id)
     saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(moneda_id).first
     if saldo
       saldo.valor

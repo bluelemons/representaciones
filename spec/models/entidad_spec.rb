@@ -1,8 +1,8 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Entidad do
   it { should belong_to(:localidad) }
-  it { should belong_to(:tentidad) }
   it { should have_many(:saldos) }
   it { should have_many(:movimientos) }
 
@@ -14,7 +14,7 @@ describe Entidad do
     end
   end
 
-  describe '#saldo_by(entidad,moneda_id)' do
+  describe '#saldo_by(entidad, moneda_id)' do
     it 'devuelve 0 si no hay saldo entre las entidades' do
       agencia = Factory(:agencia)
       operadora = Factory(:operadora)
@@ -28,7 +28,6 @@ describe Entidad do
       saldo.save.should == true
       agencia.saldo_by(operadora,1).should == 5000
     end
-
   end
 
   describe '#deposit_by(entidad,monto)' do
@@ -53,7 +52,6 @@ describe Entidad do
     end
   end
 
-
   describe '#saldo (moneda)' do
     it 'returns saldo en la moneda indicada, cero cuando se crea' do
       entidad = Factory(:entidad)
@@ -62,16 +60,15 @@ describe Entidad do
     end
   end
 
-  describe '#deposit (monto)' do
+  describe '#deposit (monto)' do # se debería crear un mock de saldo
     it 'agrega el monto al saldo correspondiente de la entidad' do
+      pending
+    end
+    it 'return true if ok' do
       entidad = Factory(:entidad)
       monto = Factory(:monto, :valor => 1000)
       saldo_anterior = entidad.saldo(monto.moneda)
-      saldo_anterior.should == 0
-      saldo_despues = saldo_anterior + monto.valor
-      saldo_despues.should == 1000
-      entidad.deposit(monto).should == saldo_despues
-      entidad.saldo(monto.moneda).should == saldo_despues
+      entidad.deposit(monto).should be_true
     end
   end
 
