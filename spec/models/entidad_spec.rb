@@ -62,7 +62,7 @@ describe Entidad do
 
   describe '#deposit (monto)' do # se debería crear un mock de saldo
     it 'agrega el monto al saldo correspondiente de la entidad' do
-      pending
+      pending('no se bien como testearlo')
     end
     it 'return true if ok' do
       entidad = Factory(:entidad)
