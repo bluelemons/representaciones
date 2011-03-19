@@ -175,16 +175,8 @@
 #    }
 #  )
 
-['Depósito', 'Pago'].each do |tipo|
-  Tpago.find_or_create_by_name tipo
-end
-
 ['Recibo', 'Banco'].each do |tipo|
   Tdeposito.find_or_create_by_name tipo
-end
-
-['Agencia', 'Operadora'].each do |tipo|
-  Tentidad.find_or_create_by_name tipo
 end
 
 [{ :name =>'Pesos', :simbolo =>'$'
