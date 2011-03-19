@@ -9,7 +9,7 @@ class OperadorasController < InheritedResources::Base
     end
       @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js
+      format.js{render "entidads/index"}
       format.html
       format.pdf do
         output = OperadoraReport.new.to_pdf(@search)

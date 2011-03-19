@@ -7,9 +7,9 @@ class AgenciasController < InheritedResources::Base
     else
       @search = Agencia.baja.search()
     end
-      @entidads = @search.paginate :page => params[:page], :per_page =>10
+    @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js
+      format.js{render "entidads/index"}
       format.html
       format.pdf do
         output = AgenciaReport.new.to_pdf(@search)
