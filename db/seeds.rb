@@ -134,26 +134,26 @@
 #  :name =>"Doble"
 #  }])
 #
-#puts Role.create({
-#  :name=>'Admin',
-#  :desc=>'Es el Rol de administrador'
-#})
-#
-#puts User.create([{
-#  :username=>'olvap',
-#  :email=>'youre-mail@mail.com',
-#  :password_confirmation=>'admin6',
-#  :password=>'admin6',
-#  :role_ids=>[1]
-#  },{
-#  :username=>'eloy',
-#  :email=>'eloy-mail@mail.com',
-#  :password_confirmation=>'admin8',
-#  :password=>'admin8',
-#  :role_ids=>[1]
-#  }
-#])
-#
+puts Role.create({
+  :name=>'Admin',
+  :desc=>'Es el Rol de administrador'
+})
+
+puts User.create([{
+  :username=>'olvap',
+  :email=>'youre-mail@mail.com',
+  :password_confirmation=>'admin6',
+  :password=>'admin6',
+  :role_ids=>[1]
+  },{
+  :username=>'eloy',
+  :email=>'eloy-mail@mail.com',
+  :password_confirmation=>'admin8',
+  :password=>'admin8',
+  :role_ids=>[1]
+  }
+])
+
 #puts Reserva.create(
 #  :hotel =>'Central Park',
 #  :reservado =>'Pablo',
