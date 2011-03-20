@@ -2,6 +2,6 @@
 
 Factory.define :monto do |f|
   f.valor 5000
-  f.moneda_id 1 # usado en entidad
+  f.moneda_id 1
 end
 

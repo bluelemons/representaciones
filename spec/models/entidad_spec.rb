@@ -10,7 +10,7 @@ describe Entidad do
     it 'create a saldo for each moneda' do
       entidad = Factory.build(:entidad)
       entidad.save.should == true
-      Saldo.where(:entidad_id => entidad.id).all.should have(3).items
+      Saldo.where(:entidad_id => entidad.id).all.should have(Moneda.all.count).items
     end
   end
 
