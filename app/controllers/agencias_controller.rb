@@ -29,14 +29,14 @@ class AgenciasController < InheritedResources::Base
   def restore
     @agencia = Agencia.find(params[:id])
     @agencia.revert_to! params[:version_id]
-	  redirect_to :action => 'entidads/show', :id => @agencia
+	  redirect_to :action => 'show', :id => @agencia
   end
 
   def update
     @agencia = Agencia.find(params[:id])
     @agencia.user = current_user
     if @agencia.update_attributes(params[:agencia])
-      redirect_to :action => 'entidads/show', :id => @agencia, :format =>'js'
+      redirect_to :action => 'show', :id => @agencia, :format =>'js'
     else
       render 'entidads/edit.js'
     end
@@ -46,6 +46,7 @@ class AgenciasController < InheritedResources::Base
     @entidad = Agencia.new
     render "entidads/new.js"
   end
+
 
   def create
     @agencia = Agencia.new(params[:agencia])

@@ -11,7 +11,7 @@ class Pago < Movimiento
 
   after_save :depositar
   def depositar
-    entidad.withdraw(monto)
+    entidad.withdraw(monto,saldo)
     if(entidad.type == "Agencia") #si es un pago de una agencia
       reserva.operadora.deposit(monto) #se aumenta el deposito de la operadora.
     end
@@ -24,7 +24,7 @@ class Pago < Movimiento
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    unless ( entidad.saldo(monto.moneda) >= monto.valor )
+    unless ( saldo.monto.valor >= monto.valor )
       errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
     end
   end

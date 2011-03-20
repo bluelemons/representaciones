@@ -33,16 +33,24 @@ class Entidad < ActiveRecord::Base
 
   # Incrementa el saldo de la entidad segun un monto.
   # Si el saldo no existe es creado.
-  # TODO (incorporar el caso particular deposit_by )
+
   def deposit(monto)
     # if monto.valor > 0 ## No chequeo porque esto depende de la validación de monto.
     moneda = monto.moneda
-    saldo = Saldo.find_or_create_by_entidad_id(self.id, :monto => {:moneda => moneda})
-    saldo.incrementar(monto.valor)
+    s = get_saldo(moneda.id)
+    s.incrementar(monto.valor)
+  end
+
+  def get_saldo_by(operadora,moneda_id)
+    saldos.by_operadora_id(operadora.id).by_moneda_id(moneda_id).first
+  end
+
+  def get_saldo(moneda_id)
+    saldos.by_moneda_id(moneda_id).where("operadora_id is null").first
   end
 
   def saldo_by(operadora, moneda_id)
-    saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(moneda_id).first
+    saldo = get_saldo_by(operadora, moneda_id)
     if saldo
       saldo.valor
     else
@@ -50,8 +58,8 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  def deposit_by(operadora,monto)
-    saldo = saldos.by_moneda_id(monto.moneda_id).by_operadora_id(operadora.id).first
+  def deposit_by(operadora, monto)
+    saldo = get_saldo_by(operadora, monto.moneda_id)
     if saldo
       m = saldo.monto
       m.valor += monto.valor
@@ -62,7 +70,7 @@ class Entidad < ActiveRecord::Base
   end
 
   def withdraw_by(operadora,monto)
-    saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(monto.moneda_id).first
+    saldo = get_saldo_by(operadora, monto.moneda_id)
     if saldo
       m = saldo.monto
       m.valor -= monto.valor
@@ -73,14 +81,14 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  def withdraw(monto)
-    s = saldos.by_moneda_id(monto.moneda.id).first
-    if s.valor > monto.valor
-      s.valor -= monto.valor
+  def withdraw(monto,saldo)
+    s = saldo
+    m = s.monto
+    if s.monto.valor >= monto.valor
+      m.valor -= monto.valor
     else
       return false
     end
-    m = s
     m.save
     m.valor
   end
@@ -104,7 +112,7 @@ class Entidad < ActiveRecord::Base
   #    end
   #  end
   #  s.monto.valor
-    saldos.by_moneda_id(moneda.id).first.try(:valor)
+    get_saldo(moneda.id).try(:valor)
   end
 
 end

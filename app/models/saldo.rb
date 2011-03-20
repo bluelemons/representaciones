@@ -27,8 +27,9 @@ class Saldo < ActiveRecord::Base
   #metodos
   # Incrementa el saldo en un valor
   def incrementar(val)
-    self.monto.valor += val
-    self.monto.save!
+    m = monto
+    m.valor += val
+    m.save!
   end
 end
 

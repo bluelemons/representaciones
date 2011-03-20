@@ -1,11 +1,12 @@
 class Directo < Movimiento
   validates_presence_of :tdeposito, :numero
 
-  # deposita el dinero en el saldo correspondiente una vez que el
-  # deposito fue registrado.
-  after_save :depositar
-  def depositar()
-    entidad.deposit_by(operadora,monto)
+  #genera el pago a la entidad
+  def pago(entidad,saldo)
+    pago = Pago.new(:fecha=>fecha,:entidad=>entidad,:monto=>monto,:reserva=>reserva,:saldo=>saldo)
+    pago.save
+    pago
   end
+
 end
 

@@ -29,14 +29,14 @@ class OperadorasController < InheritedResources::Base
   def restore
     @operadora = Operadora.find(params[:id])
     @operadora.revert_to! params[:version_id]
-	  redirect_to :action => 'entidads/show', :id => @operadora
+	  redirect_to :action => 'show', :id => @operadora
   end
 
   def update
     @operadora = Operadora.find(params[:id])
     @operadora.user = current_user
     if @operadora.update_attributes(params[:agencia])
-      redirect_to :action => 'entidads/show', :id => @operadora, :format =>'js'
+      redirect_to :action => 'show', :id => @operadora, :format =>'js'
     else
       render 'entidads/edit.js'
     end

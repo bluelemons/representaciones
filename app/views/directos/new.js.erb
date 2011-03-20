@@ -1,25 +1,25 @@
+$("#pago_form").html("");
 $('#directo_form').html('<%= raw escape_javascript(render("form")) %>');
 skin();
-if($.get("/reservas.js","qs=true", togrid, 'script')){
 
-  $("#pago_reserva_id").change(function(){
+  //cuando cambia el select de agencia
+  $("#search_agencia_id_eq").change(function(){
+    // pone el valor del select en el campo de agencia_id
+    $("#directo_entidad_id").val($("#search_agencia_id_eq").val());
     buscar_saldo();
-  });
-
-  $("#search_operadora_id_or_agencia_id_eq").change(function(){
-    buscar_saldo();
-  });
-
-  function buscar_saldo(){
-    var reserva = $("#pago_reserva_id").val();
-    var entidad = $("#search_operadora_id_or_agencia_id_eq").val();
-    var moneda_id;
-
-    $.getJSON("/reservas/"+reserva+".json",function(data){
-      moneda_id = data["reserva"]["moneda_id"];
-
-      $.get("/entidads/"+entidad+"/saldos.js","moneda_id="+moneda_id, togrid, 'script')
     });
+  //cuando cambia el select de operadora
+  $("#search_operadora_id_eq").change(function(){
+    $("#operadora_id").val($("#search_operadora_id_eq").val());
+    buscar_saldo();
+  });
+
+  //busca la lista de reservas con los datos ingresados
+  function buscar_saldo(){
+    agencia = $('#search_agencia_id_eq').val();
+    operadora = $('#search_operadora_id_eq').val();
+    $.get("/reservas.js","search[agencia_id_eq="+agencia+"]&search[operadora_id_eq="+operadora+"]", togrid, 'script');
+    return false;
+
   }
-}
 

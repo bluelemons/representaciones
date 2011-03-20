@@ -1,4 +1,4 @@
-%h2.ui-widget-header="Modificando #{@entidad.try(:tentidad).try(:name)}"
+%h2.ui-widget-header="Modificando #{@entidad.type}"
 .action_bar
   = link_to 'Mostrar', entidad_path(@entidad),:remote=>true
 = render 'form'

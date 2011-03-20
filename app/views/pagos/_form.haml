@@ -4,13 +4,18 @@
 
     = render :partial => "movimientos/comunes", :locals => { :f => f }
 
-    #reservas_search.qs_search
-    #reservas{ :style => 'height:250px' }
+    = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
+      =form.inputs do
+        =form.input :agencia_id_or_operadora_id_eq,:collection => Entidad.all
+
+    #reservas
+      =render 'reservas/reservas'
+
     #entidad_form
 
     = f.hidden_field :entidad_id
-    = f.text_field :reserva_id
-    = f.text_field :saldo_id
+    = f.hidden_field :reserva_id
+    = f.hidden_field :saldo_id
 
     #saldos
     %br
