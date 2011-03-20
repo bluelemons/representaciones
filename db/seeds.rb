@@ -9,131 +9,131 @@
 #  :tpago_id=>1,
 #  :numero =>123123
 #})
-#puts Cotizacion.create([{
-#  :fecha =>'2011-01-01',
-#  :compra =>3.98,
-#  :venta =>4.00,
-#  :moneda_id =>2
-#  },{
-#  :fecha =>'2011-01-02',
-#  :compra =>3.99,
-#  :venta =>4.01,
-#  :moneda_id =>2
-#  },{
-#  :fecha =>'2011-01-03',
-#  :compra =>4.00,
-#  :venta =>4.02,
-#  :moneda_id =>2
-#  },{
-#  :fecha =>'2011-01-04',
-#  :compra =>4.01,
-#  :venta =>4.03,
-#  :moneda_id =>2
-#  }
-#])
-#
-#
-#puts Tdeposito.create([{
-#  :name =>'Factura'
-#  },{
-#  :name =>'Banco'
-#  }
-#])
-#puts Tentidad.create([{
-#  :name =>'Agencia'
-#  },{
-#  :name =>'Operadora'
-#  }
-#])
-#
-#puts Moneda.create([{
-#  :name =>'Pesos',
-#  :simbolo =>'$'
-#  },{
-#  :name =>'Dolares',
-#  :simbolo=>'u$s'
-#  },{
-#  :name =>'Euros',
-#  :simbolo=>'€'
-#  }
-#])
-#
-#puts Tdoc.create([{
-#  :name => 'DNI'
-#  },{
-#  :name => 'LE'
-#  },{
-#  :name => 'LC'
-#  }
-#])
-#
-#
-#puts Pasajero.create([{
-#  :doc=>28684242,
-#  :name =>"Oldani Pablo",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1981-10-4"
-#  },{
-#  :doc=>31257560,
-#  :name =>"Dosso Liza",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1984-10-15"
-#  },{
-#  :doc=>32454325,
-#  :name =>"Espinaco Eloy",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1985-06-14"
-#  }
-#])
-#puts Operadora.create([{
-#  :name =>"Daniel",
-#  :localidad_id=>4807,
-#  :calle=>'Saavedra 2854 dto 3'
-#  },{
-#  :name =>"Cristina",
-#  :localidad_id=>4807,
-#  :calle=>'Crespo 3054 dpto 3'
-#  }])
-#
-#
-#puts Agencia.create([{
-#  :name=>'Pirulo',
-#  :cuit =>'23-28787872-9',
-#  :legajo=>'4d',
-#  :telefono=>'4584274',
-#  :email=>'pirulo@mail.com.ar',
-#  :web=>'http://pirulo.com.ar',
-#  :calle=>'Francia 2110',
-#  :localidad_id=>4807
-#  },{
-#  :name=>'Mengano',
-#  :cuit =>'23-28783472-9',
-#  :legajo=>'3f',
-#  :telefono=>'4334274',
-#  :email=>'mengano@mail.com.ar',
-#  :web=>'http://mengano.com.ar',
-#  :calle=>'Urquiza 1757 2b',
-#  :localidad_id=>3422
-#  }
-#
-#])
-#
-#
-#puts Programa.create([{
-#  :name => "Bariloche",
-#  :obs=>'Mucha joda a la noche'
-#  },{
-#  :name => "Brasil",
-#  :obs=>'Execelente para vacacionar con la familia'
-#  }
-#])
-#
-#puts Thabitacion.create([{
-#  :name =>"Simple"
-#  },{
-#  :name =>"Doble"
-#  }])
-#
+puts Cotizacion.create([{
+  :fecha =>'2011-01-01',
+  :compra =>3.98,
+  :venta =>4.00,
+  :moneda_id =>2
+  },{
+  :fecha =>'2011-01-02',
+  :compra =>3.99,
+  :venta =>4.01,
+  :moneda_id =>2
+  },{
+  :fecha =>'2011-01-03',
+  :compra =>4.00,
+  :venta =>4.02,
+  :moneda_id =>2
+  },{
+  :fecha =>'2011-01-04',
+  :compra =>4.01,
+  :venta =>4.03,
+  :moneda_id =>2
+  }
+])
+
+
+puts Tentidad.create([{
+  :name =>'Agencia'
+  },{
+  :name =>'Operadora'
+  }
+])
+
+puts Tdeposito.create([{
+  :name =>'Factura'
+  },{
+  :name =>'Banco'
+  }
+])
+puts Moneda.create([{
+  :name =>'Pesos',
+  :simbolo =>'$'
+  },{
+  :name =>'Dolares',
+  :simbolo=>'u$s'
+  },{
+  :name =>'Euros',
+  :simbolo=>'€'
+  }
+])
+
+puts Tdoc.create([{
+  :name => 'DNI'
+  },{
+  :name => 'LE'
+  },{
+  :name => 'LC'
+  }
+])
+
+
+puts Pasajero.create([{
+  :doc=>28684242,
+  :name =>"Oldani Pablo",
+  :tdoc_id=>1,
+  :nacimiento=>"1981-10-4"
+  },{
+  :doc=>31257560,
+  :name =>"Dosso Liza",
+  :tdoc_id=>1,
+  :nacimiento=>"1984-10-15"
+  },{
+  :doc=>32454325,
+  :name =>"Espinaco Eloy",
+  :tdoc_id=>1,
+  :nacimiento=>"1985-06-14"
+  }
+])
+puts Operadora.create([{
+  :name =>"Daniel",
+  :localidad_id=>4807,
+  :calle=>'Saavedra 2854 dto 3'
+  },{
+  :name =>"Cristina",
+  :localidad_id=>4807,
+  :calle=>'Crespo 3054 dpto 3'
+  }])
+
+
+puts Agencia.create([{
+  :name=>'Pirulo',
+  :cuit =>'23-28787872-9',
+  :legajo=>'4d',
+  :telefono=>'4584274',
+  :email=>'pirulo@mail.com.ar',
+  :web=>'http://pirulo.com.ar',
+  :calle=>'Francia 2110',
+  :localidad_id=>4807
+  },{
+  :name=>'Mengano',
+  :cuit =>'23-28783472-9',
+  :legajo=>'3f',
+  :telefono=>'4334274',
+  :email=>'mengano@mail.com.ar',
+  :web=>'http://mengano.com.ar',
+  :calle=>'Urquiza 1757 2b',
+  :localidad_id=>3422
+  }
+
+])
+
+
+puts Programa.create([{
+  :name => "Bariloche",
+  :obs=>'Mucha joda a la noche'
+  },{
+  :name => "Brasil",
+  :obs=>'Execelente para vacacionar con la familia'
+  }
+])
+
+puts Thabitacion.create([{
+  :name =>"Simple"
+  },{
+  :name =>"Doble"
+  }])
+
 puts Role.create({
   :name=>'Admin',
   :desc=>'Es el Rol de administrador'
@@ -154,26 +154,26 @@ puts User.create([{
   }
 ])
 
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agencia_id=>3,
-#  :programa_id =>1,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>3500,
-#    :moneda_id =>1
-#    }
-#  )
+puts Reserva.create(
+  :hotel =>'Central Park',
+  :reservado =>'Pablo',
+  :regimen =>'All',
+  :periodo => '6 Noches',
+  :fecha => '2011-01-24',
+  :salida=>'2011-03-21',
+  :agencia_id=>3,
+  :programa_id =>1,
+  :operadora_id =>1,
+  :thabitacion_id =>1,
+  :pasajero_ids=>[1,2],
+  :iva => 18.19,
+  :impuesto =>20.01,
+  :seguro => 0,
+  :monto_attributes =>{
+    :valor =>3500,
+    :moneda_id =>1
+    }
+  )
 
 ['Recibo', 'Banco'].each do |tipo|
   Tdeposito.find_or_create_by_name tipo
