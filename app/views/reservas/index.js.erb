@@ -1,25 +1,3 @@
 $("#reservas").html('<%= raw escape_javascript(render("reservas/reservas")) %>');
-
-<% if params[:qs] %>
-  $("#reservas_search").html('<%= raw escape_javascript(render("reservas/qsearch")) %>');
-
-  $('.qs_search input').bind("keyup",function (){
-    buscar();
-  });
-
-  $("select").change(function () {
-    $("input[id$=_entidad_id]").val($(this).val());
-
-    $.get("/entidads/"+$(this).val(),".js", togrid, 'script');
-
-    buscar();
-  });
-
-  function buscar(){
-    request.abort();
-    request = $.get("/reservas.js",$('.qs_search').serialize(), togrid, 'script');
-  }
-
-<% end %>
 skin();
 
