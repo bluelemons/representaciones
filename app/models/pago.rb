@@ -1,19 +1,37 @@
+# -*- coding: utf-8 -*-
 class Pago < Movimiento
 
   # validaciones:
-  #Esto es rails 2
-  #validates_presence_of :reserva
   validates :reserva, :presence => true
   validates :saldo, :presence => true
-
   validate :validate_deuda
   validate :saldo_suficiente
 
-  after_save :depositar
-  after_save :pago_minimo
+  # Callbacks:
 
+  before_validation :conversion
+  after_save        :depositar
+  after_save        :pago_minimo
+
+  # conversion realiza el exchange de dinero antes de el registro de
+  # la transaccion.
+  # Esta solo se realiza si las monedas en el saldo y en la reserva
+  # son distintos.
+    
+  def conversion
+    saldo_moneda = self.saldo.monto.moneda_id
+    reserva_moneda = self.reserva.monto.monto_id
+    unless saldo_moneda == reserva_moneda
+      convertido = Monto.new(:moneda_id => reserva_moneda,
+                             :valor => self.monto.to(saldo_moneda))
+      self.monto = convertido
+    end
+  end
+    
   def pago_minimo
     # el pago no puede ser superior a la dueda.
+    # Esto debería llamarse pago maximo, ser una validacion y
+    # verificar tambien que no sea superior al saldo.
   end
 
   def depositar
@@ -36,6 +54,5 @@ class Pago < Movimiento
   end
 
   #scopes
-
 end
 
