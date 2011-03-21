@@ -11,9 +11,16 @@ class Pago < Movimiento
 
   after_save :depositar
   after_save :pago_minimo
+  after_save :convertir
 
   def pago_minimo
     #el pago no puede ser superior a la dueda.
+  end
+
+  def conventir
+    #se fija si el saldo del cual se va a realizar la extracion es en la misma
+    #moneda que la reservar.
+    #si no, genera el cambio.
   end
 
   def depositar
