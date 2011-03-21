@@ -22,7 +22,7 @@
     %p
       %b Calle:
       = @entidad.calle
-      = @entidad.localidad.try(:name)
+      = @entidad.try(:localidad).try(:name)
     %p
       %b Cuit:
       = @entidad.cuit
