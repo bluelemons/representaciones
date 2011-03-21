@@ -21,10 +21,16 @@
           =movimiento.try(:entidad).type
           =movimiento.try(:entidad).try(:name)
         %td
-          = movimiento.try(:monto).try(:moneda).try(:simbolo)
+          =# movimiento.try(:monto).try(:moneda).try(:simbolo)
           -# muestro el monto en la moneda de la reserva
-          = movimiento.try(:monto).to(movimiento.try(:reserva).try(:moneda_id))
-          = movimiento.try(:reserva).try(:moneda)
+          - if movimiento.try(:reserva)
+            = movimiento.try(:reserva).try(:moneda)
+            = movimiento.try(:monto).to(movimiento.try(:reserva).try(:moneda_id))
+            -if(movimiento.try(:reserva).try(:moneda_id)!=movimiento.try(:monto).try(:moneda_id))
+              ="(cambio)"
+          -else
+            = movimiento.try(:monto).try(:moneda).try(:simbolo)
+            = movimiento.try(:monto).try(:valor)
 
           -if movimiento.try(:monto).try(:moneda_id)
             -total[movimiento.try(:monto).try(:moneda_id)-1] += movimiento.try(:monto).try(:valor)
