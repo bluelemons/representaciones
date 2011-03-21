@@ -59,6 +59,10 @@ class Reserva < ActiveRecord::Base
 
     pagos.where(:entidad_id=>agencia).each do |pago|
       array[pago.moneda_id]+=pago.valor
+      #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
+      if pago.moneda_id != pago.reserva.moneda_id
+        array[pago.reserva.moneda_id]+= pago.monto.to(pago.reserva.moneda_id)
+      end
     end
 
     array[moneda_id]
@@ -72,6 +76,10 @@ class Reserva < ActiveRecord::Base
     array = Array.new(4,0)
     pagos.where(:entidad_id=>operadora).each do |pago|
       array[pago.moneda_id]+=pago.valor
+      #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
+      if pago.moneda_id != pago.reserva.moneda_id
+        array[pago.reserva.moneda_id]+= pago.monto.to(pago.reserva.moneda_id)
+      end
     end
     array[moneda_id]
   end
