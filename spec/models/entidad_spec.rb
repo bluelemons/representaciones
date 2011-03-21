@@ -72,15 +72,16 @@ describe Entidad do
     end
   end
 
-  describe '#withdraw' do
+  describe '#withdraw(monto,saldo)' do
     context 'if there is enough money' do
       it 'should return cuanto queda en la cuenta' do
         entidad = Factory(:entidad)
         monto = Factory(:monto, :valor => 5000)
+        saldo = entidad.saldo(monto.moneda)
         entidad.deposit(monto)
         # monto = Factory(:monto, :valor => 5000)
         # saldo = Factory(:saldo, :entidad => entidad, :monto => monto)
-        entidad.withdraw(Factory(:monto, :valor => 100)).should == 4900
+        entidad.withdraw(Factory(:monto, :valor => 100),saldo).should == 4900
         entidad.saldo(monto.moneda).should == 4900
         #saldo.monto(true).valor.should == 4900
       end
@@ -88,7 +89,8 @@ describe Entidad do
     context 'if there is not enough money' do
       it 'give error' do
         entidad = Factory(:entidad)
-        entidad.withdraw(Factory(:monto, :valor => 100000)).should == false
+        saldo = Factory(:saldo)
+        entidad.withdraw(Factory(:monto, :valor => 100000),saldo).should == false
       end
     end
   end

@@ -10,6 +10,12 @@ class Pago < Movimiento
   validate :saldo_suficiente
 
   after_save :depositar
+  after_save :pago_minimo
+
+  def pago_minimo
+    #el pago no puede ser superior a la dueda.
+  end
+
   def depositar
     entidad.withdraw(monto,saldo)
     if(entidad.type == "Agencia") #si es un pago de una agencia
