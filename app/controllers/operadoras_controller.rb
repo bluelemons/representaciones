@@ -7,7 +7,7 @@ class OperadorasController < InheritedResources::Base
     else
       @search = Operadora.baja.search()
     end
-      @entidads = @search.paginate :page => params[:page], :per_page =>10
+    @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
       format.js{render "entidads/index"}
       format.html

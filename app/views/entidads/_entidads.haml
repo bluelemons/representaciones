@@ -9,18 +9,19 @@
       %th Telefono
       %th Acciones
 
-      
-    - for entidad in @entidads   
+
+    - for entidad in @entidads
       %tr
         %td= entidad.id
-        %td= entidad.try(:name) 
+        %td= entidad.try(:name)
         %td= entidad.try(:calle)
         %td= entidad.try(:cuit)
         %td= entidad.try(:telefono)
-        
+
         %td
-          = link_to 'Show', entidad,:remote=>true 
+          = link_to 'Show', {:controller=>"entidads",:action=>:show,:id=>entidad.id},:remote=>true
           -if can? :edit, entidad
-            = link_to 'Edit', edit_entidad_path(entidad),:remote=>true  
+            = link_to 'Edit', edit_entidad_path(entidad),:remote=>true
           -if can? :destroy, entidad
-            = link_to 'Destroy', entidad, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+            = link_to 'Destroy',{:controller=>"entidads",:action=>:destroy,:id=>entidad.id}, :confirm => 'Are you sure?', :method => :delete,:remote=>true
+
