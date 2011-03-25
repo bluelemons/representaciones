@@ -1,0 +1,5 @@
+-@localidads.each do |localidad|
+  =localidad.name
+  =localidad.try(:departamento).try(:name)
+  %br
+
