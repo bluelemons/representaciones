@@ -32,5 +32,20 @@ Representaciones::Application.routes.draw do
   devise_for :users
 
   root :to =>'reservas#index'
+
+  ##Localidades
+  #resources :departamentos
+
+  resources :localidads
+
+  #resources :provincias
+  ##---
+
+  ## Squeezer
+  resources :users
+  resources :roles
+  ##---
+
+
 end
 
