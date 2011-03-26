@@ -14,7 +14,9 @@
       %tr
         %td= entidad.id
         %td= entidad.try(:name)
-        %td= entidad.try(:calle)
+        %td
+          = entidad.try(:calle)
+          = entidad.try(:localidad).try(:name)
         %td= entidad.try(:cuit)
         %td= entidad.try(:telefono)
 

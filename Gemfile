@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 gem 'thin'
 gem 'rails', '~> 3.0.3'
 gem 'squeezer',"0.1.11"
-gem 'largentinas'
+gem 'largentinas',"0.1.0"
 gem "will_paginate", "~> 3.0.pre2"
 gem "haml"
 gem "devise", "~>1.1.rc2"
