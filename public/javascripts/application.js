@@ -1,4 +1,4 @@
-request = $.ajax();
+//request = $.ajax();
   //agrega un tab con
   //model es el nombre del modelos, entidad, reserva, etc. en singular y minuscula
   //id es el id del registro en paticular, el que tiene en la base de datos.
@@ -91,9 +91,9 @@ function skin(){
 
 $(function() {
 
-  $("body").ajaxStart(function() {
-    request.abort();
-  });
+  //$("body").ajaxStart(function() {
+  //  //request.abort();
+  //});
 
   $('#operadora_new').click(function() {
     $.getScript("/entidads/new.js", togrid );
