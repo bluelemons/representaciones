@@ -19,7 +19,9 @@ class Entidad < ActiveRecord::Base
   validates :name, :presence => true
 
   #scopes
+
   scope :baja, where(:hidden=>0)
+
 
   #metodos
   #cada vez que se crea la entidad tambien se crea el saldo
