@@ -14,22 +14,24 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation,:role_ids,:username
-  has_and_belongs_to_many :roles
-  
+  has_many :permitions
+  has_many :roles ,:through => :permitions
+
   def role #array con los roles del usuario
     roles.map do |role|
       role.name
     end
-  end    
-  
+  end
+
   def role?(rol) #true si el usuario tiene el rol
     role.include?(rol)
   end
-  
+
   def role_symbols
     roles.map do |role|
       role.name.underscore.to_sym
     end
-  end 
-  
+  end
+
 end
+
