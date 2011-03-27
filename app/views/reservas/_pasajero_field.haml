@@ -1,13 +1,14 @@
 %tr
   %td.pasajeros_fields
-    %input{:class=>"reserva_pasajero_#{i}_ids_",:size=>3,:type=>'text',:name=>'reserva[pasajero_ids][]'}
+    %input{:class=>"reserva_pasajero_#{i}_ids_",:size=>3,:type=>'text',:name=>'reserva[pasajero_ids][]',:value=>@ultimo.try(:id)}
   %td
-    %input.autocomplete_persona{:class=>"reserva_pasajero_#{i}_doc",:i=>i,:AUTOCOMPLETE=>'OFF'}
+    %input.autocomplete_persona{:class=>"reserva_pasajero_#{i}_doc",:i=>i,:AUTOCOMPLETE=>'OFF',:value=>@ultimo.try(:doc)}
   %td
-    %input.autocomplete_persona.autocomplete{:class=>"reserva_pasajero_#{i}_name",:i=>i,:table=>'pasajero',:AUTOCOMPLETE=>'OFF'}
+    %input.autocomplete_persona.autocomplete{:class=>"reserva_pasajero_#{i}_name",:i=>i,:table=>'pasajero',:AUTOCOMPLETE=>'OFF',:value=>@ultimo.try(:name)}
   %td
-    %input{:class=>"reserva_pasajero_#{i}_nacimiento"}   
-  %td        
+    %input{:class=>"reserva_pasajero_#{i}_nacimiento",:value=>@ultimo.try(:nacimiento)}
+  %td
     =link_to_function 'Eliminar'
 -if m
   .new_pasajero_row{:i=>i}
+
