@@ -44,33 +44,6 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.datetime "updated_at"
   end
 
-  create_table "deposito_versions", :force => true do |t|
-    t.integer  "deposito_id"
-    t.integer  "version"
-    t.integer  "tpago_id"
-    t.integer  "numero"
-    t.integer  "entidad_id"
-    t.integer  "movimiento_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",        :default => false
-    t.integer  "user_id"
-  end
-
-  add_index "deposito_versions", ["deposito_id"], :name => "index_deposito_versions_on_deposito_id"
-
-  create_table "depositos", :force => true do |t|
-    t.integer  "tpago_id"
-    t.integer  "numero"
-    t.integer  "entidad_id"
-    t.integer  "movimiento_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",        :default => false
-    t.integer  "user_id"
-    t.integer  "version"
-  end
-
   create_table "entidad_versions", :force => true do |t|
     t.integer  "entidad_id"
     t.integer  "version"
@@ -216,9 +189,9 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.integer  "version"
   end
 
-  create_table "pasajeros_reservas", :id => false, :force => true do |t|
-    t.integer  "reserva_id"
-    t.integer  "pasajero_id"
+  create_table "permitions", :id => false, :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -317,13 +290,6 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.text     "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer  "role_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -481,5 +447,12 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
+
+  create_table "viajeros", :id => false, :force => true do |t|
+    t.integer  "reserva_id"
+    t.integer  "pasajero_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -139,42 +139,42 @@
 #  :desc=>'Es el Rol de administrador'
 #})
 #
-#puts User.create([{
-#  :username=>'olvap',
-#  :email=>'youre-mail@mail.com',
-#  :password_confirmation=>'admin6',
-#  :password=>'admin6',
-#  :role_ids=>[1]
-#  },{
-#  :username=>'eloy',
-#  :email=>'eloy-mail@mail.com',
-#  :password_confirmation=>'admin8',
-#  :password=>'admin8',
-#  :role_ids=>[1]
-#  }
-#])
-#
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agencia_id=>3,
-#  :programa_id =>1,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>3500,
-#    :moneda_id =>1
-#    }
-#  )
-#
+puts User.create([{
+  :username=>'olvap',
+  :email=>'youre-mail@mail.com',
+  :password_confirmation=>'admin6',
+  :password=>'admin6',
+  :role_ids=>[1]
+  },{
+  :username=>'eloy',
+  :email=>'eloy-mail@mail.com',
+  :password_confirmation=>'admin8',
+  :password=>'admin8',
+  :role_ids=>[1]
+  }
+])
+
+puts Reserva.create(
+  :hotel =>'Central Park',
+  :reservado =>'Pablo',
+  :regimen =>'All',
+  :periodo => '6 Noches',
+  :fecha => '2011-01-24',
+  :salida=>'2011-03-21',
+  :agencia_id=>3,
+  :programa_id =>1,
+  :operadora_id =>1,
+  :thabitacion_id =>1,
+  :pasajero_ids=>[1,2],
+  :iva => 18.19,
+  :impuesto =>20.01,
+  :seguro => 0,
+  :monto_attributes =>{
+    :valor =>3500,
+    :moneda_id =>1
+    }
+  )
+
 ['Recibo', 'Banco'].each do |tipo|
   Tdeposito.find_or_create_by_name tipo
 end
