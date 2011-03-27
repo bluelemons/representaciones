@@ -4,7 +4,9 @@ class Pasajero < ActiveRecord::Base
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :tdoc
-  has_and_belongs_to_many :reservas
+
+  has_many :viajeros
+  has_many :reservas,:through => :viajeros
   #validaciones
   #validates :doc, :presence => true
   validates :name, :presence => true

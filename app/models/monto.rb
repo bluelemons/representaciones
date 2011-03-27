@@ -4,6 +4,7 @@ class Monto < ActiveRecord::Base
   has_many :reservas
   has_many :saldos
 
+  default_scope :include => :moneda
   def to_pesos(date)
     monto=valor
     if moneda_id >1
