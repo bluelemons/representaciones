@@ -45,11 +45,23 @@ class Entidad < ActiveRecord::Base
   end
 
   def get_saldo_by(operadora,moneda_id)
-    saldos.by_operadora_id(operadora.id).by_moneda_id(moneda_id).first
+    s=nil
+    saldos.each do |saldo|
+      if saldo.monto.moneda_id=moneda_id && saldo.operadora_id == operadora_id
+        s = saldo
+      end
+    end
+    s
   end
 
   def get_saldo(moneda_id)
-    saldos.by_moneda_id(moneda_id).where("operadora_id is null").first
+    s=nil
+    saldos.each do |saldo|
+      if saldo.monto.moneda_id=moneda_id && saldo.operadora_id == nil
+        s = saldo
+      end
+    end
+    s
   end
 
   def saldo_by(operadora, moneda_id)

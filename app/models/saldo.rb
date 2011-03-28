@@ -18,7 +18,7 @@ class Saldo < ActiveRecord::Base
   default_scope :include=> [:monto,:entidad,:moneda,:operadora]
 
   scope :by_moneda_id, lambda { |moneda_id|
-    where("moneda_id =?", moneda_id)
+    where("monto.moneda_id =?", moneda_id)
   }
   scope :by_operadora_id, lambda { |operadora_id|
     where("operadora_id = ?",operadora_id)
