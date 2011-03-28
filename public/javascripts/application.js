@@ -3,6 +3,9 @@
   //model es el nombre del modelos, entidad, reserva, etc. en singular y minuscula
   //id es el id del registro en paticular, el que tiene en la base de datos.
   //name es el nombre del registro en particular como està en la base de datos.
+
+
+//TODO: agregar funcion para deshabilitar el boton de submit del formulario al primer click.
 function addTab(model,id,name) {
 
   if($("#tabs-"+id).length == 0){
@@ -99,7 +102,7 @@ $(function() {
     $.getScript("/entidads/new.js", togrid );
   });
   $('#agencia_new').click(function() {
-    $.getScript("/agencias/new.js", togrid );
+    $.getScript("/agencies/new.js", togrid );
   });
 
   $('#programa_new').click(function() {

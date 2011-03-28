@@ -11,7 +11,7 @@ class Reserva < ActiveRecord::Base
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
 
   belongs_to :operadora
-  belongs_to :agencia
+  belongs_to :agency
   has_many :pagos
 
   has_many :viajeros
@@ -33,10 +33,10 @@ class Reserva < ActiveRecord::Base
   validates :thabitacion_id, :presence => true
   validates :programa_id, :presence => true
   validates :operadora_id, :presence => true
-  validates :agencia_id, :presence => true
+  validates :agency_id, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:monto,:agencia,:programa,:thabitacion,:pagos,:pasajeros]
+  default_scope :include => [:operadora,:monto,:agency,:programa,:thabitacion,:pagos,:pasajeros]
 
   scope :baja, where(:hidden=>0)
   #metodos
@@ -60,7 +60,7 @@ class Reserva < ActiveRecord::Base
     array = Array.new(4,0)
 
     pagos.each do |pago|
-      if pago.entidad ==agencia
+      if pago.entidad ==agency
         array[pago.monto.moneda_id]+=pago.monto.valor
         #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
         if pago.monto.moneda_id != pago.reserva.moneda_id

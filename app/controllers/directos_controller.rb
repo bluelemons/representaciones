@@ -7,7 +7,7 @@ class DirectosController < ApplicationController
   def new
     @directo = Directo.new
     @directo.build_monto
-    @search = Reserva.baja.search(:agencia_id_eq=>0)
+    @search = Reserva.baja.search(:agency_id_eq=>0)
     @reservas = @search.paginate :page => params[:page], :per_page =>10
   end
 

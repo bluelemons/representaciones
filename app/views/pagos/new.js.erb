@@ -2,8 +2,8 @@ $('#directo_form').html("");
 $('#pago_form').html('<%= raw escape_javascript(render("form")) %>');
 skin();
 
-  $("#search_agencia_id_or_operadora_id_eq").change(function(){
-    $("#pago_entidad_id").val($("#search_agencia_id_or_operadora_id_eq").val());
+  $("#search_agency_id_or_operadora_id_eq").change(function(){
+    $("#pago_entidad_id").val($("#search_agency_id_or_operadora_id_eq").val());
     buscar();
     });
   $("#pago_reserva_id").change(function(){
@@ -23,8 +23,8 @@ skin();
   }
 
   function buscar(){
-    entidad = $('#search_agencia_id_or_operadora_id_eq').val();
-    if($.get("/reservas.js","search[agencia_id_or_operadora_id_eq="+entidad+"]", togrid, 'script')){
+    entidad = $('#search_agency_id_or_operadora_id_eq').val();
+    if($.get("/reservas.js","search[agency_id_or_operadora_id_eq="+entidad+"]", togrid, 'script')){
       buscar_saldo();
     }
   }

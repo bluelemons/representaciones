@@ -11,7 +11,7 @@
           %td= form.input :fecha, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
           %td= form.input :salida, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %tr
-          %td= form.input :agencia,:collection => Agencia.all
+          %td= form.input :agency,:collection => Agency.all
           %td= form.input :reservado,:input_html => {:size=>25}
 
         %tr

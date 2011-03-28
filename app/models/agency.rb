@@ -1,4 +1,4 @@
-class Agencia < Entidad
+class Agency < Entidad
   #clases
 
   #asociaciones

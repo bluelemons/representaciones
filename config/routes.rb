@@ -1,11 +1,12 @@
 Representaciones::Application.routes.draw do
 
-  resources :operadoras
-  resources :agencias
-
   resources :entidads do
     resources :saldos
   end
+
+  resources :operadoras
+  resources :agencies
+
 
   resources :tpagos
 

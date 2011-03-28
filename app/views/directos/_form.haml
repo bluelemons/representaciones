@@ -7,7 +7,7 @@
 
     = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
       =form.inputs do
-        =form.input :agencia_id_eq,:collection => Agencia.all
+        =form.input :agency_id_eq,:collection => Agency.all
         =form.input :operadora_id_eq,:collection => Operadora.all
 
     #reservas
