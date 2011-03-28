@@ -99,7 +99,7 @@ $(function() {
   //});
 
   $('#operadora_new').click(function() {
-    $.getScript("/entidads/new.js", togrid );
+    $.getScript("/operadoras/new.js", togrid );
   });
   $('#agencia_new').click(function() {
     $.getScript("/agencies/new.js", togrid );
