@@ -12,3 +12,4 @@ class CreateMontos < ActiveRecord::Migration
     drop_table :montos
   end
 end
+
