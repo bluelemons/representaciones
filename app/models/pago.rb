@@ -36,7 +36,7 @@ class Pago < Movimiento
 
   def depositar
     entidad.withdraw(monto,saldo)
-    if(entidad.type == "Agencia") #si es un pago de una agencia
+    if(entidad.type == "Agency") #si es un pago de una agencia
       reserva.operadora.deposit(monto) #se aumenta el deposito de la operadora.
     end
   end
