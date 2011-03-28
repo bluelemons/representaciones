@@ -8,6 +8,7 @@ class Entidad < ActiveRecord::Base
   has_many :saldos, :dependent => :destroy  #cuando se borra la entidad se borra el saldo.
   has_many :movimientos
 
+  attr_accessible :type,:name,:cuit,:localidad_id,:calle,:legajo,:telefono,:web,:email
   #validaciones
   #validates :calle, :presence => true
   #validates :cuit, :presence => true

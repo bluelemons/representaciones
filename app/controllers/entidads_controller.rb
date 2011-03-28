@@ -24,6 +24,11 @@ class EntidadsController < InheritedResources::Base
 
   end
 
+  def edit
+    render 'entidads/edit.js'
+  end
+
+
   def show
     @entidad.revert_to(params[:version].to_i) if params[:version]
     show!
@@ -41,7 +46,7 @@ class EntidadsController < InheritedResources::Base
     if @entidad.update_attributes(params[:entidad])
       redirect_to :action => 'show', :id => @entidad, :format =>'js'
     else
-      render 'edit.js'
+      render 'entidads/edit.js'
     end
   end
 
@@ -58,7 +63,7 @@ class EntidadsController < InheritedResources::Base
       end
 
     else
-      render 'new.js'
+      render 'entidads/new.js'
     end
   end
 

@@ -8,6 +8,7 @@
     = form.input :cuit
     = form.input :calle
     = form.input :legajo
+    = form.input :type,:as=>:hidden
 
     = render :partial => "layouts/labelgrid",:locals=>{:model=>:entidad, :data=>@entidad, :label=>'Localidad', :field=>:localidad_id,:f=>form,}
 
