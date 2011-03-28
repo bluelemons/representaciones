@@ -25,6 +25,5 @@ class AgenciesController < EntidadsController
     render "entidads/new.js"
   end
 
-
 end
 
