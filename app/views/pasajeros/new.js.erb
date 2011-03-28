@@ -1,6 +1,6 @@
 $('#pasajero_form').html('<%= raw escape_javascript(render("new")) %>');
 skin();
-
+  // TODO: esto tambien estas en reservas/new.js
 $('.new_pasajero_row').replaceWith('<%= raw escape_javascript(render("reservas/pasajero_field",:i=>4,:m=>true)) %>');
   var i = unico();
 
