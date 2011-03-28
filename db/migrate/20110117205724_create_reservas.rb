@@ -18,6 +18,8 @@ class CreateReservas < ActiveRecord::Migration
       t.float :seguro
       t.integer :monto_id
       t.string :referencia
+      t.boolean :cancelada, :default =>0
+      t.boolean :activa, :default =>0
       t.timestamps
     end
   end
