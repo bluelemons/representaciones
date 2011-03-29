@@ -78,7 +78,7 @@ function skin(){
   });
 
   // pone calendario en .datepicker
-  $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  $( ".datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
   //$( "#tabs" ).tabs();
 
   //convierte los divisores con .mytabs en tab, sortable permite al usuario ordenarlos.
