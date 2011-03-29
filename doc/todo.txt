@@ -9,5 +9,8 @@
 • no indica el monto de la deuda ni la moneda. hay que verlo.
 
 Reserva#show
-• el encabezado del tab debe ser Agencia y Operadora (no los respectivos nombres de cada uno
+• el encabezado del tab debe ser Agencia y Operadora,no los respectivos nombres de cada uno. a mi me gusta como está
+
+Formularios
+#agregar funcion que deshailita el submit despues del primer click
 

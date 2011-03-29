@@ -248,12 +248,14 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.integer  "thabitacion_id"
     t.integer  "programa_id"
     t.integer  "operadora_id"
-    t.integer  "agencia_id"
+    t.integer  "agency_id"
     t.float    "iva"
     t.float    "impuesto"
     t.float    "seguro"
     t.integer  "monto_id"
     t.string   "referencia"
+    t.boolean  "cancelada",      :default => false
+    t.boolean  "activa",         :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false
@@ -274,12 +276,14 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.integer  "thabitacion_id"
     t.integer  "programa_id"
     t.integer  "operadora_id"
-    t.integer  "agencia_id"
+    t.integer  "agency_id"
     t.float    "iva"
     t.float    "impuesto"
     t.float    "seguro"
     t.integer  "monto_id"
     t.string   "referencia"
+    t.boolean  "cancelada",      :default => false
+    t.boolean  "activa",         :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false
