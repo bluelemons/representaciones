@@ -1,0 +1,27 @@
+es-AR:
+  formtastic:
+    :yes: 'Si'
+    :no: 'No'
+    :create: 'Crear %{model}'
+    :update: 'Modificar %{model}'
+    :required: 'requirido'
+
+    labels:
+      name: "Nombre"
+      name_eq: "Nombre es igual"
+      name_sw: "Nombre comienza con"
+      tdoc_id_eq: "Tipo de doc es igual"
+      doc_eq: "Numero es igual"
+      hidden_eq: "Incluir borrados"
+      agency_id_eq: "Agencia es igual"
+      thabitacion_id: "Tipo de habitacion es igual"
+      agency_id_or_operadora_id_eq: "Agencia o Operadora"
+
+
+      pasajero:
+        tdoc: "Tipo de documento"
+        doc: "Numero"
+      reserva:
+        agency: "Agencia"
+        thabitacion: "Tipo de habitacion"
+
