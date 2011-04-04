@@ -1,35 +1,18 @@
 class Saldo < ActiveRecord::Base
-  #clases
-  #asociaciones
 
+  # clases
+  # asociaciones
   belongs_to :entidad
-  belongs_to :moneda #la moneda esta en el monto, ver el default_scope :)
-  belongs_to :monto, :dependent => :destroy
   belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id"
+  monetize   :monto
 
-  accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
-  #validacioness
-  validates :entidad, :presence => true
-  validates :monto, :presence => true
-  #scopes
-  #Permie hacer
-  #     saldo.moneda
-  #     saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
-  default_scope :include=> [:monto,:entidad,:moneda,:operadora]
+  # validacioness
+  validates_presence_of :entidad, :monto_cents, :monto_currency
 
-  scope :by_moneda_id, lambda { |moneda_id|
-    where("monto.moneda_id =?", moneda_id)
-  }
-  scope :by_operadora_id, lambda { |operadora_id|
-    where("operadora_id = ?",operadora_id)
-  }
+  # scopes
+  default_scope :include => [:entidad, :operadora]
 
-  #metodos
-  # Incrementa el saldo en un valor
-  def incrementar(val)
-    m = monto
-    m.valor += val
-    m.save!
-  end
+  # metodos
+
 end
 

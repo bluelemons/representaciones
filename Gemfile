@@ -17,6 +17,7 @@ gem 'prawn', :git => "git://github.com/sandal/prawn", :tag => '0.10.2', :submodu
 gem "mysql2"
 gem 'formtastic', '~> 1.2.3'
 gem 'dbf'
+gem 'money', '~> 3.6.1'
 
 group :development, :test do
   gem "nifty-generators"

@@ -5,6 +5,18 @@ class Monto < ActiveRecord::Base
   has_many :saldos
 
   default_scope :include => :moneda
+  def to_money
+    currency = case self.moneda.name
+      when "Pesos"
+        :ars
+      when "Dolares"
+        :usd
+      when "Euros"
+        :eur
+    end
+    Money.new((self.valor * 100).round, currency)
+  end
+
   def to_pesos(date)
     monto=valor
     if moneda_id >1
