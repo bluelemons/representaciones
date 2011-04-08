@@ -9,7 +9,7 @@
       %tr
         %td=saldo.id
         %td
-          %b=saldo.try(:moneda).try(:simbolo)
+          %b=saldo.try(:monto).try(:moneda).try(:simbolo)
           =saldo.try(:monto).try(:valor)
         %td=saldo.try(:operadora).try(:name)
 

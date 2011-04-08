@@ -20,7 +20,7 @@ class Movimiento < ActiveRecord::Base
   #agrego por default montos, así por ejemplo podes hacer, pago.valor, en lugar de pago.monto.valor
 
   #default_scope select("movimientos.*,montos.moneda_id,montos.valor").joins(:monto)
-  default_scope :include => [:monto,:reserva,:entidad,:saldo]
+  default_scope :include => [:monto,:reserva,:entidad,:saldo], :order => "id desc"
   scope :baja, where(:hidden=>0)
   #metodos
 

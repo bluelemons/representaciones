@@ -26,7 +26,7 @@ class Entidad < ActiveRecord::Base
 
   #metodos
   #cada vez que se crea la entidad tambien se crea el saldo
-  after_save :crear_saldo
+  after_create :crear_saldo
   def crear_saldo
     Moneda.all.each do |moneda|
       monto = Monto.create({:valor=>0,:moneda=>moneda})
@@ -46,19 +46,19 @@ class Entidad < ActiveRecord::Base
 
   def get_saldo_by(operadora,moneda_id)
     s=nil
-    saldos.each do |saldo|
-      if saldo.monto.moneda_id=moneda_id && saldo.operadora_id == operadora_id
-        s = saldo
+    saldos.each do |sa|
+      if sa.monto.moneda_id==moneda_id && saldo.operadora_id == operadora_id
+        s = sa
       end
     end
     s
   end
 
-  def get_saldo(moneda_id)
+  def get_saldo(m_id)
     s=nil
-    saldos.each do |saldo|
-      if saldo.monto.moneda_id=moneda_id && saldo.operadora_id == nil
-        s = saldo
+    saldos(true).each do |sa|
+      if(sa.monto.moneda_id==m_id)
+        s = sa
       end
     end
     s
