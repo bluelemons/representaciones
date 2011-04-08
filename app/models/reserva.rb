@@ -34,6 +34,7 @@ class Reserva < ActiveRecord::Base
   validates :programa_id, :presence => true
   validates :operadora_id, :presence => true
   validates :agency_id, :presence => true
+  validates :monto, :presence => true
   #scopes
 
   default_scope :include => [:operadora,:monto,:agency,:programa,:thabitacion,:pagos,:pasajeros]
