@@ -24,7 +24,9 @@ Representaciones::Application.routes.draw do
 
   resources :monedas
 
-  resources :reservas
+  resources :reservas do
+    resources :pagos
+  end
 
   resources :thabitacions
 
