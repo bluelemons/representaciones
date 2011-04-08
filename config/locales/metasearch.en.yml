@@ -1,0 +1,25 @@
+es-AR:
+  meta_search:
+    or: 'o'
+    predicates:
+      equals: "%{attribute} igual"
+      does_not_equal: "%{attribute} No es igual"
+      contains: "%{attribute} contiene"
+      does_not_contain: "%{attribute} no contiene"
+      starts_with: "%{attribute} comienza con"
+      does_not_start_with: "%{attribute} no comienza con"
+      ends_with: "%{attribute} termina con"
+      does_not_end_with: "%{attribute} no termina con"
+      greater_than: "%{attribute} mayor que"
+      less_than: "%{attribute} menor que"
+      greater_than_or_equal_to: "%{attribute} mayor o igual que"
+      less_than_or_equal_to: "%{attribute} menor o igual que"
+      in: "%{attribute} esta en"
+      not_in: "%{attribute} no esta en"
+      is_true: "%{attribute} es verdadero"
+      is_false: "%{attribute} es falso"
+      is_present: "%{attribute} esta presente"
+      is_blank: "%{attribute} esta en blanco"
+      is_null: "%{attribute} es nulo"
+      is_not_null: "%{attribute} no es nulo"
+

@@ -1,11 +1,12 @@
 Representaciones::Application.routes.draw do
 
-  resources :agencias
-  resources :operadoras
-
   resources :entidads do
     resources :saldos
   end
+
+  resources :operadoras
+  resources :agencies
+
 
   resources :tpagos
 
@@ -13,11 +14,10 @@ Representaciones::Application.routes.draw do
 
   resources :tdocs
 
-  resources :movimientos do
-    member do
-      get :depositos
-    end
-  end
+  resources :movimientos
+  resources :depositos
+  resources :pagos
+  resources :directos
 
   resources :pasajeros
   match 'pasajeros_dni/:doc' => 'pasajeros#show' #Busca el pasajoer por DNI en /pasajeros_din/:doc
@@ -33,5 +33,20 @@ Representaciones::Application.routes.draw do
   devise_for :users
 
   root :to =>'reservas#index'
+
+  ##Localidades
+  #resources :departamentos
+
+  resources :localidads
+
+  #resources :provincias
+  ##---
+
+  ## Squeezer
+  resources :users
+  resources :roles
+  ##---
+
+
 end
 

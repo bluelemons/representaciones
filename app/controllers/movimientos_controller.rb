@@ -3,11 +3,7 @@ class MovimientosController < InheritedResources::Base
 
   respond_to :html, :xml,:js
 
-  def depositos
-    @movimiento = Movimiento.new
-    @movimiento.build_monto
-  end
-
+  # ver en inheritedresources como hacer para que solo haga index show, y restore.
   def index
     if params[:search]
       @search = Movimiento.search(params[:search])
@@ -26,14 +22,6 @@ class MovimientosController < InheritedResources::Base
     end
 
   end
-  def new
-    @movimiento.build_monto
-    if params[:t]=="deposito"
-      render "deposito"
-    elsif params[:t]=="pago"
-      render "pago"
-    end
-  end
 
 
   def show
@@ -46,32 +34,6 @@ class MovimientosController < InheritedResources::Base
     @movimiento = Movimiento.find(params[:id])
     @movimiento.revert_to! params[:version_id]
 	  redirect_to :action => 'show', :id => @pago
-  end
-
-  def update
-    @movimiento = Movimiento.find(params[:id])
-    @movimiento.user = current_user
-    if @movimiento.update_attributes(params[:movimiento])
-      redirect_to :action => 'show', :id => @pago, :format =>'js'
-    else
-      render 'edit.js'
-    end
-  end
-
-  def create
-    @movimiento = Movimiento.new(params[:movimiento])
-    @movimiento.user = current_user
-    if @movimiento.save
-      redirect_to :action => 'new', :format =>'js',:t=>"deposito"
-
-    else
-      @movimiento.build_monto
-      if @movimiento.tpago_id==1
-        render "deposito"
-      else
-        render "pago"
-      end
-    end
   end
 
 end

@@ -11,3 +11,4 @@ class CreateProvincias < ActiveRecord::Migration
     drop_table :provincias
   end
 end
+

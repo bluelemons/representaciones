@@ -1,6 +1,6 @@
-class CreateRolesUsers < ActiveRecord::Migration
+class CreatePermitions < ActiveRecord::Migration
   def self.up
-    create_table :roles_users,:id=>false do |t|
+    create_table :permitions,:id=>false do |t|
       t.integer :role_id
       t.integer :user_id
 
@@ -9,7 +9,7 @@ class CreateRolesUsers < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :roles_users
+    drop_table :permitions
   end
 end
 

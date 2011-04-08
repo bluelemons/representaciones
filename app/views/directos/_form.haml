@@ -1,0 +1,31 @@
+= form_for(@directo,:remote=>true) do |f|
+  =flash[:notice]
+  .ui-widget.ui-widget-content
+    = error_message(@directo)
+    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
+
+
+    = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
+      =form.inputs do
+        =form.input :agency_id_eq,:collection => Agency.all
+        =form.input :operadora_id_eq,:collection => Operadora.all
+
+    #reservas
+      =render 'reservas/reservas'
+
+    %table
+      %tr
+        =render :partial =>'montos/form',:locals=>{:f=>f}
+
+    =f.text_field :reserva_id
+    =f.text_field :entidad_id
+    %br
+    = f.label :Tipo_de_deposito
+    %br
+    = collection_select(:directo, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
+
+    = f.text_field :numero,:size=>10
+
+    .actions
+      = f.submit
+

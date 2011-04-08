@@ -4,16 +4,18 @@ class Reserva < ActiveRecord::Base
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
 
-  belongs_to :pasajero #es el pasajero titular
+#  belongs_to :pasajero #es el pasajero titular
   belongs_to :thabitacion
   belongs_to :programa
   belongs_to :monto
   accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
 
-  belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id"
-  belongs_to :agencia, :class_name => "Entidad",:foreign_key=>'agencia_id'
-  has_many :movimientos
-  has_and_belongs_to_many :pasajeros
+  belongs_to :operadora
+  belongs_to :agency
+  has_many :pagos
+
+  has_many :viajeros
+  has_many :pasajeros, :through => :viajeros
 
   #accepts_nested_attributes_for :agencia, :reject_if => lambda { |a| a[:name].blank? }
   #accepts_nested_attributes_for :operadora, :reject_if => lambda { |a| a[:name].blank? }
@@ -31,10 +33,11 @@ class Reserva < ActiveRecord::Base
   validates :thabitacion_id, :presence => true
   validates :programa_id, :presence => true
   validates :operadora_id, :presence => true
-  validates :agencia_id, :presence => true
+  validates :agency_id, :presence => true
+  validates :monto, :presence => true
   #scopes
 
-  default_scope select("reservas.*,montos.moneda_id").joins("left join montos on (montos.id = monto_id)")
+  default_scope :include => [:operadora,:monto,:agency,:programa,:thabitacion,:pagos,:pasajeros]
 
   scope :baja, where(:hidden=>0)
   #metodos
@@ -57,23 +60,35 @@ class Reserva < ActiveRecord::Base
   def agencia_pago
     array = Array.new(4,0)
 
-    movimientos.where(:entidad_id=>agencia).pagos.each do |movimiento|
-      array[movimiento.monto.moneda_id]+=movimiento.monto.valor
+    pagos.each do |pago|
+      if pago.entidad ==agency
+        array[pago.monto.moneda_id]+=pago.monto.valor
+        #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
+        if pago.monto.moneda_id != pago.reserva.moneda_id
+          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id)
+        end
+      end
     end
 
+    array[moneda_id]
+  end
+
+  def operadora_pago
+    array = Array.new(4,0)
+    pagos.each do |pago|
+      if pago.entidad == operadora
+        array[pago.monto.moneda_id]+=pago.monto.valor
+        #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
+        if pago.monto.moneda_id != pago.reserva.moneda_id
+          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id)
+        end
+      end
+    end
     array[moneda_id]
   end
 
   def agencia_deuda
     monto.valor - agencia_pago
-  end
-
-  def operadora_pago
-    array = Array.new(4,0)
-    movimientos.where(:entidad_id=>operadora).pagos.each do |movimiento|
-      array[movimiento.monto.moneda_id]+=movimiento.monto.valor
-    end
-    array[moneda_id]
   end
 
   def operadora_deuda

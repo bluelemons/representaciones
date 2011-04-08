@@ -1,0 +1,39 @@
+=flash[:notice]
+= form_for(@pago, :remote => true) do |f|
+  .ui-widget.ui-widget-content
+    = error_message(@pago)
+
+    = render :partial => "movimientos/comunes", :locals => { :f => f }
+
+    = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
+      =form.inputs do
+        =form.input :agency_id_or_operadora_id_eq,:collection => Entidad.all
+
+    #reservas
+      =render 'reservas/reservas'
+
+    #entidad_form
+
+    = f.hidden_field :entidad_id
+    = f.hidden_field :reserva_id
+    = f.hidden_field :saldo_id
+
+    #change_button Cambiar
+    %input{:type=>"CHECKBOX",:id=>"use_saldo"}
+    .pago_choise{:style=>"display:none"}
+      %h3.ui-widget-header Utilizar un saldo existente
+      #saldos
+    .pago_choise
+      %h3.ui-widget-header Generar un deposito
+      = f.label :Tipo_de_deposito
+      %br
+      = collection_select(:pago, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
+      %br
+      = f.text_field :numero, :size => 10
+
+    %br
+    = render :partial => 'montos/form', :locals => { :f => f }
+
+    .actions
+      = f.submit
+

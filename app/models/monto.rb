@@ -4,12 +4,46 @@ class Monto < ActiveRecord::Base
   has_many :reservas
   has_many :saldos
 
+  default_scope :include => :moneda
   def to_pesos(date)
     monto=valor
     if moneda_id >1
-      monto *= Cotizacion.a_la_fecha(date,moneda_id)[0].compra
+      monto *= Cotizacion.a_la_fecha(date,moneda_id).first.compra
     end
     monto
+  end
+
+  def to(x)
+    v=self.valor
+    if moneda_id == x
+      v
+    else
+      if(x == 2) #si se quiere convertir a dolares
+        v = dolares
+      else
+        v = pesos
+      end
+    end
+    v
+  end
+
+  def pesos()
+    v = self.valor
+    m = self.moneda_id
+
+    c = (Cotizacion.a_la_fecha("2011-01-01",m).first.try(:compra) || 1)
+    v *= c
+    v
+  end
+
+  def dolares()
+    #voy a pasar a dolares aumiendo que la moneda es pesos
+    v = self.valor
+    m = self.moneda_id
+
+    c = (Cotizacion.a_la_fecha("2011-01-01",2).first.try(:compra) || 1)
+    v /= c
+    v
   end
 
   def e?(m2,fecha)

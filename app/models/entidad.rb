@@ -1,32 +1,32 @@
+# -*- coding: utf-8 -*-
 class Entidad < ActiveRecord::Base
   #clases
   acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
-  belongs_to :tentidad
-  has_many :saldos,:dependent => :destroy  #cuando se borra la entidad se borra el saldo.
-
+  has_many :saldos, :dependent => :destroy  #cuando se borra la entidad se borra el saldo.
   has_many :movimientos
-  #validaciones
 
+  attr_accessible :type,:name,:cuit,:localidad_id,:calle,:legajo,:telefono,:web,:email
+  #validaciones
   #validates :calle, :presence => true
   #validates :cuit, :presence => true
   #validates :telefono, :presence => true
   #validates :legajo, :presence => true
   #validates :email, :presence => true
   #validates :web, :presence => true
-  validates :localidad_id, :presence => true
+  #validates :localidad_id, :presence => true
   validates :name, :presence => true
-  validates :tentidad_id, :presence => true
-  #scopes
-  scope :baja, where(:hidden=>0)
-  scope :agencia, where(:tentidad_id=>1)
-  scope :operadora, where(:tentidad_id=>2)
-  #metodos
 
-  after_save :crear_saldo  #cada vez que se crea la entidad tambien se crea el saldo
-#
+  #scopes
+
+  scope :baja, where(:hidden=>0)
+
+
+  #metodos
+  #cada vez que se crea la entidad tambien se crea el saldo
+  after_save :crear_saldo
   def crear_saldo
     Moneda.all.each do |moneda|
       monto = Monto.create({:valor=>0,:moneda=>moneda})
@@ -34,18 +34,38 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  #deposita en el saldo de la entidad una cantidad amount en la moneda moneda_id
+  # Incrementa el saldo de la entidad segun un monto.
+  # Si el saldo no existe es creado.
+
   def deposit(monto)
-    if monto.valor >0
-      s = saldos.by_moneda_id(monto.moneda.id).first
-      s.valor += monto.valor
-      s.save
-      s.valor
-    end
+    # if monto.valor > 0 ## No chequeo porque esto depende de la validación de monto.
+    moneda = monto.moneda
+    s = get_saldo(moneda.id)
+    s.incrementar(monto.valor)
   end
 
-  def saldo_by(operadora,moneda_id)
-    saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(moneda_id).first
+  def get_saldo_by(operadora,moneda_id)
+    s=nil
+    saldos.each do |saldo|
+      if saldo.monto.moneda_id=moneda_id && saldo.operadora_id == operadora_id
+        s = saldo
+      end
+    end
+    s
+  end
+
+  def get_saldo(moneda_id)
+    s=nil
+    saldos.each do |saldo|
+      if saldo.monto.moneda_id=moneda_id && saldo.operadora_id == nil
+        s = saldo
+      end
+    end
+    s
+  end
+
+  def saldo_by(operadora, moneda_id)
+    saldo = get_saldo_by(operadora, moneda_id)
     if saldo
       saldo.valor
     else
@@ -53,8 +73,8 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  def deposit_by(operadora,monto)
-    saldo = saldos.by_moneda_id(monto.moneda_id).by_operadora_id(operadora.id).first
+  def deposit_by(operadora, monto)
+    saldo = get_saldo_by(operadora, monto.moneda_id)
     if saldo
       m = saldo.monto
       m.valor += monto.valor
@@ -65,7 +85,7 @@ class Entidad < ActiveRecord::Base
   end
 
   def withdraw_by(operadora,monto)
-    saldo = saldos.by_operadora_id(operadora.id).by_moneda_id(monto.moneda_id).first
+    saldo = get_saldo_by(operadora, monto.moneda_id)
     if saldo
       m = saldo.monto
       m.valor -= monto.valor
@@ -76,14 +96,14 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  def withdraw(monto)
-    s = saldos.by_moneda_id(monto.moneda.id).first
-    if s.valor > monto.valor
-      s.valor -= monto.valor
+  def withdraw(monto,saldo)
+    s = saldo
+    m = s.monto
+    if s.monto.valor >= monto.valor
+      m.valor -= monto.valor
     else
       return false
     end
-    m = s
     m.save
     m.valor
   end
@@ -107,7 +127,7 @@ class Entidad < ActiveRecord::Base
   #    end
   #  end
   #  s.monto.valor
-    saldos.by_moneda_id(moneda.id).first.try(:valor)
+    get_saldo(moneda.id).try(:valor)
   end
 
 end

@@ -17,9 +17,11 @@ jQuery.fn.preventDoubleSubmit = function() {
 // deshabilita el formulario
       this.beenSubmitted = true;
 // lo rehabilita en 3 segundos
+
       setTimeout(function() {
         this.beenSubmitted = false;
       },3000);
+
   });
 };
 

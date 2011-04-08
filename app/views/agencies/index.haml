@@ -6,14 +6,14 @@
       %li
         %a{:href=>"#tabs-entidads-1"} Agencias
 
-      -if can? :new,Agencia
+      -if can? :new,Agency
         %li
           %a#agencia_new{:href=>"#tabs-entidads-2"} Alta
 
     #tabs-entidads-2
       #entidad_form
     #tabs-entidads-1
-      = render :partial => "entidads/search"
+      =render :partial => "entidads/search"
       #entidads
         =render 'entidads/entidads'
 

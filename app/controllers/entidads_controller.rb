@@ -24,9 +24,15 @@ class EntidadsController < InheritedResources::Base
 
   end
 
+  def edit
+    render 'entidads/edit.js'
+  end
+
+
   def show
+    @entidad = Entidad.find(params[:id])
     @entidad.revert_to(params[:version].to_i) if params[:version]
-    show!
+    render 'entidads/show.js'
   end
 
   def restore
@@ -38,10 +44,10 @@ class EntidadsController < InheritedResources::Base
   def update
     @entidad = Entidad.find(params[:id])
     @entidad.user = current_user
-    if @entidad.update_attributes(params[:entidad])
-      redirect_to :action => 'show', :id => @entidad, :format =>'js'
+    if @entidad.update_attributes(params[@entidad.type.downcase.to_sym])
+      redirect_to :action => 'show',:controller=>"entidads", :id => @entidad, :format =>'js'
     else
-      render 'edit.js'
+      render 'entidads/edit.js'
     end
   end
 
@@ -58,7 +64,7 @@ class EntidadsController < InheritedResources::Base
       end
 
     else
-      render 'new.js'
+      render 'entidads/new.js'
     end
   end
 

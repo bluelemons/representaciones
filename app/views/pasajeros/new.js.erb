@@ -1,3 +1,18 @@
 $('#pasajero_form').html('<%= raw escape_javascript(render("new")) %>');
 skin();
+  // TODO: esto tambien estas en reservas/new.js
+$('.new_pasajero_row').replaceWith('<%= raw escape_javascript(render("reservas/pasajero_field",:i=>4,:m=>true)) %>');
+  var i = unico();
+
+  $(".reserva_pasajero_4_ids_").removeClass("reserva_pasajero_4_ids_").addClass("reserva_pasajero_"+i+"_ids_")
+  $(".reserva_pasajero_4_doc").removeClass("reserva_pasajero_4_doc").addClass("reserva_pasajero_"+i+"_doc")
+  $(".reserva_pasajero_4_name").removeClass("reserva_pasajero_4_name").addClass("reserva_pasajero_"+i+"_name")
+  $(".reserva_pasajero_4_nacimiento").removeClass("reserva_pasajero_4_nacimiento").addClass("reserva_pasajero_"+i+"_nacimiento")
+
+  $(".reserva_pasajero_"+i+"_ids_").attr("i",i);
+  $(".reserva_pasajero_"+i+"_doc").attr("i",i);
+  $(".reserva_pasajero_"+i+"_name").attr("i",i);
+  $(".reserva_pasajero_"+i+"_nacimiento").attr("i",i);
+
+  autocomplete();
 

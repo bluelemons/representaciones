@@ -12,12 +12,14 @@ class CreateReservas < ActiveRecord::Migration
       t.integer :thabitacion_id
       t.integer :programa_id
       t.integer :operadora_id
-      t.integer :agencia_id
+      t.integer :agency_id
       t.float :iva
       t.float :impuesto
       t.float :seguro
       t.integer :monto_id
       t.string :referencia
+      t.boolean :cancelada, :default =>0
+      t.boolean :activa, :default =>0
       t.timestamps
     end
   end
@@ -26,3 +28,4 @@ class CreateReservas < ActiveRecord::Migration
     drop_table :reservas
   end
 end
+

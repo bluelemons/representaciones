@@ -1,0 +1,25 @@
+$("#pago_form").html("");
+$('#directo_form').html('<%= raw escape_javascript(render("form")) %>');
+skin();
+
+  //cuando cambia el select de agencia
+  $("#search_agency_id_eq").change(function(){
+    // pone el valor del select en el campo de agencia_id
+    $("#directo_entidad_id").val($("#search_agency_id_eq").val());
+    buscar_saldo();
+    });
+  //cuando cambia el select de operadora
+  $("#search_operadora_id_eq").change(function(){
+    $("#operadora_id").val($("#search_operadora_id_eq").val());
+    buscar_saldo();
+  });
+
+  //busca la lista de reservas con los datos ingresados
+  function buscar_saldo(){
+    agencia = $('#search_agency_id_eq').val();
+    operadora = $('#search_operadora_id_eq').val();
+    $.get("/reservas.js","search[agency_id_eq="+agencia+"]&search[operadora_id_eq="+operadora+"]", togrid, 'script');
+    return false;
+
+  }
+

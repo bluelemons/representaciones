@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe Pago do
-  describe '#create' do
+  
+  it { should validate_presence_of(:reserva) }
+  
+  describe '#save' do
     it 'valida: suficiente plata en el saldo' do
       pending
     end
@@ -12,7 +15,7 @@ describe Pago do
       saldo = mock_model(Saldo)
       saldo.should_receive(:withdraw).with(500)
       pago = Factory.build(:pago, :saldo => saldo)
-      pago.save
+      pago.save.should be_true
     end
   end
 end

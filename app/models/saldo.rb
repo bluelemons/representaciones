@@ -12,16 +12,24 @@ class Saldo < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto, :presence => true
   #scopes
-  default_scope select("saldos.*,montos.*").joins("left join montos on (montos.id = monto_id)")
-  #ahora podes hacer saldo.moneda o saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
+  #Permie hacer
+  #     saldo.moneda
+  #     saldo.valor y te devuelve saldo.monto.moneda o saldo.monto.valor segun corresponda
+  default_scope :include=> [:monto,:entidad,:moneda,:operadora]
 
   scope :by_moneda_id, lambda { |moneda_id|
-    where("montos.moneda_id =?", moneda_id)
+    where("monto.moneda_id =?", moneda_id)
   }
   scope :by_operadora_id, lambda { |operadora_id|
     where("operadora_id = ?",operadora_id)
   }
 
   #metodos
+  # Incrementa el saldo en un valor
+  def incrementar(val)
+    m = monto
+    m.valor += val
+    m.save!
+  end
 end
 

@@ -1,8 +1,11 @@
-request = $.ajax();
+//request = $.ajax();
   //agrega un tab con
   //model es el nombre del modelos, entidad, reserva, etc. en singular y minuscula
   //id es el id del registro en paticular, el que tiene en la base de datos.
   //name es el nombre del registro en particular como està en la base de datos.
+
+
+//TODO: agregar funcion para deshabilitar el boton de submit del formulario al primer click.
 function addTab(model,id,name) {
 
   if($("#tabs-"+id).length == 0){
@@ -75,7 +78,7 @@ function skin(){
   });
 
   // pone calendario en .datepicker
-  $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  $( ".datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
   //$( "#tabs" ).tabs();
 
   //convierte los divisores con .mytabs en tab, sortable permite al usuario ordenarlos.
@@ -91,16 +94,15 @@ function skin(){
 
 $(function() {
 
-  $("body").ajaxStart(function() {
-    request.abort();
-  });
+  //$("body").ajaxStart(function() {
+  //  //request.abort();
+  //});
 
-  $('#entidad_new').click(function() {
-    $.getScript("/entidads/new.js", togrid );
+  $('#operadora_new').click(function() {
+    $.getScript("/operadoras/new.js", togrid );
   });
-
   $('#agencia_new').click(function() {
-    $.getScript("/agencias/new.js", togrid );
+    $.getScript("/agencies/new.js", togrid );
   });
 
   $('#programa_new').click(function() {
@@ -114,11 +116,15 @@ $(function() {
   });
 
   $('#deposito_new').click(function() {
-    $.getScript("/movimientos/new?t=deposito", togrid );
+    $.getScript("/depositos/new.js", togrid );
   });
   $('#pago_new').click(function() {
-    $.getScript("/movimientos/new?t=pago", togrid );
+    $.getScript("/pagos/new.js", togrid );
   });
+  $('#directo_new').click(function() {
+    $.getScript("/directos/new.js", togrid );
+  });
+
 
 
   $('.pagination a').live('click', function () {

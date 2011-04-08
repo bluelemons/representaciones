@@ -1,14 +1,6 @@
-= form_for(@moneda,:remote=>true) do |f| 
+= form_for(@moneda,:remote=>true) do |f|
   .ui-widget.ui-widget-content
-    - if @moneda.errors.any? 
-      #error_explanation
-        %h2="#{pluralize(@moneda.errors.count, 'error')} prohibited this moneda from being saved:"
-  
-        %ul
-          - @moneda.errors.full_messages.each do |msg| 
-            %li= msg 
-    
-    
+    = error_message(@moneda)
     .field
       = f.label :Name
       %br
@@ -17,7 +9,8 @@
       = f.label :Simbolo
       %br
       = f.text_field :simbolo
-    
-    
+
+
     .actions
-      = f.submit 
+      = f.submit
+

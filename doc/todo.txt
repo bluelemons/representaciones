@@ -1,0 +1,16 @@
+# RESERVA
+• Listado de reservas como home page (si no estás logeado te dirije a conectarse). me parece que esta bien así
+• El tab desde Name a Tdoc no anda bien. no se que quiere decir esto
+• Las fechas están al revés. hay que verlo
+• El segundo pasajero no se agrega correctamente. En algunos navegadores, hay que ver porque ocurre
+
+# PAGOS
+• la fecha por defecto es hoy. la fecha no tiene valor por defecto. la fecha en un pago tiene que ser cargada (experiencia hablando).
+• no indica el monto de la deuda ni la moneda. hay que verlo.
+
+Reserva#show
+• el encabezado del tab debe ser Agencia y Operadora,no los respectivos nombres de cada uno. a mi me gusta como está
+
+Formularios
+#agregar funcion que deshailita el submit despues del primer click
+

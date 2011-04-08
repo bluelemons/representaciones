@@ -3,7 +3,7 @@
     %li
       %a{:href=>"#tabs-reserva-1"} Reserva
     %li
-      %a{:href=>"#tabs-reserva-2"}=@reserva.try(:agencia).try(:name)
+      %a{:href=>"#tabs-reserva-2"}=@reserva.try(:agency).try(:name)
     %li
       %a{:href=>"#tabs-reserva-3"}=@reserva.try(:operadora).try(:name)
     %li
@@ -28,7 +28,7 @@
       {:value=>:periodo},
       {:name=>"Habitacion",:string=> @reserva.thabitacion.try(:name)},
       {:name=>"Programa",:string=> @reserva.programa.try(:name)},
-      {:name=>"Agecia",:string=> @reserva.agencia.try(:name)},
+      {:name=>"Agecia",:string=> @reserva.agency.try(:name)},
       {:name=>"Operadora",:string=> @reserva.operadora.try(:name)},
       ],:class=>"wide")
 
@@ -39,8 +39,8 @@
       = render :partial => "layouts/version",:locals=>{:model=>@reserva}
 
   #tabs-reserva-2.ui-widget.ui-widget-content
-    .div{:id=>"entidad_form#{@reserva.agencia.id}"}
-      = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.agencia}
+    .div{:id=>"entidad_form#{@reserva.agency.id}"}
+      = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.agency}
   #tabs-reserva-3.ui-widget.ui-widget-content
     .div{:id=>"entidad_form#{@reserva.operadora.id}"}
       = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.operadora}
@@ -60,8 +60,8 @@
     =render :partial=>'pasajeros/grilla',:locals=>{:@pasajeros=>@reserva.pasajeros}
 
   #tabs-reserva-6.ui-widget.ui-widget-content
-    %h2="Pagos de agencia #{@reserva.try(:agencia).try(:name)}"
-    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.movimientos.pagos.where(:entidad_id=>@reserva.agencia_id)}
+    %h2="Pagos de agencia #{@reserva.try(:agency).try(:name)}"
+    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.pagos.where(:entidad_id=>@reserva.agency_id)}
     %h2="Pagos de operadora #{@reserva.try(:operadora).try(:name)}"
-    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.movimientos.pagos.where(:entidad_id=>@reserva.operadora_id)}
+    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.pagos.where(:entidad_id=>@reserva.operadora_id)}
 
