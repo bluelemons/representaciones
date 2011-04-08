@@ -23,7 +23,7 @@
         %td
           = link_to 'Show', {:controller=>"entidads",:action=>:show,:id=>entidad.id},:remote=>true
           -if can? :edit, entidad
-            = link_to 'Edit', edit_entidad_path(entidad),:remote=>true
+            = link_to 'Edit', {:controller=>"entidads",:action=>:edit,:id=>entidad.id},:remote=>true
           -if can? :destroy, entidad
             = link_to 'Destroy',{:controller=>"entidads",:action=>:destroy,:id=>entidad.id}, :confirm => 'Are you sure?', :method => :delete,:remote=>true
 
