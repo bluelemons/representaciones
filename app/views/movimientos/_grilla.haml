@@ -23,9 +23,9 @@
         %td
           =# movimiento.try(:monto).try(:moneda).try(:simbolo)
           -# muestro el monto en la moneda de la reserva
-          - if movimiento.try(:reserva)
+          - if movimiento.type == "Pago"
             = movimiento.try(:reserva).try(:moneda)
-            = movimiento.try(:monto).to(movimiento.try(:reserva).try(:moneda_id))
+            = movimiento.try(:monto).to(movimiento.reserva.moneda_id, movimiento.fecha)
             -if(movimiento.try(:reserva).try(:moneda_id)!=movimiento.try(:monto).try(:moneda_id))
               ="(cambio)"
           -else

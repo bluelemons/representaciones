@@ -37,7 +37,8 @@ class Reserva < ActiveRecord::Base
   validates :monto, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:monto,:agency,:programa,:thabitacion,:pagos,:pasajeros]
+  default_scope :include => [:operadora,:monto,:agency,:programa,:thabitacion,:pagos,:pasajeros],
+                :order => "id desc"
 
   scope :baja, where(:hidden=>0)
   #metodos
@@ -65,7 +66,7 @@ class Reserva < ActiveRecord::Base
         array[pago.monto.moneda_id]+=pago.monto.valor
         #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
         if pago.monto.moneda_id != pago.reserva.moneda_id
-          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id)
+          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id, pago.fecha)
         end
       end
     end
@@ -80,16 +81,23 @@ class Reserva < ActiveRecord::Base
         array[pago.monto.moneda_id]+=pago.monto.valor
         #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
         if pago.monto.moneda_id != pago.reserva.moneda_id
-          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id)
+          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id, pago.fecha)
         end
       end
     end
     array[moneda_id]
   end
 
-  def agencia_deuda
-    monto.valor - agencia_pago
+  def agencia_deuda(como = :valor)
+    if como == :valor
+      monto.valor - agencia_pago
+    else
+      m = monto
+      monto.valor -= agencia_pago
+      m
+    end
   end
+  alias :agency_deuda :agencia_deuda
 
   def operadora_deuda
     monto.valor - operadora_pago

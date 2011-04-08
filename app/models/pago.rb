@@ -9,7 +9,7 @@ class Pago < Movimiento
 
   # Callbacks:
 
-  before_validation :conversion
+  before_save       :conversion
   after_save        :depositar
   after_save        :pago_minimo
 
@@ -23,7 +23,7 @@ class Pago < Movimiento
     reserva_moneda = reserva.monto.moneda_id
     unless saldo_moneda == reserva_moneda
       convertido = Monto.new(:moneda_id => saldo_moneda,
-                             :valor => monto.to(saldo_moneda))
+                               :valor     => monto.to(saldo_moneda, fecha))
       monto = convertido
     end
   end
