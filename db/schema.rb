@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.integer  "entidad_id"
     t.integer  "version"
     t.string   "calle"
-    t.integer  "cuit"
+    t.string   "cuit"
     t.string   "telefono"
     t.string   "legajo"
     t.string   "email"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
 
   create_table "entidads", :force => true do |t|
     t.string   "calle"
-    t.integer  "cuit"
+    t.string   "cuit"
     t.string   "telefono"
     t.string   "legajo"
     t.string   "email"
