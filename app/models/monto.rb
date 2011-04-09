@@ -13,13 +13,13 @@ class Monto < ActiveRecord::Base
     monto
   end
 
-  def to(x)
-    v=self.valor
+  def to(x, fecha)
+    v = self.valor
     if moneda_id == x
       v
     else
       if(x == 2) #si se quiere convertir a dolares
-        v = dolares
+        v = dolares(fecha)
       else
         v = pesos
       end
@@ -36,12 +36,12 @@ class Monto < ActiveRecord::Base
     v
   end
 
-  def dolares()
+  def dolares(fecha)
     #voy a pasar a dolares aumiendo que la moneda es pesos
     v = self.valor
     m = self.moneda_id
 
-    c = (Cotizacion.a_la_fecha("2011-01-01",2).first.try(:compra) || 1)
+    c = (Cotizacion.a_la_fecha(fecha,2).first.try(:compra) || 1)
     v /= c
     v
   end

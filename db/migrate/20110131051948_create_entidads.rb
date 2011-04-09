@@ -5,7 +5,7 @@ class CreateEntidads < ActiveRecord::Migration
 
       t.string :calle
 
-      t.integer :cuit
+      t.string :cuit
 
       t.string :telefono
 

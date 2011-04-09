@@ -68,23 +68,23 @@
 #])
 #
 #
-#puts Pasajero.create([{
-#  :doc=>28684242,
-#  :name =>"Oldani Pablo",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1981-10-4"
-#  },{
-#  :doc=>31257560,
-#  :name =>"Dosso Liza",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1984-10-15"
-#  },{
-#  :doc=>32454325,
-#  :name =>"Espinaco Eloy",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1985-06-14"
-#  }
-#])
+puts Pasajero.create([{
+  :doc=>28684242,
+  :name =>"Oldani Pablo",
+  :tdoc_id=>1,
+  :nacimiento=>"1981-10-4"
+  },{
+  :doc=>31257560,
+  :name =>"Dosso Liza",
+  :tdoc_id=>1,
+  :nacimiento=>"1984-10-15"
+  },{
+  :doc=>32454325,
+  :name =>"Espinaco Eloy",
+  :tdoc_id=>1,
+  :nacimiento=>"1985-06-14"
+  }
+])
 #puts Operadora.create([{
 #  :name =>"Daniel",
 #  :localidad_id=>4807,
@@ -96,27 +96,27 @@
 #  }])
 #
 #
-puts Agency.create([{
-  :name=>'Pirulo',
-  :cuit =>'23-28787872-9',
-  :legajo=>'4d',
-  :telefono=>'4584274',
-  :email=>'pirulo@mail.com.ar',
-  :web=>'http://pirulo.com.ar',
-  :calle=>'Francia 2110',
-  :localidad_id=>4807
-  },{
-  :name=>'Mengano',
-  :cuit =>'23-28783472-9',
-  :legajo=>'3f',
-  :telefono=>'4334274',
-  :email=>'mengano@mail.com.ar',
-  :web=>'http://mengano.com.ar',
-  :calle=>'Urquiza 1757 2b',
-  :localidad_id=>3422
-  }
-
-])
+#puts Agency.create([{
+#  :name=>'Pirulo',
+#  :cuit =>'23-28787872-9',
+#  :legajo=>'4d',
+#  :telefono=>'4584274',
+#  :email=>'pirulo@mail.com.ar',
+#  :web=>'http://pirulo.com.ar',
+#  :calle=>'Francia 2110',
+#  :localidad_id=>4807
+#  },{
+#  :name=>'Mengano',
+#  :cuit =>'23-28783472-9',
+#  :legajo=>'3f',
+#  :telefono=>'4334274',
+#  :email=>'mengano@mail.com.ar',
+#  :web=>'http://mengano.com.ar',
+#  :calle=>'Urquiza 1757 2b',
+#  :localidad_id=>3422
+#  }
+#
+#])
 
 
 puts Programa.create([{
