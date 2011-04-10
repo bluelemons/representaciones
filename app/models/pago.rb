@@ -11,13 +11,12 @@ class Pago < Movimiento
 
   before_save       :conversion
   after_save        :depositar
-  after_save        :pago_minimo
+  before_save        :pago_maximo
 
   # conversion realiza el exchange de dinero antes de el registro de
   # la transaccion.
   # Esta solo se realiza si las monedas en el saldo y en la reserva
   # son distintos.
-
   def conversion
     saldo_moneda = saldo.monto.moneda_id
     reserva_moneda = reserva.monto.moneda_id
@@ -28,10 +27,16 @@ class Pago < Movimiento
     end
   end
 
-  def pago_minimo
-    # el pago no puede ser superior a la dueda.
-    # Esto debería llamarse pago maximo, ser una validacion y
-    # verificar tambien que no sea superior al saldo.
+  # el pago no puede ser superior a la dueda.
+  def pago_maximo
+    tipo = entidad.type
+    deuda = reserva.send((tipo.downcase + "_deuda").to_sym, :monto)
+    if monto.to(1, fecha) > deuda.to(1,fecha)
+      m = monto
+      m.valor = deuda.to(monto.moneda_id, fecha)
+      #m.save
+    end
+
   end
 
   def depositar
@@ -43,7 +48,11 @@ class Pago < Movimiento
 
   # valida que exista la deuda.
   def validate_deuda
-    true
+    tipo = entidad.type
+    deuda = reserva.send((tipo.downcase + "_deuda").to_sym, :monto)
+    unless (deuda.valor >0)
+      errors.add(:base, "No exite deuda para saldar")
+    end
   end
 
   # valida que exista plata en la cuenta.

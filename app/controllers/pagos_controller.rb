@@ -21,14 +21,6 @@ class PagosController < InheritedResources::Base
       flash[:notice] = "#{deposito.errors}"
       @pago.saldo = deposito.entidad.get_saldo(deposito.monto.moneda.id)
     end
-    #debe tomar el saldo en el que deposite.
-    tipo = @pago.entidad.type
-    deuda = @pago.reserva.send((tipo.downcase + "_deuda").to_sym, :monto)
-    if @pago.monto.to(1, @pago.fecha) > deuda.to(1,@pago.fecha)
-      m = @pago.monto
-      m.valor = deuda.to(@pago.monto.moneda_id, @pago.fecha)
-      #m.save
-    end
     if @pago.save
       flash[:notice] = "Por fin pagaron"
       redirect_to :action => 'new', :format =>'js'
