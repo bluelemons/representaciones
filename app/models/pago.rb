@@ -3,22 +3,21 @@ class Pago < Movimiento
 
   # validaciones:
   validates :reserva, :presence => true
-  validates :saldo, :presence => true
+  #validates :saldo, :presence => true
   validate :validate_deuda
   validate :saldo_suficiente
 
   # Callbacks:
 
   before_save       :conversion
-  after_save        :depositar
-  before_save        :pago_maximo
+  after_validation  :pago_maximo
 
   # conversion realiza el exchange de dinero antes de el registro de
   # la transaccion.
   # Esta solo se realiza si las monedas en el saldo y en la reserva
   # son distintos.
   def conversion
-    saldo_moneda = saldo.monto.moneda_id
+    saldo_moneda = monto.moneda_id
     reserva_moneda = reserva.monto.moneda_id
     unless saldo_moneda == reserva_moneda
       convertido = Monto.new(:moneda_id => saldo_moneda,
@@ -31,19 +30,23 @@ class Pago < Movimiento
   def pago_maximo
     tipo = entidad.type
     deuda = reserva.send((tipo.downcase + "_deuda").to_sym, :monto)
+    if saldo
+      entidad.withdraw(monto,saldo)
+    end
     if monto.to(1, fecha) > deuda.to(1,fecha)
       m = monto
+      resto = Monto.new(:valor=>monto.valor,:moneda=>monto.moneda)
+      resto.valor = monto.valor - deuda.to(monto.moneda_id,fecha)
       m.valor = deuda.to(monto.moneda_id, fecha)
-      #m.save
-    end
 
+      #crea un deposito con el remanente
+      depositar(resto)
+    end
   end
 
-  def depositar
-    entidad.withdraw(monto,saldo)
-    if(entidad.type == "Agency") #si es un pago de una agencia
-      reserva.operadora.deposit(monto) #se aumenta el deposito de la operadora.
-    end
+  def depositar(m)
+    deposito = Deposito.new(:monto =>m,:fecha=>fecha,:entidad=>entidad,:tdeposito =>tdeposito, :numero=>numero)
+    deposito.save
   end
 
   # valida que exista la deuda.
@@ -57,8 +60,8 @@ class Pago < Movimiento
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    unless ( saldo.monto.valor >= monto.valor )
-      errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
+    if (saldo && (saldo.monto.to(1,fecha) < monto.to(1,fecha)))
+       errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
     end
   end
 

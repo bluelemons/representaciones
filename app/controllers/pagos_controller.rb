@@ -12,15 +12,7 @@ class PagosController < InheritedResources::Base
   def create
     @pago = Pago.new(params[:pago])
     @pago.user = current_user
-    #genero deposito
 
-    #si uso la opcion de depositar
-    if !(params[:use_saldo])
-      deposito = Deposito.new(params[:pago])
-      deposito.save
-      flash[:notice] = "#{deposito.errors}"
-      @pago.saldo = deposito.entidad.get_saldo(deposito.monto.moneda.id)
-    end
     if @pago.save
       flash[:notice] = "Por fin pagaron"
       redirect_to :action => 'new', :format =>'js'

@@ -88,19 +88,28 @@ class Reserva < ActiveRecord::Base
     array[moneda_id]
   end
 
+
+#### hay que sacar el como = valor y devolver solo el objeto Monto. para eso hay que modificar en los lugares donde
+#### aparece agencia_deuda y agencia valor y agregar ".valor"
   def agencia_deuda(como = :valor)
     if como == :valor
       monto.valor - agencia_pago
     else
-      m = monto
-      monto.valor -= agencia_pago
+      m = Monto.new(:valor=>monto.valor,:moneda => monto.moneda)
+      m.valor = monto.valor - agencia_pago
       m
     end
   end
   alias :agency_deuda :agencia_deuda
 
-  def operadora_deuda
-    monto.valor - operadora_pago
+  def operadora_deuda(como = :valor)
+    if como == :valor
+      monto.valor - operadora_pago
+    else
+      m = Monto.new(:valor=>monto.valor,:moneda => monto.moneda)
+      m.valor = monto.valor - operadora_pago
+      m
+    end
   end
 
   def pasajero #array con los roles del usuario
