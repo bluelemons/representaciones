@@ -54,10 +54,10 @@ class Entidad < ActiveRecord::Base
     s
   end
 
-  def get_saldo(m_id)
+  def get_saldo(m_id,operadora=nil)
     s=nil
     saldos(true).each do |sa|
-      if(sa.monto.moneda_id==m_id)
+      if(sa.monto.moneda_id==m_id && operadora_id == nil)
         s = sa
       end
     end
