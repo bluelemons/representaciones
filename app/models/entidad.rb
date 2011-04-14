@@ -25,6 +25,7 @@ class Entidad < ActiveRecord::Base
 
 
   #metodos
+
   #cada vez que se crea la entidad tambien se crea el saldo
   after_create :crear_saldo
   def crear_saldo
@@ -34,47 +35,25 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  # Incrementa el saldo de la entidad segun un monto.
-  # Si el saldo no existe es creado.
-
-  def deposit(monto)
+  def deposit(monto,op=nil)
     # if monto.valor > 0 ## No chequeo porque esto depende de la validación de monto.
     moneda = monto.moneda
-    s = get_saldo(moneda.id)
+    s = saldo(moneda.id,op)
     s.incrementar(monto.valor)
   end
 
-  def get_saldo_by(operadora,moneda_id)
-    s=nil
-    saldos.each do |sa|
-      if sa.monto.moneda_id==moneda_id && saldo.operadora_id == operadora_id
-        s = sa
-      end
-    end
-    s
-  end
-
-  def get_saldo(m_id,operadora=nil)
+  def saldo(m_id,op=nil)
     s=nil
     saldos(true).each do |sa|
-      if(sa.monto.moneda_id==m_id && operadora_id == nil)
+      if(sa.monto.moneda_id==m_id && sa.operadora_id == op.try(:id))
         s = sa
       end
     end
     s
-  end
-
-  def saldo_by(operadora, moneda_id)
-    saldo = get_saldo_by(operadora, moneda_id)
-    if saldo
-      saldo.valor
-    else
-      0
-    end
   end
 
   def deposit_by(operadora, monto)
-    saldo = get_saldo_by(operadora, monto.moneda_id)
+    saldo = saldo(monto.moneda_id,operadora)
     if saldo
       m = saldo.monto
       m.valor += monto.valor
@@ -84,20 +63,8 @@ class Entidad < ActiveRecord::Base
     end
   end
 
-  def withdraw_by(operadora,monto)
-    saldo = get_saldo_by(operadora, monto.moneda_id)
-    if saldo
-      m = saldo.monto
-      m.valor -= monto.valor
-      m.save
-      m.valor
-    else
-      false
-    end
-  end
-
-  def withdraw(monto,saldo)
-    s = saldo
+  def withdraw(monto,sal)
+    s = sal
     m = s.monto
     if s.monto.valor >= monto.valor
       m.valor -= monto.valor
@@ -106,28 +73,6 @@ class Entidad < ActiveRecord::Base
     end
     m.save
     m.valor
-  end
-
-  #def saldo_by_moneda(moneda)
-  #  s = nil
-  #  saldos.each do |saldo|
-  #    if saldo.monto.moneda == moneda
-  #      s = saldo
-  #    end
-  #  end
-  #  s
-  # saldos.by_moneda(moneda.id).first
-  #end
-
-  def saldo(moneda)
-  #  s = nil
-  #  saldos.each do |saldo|
-  #    if saldo.monto.moneda == moneda
-  #      s = saldo
-  #    end
-  #  end
-  #  s.monto.valor
-    get_saldo(moneda.id).try(:valor)
   end
 
 end
