@@ -1,12 +1,12 @@
 %h2 Pasajeros
 .pasajeros
   =link_to_function 'Agregar',:class=>'new'
-  %table
+  %table#viajeros
     %tr
       %th
       %th Documento
-      %th Nombre   
-      %th Nacimiento    
+      %th Nombre
+      %th Nacimiento
     -@reserva.pasajeros.each do |pasajero|
       %tr
         %td
@@ -18,9 +18,10 @@
         %td
           =pasajero.nacimiento
         %td
-          = check_box_tag "reserva[pasajero_ids][]",pasajero.id, @reserva.pasajeros.include?(pasajero)     
-         
-    -for i in 0..3
-      = render :partial => "pasajero_field",:locals=>{:i=>i,:m=>false}
-    .new_pasajero_row{:i=>4}
-    
+          = check_box_tag "reserva[pasajero_ids][]",pasajero.id, @reserva.pasajeros.include?(pasajero)
+    %tr
+      -for i in 0..3
+        = render :partial => "pasajero_field",:locals=>{:i=>i,:m=>false}
+      %td
+        .new_pasajero_row{:i=>4,:foo=>"bar"}
+
