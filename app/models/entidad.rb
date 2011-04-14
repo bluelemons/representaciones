@@ -20,7 +20,7 @@ class Entidad < ActiveRecord::Base
   validates :name, :presence => true
 
   #scopes
-
+  default_scope order(:name)
   scope :baja, where(:hidden=>0)
 
 
