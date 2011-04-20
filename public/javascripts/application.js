@@ -66,8 +66,22 @@ function togrid(){
     });
   }
 function skin(){
+
+  $(".notice").each(function() {
+    if($(this).html().length != 0){
+      var text =$(this).html();
+
+      $(this).empty();
+      $("#freeow").freeow(text,"", {
+        classes: ["gray", "error"],
+        autoHideDelay:5000
+      });
+    }
+
+  });
+
   $('.action_bar *').button({icons: {primary: "ui-icon-pencil"},text: true});
-  $('.new_button').button({icons: {primary: "ui-icon-plus"},text: false});
+/*  $('.new_button').button({icons: {primary: "ui-icon-plus"},text: false});
 
   $('.show_button').button({icons: {primary: "ui-icon-search"},text: false});
   $('.change_button').button({icons: {primary: "ui-icon-transferthick-e-w"},text: false});
@@ -75,7 +89,7 @@ function skin(){
 
   $('.tohide').live('dblclick',function(){
     $(this).hide();
-  });
+  });*/
 
   // pone calendario en .datepicker
   $( ".datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
@@ -93,6 +107,7 @@ function skin(){
 }
 
 $(function() {
+
 
   //$("body").ajaxStart(function() {
   //  //request.abort();
