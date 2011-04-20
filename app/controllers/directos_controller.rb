@@ -23,11 +23,11 @@ class DirectosController < ApplicationController
 
       #genero el pago
       # un pago de la agencia.
-      saldo_a = agencia.get_saldo_by(operadora,moneda_id)
+      saldo_a = agencia.saldo(moneda_id,operadora)
       valid = @directo.pago(agencia,saldo_a)
 
       #un pago de la operadora
-      saldo_o = operadora.get_saldo(moneda_id)
+      saldo_o = operadora.saldo(moneda_id)
       @directo.pago(operadora,saldo_o)
 
 
