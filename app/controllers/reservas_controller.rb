@@ -48,6 +48,7 @@ class ReservasController < InheritedResources::Base
     @reserva = Reserva.find(params[:id])
     @reserva.user = current_user
     if @reserva.update_attributes(params[:reserva])
+
       redirect_to :action => 'show', :id => @reserva, :format =>'js',:controller=>'reservas'
     else
       render 'reservas/edit.js'
@@ -59,6 +60,7 @@ class ReservasController < InheritedResources::Base
     @reserva.user = current_user
 
     if @reserva.save
+      flash[:notice]="Reserva creada"
       redirect_to :action => 'show', :id => @reserva, :format =>'js'
     else
       @reserva.build_monto
