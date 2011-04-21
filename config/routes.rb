@@ -1,18 +1,13 @@
 Representaciones::Application.routes.draw do
 
+  resources :vencidas
+
   resources :entidads do
     resources :saldos
   end
 
   resources :operadoras
   resources :agencies
-
-
-  resources :tpagos
-
-  resources :tentidads
-
-  resources :tdocs
 
   resources :movimientos
   resources :depositos
@@ -21,8 +16,6 @@ Representaciones::Application.routes.draw do
 
   resources :pasajeros
   match 'pasajeros_dni/:doc' => 'pasajeros#show' #Busca el pasajoer por DNI en /pasajeros_din/:doc
-
-  resources :monedas
 
   resources :reservas do
     resources :pagos

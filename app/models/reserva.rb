@@ -41,6 +41,8 @@ class Reserva < ActiveRecord::Base
                 :order => "id desc"
 
   scope :baja, where(:hidden=>0)
+
+  scope :por_vencer, lambda {|fecha| where("fecha = ? and pago_minimo > 0",fecha) }
   #metodos
 
   def titular

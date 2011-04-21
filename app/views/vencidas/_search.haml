@@ -1,0 +1,11 @@
+%h3.ui-widget-header Busqueda
+= semantic_form_for @search,:url=>{:controller=>"vencidas"} do |form|
+
+  =form.inputs do
+    %table{:style=>'width:800px;'}
+      %tr
+        %td=form.input :fecha_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+      %tr
+        %td=form.input :agency_id_eq,:collection => Agency.all
+        %td=form.input :operadora_id_eq,:collection => Operadora.all
+
