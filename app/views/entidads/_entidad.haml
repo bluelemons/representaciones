@@ -45,7 +45,17 @@
     %br
     = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
   #tabs-entidad-2
+    %h3 Cuenta corriente
     = render :partial => "saldos/saldos",:locals=>{:@saldos=>@entidad.saldos}
+    %h3 Deuda total
+    %table.togrid{:id=>"deuda_grid_#{Time.now}"}
+      %tr
+        %th Pesos
+        %th Dolares
+        %th Euros
+      %tr
+        - @entidad.deudas.each do |d|
+          %td=d
   #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.movimientos.where(:entidad_id=>@entidad.id)}
