@@ -27,3 +27,6 @@
           -if can? :destroy, entidad
             = link_to 'Destroy',{:controller=>"entidads",:action=>:destroy,:id=>entidad.id}, :confirm => 'Are you sure?', :method => :delete,:remote=>true
 
+.action_bar
+  =link_to "imprimir",{:search=>params[:search],:format=>'pdf'}
+

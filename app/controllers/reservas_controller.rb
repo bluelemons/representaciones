@@ -12,7 +12,7 @@ class ReservasController < InheritedResources::Base
       format.js
       format.html
       format.pdf do
-        output = ReservaReport.new.to_pdf(@search,params[:search])
+        output = ReservaReport.new.regular(@search,params[:search])
         send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end

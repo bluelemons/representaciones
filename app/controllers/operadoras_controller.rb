@@ -12,7 +12,7 @@ class OperadorasController < EntidadsController
       format.js{render "entidads/index"}
       format.html
       format.pdf do
-        output = OperadoraReport.new.to_pdf(@search)
+        output = EntidadReport.new.to_pdf(@search)
         send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end

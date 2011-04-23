@@ -2,7 +2,7 @@
 include Layout
 class ReservaReport < Prawn::Document
 
-  def to_pdf(datos,params)
+  def regular(datos,params)
 
     self.font_size = 8
 
