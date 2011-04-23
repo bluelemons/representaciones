@@ -35,6 +35,14 @@ class Entidad < ActiveRecord::Base
     end
   end
 
+  def deudas
+    d = Array.new(3,0)
+    reservas.each do |r|
+      d[r.moneda_id-1] += r.send((type.downcase + "_deuda").to_sym) if r.moneda_id
+    end
+    d
+  end
+
   def deposit(monto,op=nil)
     # if monto.valor > 0 ## No chequeo porque esto depende de la validación de monto.
     moneda = monto.moneda
