@@ -2,6 +2,13 @@ Representaciones::Application.routes.draw do
 
   resources :vencidas
 
+  resources :bouchers do
+    member do
+      get :cargar
+      get :bajar
+    end
+  end
+
   resources :entidads do
     resources :saldos
   end

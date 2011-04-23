@@ -24,6 +24,7 @@ class CreateReservas < ActiveRecord::Migration
       t.float :aereo, :float
       t.float :otros, :float
       t.float :pago_minimo, :float
+      t.date :boucher
 
       t.timestamps
     end

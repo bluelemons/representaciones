@@ -1,0 +1,17 @@
+=javascript("jq.reservas")
+=javascript("jq.boucher")
+.ui-widget
+  %h1.ui-widget-header Reservas
+
+  #tabs-reservas.mytabs
+    %ul
+      %li
+        %a{:href=>"#tabs-reservas-1"} Reservas
+
+    #tabs-reservas-1
+      Fecha para de los bouchers
+      %input#boucher_date.datepicker
+      = render :partial => "search"
+      #reservas
+        =render 'bouchers/reservas'
+

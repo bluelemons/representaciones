@@ -1,0 +1,14 @@
+%h3.ui-widget-header Busqueda
+= semantic_form_for @search,:url=>{:controller=>"bouchers"} do |form|
+
+  =form.inputs do
+    %table{:style=>'width:800px;'}
+      %tr
+        %td
+          %input{:type=>"checkbox",:name=>"sin_boucher"} Sin boucher
+      %tr
+        %td=form.input :agency_id_eq,:collection => Agency.all
+        %td=form.input :operadora_id_eq,:collection => Operadora.all
+    %br
+    =form.buttons
+

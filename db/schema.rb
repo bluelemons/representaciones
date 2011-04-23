@@ -299,6 +299,7 @@ ActiveRecord::Schema.define(:version => 20110420144118) do
     t.boolean  "hidden",         :default => false
     t.integer  "user_id"
     t.integer  "version"
+    t.date     "boucher"
   end
 
   create_table "roles", :force => true do |t|
@@ -470,3 +471,4 @@ ActiveRecord::Schema.define(:version => 20110420144118) do
   end
 
 end
+
