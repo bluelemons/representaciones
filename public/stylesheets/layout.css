@@ -1,7 +1,7 @@
 .action_bar{
   padding-top:4px;
   padding-bottom:4px;
-  float:right;
+  /*float:right;*/
 }
 .version{
   font-size:0.7em;

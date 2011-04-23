@@ -68,206 +68,206 @@
 #])
 #
 #
-puts Pasajero.create([{
-  :doc=>28684242,
-  :name =>"Oldani Pablo",
-  :tdoc_id=>1,
-  :nacimiento=>"1981-10-4"
-  },{
-  :doc=>31257560,
-  :name =>"Dosso Liza",
-  :tdoc_id=>1,
-  :nacimiento=>"1984-10-15"
-  },{
-  :doc=>32454325,
-  :name =>"Espinaco Eloy",
-  :tdoc_id=>1,
-  :nacimiento=>"1985-06-14"
-  }
-])
-#puts Operadora.create([{
-#  :name =>"Daniel",
-#  :localidad_id=>4807,
-#  :calle=>'Saavedra 2854 dto 3'
+#puts Pasajero.create([{
+#  :doc=>28684242,
+#  :name =>"Oldani Pablo",
+#  :tdoc_id=>1,
+#  :nacimiento=>"1981-10-4"
 #  },{
-#  :name =>"Cristina",
-#  :localidad_id=>4807,
-#  :calle=>'Crespo 3054 dpto 3'
-#  }])
-#
-#
-#puts Agency.create([{
-#  :name=>'Pirulo',
-#  :cuit =>'23-28787872-9',
-#  :legajo=>'4d',
-#  :telefono=>'4584274',
-#  :email=>'pirulo@mail.com.ar',
-#  :web=>'http://pirulo.com.ar',
-#  :calle=>'Francia 2110',
-#  :localidad_id=>4807
+#  :doc=>31257560,
+#  :name =>"Dosso Liza",
+#  :tdoc_id=>1,
+#  :nacimiento=>"1984-10-15"
 #  },{
-#  :name=>'Mengano',
-#  :cuit =>'23-28783472-9',
-#  :legajo=>'3f',
-#  :telefono=>'4334274',
-#  :email=>'mengano@mail.com.ar',
-#  :web=>'http://mengano.com.ar',
-#  :calle=>'Urquiza 1757 2b',
-#  :localidad_id=>3422
+#  :doc=>32454325,
+#  :name =>"Espinaco Eloy",
+#  :tdoc_id=>1,
+#  :nacimiento=>"1985-06-14"
 #  }
-#
 #])
-
-
-puts Programa.create([{
-  :name => "Bariloche",
-  :obs=>'Mucha joda a la noche'
+puts Operadora.create([{
+  :name =>"Daniel",
+  :localidad_id=>4807,
+  :calle=>'Saavedra 2854 dto 3'
   },{
-  :name => "Brasil",
-  :obs=>'Execelente para vacacionar con la familia'
-  }
-])
-
-puts Thabitacion.create([{
-  :name =>"Simple"
-  },{
-  :name =>"Doble"
+  :name =>"Cristina",
+  :localidad_id=>4807,
+  :calle=>'Crespo 3054 dpto 3'
   }])
 
-puts Role.create({
-  :name=>'Admin',
-  :desc=>'Es el Rol de administrador'
-})
 
-puts User.create([{
-  :username=>'olvap',
-  :email=>'youre-mail@mail.com',
-  :password_confirmation=>'admin6',
-  :password=>'admin6',
-  :role_ids=>[1]
+puts Agency.create([{
+  :name=>'Pirulo',
+  :cuit =>'23-28787872-9',
+  :legajo=>'4d',
+  :telefono=>'4584274',
+  :email=>'pirulo@mail.com.ar',
+  :web=>'http://pirulo.com.ar',
+  :calle=>'Francia 2110',
+  :localidad_id=>4807
   },{
-  :username=>'eloy',
-  :email=>'eloy-mail@mail.com',
-  :password_confirmation=>'admin8',
-  :password=>'admin8',
-  :role_ids=>[1]
+  :name=>'Mengano',
+  :cuit =>'23-28783472-9',
+  :legajo=>'3f',
+  :telefono=>'4334274',
+  :email=>'mengano@mail.com.ar',
+  :web=>'http://mengano.com.ar',
+  :calle=>'Urquiza 1757 2b',
+  :localidad_id=>3422
   }
+
 ])
 
-puts Reserva.create(
-  :hotel =>'Central Park',
-  :reservado =>'Pablo',
-  :regimen =>'All',
-  :periodo => '6 Noches',
-  :fecha => '2011-01-24',
-  :salida=>'2011-03-21',
-  :agency_id=>3,
-  :programa_id =>1,
-  :operadora_id =>1,
-  :thabitacion_id =>1,
-  :pasajero_ids=>[1,2],
-  :iva => 18.19,
-  :impuesto =>20.01,
-  :seguro => 0,
-  :monto_attributes =>{
-    :valor =>3500,
-    :moneda_id =>1
-    }
-  )
-puts Reserva.create(
-  :hotel =>'Central Park',
-  :reservado =>'Pablo',
-  :regimen =>'All',
-  :periodo => '6 Noches',
-  :fecha => '2011-01-24',
-  :salida=>'2011-03-21',
-  :agency_id=>4,
-  :programa_id =>2,
-  :operadora_id =>1,
-  :thabitacion_id =>1,
-  :pasajero_ids=>[1,2],
-  :iva => 18.19,
-  :impuesto =>20.01,
-  :seguro => 0,
-  :monto_attributes =>{
-    :valor =>300,
-    :moneda_id =>2
-    }
-  )
-puts Reserva.create(
-  :hotel =>'Central Park',
-  :reservado =>'Pablo',
-  :regimen =>'All',
-  :periodo => '6 Noches',
-  :fecha => '2011-01-24',
-  :salida=>'2011-03-21',
-  :agency_id=>3,
-  :programa_id =>2,
-  :operadora_id =>1,
-  :thabitacion_id =>1,
-  :pasajero_ids=>[1,2],
-  :iva => 18.19,
-  :impuesto =>20.01,
-  :seguro => 0,
-  :monto_attributes =>{
-    :valor =>4500,
-    :moneda_id =>1
-    }
-  )
-puts Reserva.create(
-  :hotel =>'Central Park',
-  :reservado =>'Pablo',
-  :regimen =>'All',
-  :periodo => '6 Noches',
-  :fecha => '2011-01-24',
-  :salida=>'2011-03-21',
-  :agency_id=>4,
-  :programa_id =>2,
-  :operadora_id =>1,
-  :thabitacion_id =>1,
-  :pasajero_ids=>[1,2],
-  :iva => 18.19,
-  :impuesto =>20.01,
-  :seguro => 0,
-  :monto_attributes =>{
-    :valor =>500,
-    :moneda_id =>2
-    }
-  )
-puts Reserva.create(
-  :hotel =>'Central Park',
-  :reservado =>'Pablo',
-  :regimen =>'All',
-  :periodo => '6 Noches',
-  :fecha => '2011-01-24',
-  :salida=>'2011-03-21',
-  :agency_id=>3,
-  :programa_id =>2,
-  :operadora_id =>1,
-  :thabitacion_id =>1,
-  :pasajero_ids=>[1,2],
-  :iva => 18.19,
-  :impuesto =>20.01,
-  :seguro => 0,
-  :monto_attributes =>{
-    :valor =>800,
-    :moneda_id =>3
-    }
-  )
-['Recibo', 'Banco'].each do |tipo|
-  Tdeposito.find_or_create_by_name tipo
-end
 
-[{ :name =>'Pesos', :simbolo =>'$'
-  },{
-  :name =>'Dolares', :simbolo=>'u$s'
-  },{
-  :name =>'Euros', :simbolo=>'€'
-  }].each do |moneda|
-  Moneda.find_or_create_by_name(moneda[:name], :simbolo => moneda[:simbolo])
-end
-
-['DNI', 'LE' ,'LC'].each do |tipo|
-  Tdoc.find_or_create_by_name tipo
-end
+#puts Programa.create([{
+#  :name => "Bariloche",
+#  :obs=>'Mucha joda a la noche'
+#  },{
+#  :name => "Brasil",
+#  :obs=>'Execelente para vacacionar con la familia'
+#  }
+#])
+#
+#puts Thabitacion.create([{
+#  :name =>"Simple"
+#  },{
+#  :name =>"Doble"
+#  }])
+#
+#puts Role.create({
+#  :name=>'Admin',
+#  :desc=>'Es el Rol de administrador'
+#})
+#
+#puts User.create([{
+#  :username=>'olvap',
+#  :email=>'youre-mail@mail.com',
+#  :password_confirmation=>'admin6',
+#  :password=>'admin6',
+#  :role_ids=>[1]
+#  },{
+#  :username=>'eloy',
+#  :email=>'eloy-mail@mail.com',
+#  :password_confirmation=>'admin8',
+#  :password=>'admin8',
+#  :role_ids=>[1]
+#  }
+#])
+#
+#puts Reserva.create(
+#  :hotel =>'Central Park',
+#  :reservado =>'Pablo',
+#  :regimen =>'All',
+#  :periodo => '6 Noches',
+#  :fecha => '2011-01-24',
+#  :salida=>'2011-03-21',
+#  :agency_id=>3,
+#  :programa_id =>1,
+#  :operadora_id =>1,
+#  :thabitacion_id =>1,
+#  :pasajero_ids=>[1,2],
+#  :iva => 18.19,
+#  :impuesto =>20.01,
+#  :seguro => 0,
+#  :monto_attributes =>{
+#    :valor =>3500,
+#    :moneda_id =>1
+#    }
+#  )
+#puts Reserva.create(
+#  :hotel =>'Central Park',
+#  :reservado =>'Pablo',
+#  :regimen =>'All',
+#  :periodo => '6 Noches',
+#  :fecha => '2011-01-24',
+#  :salida=>'2011-03-21',
+#  :agency_id=>4,
+#  :programa_id =>2,
+#  :operadora_id =>1,
+#  :thabitacion_id =>1,
+#  :pasajero_ids=>[1,2],
+#  :iva => 18.19,
+#  :impuesto =>20.01,
+#  :seguro => 0,
+#  :monto_attributes =>{
+#    :valor =>300,
+#    :moneda_id =>2
+#    }
+#  )
+#puts Reserva.create(
+#  :hotel =>'Central Park',
+#  :reservado =>'Pablo',
+#  :regimen =>'All',
+#  :periodo => '6 Noches',
+#  :fecha => '2011-01-24',
+#  :salida=>'2011-03-21',
+#  :agency_id=>3,
+#  :programa_id =>2,
+#  :operadora_id =>1,
+#  :thabitacion_id =>1,
+#  :pasajero_ids=>[1,2],
+#  :iva => 18.19,
+#  :impuesto =>20.01,
+#  :seguro => 0,
+#  :monto_attributes =>{
+#    :valor =>4500,
+#    :moneda_id =>1
+#    }
+#  )
+#puts Reserva.create(
+#  :hotel =>'Central Park',
+#  :reservado =>'Pablo',
+#  :regimen =>'All',
+#  :periodo => '6 Noches',
+#  :fecha => '2011-01-24',
+#  :salida=>'2011-03-21',
+#  :agency_id=>4,
+#  :programa_id =>2,
+#  :operadora_id =>1,
+#  :thabitacion_id =>1,
+#  :pasajero_ids=>[1,2],
+#  :iva => 18.19,
+#  :impuesto =>20.01,
+#  :seguro => 0,
+#  :monto_attributes =>{
+#    :valor =>500,
+#    :moneda_id =>2
+#    }
+#  )
+#puts Reserva.create(
+#  :hotel =>'Central Park',
+#  :reservado =>'Pablo',
+#  :regimen =>'All',
+#  :periodo => '6 Noches',
+#  :fecha => '2011-01-24',
+#  :salida=>'2011-03-21',
+#  :agency_id=>3,
+#  :programa_id =>2,
+#  :operadora_id =>1,
+#  :thabitacion_id =>1,
+#  :pasajero_ids=>[1,2],
+#  :iva => 18.19,
+#  :impuesto =>20.01,
+#  :seguro => 0,
+#  :monto_attributes =>{
+#    :valor =>800,
+#    :moneda_id =>3
+#    }
+#  )
+#['Recibo', 'Banco'].each do |tipo|
+#  Tdeposito.find_or_create_by_name tipo
+#end
+#
+#[{ :name =>'Pesos', :simbolo =>'$'
+#  },{
+#  :name =>'Dolares', :simbolo=>'u$s'
+#  },{
+#  :name =>'Euros', :simbolo=>'€'
+#  }].each do |moneda|
+#  Moneda.find_or_create_by_name(moneda[:name], :simbolo => moneda[:simbolo])
+#end
+#
+#['DNI', 'LE' ,'LC'].each do |tipo|
+#  Tdoc.find_or_create_by_name tipo
+#end
 
