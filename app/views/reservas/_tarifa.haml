@@ -1,12 +1,17 @@
 %h2 Tarifa
 
-%table.wide
-  %tr
-    %td= form.input :iva,:input_html => {:size=>8}
-    %td= form.input :impuesto,:input_html => {:size=>8}
-    %td= form.input :seguro,:input_html => {:size=>8}
-  %tr
-    =render :partial =>'montos/form',:locals=>{:f=>form}
+=render :partial =>'montos/form',:locals=>{:f=>form}
+%br
+%br
+= form.input :tarifa,:input_html => {:size=>8}
+= form.input :iva,:input_html => {:size=>8}
+= form.input :impuesto,:input_html => {:size=>8}
+= form.input :aereo,:input_html => {:size=>8}
+= form.input :seguro,:input_html => {:size=>8}
+= form.input :pago_minimo,:input_html => {:size=>8}
+
+
+
 = form.input :obs
 
 = render :partial => "pasajeros"

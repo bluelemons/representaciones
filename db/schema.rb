@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110204130234) do
+ActiveRecord::Schema.define(:version => 20110420144118) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -256,6 +256,11 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.string   "referencia"
     t.boolean  "cancelada",      :default => false
     t.boolean  "activa",         :default => false
+    t.float    "tarifa"
+    t.float    "float"
+    t.float    "aereo"
+    t.float    "otros"
+    t.float    "pago_minimo"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false
@@ -284,6 +289,11 @@ ActiveRecord::Schema.define(:version => 20110204130234) do
     t.string   "referencia"
     t.boolean  "cancelada",      :default => false
     t.boolean  "activa",         :default => false
+    t.float    "tarifa"
+    t.float    "float"
+    t.float    "aereo"
+    t.float    "otros"
+    t.float    "pago_minimo"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false

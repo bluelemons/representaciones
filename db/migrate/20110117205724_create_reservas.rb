@@ -20,6 +20,11 @@ class CreateReservas < ActiveRecord::Migration
       t.string :referencia
       t.boolean :cancelada, :default =>0
       t.boolean :activa, :default =>0
+      t.float :tarifa, :float
+      t.float :aereo, :float
+      t.float :otros, :float
+      t.float :pago_minimo, :float
+
       t.timestamps
     end
   end
