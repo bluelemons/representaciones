@@ -52,9 +52,15 @@ class Entidad < ActiveRecord::Base
 
   def saldo(m_id,op=nil)
     s=nil
-    saldos(true).each do |sa|
+    saldos.each do |sa|
       if(sa.monto.moneda_id==m_id && sa.operadora_id == op.try(:id))
         s = sa
+      end
+      if !s
+        monto = Monto.new(:moneda_id=>m_id,:valor=>0)
+        monto.save
+        s = Saldo.new(:entidad_id=>id,:operadora => op,:moneda_id => m_id,:monto => monto)
+        s.save
       end
     end
     s

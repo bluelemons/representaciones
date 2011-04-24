@@ -4,6 +4,7 @@ class CreateMovimientos < ActiveRecord::Migration
     create_table :movimientos do |t|
 
       t.integer :entidad_id
+      t.integer :operadora_id #es la operadora sobre la cual se hace el deposito. este dato reemplaza a saldo_id.
       t.integer :reserva_id
       t.string :type # depósito o pago
       t.integer :tdeposito_id

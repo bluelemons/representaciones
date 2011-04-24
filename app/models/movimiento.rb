@@ -1,10 +1,11 @@
 class Movimiento < ActiveRecord::Base
   #clases
-  acts_as_versioned
+  #acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :reserva
   belongs_to :entidad
+  belongs_to :operadora
   belongs_to :saldo
   belongs_to :monto
 

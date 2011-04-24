@@ -5,6 +5,8 @@
 
     = render :partial => "movimientos/comunes",:locals=>{:f=>f}
     = f.collection_select(:entidad_id, Entidad.all, :id, :name, :prompt => false)
+    %br
+    = f.collection_select(:operadora_id, Operadora.all, :id, :name,:prompt=>true)
     %table
       %tr
         =render :partial =>'montos/form',:locals=>{:f=>f}
