@@ -1,5 +1,51 @@
 # coding: utf-8
 
+['Recibo', 'Banco'].each do |tipo|
+  Tdeposito.find_or_create_by_name tipo
+end
+
+[{ :name =>'Pesos', :simbolo =>'$'
+  },{
+  :name =>'Dolares', :simbolo=>'u$s'
+  },{
+  :name =>'Euros', :simbolo=>'€'
+  }].each do |moneda|
+  Moneda.find_or_create_by_name(moneda[:name], :simbolo => moneda[:simbolo])
+end
+
+['DNI', 'CUIT', 'CUIL', 'LE' ,'LC'].each do |tipo|
+  Tdoc.find_or_create_by_name tipo
+end
+
+puts Role.create({
+  :name=>'Admin',
+  :desc=>'Es el Rol de administrador'
+})
+
+puts User.create([{
+  :username=>'olvap',
+  :email=>'youre-mail@mail.com',
+  :password_confirmation=>'admin6',
+  :password=>'admin6',
+  :role_ids=>[1]
+  },{
+  :username=>'eloy',
+  :email=>'eloy-mail@mail.com',
+  :password_confirmation=>'admin8',
+  :password=>'admin8',
+  :role_ids=>[1]
+  },{
+  :username=>'susana',
+  :email=>'susana@gmail.com',
+  :password_confirmation=>'susana1',
+  :password=>'susana1',
+  :role_ids=>[1]
+  }
+])
+
+require "#{RAILS_ROOT}/db/seeds/agencias/agencias"
+require "#{RAILS_ROOT}/db/seeds/operadoras/operadoras"
+
 #Pago.create({
 #  :fecha=>"2011-01-30",
 #  :reserva_id =>1,
@@ -32,42 +78,6 @@
 #  }
 #])
 #
-#
-#puts Tentidad.create([{
-#  :name =>'Agencia'
-#  },{
-#  :name =>'Operadora'
-#  }
-#])
-#
-#puts Tdeposito.create([{
-#  :name =>'Factura'
-#  },{
-#  :name =>'Banco'
-#  }
-#])
-#puts Moneda.create([{
-#  :name =>'Pesos',
-#  :simbolo =>'$'
-#  },{
-#  :name =>'Dolares',
-#  :simbolo=>'u$s'
-#  },{
-#  :name =>'Euros',
-#  :simbolo=>'€'
-#  }
-#])
-#
-#puts Tdoc.create([{
-#  :name => 'DNI'
-#  },{
-#  :name => 'LE'
-#  },{
-#  :name => 'LC'
-#  }
-#])
-#
-#
 #puts Pasajero.create([{
 #  :doc=>28684242,
 #  :name =>"Oldani Pablo",
@@ -85,40 +95,6 @@
 #  :nacimiento=>"1985-06-14"
 #  }
 #])
-puts Operadora.create([{
-  :name =>"Daniel",
-  :localidad_id=>4807,
-  :calle=>'Saavedra 2854 dto 3'
-  },{
-  :name =>"Cristina",
-  :localidad_id=>4807,
-  :calle=>'Crespo 3054 dpto 3'
-  }])
-
-
-puts Agency.create([{
-  :name=>'Pirulo',
-  :cuit =>'23-28787872-9',
-  :legajo=>'4d',
-  :telefono=>'4584274',
-  :email=>'pirulo@mail.com.ar',
-  :web=>'http://pirulo.com.ar',
-  :calle=>'Francia 2110',
-  :localidad_id=>4807
-  },{
-  :name=>'Mengano',
-  :cuit =>'23-28783472-9',
-  :legajo=>'3f',
-  :telefono=>'4334274',
-  :email=>'mengano@mail.com.ar',
-  :web=>'http://mengano.com.ar',
-  :calle=>'Urquiza 1757 2b',
-  :localidad_id=>3422
-  }
-
-])
-
-
 #puts Programa.create([{
 #  :name => "Bariloche",
 #  :obs=>'Mucha joda a la noche'
@@ -134,25 +110,6 @@ puts Agency.create([{
 #  :name =>"Doble"
 #  }])
 #
-#puts Role.create({
-#  :name=>'Admin',
-#  :desc=>'Es el Rol de administrador'
-#})
-#
-#puts User.create([{
-#  :username=>'olvap',
-#  :email=>'youre-mail@mail.com',
-#  :password_confirmation=>'admin6',
-#  :password=>'admin6',
-#  :role_ids=>[1]
-#  },{
-#  :username=>'eloy',
-#  :email=>'eloy-mail@mail.com',
-#  :password_confirmation=>'admin8',
-#  :password=>'admin8',
-#  :role_ids=>[1]
-#  }
-#])
 #
 #puts Reserva.create(
 #  :hotel =>'Central Park',
@@ -254,20 +211,4 @@ puts Agency.create([{
 #    :moneda_id =>3
 #    }
 #  )
-#['Recibo', 'Banco'].each do |tipo|
-#  Tdeposito.find_or_create_by_name tipo
-#end
-#
-#[{ :name =>'Pesos', :simbolo =>'$'
-#  },{
-#  :name =>'Dolares', :simbolo=>'u$s'
-#  },{
-#  :name =>'Euros', :simbolo=>'€'
-#  }].each do |moneda|
-#  Moneda.find_or_create_by_name(moneda[:name], :simbolo => moneda[:simbolo])
-#end
-#
-#['DNI', 'LE' ,'LC'].each do |tipo|
-#  Tdoc.find_or_create_by_name tipo
-#end
 
