@@ -123,6 +123,9 @@ $(function() {
   $('#programa_new').click(function() {
     $.getScript("/programas/new.js", togrid );
   });
+  $('#thabitacion_new').click(function() {
+    $.getScript("/thabitacions/new.js", togrid );
+  });
   $('#pasajero_new').click(function() {
     $.getScript("/pasajeros/new.js", togrid );
   });

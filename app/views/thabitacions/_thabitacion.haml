@@ -1,14 +1,14 @@
-.ui-widget
-  %h3.ui-widget-header thabitacion  
-  .left{:style=>'float:right'}
-    .action_bar
-      -if can? :edit, @thabitacion 
-        = link_to 'Editar', edit_thabitacion_path(@thabitacion),:remote=>true,:width =>'200px'
+.ui-widget.ui-widget-content
+  %h3.ui-widget-header thabitacion
+  .action_bar
+    -if can? :edit, @thabitacion
+      = link_to 'Editar', edit_thabitacion_path(@thabitacion),:remote=>true,:width =>'200px'
     %br
-  
+
   
   %p
     %b Name:
     = @thabitacion.name
   
-    = render :partial => "version"
+    = render :partial => "layouts/version",:locals=>{:model=>@thabitacion,:controller=>:thabitacions}
+

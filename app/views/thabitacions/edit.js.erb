@@ -1,2 +1,6 @@
-$('#thabitacion').html('<%= raw escape_javascript(render("edit")) %>');
+addTab("thabitacion","<%=@thabitacion.id%>","<%=@thabitacion.name%>");
+
+$('#thabitacion_form<%=@thabitacion.id%>').html('<%= raw escape_javascript(render("edit")) %>');
+
 skin();
+

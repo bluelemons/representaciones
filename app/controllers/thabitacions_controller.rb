@@ -1,5 +1,5 @@
 class ThabitacionsController < InheritedResources::Base
-  
+
   respond_to :html, :xml,:js
   def index
     if params[:search]
@@ -9,21 +9,21 @@ class ThabitacionsController < InheritedResources::Base
     end
       @thabitacions = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js 
+      format.js
       format.html
       format.pdf do
         output = ThabitacionReport.new.to_pdf(@search)
-        send_data output, :filename => "index_report.pdf", 
+        send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end
     end
-    
+
   end
-  
+
   def show
     @thabitacion = Thabitacion.find(params[:id])
     @thabitacion.revert_to(params[:version].to_i) if params[:version]
-    show! 
+    show!
   end
 
   def restore
@@ -31,7 +31,7 @@ class ThabitacionsController < InheritedResources::Base
     @thabitacion.revert_to! params[:version_id]
 	  redirect_to :action => 'show', :id => @thabitacion
   end
-  
+
   def update
     @thabitacion = Thabitacion.find(params[:id])
     @thabitacion.user = current_user
@@ -46,10 +46,16 @@ class ThabitacionsController < InheritedResources::Base
     @thabitacion = Thabitacion.new(params[:thabitacion])
     @thabitacion.user = current_user
     if @thabitacion.save
-      redirect_to :action => 'show', :id => @thabitacion, :format =>'js'
+
+      if params[:another_one]
+        redirect_to :action => 'new', :format =>'js'
+      else
+        redirect_to :action => 'show', :id => @thabitacion, :format =>'js'
+      end
     else
       render 'new.js'
     end
-  end 
-  
+  end
+
 end
+

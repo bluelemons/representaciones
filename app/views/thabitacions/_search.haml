@@ -1,13 +1,11 @@
-.half.left
-  %h3.ui-widget-header Busqueda
-  = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
-     
-    = f.label :name
-    %br 
-    = f.text_field :name_eq
-    %br
-    =f.label 'Baja'
-    %br
-    = f.check_box :hidden_eq
-    %br
-    = f.submit('Buscar') 
+%h3.ui-widget-header Busqueda
+= semantic_form_for @search do |form|
+  =form.inputs do
+    %table
+    
+      %tr
+        %td=form.input :name_eq
+      
+      %tr
+        %td=form.input :hidden_eq,:as=> :boolean
+
