@@ -45,6 +45,7 @@ puts User.create([{
 
 require "#{RAILS_ROOT}/db/seeds/agencias/agencias"
 require "#{RAILS_ROOT}/db/seeds/operadoras/operadoras"
+require "#{RAILS_ROOT}/db/seeds/programas/programas"
 
 #Pago.create({
 #  :fecha=>"2011-01-30",
