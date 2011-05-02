@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110428203850) do
+ActiveRecord::Schema.define(:version => 20110502141912) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -382,27 +382,6 @@ ActiveRecord::Schema.define(:version => 20110428203850) do
     t.integer  "version"
   end
 
-  create_table "tentidad_versions", :force => true do |t|
-    t.integer  "tentidad_id"
-    t.integer  "version"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",      :default => false
-    t.integer  "user_id"
-  end
-
-  add_index "tentidad_versions", ["tentidad_id"], :name => "index_tentidad_versions_on_tentidad_id"
-
-  create_table "tentidads", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
-    t.integer  "version"
-  end
-
   create_table "thabitacion_versions", :force => true do |t|
     t.integer  "thabitacion_id"
     t.integer  "version"
@@ -416,27 +395,6 @@ ActiveRecord::Schema.define(:version => 20110428203850) do
   add_index "thabitacion_versions", ["thabitacion_id"], :name => "index_thabitacion_versions_on_thabitacion_id"
 
   create_table "thabitacions", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
-    t.integer  "version"
-  end
-
-  create_table "tpago_versions", :force => true do |t|
-    t.integer  "tpago_id"
-    t.integer  "version"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
-  end
-
-  add_index "tpago_versions", ["tpago_id"], :name => "index_tpago_versions_on_tpago_id"
-
-  create_table "tpagos", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
