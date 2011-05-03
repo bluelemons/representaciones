@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110502172357) do
+ActiveRecord::Schema.define(:version => 20110503175348) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -149,10 +149,12 @@ ActiveRecord::Schema.define(:version => 20110502172357) do
     t.date     "fecha"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",       :default => false
+    t.boolean  "hidden",                      :default => false
     t.integer  "user_id"
     t.integer  "version"
     t.integer  "operadora_id"
+    t.integer  "monto_cents"
+    t.string   "monto_currency", :limit => 3
   end
 
   create_table "pages", :force => true do |t|
