@@ -10,10 +10,12 @@ class DepositosController < ApplicationController
   end
 
   def create
-    @deposito = Deposito.new(params[:deposito])
+    @deposito = params[:deposito]
+    @deposito[:monto] = Monto.new(@deposito.delete(:monto_attributes)).to_money
+    @deposito = Deposito.new(@deposito)
     @deposito.user = current_user
     if @deposito.save
-      flash[:notice] = "Por fin pagaron"
+      flash[:notice] = "El deposito fue registrado correctamente"
       redirect_to :action => 'new', :format =>'js'
     else
       render 'new.js'

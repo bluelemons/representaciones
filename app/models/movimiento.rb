@@ -15,13 +15,12 @@ class Movimiento < ActiveRecord::Base
   #validaciones
   validates :fecha, :presence => true
   validates :entidad, :presence => true
-  validates :monto, :presence => true
 
   #scopes
   #agrego por default montos, así por ejemplo podes hacer, pago.valor, en lugar de pago.monto.valor
 
   #default_scope select("movimientos.*,montos.moneda_id,montos.valor").joins(:monto)
-  default_scope :include => [:monto,:reserva,:entidad,:saldo], :order => "id desc"
+  default_scope :include => [:reserva, :entidad, :saldo], :order => "id desc"
   scope :baja, where(:hidden=>0)
   #metodos
 end

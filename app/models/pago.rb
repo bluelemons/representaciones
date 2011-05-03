@@ -3,6 +3,7 @@ class Pago < Movimiento
 
   # validaciones:
   validates :reserva, :presence => true
+  validates :monto, :presence => true
   #validates :saldo, :presence => true
   validate :validate_deuda
   validate :saldo_suficiente
