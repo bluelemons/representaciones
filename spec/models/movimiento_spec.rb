@@ -10,7 +10,8 @@ describe Movimiento do
   describe '#create' do
     context 'si el movimiento es un pago de una agencia' do
       it 'el saldo de la operadora aumenta' do
-        entidad = Factory(:agencia)
+        pending "Moneda está en el seed"
+        entidad = Factory(:agency)
         reserva = Factory(:reserva)
         pago = Factory.build(:pago, :entidad => entidad,:reserva=>reserva)
         moneda = Moneda.find(1)

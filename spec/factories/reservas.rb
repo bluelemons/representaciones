@@ -11,7 +11,7 @@ Factory.define :reserva do |f|
   f.association :thabitacion
   f.association :programa
   f.association :operadora
-  f.association :agencia
+  f.association :agency
   f.operado "MyString"
   f.iva 1.5
   f.impuesto 1.5

@@ -6,6 +6,7 @@ describe Deposito do
 
   describe '#save' do
     it 'aumenta el saldo de la entidad' do
+      pending
       deposito = Factory.build(:deposito)
       deposito.save.should == true
       moneda =Moneda.find(1)
