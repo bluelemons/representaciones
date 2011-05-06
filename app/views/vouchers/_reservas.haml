@@ -1,13 +1,13 @@
 #reservas_grid
-  %table#boucher_grid.togrid
+  %table#voucher_grid.togrid
     %tr
       %th ID
       %th Titular
       %th Salida
       %th Hotel
-      %th Fecha Boucher
+      %th Fecha Voucher
       %th Acciones
-      %th Boucher
+      %th Voucher
 
 
     - for reserva in @reservas
@@ -16,7 +16,7 @@
         %td= reserva.try(:titular)
         %td= reserva.try(:salida)
         %td= reserva.try(:hotel)
-        %td= reserva.try(:boucher)
+        %td= reserva.try(:voucher)
 
         %td
           = link_to 'Show', {:controller=>"reservas",:action=>:show,:id=>reserva.id},:remote=>true
@@ -25,14 +25,14 @@
           -if can? :destroy, reserva
             = link_to 'Destroy',{:controller=>"reservas",:action=>:destroy,:id=>reserva.id}, :confirm => 'Are you sure?', :method => :delete,:remote=>true
         %td
-          - if reserva.boucher
-            .boucher_quitar{:id=>reserva.id}
+          - if reserva.voucher
+            .voucher_quitar{:id=>reserva.id}
               Quitar
           - else
-            .boucher_cargar{:id=>reserva.id}
+            .voucher_cargar{:id=>reserva.id}
               Cargar
 
 
 .action_bar
-  =link_to "imprimir",{:sin_boucher=>params[:sin_boucher],:search=>params[:search],:format=>'pdf'}
+  =link_to "imprimir",{:sin_voucher=>params[:sin_voucher],:search=>params[:search],:format=>'pdf'}
 

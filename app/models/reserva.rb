@@ -43,8 +43,8 @@ class Reserva < ActiveRecord::Base
   scope :baja, where(:hidden=>0)
 
   scope :por_vencer, lambda {|fecha| where("fecha = ? and pago_minimo > 0",fecha) }
-  search_methods :sin_boucher
-  scope :sin_boucher, where("boucher is null")
+  search_methods :sin_voucher
+  scope :sin_voucher, where("voucher is null")
   #metodos
 
   def titular

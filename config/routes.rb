@@ -2,7 +2,7 @@ Representaciones::Application.routes.draw do
 
   resources :vencidas
 
-  resources :bouchers do
+  resources :vouchers do
     member do
       get :cargar
       get :bajar

@@ -1,10 +1,10 @@
-class BouchersController < InheritedResources::Base
+class VouchersController < InheritedResources::Base
   respond_to :html, :xml, :js, :json
   def index
 
-    if params[:sin_boucher]
-      r = Reserva.sin_boucher
-    else
+    if params[:sin_voucher]
+      r = Reserva.sin_voucher
+  else
       r = Reserva
     end
 
@@ -19,7 +19,7 @@ class BouchersController < InheritedResources::Base
       format.js
       format.html
       format.pdf do
-        output = BoucherReport.new.to_pdf(@search,params[:search])
+        output = VoucherReport.new.to_pdf(@search,params[:search])
         send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end
@@ -28,13 +28,13 @@ class BouchersController < InheritedResources::Base
 
   def cargar
     @reserva = Reserva.find(params[:id])
-    @reserva.boucher = params[:boucher]
+    @reserva.voucher = params[:voucher]
     @reserva.save
   end
 
   def bajar
     @reserva = Reserva.find(params[:id])
-    @reserva.boucher = nil
+    @reserva.voucher = nil
     @reserva.save
   end
 

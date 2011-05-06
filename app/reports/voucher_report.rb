@@ -1,6 +1,6 @@
 #Generado con vistas generator 2011-02-10 19:32:11 -0300 'lib/generators/vistas'
 include Layout
-class BoucherReport < Prawn::Document
+class VoucherReport < Prawn::Document
 
   def to_pdf(datos,params)
 
@@ -10,10 +10,10 @@ class BoucherReport < Prawn::Document
 
     draw_text params, :at => [0,700]
 
-    myrow = [["ID","Ref.","Salida","Titular","Boucher","Agencia" ,"Hotel" ]]
+    myrow = [["ID","Ref.","Salida","Titular","Voucher","Agencia" ,"Hotel" ]]
 
     datos.each do |r|
-      myrow += [["#{r.id}","#{r.referencia}","#{r.salida}","#{r.titular}","#{r.boucher}","#{r.agency.try(:name)}","#{r.hotel}"]]
+      myrow += [["#{r.id}","#{r.referencia}","#{r.salida}","#{r.titular}","#{r.voucher}","#{r.agency.try(:name)}","#{r.hotel}"]]
 
     end
 

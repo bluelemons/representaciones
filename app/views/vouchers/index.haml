@@ -1,5 +1,5 @@
 =javascript("jq.reservas")
-=javascript("jq.boucher")
+=javascript("jq.voucher")
 .ui-widget
   %h1.ui-widget-header Reservas
 
@@ -9,9 +9,9 @@
         %a{:href=>"#tabs-reservas-1"} Reservas
 
     #tabs-reservas-1
-      Fecha para de los bouchers
-      %input#boucher_date.datepicker
+      Fecha para de los vouchers
+      %input#voucher_date.datepicker
       = render :partial => "search"
       #reservas
-        =render 'bouchers/reservas'
+        =render 'vouchers/reservas'
 
