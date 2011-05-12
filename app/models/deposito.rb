@@ -5,7 +5,7 @@ class Deposito < Movimiento
   # Asociaciones
   monetize   :monto
 
-  # deposita el dinero en el saldo correspondiente una vez que el
+  # deposita el dinero en la cuenta correspondiente una vez que el
   # deposito fue registrado.
   after_save :depositar
 

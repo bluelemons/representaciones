@@ -1,16 +1,16 @@
 Pago:
-La agencia hace un pago sobre una reserva si hay un sobrante se aumenta el saldo de la agencia.
+La agencia hace un pago sobre una reserva si hay un sobrante se aumenta el saldo en la cuenta de la agencia.
 
 Pago a la operadora:
 s representaciones liquida su deuda de una reserva con una operadora.
 
 Deposito directo:
-La agencia informa que depositó directamente en la operadora dinero, por una reserva en particular. Se realizan los pagos de ambas entidades, si el deposito es mayor que la deuda, se aumenta el saldo entre agencia y la operadora.
+La agencia informa que depositó directamente en la operadora dinero, por una reserva en particular. Se realizan los pagos de ambas entidades, si el deposito es mayor que la deuda, se crea (o incrementa) una cuenta entre la agencia y la operadora.
 
 Depostio directo abierto:
 No lo vamos a hacer todavía. pero igual que deposito directo pero no se realiza el pago a la operadora, y se paga otra reserva de otra agencia con esa misma operadora.
 
-La entindad puede realizar pagos haciendo nuevos depositos o utilizando dinero en su saldo.
+La entindad puede realizar pagos haciendo nuevos depositos o utilizando dinero en su cuenta.
 
 
 Casos de Uso
@@ -21,15 +21,15 @@ Deposito:
   Caso normal
     1. La agencia envia datos del deposito o talonario
     2. Se guardan los datos del deposito, moneda, monto y numero de comprobantes
-    3. El sistema aumenta el saldo de la entidad con el monto correspondiente
+    3. El sistema aumenta el saldo en la cuenta de la entidad con el monto correspondiente.
 
 
 Pago:
   Descripcion:
-    Una entidad liquida parte de su deuda con la reserva usando saldo.
+    Una entidad liquida parte de su deuda con respecto a una reserva usando el dinero de su cuenta.
   Caso normal.
     1. Se pide reserva agencia_id, operadora_id, monto y moneda_id
-    2. Se retira el monto del saldo de la entidad.
+    2. Se retira el monto del cuenta de la entidad.
       2.1 el monto es menor al pago que se quiere realizar, se avisa y se retorna.
       2.2 Si el pago es de una agencia se, generar un deposito a la operadora con el monto del pago.
     3. Se guarda un pago con los datos.
@@ -59,17 +59,17 @@ Deposito directo cerrado:
 
 Cambiar Moneda:
   Descripcion:
-    cambiar parte o la totalidad de la moneda de un saldo en otra moneda.
+    cambiar parte o la totalidad de la moneda de un cuenta en otra moneda.
   Caso normal:
     1. Se ingresa la entidad
-    2. se elije el saldo a cambiar
+    2. se elije el cuenta a cambiar
     3. se ingresa cuanto se quiere cambiar y a que moneda
       3.1 si no esta cargado el valor de cambio para la moneda, se pide cargar.
-    4. se guarda el nuvo saldo.
+    4. se guarda la nueva cuenta. (o se incrementa el saldo en la moneda correspondiente)
 
 Ejemplo de deposito directo.
-  1. la agencia hace un deposito, aumenta el saldo de esta.
-  2. se genera un pago de la agencia sobre una reserva, disminuye el saldo con el valor del deposito, siempre que la deuda sea mayor igual que este.
-  3. se genera un depostio en la operadora con el monto del pago, aumenta el saldo de la operadora.
-  4. *** se genera un pago de la operadora sobre la reserva. Disminulle de igual forma que antes el saldo de la operadora.
+  1. la agencia hace un deposito, aumenta el cuenta de esta.
+  2. se genera un pago de la agencia sobre una reserva, disminuye el cuenta con el valor del deposito, siempre que la deuda sea mayor igual que este.
+  3. se genera un depostio en la operadora con el monto del pago, aumenta el cuenta de la operadora.
+  4. *** se genera un pago de la operadora sobre la reserva. Disminulle de igual forma que antes el cuenta de la operadora.
 

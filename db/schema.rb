@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110506124940) do
+ActiveRecord::Schema.define(:version => 20110512133435) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(:version => 20110506124940) do
     t.float    "venta"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "cuentas", :force => true do |t|
+    t.integer  "entidad_id"
+    t.integer  "operadora_id"
+    t.integer  "moneda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "monto_cents"
+    t.string   "monto_currency", :limit => 3
   end
 
   create_table "departamentos", :force => true do |t|
@@ -143,7 +153,7 @@ ActiveRecord::Schema.define(:version => 20110506124940) do
     t.integer  "reserva_id"
     t.string   "type"
     t.integer  "tdeposito_id"
-    t.integer  "saldo_id"
+    t.integer  "cuenta_id"
     t.integer  "monto_id"
     t.integer  "numero"
     t.date     "fecha"
@@ -312,16 +322,6 @@ ActiveRecord::Schema.define(:version => 20110506124940) do
     t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "saldos", :force => true do |t|
-    t.integer  "entidad_id"
-    t.integer  "operadora_id"
-    t.integer  "moneda_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "monto_cents"
-    t.string   "monto_currency", :limit => 3
   end
 
   create_table "sites", :force => true do |t|

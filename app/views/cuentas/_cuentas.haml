@@ -1,0 +1,14 @@
+#cuentas_grid
+  %table.togrid{:id=>"cuenta_grid_#{Time.now}"}
+    %tr
+      %th ID
+      %th Monto
+      %th Operadora
+
+    -@cuentas.each do |cuenta|
+      %tr
+        %td=cuenta.id
+        %td
+          %b=cuenta.monto.format
+        %td=cuenta.try(:operadora).try(:name)
+

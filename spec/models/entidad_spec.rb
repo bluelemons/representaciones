@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Entidad do
-  it { should have_many(:saldos) }
+  it { should have_many(:cuentas) }
   it { should have_many(:movimientos) }
   # should be checked in other way
   it "{ should validate_uniqueness_of(:name) }"
@@ -9,21 +9,21 @@ describe Entidad do
 
   describe '#deposit (money, operadora_id)' do
     let(:entidad) { Factory(:entidad) }
-    it 'Crea el saldo si no existe' do
-      entidad.saldos.count.should == 0
+    it 'Crea la cuenta si no existe' do
+      entidad.cuentas.count.should == 0
       entidad.deposit(Money.new(10000, :ars))
-      entidad.saldos(true).count.should == 1
+      entidad.cuentas(true).count.should == 1
     end
-    it 'si el saldo existe lo incrementa' do
-      entidad.saldos.count.should == 0
+    it 'si la cuenta existe lo incrementa' do
+      entidad.cuentas.count.should == 0
       entidad.deposit(Money.new(10000)).should be_true
       entidad.deposit(Money.new(10000)).should be_true
-      entidad.saldos.count.should == 1
-      entidad.saldos(true).first.monto.should == Money.new(20000)
+      entidad.cuentas.count.should == 1
+      entidad.cuentas(true).first.monto.should == Money.new(20000)
     end
   end
 
-  describe '#withdraw(money, saldo)' do
+  describe '#withdraw(money, cuenta)' do
 
     let (:entidad) { Factory(:entidad) }
 

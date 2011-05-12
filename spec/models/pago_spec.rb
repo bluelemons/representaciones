@@ -5,17 +5,17 @@ describe Pago do
   #it { should validate_presence_of(:reserva) }
 
   describe '#save' do
-    it 'valida: suficiente plata en el saldo' do
+    it 'valida: suficiente plata en la cuenta' do
       pending
     end
-    it 'valida: coinciden monedas de saldo y reserva' do
+    it 'valida: coinciden las monedas de cuenta y reserva' do
       pending
     end
-    it 'quita dinero del saldo' do
+    it 'quita dinero de la cuenta' do
       pending
-      saldo = mock_model(Saldo)
-      saldo.should_receive(:withdraw).with(500)
-      pago = Factory.build(:pago, :saldo => saldo)
+      cuenta = mock_model(Cuenta)
+      cuenta.should_receive(:withdraw).with(500)
+      pago = Factory.build(:pago, :cuenta => cuenta)
       pago.save.should be_true
     end
   end

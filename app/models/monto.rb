@@ -2,7 +2,7 @@ class Monto < ActiveRecord::Base
   belongs_to :moneda
   has_many :pagos
   has_many :reservas
-  has_many :saldos
+  has_many :cuentas
 
   default_scope :include => :moneda
   def to_money

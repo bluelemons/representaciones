@@ -20,7 +20,7 @@ describe "movimientos/_pago.haml" do
       form.should have_selector("select#movimiento_monto_attributes_moneda_id", :name => "movimiento[monto_attributes][moneda_id]")
     end
     rendered.should have_selector("div.qs_search", :count=>1)
-    rendered.should have_selector("div#saldos", :count=>1)
+    rendered.should have_selector("div#cuentas", :count=>1)
   end
 end
 

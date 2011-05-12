@@ -4,7 +4,6 @@ class Pago < Movimiento
   # validaciones:
   validates :reserva, :presence => true
   validates :monto, :presence => true
-  #validates :saldo, :presence => true
   validate :validate_deuda
   validate :saldo_suficiente
 
@@ -15,14 +14,14 @@ class Pago < Movimiento
 
   # conversion realiza el exchange de dinero antes de el registro de
   # la transaccion.
-  # Esta solo se realiza si las monedas en el saldo y en la reserva
-  # son distintos.
+  # Esta solo se realiza si las monedas en la cuenta y en la reserva
+  # son distintas.
   def conversion
-    saldo_moneda = monto.moneda_id
+    cuenta_moneda = monto.moneda_id
     reserva_moneda = reserva.monto.moneda_id
-    unless saldo_moneda == reserva_moneda
-      convertido = Monto.new(:moneda_id => saldo_moneda,
-                               :valor     => monto.to(saldo_moneda, fecha))
+    unless cuenta_moneda == reserva_moneda
+      convertido = Monto.new(:moneda_id => cuenta_moneda,
+                             :valor     => monto.to(cuenta_moneda, fecha))
       monto = convertido
     end
   end
@@ -31,8 +30,8 @@ class Pago < Movimiento
   def pago_maximo
     tipo = entidad.type
     deuda = reserva.send((tipo.downcase + "_deuda").to_sym, :monto)
-    if saldo
-      entidad.withdraw(monto,saldo)
+    if cuenta
+      entidad.withdraw(monto,cuenta)
     end
     if monto.to(1, fecha) > deuda.to(1,fecha)
       m = monto
@@ -61,7 +60,7 @@ class Pago < Movimiento
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    if (saldo && (saldo.monto.to(1,fecha) < monto.to(1,fecha)))
+    if (cuenta && (cuenta.monto.to(1,fecha) < monto.to(1,fecha)))
        errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
     end
   end

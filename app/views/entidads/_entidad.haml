@@ -3,7 +3,7 @@
     %li
       %a{:href=>"#tabs-entidad-1"}=@entidad.type
     %li
-      %a{:href=>"#tabs-entidad-2"} Saldo
+      %a{:href=>"#tabs-entidad-2"} Cuenta
     %li
       %a{:href=>"#tabs-entidad-3"} Pagos
 
@@ -46,7 +46,7 @@
     = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
   #tabs-entidad-2
     %h3 Cuenta corriente
-    = render :partial => "saldos/saldos",:locals=>{:@saldos=>@entidad.saldos}
+    = render :partial => "cuentas/cuentas", :locals=>{:@cuentas=>@entidad.cuentas}
     %h3 Deuda total
     %table.togrid{:id=>"deuda_grid_#{Time.now}"}
       %tr

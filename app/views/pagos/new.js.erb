@@ -7,16 +7,16 @@ skin();
     buscar();
     });
   $("#pago_reserva_id").change(function(){
-    buscar_saldo();
+    buscar_cuenta();
   });
 
   //busca la lista de reservas con los datos ingresados
-  function buscar_saldo(){
+  function buscar_cuenta(){
     var reserva = $("#pago_reserva_id").val();
     $.getJSON("/reservas/"+reserva+".json",function(data){
       moneda_id = data["reserva"]["moneda_id"];
 
-      $.get("/entidads/"+entidad+"/saldos.js","moneda_id="+moneda_id, togrid, 'script');
+      $.get("/entidads/"+entidad+"/cuentas.js","moneda_id="+moneda_id, togrid, 'script');
 
     });
 
@@ -25,13 +25,13 @@ skin();
   function buscar(){
     entidad = $('#search_agency_id_or_operadora_id_eq').val();
     if($.get("/reservas.js","search[agency_id_or_operadora_id_eq="+entidad+"]", togrid, 'script')){
-      buscar_saldo();
+      buscar_cuenta();
     }
   }
   $("#change_button").button({icons: {primary: "ui-icon-transfer-e-w"},text: true});
 
   $("#change_button").click(function(){
-//    $('#use_saldo').toggle(function() {
+//    $('#use_cuenta').toggle(function() {
 //        $(this).find(':checkbox').attr('checked', true);
 //    }, function() {
 //        $(this).find(':checkbox').attr('checked', false);

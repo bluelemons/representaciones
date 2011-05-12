@@ -23,12 +23,12 @@ class DirectosController < ApplicationController
 
       #genero el pago
       # un pago de la agencia.
-      saldo_a = agencia.saldo(moneda_id,operadora)
-      valid = @directo.pago(agencia,saldo_a)
+      cuenta_a = agencia.cuenta(moneda_id,operadora)
+      valid = @directo.pago(agencia,cuenta_a)
 
       #un pago de la operadora
-      saldo_o = operadora.saldo(moneda_id)
-      @directo.pago(operadora,saldo_o)
+      cuenta_o = operadora.cuenta(moneda_id)
+      @directo.pago(operadora,cuenta_o)
 
 
       flash[:notice] = "#{valid.errors}"

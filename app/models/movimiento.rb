@@ -6,7 +6,7 @@ class Movimiento < ActiveRecord::Base
   belongs_to :reserva
   belongs_to :entidad
   belongs_to :operadora
-  belongs_to :saldo
+  belongs_to :cuenta
   belongs_to :monto
 
   belongs_to :tdeposito   #por banco o talonario, solo para depositos
@@ -20,7 +20,7 @@ class Movimiento < ActiveRecord::Base
   #agrego por default montos, así por ejemplo podes hacer, pago.valor, en lugar de pago.monto.valor
 
   #default_scope select("movimientos.*,montos.moneda_id,montos.valor").joins(:monto)
-  default_scope :include => [:reserva, :entidad, :saldo], :order => "id desc"
+  default_scope :include => [:reserva, :entidad, :cuenta], :order => "id desc"
   scope :baja, where(:hidden=>0)
   #metodos
 end

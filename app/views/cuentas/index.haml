@@ -1,0 +1,13 @@
+.ui-widget
+  %h1.ui-widget-header Cuentas
+
+  #tabs-cuentas.mytabs
+    %ul
+      %li
+        %a{:href=>"#tabs-cuentas-1"} Cuenta
+
+    #tabs-cuentas-1
+      = render :partial => "cuentas/search"
+      #entidads
+        =render 'cuentas'
+

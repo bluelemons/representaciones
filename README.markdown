@@ -19,23 +19,23 @@ por una *agencia* y comprado a una *operadora*.
 2. Entidades: Clase que engloba a las agencias y a las operadoras.
 
   1. Agencia: La agencia de turismo que compra el paquete. Cada una
-  dispone de uno o más *saldos* (dinero depositado en S para realizar
-  pagos) o *saldos en las operadoras* (dinero enviado directamente a la
+  dispone de una o más *cuentas* (dinero depositado en S para realizar
+  pagos) o *cuentas en las operadoras* (dinero enviado directamente a la
   operadora).
 
   2. Operadora: Las operadoras de turismo que venden los paquetes en
-  cuestión. S dispone de uno o más saldos en las mismas, que
+  cuestión. S dispone de una o más cuentas en las mismas, que
   representan el dinero depositado en ellas para la realización de
-  pagos.  
+  pagos.
 
-3. Movimiento: todo tipo de movimiento de dinero, 
+3. Movimiento: todo tipo de movimiento de dinero,
 
-  1. Depósito: Agrega dinero a un saldo. Se acompaña de información
-  sobre el medio por el cual fue transferido (banco, efectivo, etc.) y
-  de forma que se permita rastrear el comprobante.
+   1. Depósito: Agrega dinero a un cuenta. Se acompaña de información
+   sobre el medio por el cual fue transferido (banco, efectivo, etc.) y
+   de forma que se permita rastrear el comprobante.
 
-  2. Pago: Se que quita dinero de un saldo para pagar una reserva. En
-  caso de ser distintas las monedas, se asocian a un valor de cambio.
+   2. Pago: Se que quita dinero de una cuenta para pagar una reserva. En
+   caso de ser distintas las monedas, se asocian a un valor de cambio.
 
 4. Monto: Todo monto de dinero tiene asociado un valor y una moneda.
 
@@ -65,3 +65,4 @@ tratadas.
   quien realizó cada una) para un rápido conocimiento de la
   situación de los compañeros.
 - Mensajes: mensajes recibidos por los compañeros de trabajo.
+

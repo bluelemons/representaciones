@@ -6,7 +6,7 @@ class Entidad < ActiveRecord::Base
   # asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
-  has_many :saldos, :dependent => :destroy  #cuando se borra la entidad se borra el saldo.
+  has_many :cuentas, :dependent => :destroy  #cuando se borra la entidad se borra la cuenta.
   has_many :movimientos
 
   attr_accessible :type, :name, :cuit, :localidad_id,
@@ -29,21 +29,21 @@ class Entidad < ActiveRecord::Base
 
   # metodos
 
-  # Consulta el saldo de una entidad en la moneda especificada.
+  # Consulta la cuenta de una entidad en la moneda especificada.
   #
-  # @param  [#to_currency] moneda del saldo buscado.
+  # @param  [#to_currency] moneda de la cuenta buscada.
   # @param  [Integer] operadora_id id de la operadora que dispone del dinero.
-  # @return [Saldo, nil]
+  # @return [Cuenta, nil]
 
-  def saldo(moneda, operadora_id = nil)
+  def cuenta(moneda, operadora_id = nil)
     moneda = Money::Currency.new(moneda).to_s
-    saldos.find_by_monto_currency_and_operadora_id(moneda, operadora_id)
+    cuentas.find_by_monto_currency_and_operadora_id(moneda, operadora_id)
   end
 
-  # Incrementa el saldo de la entidad segun un monto.
-  # Si el saldo no existe es creado.
+  # Incrementa la cuenta de la entidad segun un monto.
+  # Si la cuenta no existe es creada.
   #
-  # @param  [#to_money] moneda Moneda del saldo buscado.
+  # @param  [#to_money] moneda Moneda de la cuenta buscada.
   # @param  [Operadora] operadora_id operadora que dispone del dinero.
   # @return [Bool]
 
@@ -54,28 +54,28 @@ class Entidad < ActiveRecord::Base
     unless operadora.nil?
       operadora = operadora.id unless operadora.kind_of? Integer
     end
-   s = Saldo.find_or_initialize_by_entidad_id_and_monto_currency_and_operadora_id( \
+   s = Cuenta.find_or_initialize_by_entidad_id_and_monto_currency_and_operadora_id( \
       id, moneda, operadora, {:monto_cents => 0})
     s.monto += money
     s.save
   end
 
-  # Quita el saldo de la entidad segun un monto.
-  # Si el saldo no es suficiente, da un error.
+  # Sustrae un monto de la cuenta de la entidad.
+  # Si el saldo es insuficiente, da un error.
   #
-  # @param  [Money, #to_money] moneda Moneda del saldo buscado.
+  # @param  [Money, #to_money] monto Cantidad a sustraer.
   # @param  [Integer] operadora_id id de la operadora que dispone del dinero.
   # @return [Bool]
-  # @raise  ["no hay suficiente saldo"]
+  # @raise  ["saldo insuficiente"]
 
   def withdraw(monto, operadora_id = nil)
     monto = monto.to_money
     moneda = monto.currency_as_string
-    saldo = saldo(moneda, operadora_id)
-    if saldo && saldo.monto >= monto
-        deposit(monto * -1, operadora_id)
+    c = cuenta(moneda, operadora_id)
+    if c && c.monto >= monto
+      deposit(monto * -1, operadora_id)
     else
-      raise "No hay suficiente saldo"
+      raise "saldo insuficiente"
     end
   end
 

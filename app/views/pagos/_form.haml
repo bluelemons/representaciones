@@ -16,13 +16,13 @@
 
     = f.hidden_field :entidad_id
     = f.hidden_field :reserva_id
-    = f.hidden_field :saldo_id
+    = f.hidden_field :cuenta_id
 
     #change_button Cambiar
-    %input{:type=>"CHECKBOX",:id=>"use_saldo"}
+    %input{:type=>"CHECKBOX",:id=>"use_cuenta"}
     .pago_choise{:style=>"display:none"}
-      %h3.ui-widget-header Utilizar un saldo existente
-      #saldos
+      %h3.ui-widget-header Utilizar dinero de la cuenta
+      #cuentas
     .pago_choise
       %h3.ui-widget-header Generar un deposito
       = f.label :Tipo_de_deposito

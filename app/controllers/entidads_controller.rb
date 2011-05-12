@@ -56,7 +56,7 @@ class EntidadsController < InheritedResources::Base
     @entidad.user = current_user
     if @entidad.save
       flash[:notice]="Entidad guardada!"
-      #creo el saldo para cada tipo de moneda
+      # creo la cuenta para cada tipo de moneda
       if params[:another_one]
         redirect_to :action => 'new', :format =>'js'
       else

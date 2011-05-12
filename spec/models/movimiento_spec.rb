@@ -9,16 +9,16 @@ describe Movimiento do
 
   describe '#create' do
     context 'si el movimiento es un pago de una agencia' do
-      it 'el saldo de la operadora aumenta' do
+      it 'la cuenta de la operadora aumenta' do
         pending "Moneda está en el seed"
         entidad = Factory(:agency)
         reserva = Factory(:reserva)
         pago = Factory.build(:pago, :entidad => entidad,:reserva=>reserva)
         moneda = Moneda.find(1)
-        saldo_anterior = pago.reserva.operadora.saldo(moneda)
+        cuenta_anterior = pago.reserva.operadora.cuenta(moneda)
         entidad.deposit(Factory(:monto))
         pago.save
-        pago.reserva.operadora.saldo(moneda).should == (saldo_anterior + pago.monto.valor)
+        pago.reserva.operadora.cuenta(moneda).should == (cuenta_anterior + pago.monto.valor)
       end
     end
 #    context 'si el movimiento es un pago' do

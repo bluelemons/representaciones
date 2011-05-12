@@ -1,4 +1,4 @@
-class Saldo < ActiveRecord::Base
+class Cuenta < ActiveRecord::Base
 
   # clases
   # asociaciones

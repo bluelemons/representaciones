@@ -10,7 +10,7 @@ Representaciones::Application.routes.draw do
   end
 
   resources :entidads do
-    resources :saldos
+    resources :cuentas
   end
 
   resources :operadoras

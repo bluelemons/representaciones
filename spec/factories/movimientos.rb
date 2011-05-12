@@ -4,7 +4,7 @@ Factory.define :movimiento do |f|
   f.association :entidad
   f.fecha "2011-01-05"
   f.association :monto
-  f.association :saldo
+  f.association :cuenta
 end
 
 Factory.define :deposito, :parent => :movimiento do |f|
