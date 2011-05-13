@@ -15,7 +15,14 @@ class Reserva < ActiveRecord::Base
   has_many :pagos
 
   has_many :viajeros
-  has_many :pasajeros, :through => :viajeros
+  has_many :pasajeros, :through => :viajeros do
+    def names
+      map { |p| p.name }
+    end
+    def as_symbols
+      map { |p| p.name.underscore.to_sym }
+    end
+  end
 
   #accepts_nested_attributes_for :agencia, :reject_if => lambda { |a| a[:name].blank? }
   #accepts_nested_attributes_for :operadora, :reject_if => lambda { |a| a[:name].blank? }
@@ -116,21 +123,19 @@ class Reserva < ActiveRecord::Base
     end
   end
 
-  def pasajero #array con los roles del usuario
-    pasajeros.map do |pasajero|
-      pasajero.name
-    end
+  def pasajero
+    warn "`pasajero` is deprecated. Use `pasajeros.names` instead."
+    pasajeros.names
   end
 
   def pasajero?(pas) #true si el usuario tiene el rol
-    pasajero.include?(pas)
+    warn "`pasajero?(pas)` is deprecated. Use `pasajeros.exists?(pas)` instead."
+    pasajeros.exists?(pas)
   end
 
   def pasajero_symbols
-    pasajeros.map do |pasajero|
-      pasajero.name.underscore.to_sym
-    end
+    warn "`pasajero_symbols` is deprecated. Use `pasajeros.as_symbols` instead."
+    pasajeros.as_symbols
   end
-
 end
 
