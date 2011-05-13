@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110512133435) do
+ActiveRecord::Schema.define(:version => 20110513182028) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -268,8 +268,8 @@ ActiveRecord::Schema.define(:version => 20110512133435) do
     t.float    "seguro"
     t.integer  "monto_id"
     t.string   "referencia"
-    t.boolean  "cancelada",      :default => false
-    t.boolean  "activa",         :default => false
+    t.boolean  "cancelada",                      :default => false
+    t.boolean  "activa",                         :default => false
     t.float    "tarifa"
     t.float    "float"
     t.float    "aereo"
@@ -277,9 +277,18 @@ ActiveRecord::Schema.define(:version => 20110512133435) do
     t.float    "pago_minimo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",         :default => false
+    t.boolean  "hidden",                         :default => false
     t.integer  "user_id"
     t.date     "voucher"
+    t.integer  "total_cents"
+    t.string   "total_currency",    :limit => 3
+    t.integer  "iva_cents"
+    t.integer  "tarifa_cents"
+    t.integer  "aereo_cents"
+    t.integer  "otros_cents"
+    t.integer  "pago_minimo_cents"
+    t.integer  "impuesto_cents"
+    t.integer  "seguro_cents"
   end
 
   add_index "reserva_versions", ["reserva_id"], :name => "index_reserva_versions_on_reserva_id"
@@ -302,8 +311,8 @@ ActiveRecord::Schema.define(:version => 20110512133435) do
     t.float    "seguro"
     t.integer  "monto_id"
     t.string   "referencia"
-    t.boolean  "cancelada",      :default => false
-    t.boolean  "activa",         :default => false
+    t.boolean  "cancelada",                      :default => false
+    t.boolean  "activa",                         :default => false
     t.float    "tarifa"
     t.float    "float"
     t.float    "aereo"
@@ -311,10 +320,19 @@ ActiveRecord::Schema.define(:version => 20110512133435) do
     t.float    "pago_minimo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",         :default => false
+    t.boolean  "hidden",                         :default => false
     t.integer  "user_id"
     t.integer  "version"
     t.date     "voucher"
+    t.integer  "total_cents"
+    t.string   "total_currency",    :limit => 3
+    t.integer  "iva_cents"
+    t.integer  "tarifa_cents"
+    t.integer  "aereo_cents"
+    t.integer  "otros_cents"
+    t.integer  "pago_minimo_cents"
+    t.integer  "impuesto_cents"
+    t.integer  "seguro_cents"
   end
 
   create_table "roles", :force => true do |t|
