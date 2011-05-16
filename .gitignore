@@ -16,6 +16,7 @@ Gemfile.lock
 coverage/*
 .bundle
 rdoc/*
+.yardoc/*
 db/*.sqlite3
 
 ###########################
@@ -31,15 +32,5 @@ database.yml
 *.tar
 *\(copia\)*
 *.bak
-<<<<<<< HEAD
-*#
-=======
-
-###########################
-# No están bien
-# log
-# pkg
-
-.#*
->>>>>>> cec116913ea7f780ec4416cb6a018f486c9b93d0
 webrat.log
+
