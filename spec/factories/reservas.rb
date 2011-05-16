@@ -1,21 +1,20 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.define :reserva do |f|
-  f.fecha "2011-03-01"
-  f.salida "2011-03-01"
-  f.reservado "MyString"
-  f.hotel "MyText"
-  f.periodo 1
-  f.regimen "MyString"
-  f.obs "MyText"
+  f.fecha       Forgery(:date).date
+  f.salida      Forgery(:date).date
+  f.reservado   Forgery(:name).first_name
+  f.operado     Forgery(:name).first_name
+  f.hotel       Forgery(:name).location
+  f.periodo     "#{rand(10)} noches"
+  f.regimen     "media_pensión"
   f.association :thabitacion
   f.association :programa
   f.association :operadora
   f.association :agency
-  f.operado "MyString"
-  f.iva 1.5
-  f.impuesto 1.5
-  f.seguro 1.5
-  f.association :monto
+  f.iva         Forgery(:monetary).money
+  f.impuesto    Forgery(:monetary).money
+  f.seguro      Forgery(:monetary).money
+  f.total       Forgery(:monetary).money
 end
 

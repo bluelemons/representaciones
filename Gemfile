@@ -25,6 +25,7 @@ group :development, :test do
   gem 'autotest'
   gem 'rspec-rails', '~> 2.5'
   gem 'factory_girl_rails'
+  gem 'forgery'
 end
 
 group :test do
