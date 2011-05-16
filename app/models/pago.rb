@@ -4,12 +4,12 @@ class Pago < Movimiento
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
-  validate :saldo_suficiente
+  validate :saldo_suficiente, :if => :cuenta?
   before_save :withdraw
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    if (cuenta && (cuenta.monto < monto))
+    if cuenta.monto < monto
        errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
     end
   end
