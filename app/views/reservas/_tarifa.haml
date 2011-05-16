@@ -1,7 +1,8 @@
 %h2 Tarifa
 
-=render :partial =>'montos/form',:locals=>{:f=>form}
-%br
+= form.fields_for :total_fields, @reserva do |money_fields|
+  = money_fields.text_field :total, :class => "money"
+  = money_fields.collection_select :total_currency, Money.monedas, :iso_code, :symbol
 %br
 = form.input :tarifa,:input_html => {:size=>8}
 = form.input :iva,:input_html => {:size=>8}

@@ -55,7 +55,7 @@
         {:value => :aereo},
         {:value => :seguro},
         {:value => :pago_minimo},
-        {:name=>"Monto Total",:string => "#{@reserva.moneda} #{@reserva.try(:monto).try(:valor)}"},
+        {:name=>"Monto Total",:string => @reserva.total.format},
         {:name=>"Deuda de la agencia",:string => "#{@reserva.moneda} #{@reserva.agencia_deuda}"},
         {:name=>"Deuda de la operadora",:string => "#{@reserva.moneda} #{@reserva.operadora_deuda}"},
         ],:class=>"wide")
