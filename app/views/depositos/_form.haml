@@ -9,8 +9,9 @@
     = f.collection_select(:operadora_id, Operadora.all, :id, :name,:prompt=>true)
     %table
       %tr
-        =render :partial =>'montos/form',:locals=>{:f=>f}
-
+        = f.fields_for :monto_fields, @deposito do |money_fields|
+          = money_fields.text_field :monto, :class => "money"
+          = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
 
     = f.label :Tipo_de_deposito
     %br

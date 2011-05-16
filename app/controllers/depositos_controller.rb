@@ -6,13 +6,10 @@ class DepositosController < ApplicationController
 
   def new
     @deposito = Deposito.new
-    @deposito.build_monto
   end
 
   def create
-    @deposito = params[:deposito]
-    @deposito[:monto] = Monto.new(@deposito.delete(:monto_attributes)).to_money
-    @deposito = Deposito.new(@deposito)
+    @deposito = Deposito.new(params[:deposito])
     @deposito.user = current_user
     if @deposito.save
       flash[:notice] = "El deposito fue registrado correctamente"
