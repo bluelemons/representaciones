@@ -1,5 +1,5 @@
 class ReservasController < InheritedResources::Base
-  #load_and_authorize_resource
+  load_and_authorize_resource
   respond_to :html, :xml, :js, :json
   def index
     if params[:search]
@@ -20,8 +20,8 @@ class ReservasController < InheritedResources::Base
   end
 
   def new
-    @reserva = Reserva.new
-    @reserva.build_monto
+#    @reserva = Reserva.new
+#    @reserva.build_monto
     @pasajero = Pasajero.new
 
     new!
@@ -33,7 +33,6 @@ class ReservasController < InheritedResources::Base
   end
 
   def show
-    @reserva = Reserva.find(params[:id])
     @reserva.revert_to(params[:version].to_i) if params[:version]
     show!
   end
@@ -41,7 +40,7 @@ class ReservasController < InheritedResources::Base
   def restore
     @reserva = Reserva.find(params[:id])
     @reserva.revert_to! params[:version_id]
-	  redirect_to :action => 'show', :id => @reserva
+    redirect_to :action => 'show', :id => @reserva
   end
 
   def update
@@ -56,9 +55,10 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-    @reserva = Reserva.new(params[:reserva])
+    @reserva = params[:reserva]
+    @reserva[:total] = @reserva.delete(:total).to_money(@reserva.delete(:total_currency))
+    @reserva = Reserva.new(@reserva)
     @reserva.user = current_user
-
     if @reserva.save
       flash[:notice]="Reserva creada"
       redirect_to :action => 'show', :id => @reserva, :format =>'js'
@@ -69,8 +69,6 @@ class ReservasController < InheritedResources::Base
       @pasajero = Pasajero.new
       render 'new.js'
     end
-
   end
-
 end
 
