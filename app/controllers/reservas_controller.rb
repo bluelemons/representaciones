@@ -55,17 +55,12 @@ class ReservasController < InheritedResources::Base
   end
 
   def create
-    @reserva = params[:reserva]
-    @reserva[:total] = @reserva.delete(:total).to_money(@reserva.delete(:total_currency))
-    @reserva = Reserva.new(@reserva)
+    @reserva = Reserva.new(params[:reserva])
     @reserva.user = current_user
     if @reserva.save
       flash[:notice]="Reserva creada"
       redirect_to :action => 'show', :id => @reserva, :format =>'js'
     else
-      @reserva.build_monto
-      #@reserva.build_operadora.build_direccion
-      #@reserva.build_agencia.build_direccion
       @pasajero = Pasajero.new
       render 'new.js'
     end
