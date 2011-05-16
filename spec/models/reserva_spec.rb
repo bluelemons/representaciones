@@ -22,5 +22,11 @@ describe Reserva do
       end
     end
   end
+  describe 'total' do
+    let(:reserva) { Factory(:reserva) }
+    it "return a Money object" do
+      reserva.total.should be_a_kind_of(Money)
+    end
+  end
 end
 
