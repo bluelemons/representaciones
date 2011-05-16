@@ -143,6 +143,9 @@ $(function() {
   $('#directo_new').click(function() {
     $.getScript("/directos/new.js", togrid );
   });
+  $('#cambio_new').click(function() {
+    $.getScript("/cambios/new.js", togrid );
+  });
 
 
 

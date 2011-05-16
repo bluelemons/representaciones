@@ -9,9 +9,10 @@ class Cambio < Movimiento
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    if (cuenta && (cuenta.monto < monto))
-       errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
-    end
+    true
+    #if (cuenta && (cuenta.monto < monto.exchange_to(cuenta.monto.currency)))
+    #   errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
+    #end
   end
 
   #valida que existe la cotizacion para el día exista.
@@ -25,9 +26,8 @@ class Cambio < Movimiento
     #=> 4.1
     #>> Money.new(100,"USD").exchange_to("ARS")
     #=> #<Money cents:410 currency:ARS>
-    #>> Money.new(100,"ARS").exchange_to("USD")
     cotizacion = 4.17
-    Money.add_rate(cuenta.monto.currency,monto.currency,cotizacion)
+    Money.add_rate(monto.currency,cuenta.monto.currency,cotizacion)
     cuenta.entidad.withdraw(monto.exchange_to(cuenta.monto.currency))
   end
 
