@@ -18,22 +18,12 @@
     = f.hidden_field :reserva_id
     = f.hidden_field :cuenta_id
 
-    #change_button Cambiar
-    %input{:type=>"CHECKBOX",:id=>"use_cuenta"}
-    .pago_choise{:style=>"display:none"}
-      %h3.ui-widget-header Utilizar dinero de la cuenta
-      #cuentas
-    .pago_choise
-      %h3.ui-widget-header Generar un deposito
-      = f.label :Tipo_de_deposito
-      %br
-      = collection_select(:pago, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
-      %br
-      = f.text_field :numero, :size => 10
+
+    #cuentas
 
     %br
-    = render :partial => 'montos/form', :locals => { :f => f }
-
+    = f.text_field :monto, :class => "money"
+    = monedas :monto, f
     .actions
       = f.submit
 

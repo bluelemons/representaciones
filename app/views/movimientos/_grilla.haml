@@ -8,7 +8,7 @@
       %th Entidad
       %th Monto
 
-    - total = Array.new(3,0)
+    - total = Hash.new
 
     - for movimiento in @movimientos
       %tr
@@ -21,32 +21,20 @@
           =movimiento.try(:entidad).type
           =movimiento.try(:entidad).try(:name)
         %td
-          =# movimiento.try(:monto).try(:moneda).try(:simbolo)
-          -# muestro el monto en la moneda de la reserva
-          -# if movimiento.type == "Pago"
-            = movimiento.try(:reserva).try(:moneda)
-            = movimiento.monto.to_money.format
-            -if(movimiento.try(:reserva).try(:moneda_id)!=movimiento.try(:monto).try(:moneda_id))
-              ="(cambio)"
-          -#else
-            = movimiento.try(:monto).try(:moneda).try(:simbolo)
-            = movimiento.try(:monto).try(:valor)
           = movimiento.monto.to_money.format
-
-          -#if movimiento.try(:monto).try(:moneda_id)
-            -total[movimiento.try(:monto).try(:moneda_id)-1] += movimiento.try(:monto).try(:valor)
+          -total[movimiento.monto.currency_as_string] = movimiento.monto
   %table.wide
     %tr
       %td
         Pesos $
         %b
-          =total[0]
+          =total["ARS"]
       %td
         Dolares u$s
         %b
-          =total[1]
+          =total["USD"]
       %td
         Euros €
         %b
-          =total[2]
+          =total["EUR"]
 

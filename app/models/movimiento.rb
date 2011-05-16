@@ -7,11 +7,11 @@ class Movimiento < ActiveRecord::Base
   belongs_to :entidad
   belongs_to :operadora
   belongs_to :cuenta
-  belongs_to :monto
+  monetize :monto
 
   belongs_to :tdeposito   #por banco o talonario, solo para depositos
 
-  accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
+  #accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
   #validaciones
   validates :fecha, :presence => true
   validates :entidad, :presence => true
