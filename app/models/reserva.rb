@@ -1,18 +1,18 @@
 class Reserva < ActiveRecord::Base
-  #clases
+  # clases
   acts_as_versioned
-  #asociaciones
+  # asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
-
-#  belongs_to :pasajero #es el pasajero titular
   belongs_to :thabitacion
   belongs_to :programa
-  belongs_to :monto
-  accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
 
   belongs_to :operadora
   belongs_to :agency
-  has_many :pagos
+  has_many :pagos do
+    def by_entidad(entidad)
+      find_all_by_entidad_id(entidad.id)
+    end
+  end
 
   has_many :viajeros
   has_many :pasajeros, :through => :viajeros do
@@ -23,6 +23,11 @@ class Reserva < ActiveRecord::Base
       map { |p| p.name.underscore.to_sym }
     end
   end
+
+  monetize :total
+#  def total_fields=(fields)
+#    self.total = fields[:total].to_money(fields[:total_currency])
+#  end
 
   #accepts_nested_attributes_for :agencia, :reject_if => lambda { |a| a[:name].blank? }
   #accepts_nested_attributes_for :operadora, :reject_if => lambda { |a| a[:name].blank? }
@@ -41,10 +46,10 @@ class Reserva < ActiveRecord::Base
   validates :programa_id, :presence => true
   validates :operadora_id, :presence => true
   validates :agency_id, :presence => true
-  validates :monto, :presence => true
+  validates :total, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:monto,:agency,:programa,:thabitacion,:pagos,:pasajeros],
+  default_scope :include => [:operadora,:agency,:programa,:thabitacion,:pagos,:pasajeros],
                 :order => "id desc"
 
   scope :baja, where(:hidden=>0)
@@ -59,68 +64,36 @@ class Reserva < ActiveRecord::Base
   end
 
   def moneda
-    try(:monto).try(:moneda).try(:simbolo)
+    total.currency.symbol
   end
 
-  def moneda_id
-    try(:monto).try(:moneda_id)
-  end
   def liquidada?
-    (agencia_deuda <= 0)
+    (agencia_deuda.cents <= 0)
   end
 
   def agencia_pago
-    array = Array.new(4,0)
-
-    pagos.each do |pago|
-      if pago.entidad ==agency
-        array[pago.monto.moneda_id]+=pago.monto.valor
-        #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
-        if pago.monto.moneda_id != pago.reserva.moneda_id
-          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id, pago.fecha)
-        end
-      end
-    end
-
-    array[moneda_id]
+    pagos.by_entidad(agency).map {|p| p.monto.to_money }.reduce(:+) || Money.empty(total.currency)
   end
 
   def operadora_pago
-    array = Array.new(4,0)
-    pagos.each do |pago|
-      if pago.entidad == operadora
-        array[pago.monto.moneda_id]+=pago.monto.valor
-        #agrego que ponga en la moneda de la reserva el pago transformado a esa moneda.
-        if pago.monto.moneda_id != pago.reserva.moneda_id
-          array[pago.reserva.monto.moneda_id]+= pago.monto.to(pago.reserva.moneda_id, pago.fecha)
-        end
-      end
-    end
-    array[moneda_id]
+    pagos.by_entidad(operadora).map {|p| p.monto.to_money }.reduce(:+) || Money.empty(total.currency)
   end
 
-
-#### hay que sacar el como = valor y devolver solo el objeto Monto. para eso hay que modificar en los lugares donde
-#### aparece agencia_deuda y agencia valor y agregar ".valor"
-  def agencia_deuda(como = :valor)
-    if como == :valor
-      monto.valor - agencia_pago
-    else
-      m = Monto.new(:valor=>monto.valor,:moneda => monto.moneda)
-      m.valor = monto.valor - agencia_pago
-      m
-    end
+  def agencia_deuda
+    total - agencia_pago
   end
   alias :agency_deuda :agencia_deuda
 
-  def operadora_deuda(como = :valor)
-    if como == :valor
-      monto.valor - operadora_pago
-    else
-      m = Monto.new(:valor=>monto.valor,:moneda => monto.moneda)
-      m.valor = monto.valor - operadora_pago
-      m
-    end
+  def operadora_deuda
+    total - operadora_pago
+  end
+
+  def operadora_deuda_format
+    operadora_deuda.format
+  end
+
+  def agencia_deuda_format
+    agencia_deuda.format
   end
 
   def pasajero

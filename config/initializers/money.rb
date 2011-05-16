@@ -30,12 +30,12 @@ class ActiveRecord::Base
     composed_of atrb.to_sym, :class_name => "Money",
       :mapping => [%W(#{atrb.to_s}_cents cents), %W(#{atrb.to_s}_currency currency_as_string)],
       :constructor => Proc.new { |cents, currency| Money.new(cents || 0, currency || Money.default_currency) },
-      :converter => Proc.new { |value| value.respond_to?(:to_money) ? value.to_money : raise(ArgumentError, "Can't convert #{value.class} to Money") }
-  end
-
-  def self.find_values opts
-    sql = self.send(:construct_finder_sql, opts)
-    self.connection.select_values(sql)
+      :converter => Proc.new { |value| value.respond_to?(:to_money) ? value.to_money : raise(ArgumentError, "Can't convert #{value.inspect} of class #{value.class} to Money") }
+    self.class_eval <<-fin, "method #{atrb.to_sym} in: " + __FILE__, __LINE__ + 1
+      def #{atrb.to_s}_fields=(fields)
+        self.#{atrb.to_s} = fields[:#{atrb.to_s}].to_money(fields[:#{atrb.to_s}_currency])
+      end
+    fin
   end
 end
 
