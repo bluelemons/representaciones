@@ -36,7 +36,7 @@ function togrid(){
   $(".togrid").each(function(index) {
 
     var i = $(this).attr("id");
-    i=i.substring(0,i.length - 5);//le saco el _grid al nombre de la
+    i=i.substring(0,i.search(/_grid/i));//le saco el _grid al nombre de la
 
     tableToGrid($(this),{
       datatype: "local",
@@ -45,7 +45,8 @@ function togrid(){
       //onSelectRow: function(id){$.getScript('reservas/' + $('#togrid').getCell(id, 'ID') + '.js');},
       //onSelectRow: getSelectedRow(),
       onSelectRow: function(id){
-        var idx =$('#'+i+'_grid').getCell(id, 'ID');
+
+        var idx =$(this).getCell(id, 'ID');
         $("input[id$=_"+i+"_id]").val(idx).change();
         },
 
