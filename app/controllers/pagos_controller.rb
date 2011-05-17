@@ -9,13 +9,10 @@ class PagosController < InheritedResources::Base
   end
 
   def create
-    pago = params[:pago]
-    pago[:monto] = pago.delete(:monto).to_money(pago.delete(:monto_currency))
-    @pago = Pago.new(pago)
+    @pago = Pago.new(params[:pago])
     @pago.user = current_user
-
     if @pago.save
-      flash[:notice] = "Por fin pagaron"
+      flash[:notice] = "El pago a sido registrado"
       redirect_to :action => 'new', :format =>'js'
     else
       @search = Reserva.baja.search(:agency_id_eq=>0)
@@ -23,6 +20,5 @@ class PagosController < InheritedResources::Base
       render 'new.js'
     end
   end
-
 end
 
