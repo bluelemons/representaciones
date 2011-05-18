@@ -1,27 +1,25 @@
 class Movimiento < ActiveRecord::Base
   #clases
-  #acts_as_versioned
-  #asociaciones
+
+  # Asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :reserva
   belongs_to :entidad
   belongs_to :operadora
   belongs_to :cuenta
-  monetize :monto
+  monetize   :monto
 
-  belongs_to :tdeposito   #por banco o talonario, solo para depositos
-
-  #accepts_nested_attributes_for :monto, :reject_if => lambda { |a| a[:valor].blank? }
-  #validaciones
+  # Validaciones
   validates :fecha, :presence => true
   validates :entidad, :presence => true
+  validates :monto_cents, :presence => true
+  validates :monto_currency, :presence => true
+  validates :reserva, :presence => true
+  validates :cuenta, :presence => true
 
-  #scopes
-  #agrego por default montos, así por ejemplo podes hacer, pago.valor, en lugar de pago.monto.valor
-
-  #default_scope select("movimientos.*,montos.moneda_id,montos.valor").joins(:monto)
-  default_scope :include => [:reserva, :entidad, :cuenta], :order => "id desc"
+  # scopes
+  default_scope :include => [:reserva, :cuenta], :order => "id desc"
   scope :baja, where(:hidden=>0)
-  #metodos
+  # metodos
 end
 

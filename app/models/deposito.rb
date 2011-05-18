@@ -3,7 +3,9 @@ class Deposito < Movimiento
   validates_presence_of :tdeposito, :numero
 
   # Asociaciones
+  belongs_to :tdeposito
   monetize   :monto
+
 
   # deposita el dinero en la cuenta correspondiente una vez que el
   # deposito fue registrado.
