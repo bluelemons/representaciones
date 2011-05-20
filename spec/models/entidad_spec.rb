@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 describe Entidad do
-  it { should have_many(:cuentas) }
-  it { should have_many(:movimientos) }
-  # should be checked in other way
-  it "{ should validate_uniqueness_of(:name) }"
-  it { should validate_presence_of(:name) }
-
+  context 'validaciones' do
+    before(:each) { Factory(:operadora); Factory(:agency) }
+    it { should have_many(:cuentas) }
+    it { should have_many(:movimientos) }
+    # should be checked in other way
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_presence_of(:name) }
+  end
   describe '#deposit (money, operadora_id)' do
     let(:entidad) { Factory(:entidad) }
     it 'Crea la cuenta si no existe' do
@@ -37,6 +39,40 @@ describe Entidad do
     context 'if there is not enough money' do
       it 'raise exception' do
         lambda { entidad.withdraw("5000 ARS") }.should raise_error
+      end
+    end
+  end
+  context 'Cuando entidad es una agencia o operadora: ' do
+    describe '#deudas' do
+      let(:entidad) { Factory([:agency, :operadora][rand(2)]) }
+      it 'returns an array' do
+        entidad.deudas.should be_a_kind_of(Array)
+      end
+      it 'pregunta a cada reserva su deuda' do
+        entidad.should_receive(:reservas).once do
+          Array.new(rand(5)) do
+            r = double()
+            r.should_receive(:"#{entidad.type.downcase}_deuda").once do
+              Money.empty()
+            end
+            r
+          end
+        end
+        entidad.deudas
+      end
+      it 'sum deudas by currency' do
+        entidad.stub(:reservas) do
+          deudas = ["2 ARS", "5 ARS", "3 USD", "2 ARS"]
+          Array.new(4) do |index|
+            r = double()
+            r.stub(:"#{entidad.type.downcase}_deuda") do
+              deudas[index].to_money
+            end
+            r
+          end
+        end
+        resultados = entidad.deudas
+        resultados.should include("9 ARS".to_money, "3 USD".to_money)
       end
     end
   end

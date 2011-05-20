@@ -13,7 +13,7 @@ class Entidad < ActiveRecord::Base
                   :calle, :legajo, :telefono, :web, :email
 
   #validaciones
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
   #validates :calle, :presence => true
   #validates :cuit, :presence => true
   #validates :telefono, :presence => true
@@ -79,12 +79,25 @@ class Entidad < ActiveRecord::Base
     end
   end
 
+  # Consulta las deudas de la entidad en cada reserva.
+  #
+  # @return [Array] Un array de deudas de la entidad sin monedas repetidas,
+  #   ya que las deudas con la misma moneda son sumadas.
+
   def deudas
-    d = Array.new(3,0)
-    reservas.each do |r|
-      d[r.moneda_id-1] += r.send((type.downcase + "_deuda").to_sym) if r.moneda_id
+    deudas = reservas.map do |reserva|
+      reserva.send((type.downcase + "_deuda").to_sym)
     end
-    d
+    deudas.reduce([]) do |memo, deuda|
+      deuda_currency = deuda.currency
+      coincidencia = memo.find_index { |mem| deuda_currency == mem.currency }
+      if coincidencia
+        memo[coincidencia] = memo[coincidencia] + deuda
+      else
+        memo << deuda
+      end
+      memo
+    end
   end
 end
 
