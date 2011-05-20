@@ -9,13 +9,10 @@ class CambiosController < InheritedResources::Base
   end
 
   def create
-    cambio = params[:cambio]
-    cambio[:monto] = cambio.delete(:monto).to_money(cambio.delete(:monto_currency))
-    @cambio = Cambio.new(cambio)
+    @cambio = Cambio.new(params[:cambio])
     @cambio.user = current_user
-
     if @cambio.save
-      flash[:notice] = "Por fin pagaron"
+      flash[:notice] = "El cambio de monedas fue realizado correctamente"
       redirect_to :action => 'new', :format =>'js'
     else
       @search = Reserva.baja.search(:agency_id_eq=>0)
@@ -23,6 +20,5 @@ class CambiosController < InheritedResources::Base
       render 'new.js'
     end
   end
-
 end
 
