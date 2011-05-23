@@ -19,8 +19,9 @@
     #cuentas
 
     %br
-    = f.text_field :monto, :class => "money"
-    = monedas :monto, f
+    = f.fields_for :monto_fields, @cambio do |money_fields|
+      = money_fields.text_field :monto, :class => "money"
+      = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
     .actions
       = f.submit
 
