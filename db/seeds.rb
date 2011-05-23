@@ -17,199 +17,24 @@ end
   Tdoc.find_or_create_by_name tipo
 end
 
-puts Role.create({
-  :name=>'Admin',
-  :desc=>'Es el Rol de administrador'
-})
+puts Role.find_or_create_by_name('Admin',
+  {:desc=>'Es el Rol de administrador'})
 
-puts User.create([{
-  :username=>'olvap',
-  :email=>'youre-mail@mail.com',
-  :password_confirmation=>'admin6',
-  :password=>'admin6',
-  :role_ids=>[1]
-  },{
-  :username=>'eloy',
-  :email=>'eloy-mail@mail.com',
-  :password_confirmation=>'admin8',
-  :password=>'admin8',
-  :role_ids=>[1]
-  },{
-  :username=>'susana',
-  :email=>'susana@gmail.com',
-  :password_confirmation=>'susana1',
-  :password=>'susana1',
-  :role_ids=>[1]
-  }
-])
+[{:username=>'olvap', :details => {
+  :email=>'youre-mail@mail.com', :password_confirmation=>'admin6',
+  :password=>'admin6', :role_ids=>[1]}},
+  {:username=>'eloy', :details => {
+  :email=>'eloy-mail@mail.com', :password_confirmation=>'admin8',
+  :password=>'admin8', :role_ids=>[1]
+  }},
+  {:username=>'susana', :details => {
+  :email=>'susana@gmail.com', :password_confirmation=>'susana1',
+  :password=>'susana1', :role_ids=>[1]
+  }}].each do |user_hash|
+    User.find_or_create_by_username(user_hash[:username], user_hash[:details])
+end
 
 require "#{RAILS_ROOT}/db/seeds/agencias/agencias"
 require "#{RAILS_ROOT}/db/seeds/operadoras/operadoras"
 require "#{RAILS_ROOT}/db/seeds/programas/programas"
-
-#Pago.create({
-#  :fecha=>"2011-01-30",
-#  :reserva_id =>1,
-#  :monto => 22.41,
-#  :moneda_id =>1,
-#  :entidad_id=>3,
-#  :tpago_id=>1,
-#  :numero =>123123
-#})
-#puts Cotizacion.create([{
-#  :fecha =>'2011-01-01',
-#  :compra =>3.98,
-#  :venta =>4.00,
-#  :moneda_id =>2
-#  },{
-#  :fecha =>'2011-01-02',
-#  :compra =>3.99,
-#  :venta =>4.01,
-#  :moneda_id =>2
-#  },{
-#  :fecha =>'2011-01-03',
-#  :compra =>4.00,
-#  :venta =>4.02,
-#  :moneda_id =>2
-#  },{
-#  :fecha =>'2011-01-04',
-#  :compra =>4.01,
-#  :venta =>4.03,
-#  :moneda_id =>2
-#  }
-#])
-#
-#puts Pasajero.create([{
-#  :doc=>28684242,
-#  :name =>"Oldani Pablo",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1981-10-4"
-#  },{
-#  :doc=>31257560,
-#  :name =>"Dosso Liza",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1984-10-15"
-#  },{
-#  :doc=>32454325,
-#  :name =>"Espinaco Eloy",
-#  :tdoc_id=>1,
-#  :nacimiento=>"1985-06-14"
-#  }
-#])
-#puts Programa.create([{
-#  :name => "Bariloche",
-#  :obs=>'Mucha joda a la noche'
-#  },{
-#  :name => "Brasil",
-#  :obs=>'Execelente para vacacionar con la familia'
-#  }
-#])
-#
-#puts Thabitacion.create([{
-#  :name =>"Simple"
-#  },{
-#  :name =>"Doble"
-#  }])
-#
-#
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agency_id=>3,
-#  :programa_id =>1,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>3500,
-#    :moneda_id =>1
-#    }
-#  )
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agency_id=>4,
-#  :programa_id =>2,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>300,
-#    :moneda_id =>2
-#    }
-#  )
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agency_id=>3,
-#  :programa_id =>2,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>4500,
-#    :moneda_id =>1
-#    }
-#  )
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agency_id=>4,
-#  :programa_id =>2,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>500,
-#    :moneda_id =>2
-#    }
-#  )
-#puts Reserva.create(
-#  :hotel =>'Central Park',
-#  :reservado =>'Pablo',
-#  :regimen =>'All',
-#  :periodo => '6 Noches',
-#  :fecha => '2011-01-24',
-#  :salida=>'2011-03-21',
-#  :agency_id=>3,
-#  :programa_id =>2,
-#  :operadora_id =>1,
-#  :thabitacion_id =>1,
-#  :pasajero_ids=>[1,2],
-#  :iva => 18.19,
-#  :impuesto =>20.01,
-#  :seguro => 0,
-#  :monto_attributes =>{
-#    :valor =>800,
-#    :moneda_id =>3
-#    }
-#  )
 

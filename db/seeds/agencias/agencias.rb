@@ -16,7 +16,7 @@ agencias.each do |a|
   else
     localidad_id = nil
   end
-  puts Agency.create!(:name => a.nombre, :calle => a.direccion,
+  puts Agency.create(:name => a.nombre, :calle => a.direccion,
                  :cuit => a.nro_cuit, :telefono => a.telefono,
                  :email => a.e_mail, :web => a.pag_web,
                  :localidad_id => localidad_id).inspect
