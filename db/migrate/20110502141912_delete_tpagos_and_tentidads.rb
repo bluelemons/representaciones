@@ -1,17 +1,14 @@
 class DeleteTpagosAndTentidads < ActiveRecord::Migration
-  # para chequear la existencia de la tabla hago esto
-  class Tpago < ActiveRecord::Base ; end
-  class Tentidad < ActiveRecord::Base ; end
-
+  def self.drop_existing_table(table)
+    if ActiveRecord::Base.connection.tables.include?(table.to_s)
+      drop_table table
+    end
+  end
   def self.up
-    if Tpago.table_exists?
-      drop_table :tpagos
-      drop_table :tpago_versions
-    end
-    if Tentidad.table_exists?
-      drop_table :tentidads
-      drop_table :tentidad_versions
-    end
+    drop_existing_table :tpagos
+    drop_existing_table :tpago_versions
+    drop_existing_table :tentidads
+    drop_existing_table :tentidad_versions
   end
 
   def self.down
