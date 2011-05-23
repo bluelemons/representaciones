@@ -14,8 +14,6 @@ class Movimiento < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto_cents, :presence => true
   validates :monto_currency, :presence => true
-  validates :reserva, :presence => true
-  validates :cuenta, :presence => true
 
   # scopes
   default_scope :include => [:reserva, :cuenta], :order => "id desc"

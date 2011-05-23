@@ -4,7 +4,7 @@ class Pago < Movimiento
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
-  validate :saldo_suficiente, :if => :cuenta?
+  validate :saldo_suficiente, :if => :cuenta
   before_save :withdraw
 
   # valida que exista plata en la cuenta.
