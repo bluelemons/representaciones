@@ -6,8 +6,6 @@ describe Movimiento do
   it { should validate_presence_of(:fecha) }
   it { should validate_presence_of(:monto_cents) }
   it { should validate_presence_of(:monto_currency) }
-  it { should validate_presence_of(:reserva) }
-  it { should validate_presence_of(:cuenta) }
 
   describe '#create' do
     context 'si el movimiento es un pago de una agencia' do
