@@ -1,0 +1,27 @@
+.ui-widget.ui-widget-content
+  %h3.ui-widget-header cotizacion
+  .action_bar
+    -if can? :edit, @cotizacion
+      = link_to 'Editar', edit_cotizacion_path(@cotizacion), :remote=>true, :width =>'200px'
+    %br
+
+  %p
+    %b Fecha:
+    = @cotizacion.fecha
+
+  %p
+    %b Moneda_compra:
+    = @cotizacion.moneda_compra
+
+  %p
+    %b Moneda_venta:
+    = @cotizacion.moneda_venta
+
+  %p
+    %b Compra:
+    = @cotizacion.compra
+
+  %p
+    %b Venta:
+    = @cotizacion.venta
+

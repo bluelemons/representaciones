@@ -1,0 +1,5 @@
+%h2.ui-widget-header Modificando Cotizacion
+.action_bar{:style=>'float:right'}
+    = link_to 'Mostrar', cotizacion_path(@cotizacion), :remote=>true
+= render 'form'
+

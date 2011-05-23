@@ -1,5 +1,7 @@
 Representaciones::Application.routes.draw do
 
+  resources :cotizacions
+
   resources :vencidas
 
   resources :vouchers do

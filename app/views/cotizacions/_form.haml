@@ -1,0 +1,13 @@
+.action_bar
+  =link_to "Resetear", new_cotizacion_path, :remote=>true
+
+= semantic_form_for @cotizacion, :remote=>true do |form|
+  = form.inputs do
+    = error_message(@cotizacion)
+    = form.input :fecha, :as=>:string, :input_html=>{:class=>'datepicker', :size=>10}
+    = form.input :moneda_compra
+    = form.input :moneda_venta
+    = form.input :compra
+    = form.input :venta
+  = form.buttons
+

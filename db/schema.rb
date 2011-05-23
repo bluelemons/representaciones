@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110513182028) do
+ActiveRecord::Schema.define(:version => 20110520150020) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -30,11 +30,12 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
 
   create_table "cotizacions", :force => true do |t|
     t.date     "fecha"
-    t.integer  "moneda_id"
     t.float    "compra"
     t.float    "venta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "moneda_compra", :limit => 3
+    t.string   "moneda_venta",  :limit => 3
   end
 
   create_table "cuentas", :force => true do |t|
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
   create_table "entidad_versions", :force => true do |t|
     t.integer  "entidad_id"
     t.integer  "version"
+    t.string   "name"
     t.string   "calle"
     t.string   "cuit"
     t.string   "telefono"
@@ -64,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
     t.string   "email"
     t.string   "web"
     t.integer  "localidad_id"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",         :default => false
@@ -75,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
   add_index "entidad_versions", ["entidad_id"], :name => "index_entidad_versions_on_entidad_id"
 
   create_table "entidads", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
     t.string   "calle"
     t.string   "cuit"
     t.string   "telefono"
@@ -82,8 +85,6 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
     t.string   "email"
     t.string   "web"
     t.integer  "localidad_id"
-    t.string   "name"
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "hidden",       :default => false
@@ -128,26 +129,6 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
     t.datetime "updated_at"
   end
 
-  create_table "movimiento_versions", :force => true do |t|
-    t.integer  "movimiento_id"
-    t.integer  "version"
-    t.integer  "entidad_id"
-    t.integer  "reserva_id"
-    t.integer  "tdeposito_id"
-    t.integer  "saldo_id"
-    t.integer  "monto_id"
-    t.integer  "numero"
-    t.date     "fecha"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "hidden",         :default => false
-    t.integer  "user_id"
-    t.string   "versioned_type"
-    t.integer  "operadora_id"
-  end
-
-  add_index "movimiento_versions", ["movimiento_id"], :name => "index_movimiento_versions_on_movimiento_id"
-
   create_table "movimientos", :force => true do |t|
     t.integer  "entidad_id"
     t.integer  "reserva_id"
@@ -161,7 +142,6 @@ ActiveRecord::Schema.define(:version => 20110513182028) do
     t.datetime "updated_at"
     t.boolean  "hidden",                      :default => false
     t.integer  "user_id"
-    t.integer  "version"
     t.integer  "operadora_id"
     t.integer  "monto_cents"
     t.string   "monto_currency", :limit => 3

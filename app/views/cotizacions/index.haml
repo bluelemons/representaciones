@@ -1,0 +1,19 @@
+.ui-widget
+  %h1.ui-widget-header Cotizacions
+
+  #tabs-cotizacions.mytabs
+    %ul
+      %li
+        %a{:href=>"#tabs-cotizacions-1"} Cotizacion
+
+      -if can? :new,Cotizacion
+        %li
+          %a#cotizacion_new{:href=>"#tabs-cotizacions-2"} Alta
+
+    #tabs-cotizacions-1
+      = render :partial => "search"
+      #cotizacions
+        =render 'cotizacions'
+    #tabs-cotizacions-2
+      #cotizacion_form
+

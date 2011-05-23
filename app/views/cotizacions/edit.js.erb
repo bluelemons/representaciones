@@ -1,0 +1,6 @@
+addTab("cotizacion","<%=@cotizacion.id%>","<%=@cotizacion.name%>");
+
+$('#cotizacion_form<%=@cotizacion.id%>').html('<%= raw escape_javascript(render("edit")) %>');
+
+skin();
+

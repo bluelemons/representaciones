@@ -1,0 +1,27 @@
+.half.left
+  %h3.ui-widget-header Listado
+  =will_paginate @cotizacions
+
+  #cotizacions_grid
+    %table#migrilla.togrid
+      %tr
+        %th Fecha
+        %th Moneda_compra
+        %th Moneda_venta
+        %th Compra
+        %th Venta
+      %th Acciones
+      - for cotizacion in @cotizacions
+        %tr
+          %td= cotizacion.try(:fecha)
+          %td= cotizacion.try(:moneda_compra)
+          %td= cotizacion.try(:moneda_venta)
+          %td= cotizacion.try(:compra)
+          %td= cotizacion.try(:venta)
+          %td
+            = link_to 'Show', cotizacion,:remote=>true
+            -if can? :edit, cotizacion
+              = link_to 'Edit', edit_cotizacion_path(cotizacion),:remote=>true
+            -if can? :destroy, cotizacion
+              = link_to 'Destroy', cotizacion, :confirm => 'Are you sure?', :method => :delete,:remote=>true
+
