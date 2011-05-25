@@ -2,6 +2,6 @@
 
 Factory.define :cuenta do |f|
   f.association     :entidad
-  f.monto           Money.new(rand(600000), [:ARS,:USD,:EUR][rand(3)])
+  f.monto           { Forgery(:monetary).money :max=>15000 }
 end
 
