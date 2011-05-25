@@ -4,31 +4,49 @@ class Pago < Movimiento
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
-  validate :saldo_suficiente, :if => :cuenta
-  before_save :withdraw
+  validate  :saldo_suficiente
+  validate  :coinciden_monedas
+
+  # quita la plata de la cuenta
+  before_save do |p|
+# TODO revisar para que ande el autosave
+#    puts "antes: " + p.cuenta.monto.format
+#    puts "changed_for_autosave?: " + p.cuenta.changed_for_autosave?.to_s
+    p.cuenta.monto -= p.monto
+#    puts "después: " + p.cuenta.monto.format
+#    puts "changed_for_autosave?: " + p.cuenta.changed_for_autosave?.to_s
+    p.cuenta.save
+  end
+
+  # Asigna una cuenta a partir de la entidad y el monto si no tiene una asignada.
+  before_validation do |p|
+    if p.cuenta.nil? && p.entidad
+      p.cuenta = p.entidad.cuenta(p.monto.currency, p.operadora)
+    end
+  end
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    if cuenta.monto < monto
+    if same_currency? && cuenta.monto < monto
        errors.add(:base, "Debe tener suficiente dinero para efectuar el pago")
     end
   end
 
-  def withdraw
-    entidad.withdraw(monto)
+  # valida que las monedas coinciden.
+  def coinciden_monedas
+    unless same_currency?
+       errors.add(:base, "Las monedas de la reserva y la cuenta no coinciden")
+    end
   end
 
-#
-#  # validaciones:
-#  validates :reserva, :presence => true
-#  validates :monto, :presence => true
-##  validate :validate_deuda
-##  validate :saldo_suficiente
-#
-#  # Callbacks:
-#
-##  before_save       :conversion
-##  after_validation  :pago_maximo
+  private
+
+  # Chequea la coincidencia de monedas
+  def same_currency?
+    cuenta.monto.currency == monto.currency if cuenta && monto
+  end
+
+#  before_save       :conversion
 #
 #  # conversion realiza el exchange de dinero antes de el registro de
 #  # la transaccion.

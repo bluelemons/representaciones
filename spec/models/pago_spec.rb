@@ -1,22 +1,46 @@
 require 'spec_helper'
 
 describe Pago do
+  it { should validate_presence_of(:reserva) }
+  it { should validate_presence_of(:cuenta) }
+  it { should validate_presence_of(:entidad) }
 
-  #it { should validate_presence_of(:reserva) }
-
-  describe '#save' do
-    it 'valida: suficiente plata en la cuenta' do
-      pending
+  describe 'before_validation' do
+    context 'if not given a Cuenta' do
+      let(:pago) { Factory.build(:pago, :cuenta => nil) }
+      it 'ask Entidad to assign one' do
+        pago.entidad.should_receive(:cuenta) do
+          Factory(:cuenta, :monto => Money.parse("5000000"))
+        end
+        pago.valid? #.should be_true
+        pago.cuenta.should_not be_nil
+      end
     end
-    it 'valida: coinciden las monedas de cuenta y reserva' do
-      pending
+  end
+  describe '#save' do
+    let(:pago) { Factory.build(:pago) }
+    it 'salva el pago con valores correctos' do
+      pago.save.should be_true
+      pago.errors.should be_empty
+    end
+    context 'si no coinciden las monedas de cuenta y reserva' do
+      it 'da un error' do
+        pago.cuenta = mock_model Cuenta, :monto => Money.new(1, :aed)
+        pago.valid?.should be_false
+        pago.errors[:base].should include("Las monedas de la reserva y la cuenta no coinciden")
+      end
+    end
+    context 'si no tiene suficiente plata en la cuenta' do
+      it 'da un error explicativo' do
+        pago.cuenta = mock_model Cuenta, :monto => Money.new(1, pago.monto.currency)
+        pago.valid?.should be_false
+        pago.errors[:base].should include("Debe tener suficiente dinero para efectuar el pago")
+      end
     end
     it 'quita dinero de la cuenta' do
-      pending
-      cuenta = mock_model(Cuenta)
-      cuenta.should_receive(:withdraw).with(500)
-      pago = Factory.build(:pago, :cuenta => cuenta)
+      monto_anterior = pago.cuenta(true).monto
       pago.save.should be_true
+      pago.cuenta(true).monto.should == (monto_anterior - pago.monto)
     end
   end
 end
