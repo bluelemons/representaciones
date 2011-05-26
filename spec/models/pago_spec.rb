@@ -24,8 +24,13 @@ describe Pago do
       pago.errors.should be_empty
     end
     context 'si no coinciden las monedas de cuenta y reserva' do
-      it 'da un error' do
-        pago.cuenta = mock_model Cuenta, :monto => Money.new(1, :aed)
+      it 'da un error si la cuenta está en una moneda distinta' do
+        pago.cuenta.stub(:monto) { Money.parse("10000 AED") }
+        pago.valid?.should be_false
+        pago.errors[:base].should include("Las monedas de la reserva y la cuenta no coinciden")
+      end
+      it 'da un error si la reserva está en una moneda distinta' do
+        pago.reserva.stub(:total) { Money.parse("10000 AED") }
         pago.valid?.should be_false
         pago.errors[:base].should include("Las monedas de la reserva y la cuenta no coinciden")
       end

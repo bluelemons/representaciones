@@ -43,7 +43,15 @@ class Pago < Movimiento
 
   # Chequea la coincidencia de monedas
   def same_currency?
+    same_currency_cuenta? && same_currency_reserva?
+  end
+
+  def same_currency_cuenta?
     cuenta.monto.currency == monto.currency if cuenta && monto
+  end
+
+  def same_currency_reserva?
+    reserva.total.currency == monto.currency if reserva && monto
   end
 
 #  before_save       :conversion
