@@ -1,5 +1,5 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
-
+# -- coding utf-8
 Factory.define :reserva do |f|
   f.fecha       Forgery(:date).date
   f.salida      Forgery(:date).date
