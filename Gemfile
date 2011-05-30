@@ -14,7 +14,7 @@ gem "meta_search"
 gem "builder"
 gem "acts_as_versioned"
 gem 'prawn', :git => "git://github.com/sandal/prawn", :tag => '0.10.2', :submodules => true
-gem "mysql2"
+gem "mysql2", '~> 0.2.7'
 gem 'formtastic', '~> 1.2.3'
 gem 'dbf'
 gem 'money', '~> 3.6.1'
