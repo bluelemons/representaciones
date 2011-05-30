@@ -4,6 +4,8 @@ Factory.define :deposito do |d|
   d.fecha             { Forgery(:date).date :max_delta => 3000 }
   d.association       :tdeposito
   d.sequence(:numero) {|n| n }
+  d.association       :entidad
+  d.monto             { Forgery(:monetary).money :max=>15000 }
 end
 
 Factory.define :pago do |p|
