@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Cambio do
+  it_behaves_like "un movimiento"
+  it { should validate_presence_of :cuenta }
+
   it "works" do
     fecha = Forgery(:date).date :max_delta=>150, :past => true
     Factory(:cotizacion, :fecha => fecha, :moneda_venta => "ARS", :moneda_compra => "USD", :compra => 4.07)

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Pago do
+  it_behaves_like "un movimiento"
   it { should validate_presence_of(:reserva) }
   it { should validate_presence_of(:cuenta) }
   it { should validate_presence_of(:entidad) }
