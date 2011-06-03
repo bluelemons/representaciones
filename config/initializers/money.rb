@@ -24,6 +24,9 @@ class Money
 end
 
 Money.default_currency = Money::Currency.new(:ars)
+Money.default_bank     = Money::Bank::VariableExchange.new do |float|
+  float.to_d.round(0,7).to_i
+end
 
 class ActiveRecord::Base
   def self.monetize(atrb)
