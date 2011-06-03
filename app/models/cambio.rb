@@ -13,8 +13,6 @@ class Cambio < Movimiento
     c = cotizacion
     if c
       Money.add_rate(monto.currency,cuenta.monto.currency,c.compra)
-    else
-      nil
     end
   end
 
@@ -26,7 +24,9 @@ class Cambio < Movimiento
   end
 
   def cotizacion
-    c = Cotizacion.buscar(fecha,monto,cuenta.monto).first
+    if fecha and monto and cuenta
+      c = Cotizacion.buscar(fecha,cuenta.monto,monto).first
+    end
   end
 
   #valida que existe la cotizacion para el día exista.
