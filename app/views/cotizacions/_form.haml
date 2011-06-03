@@ -5,9 +5,14 @@
   = form.inputs do
     = error_message(@cotizacion)
     = form.input :fecha, :as=>:string, :input_html=>{:class=>'datepicker', :size=>10}
-    = form.input :moneda_compra
-    = form.input :moneda_venta
+    Moneda Compra
+    %br
+    = form.collection_select :moneda_compra, Money.monedas, :iso_code, :symbol
+    %br
+    Monda Venta
+    %br
+    = form.collection_select :moneda_venta, Money.monedas, :iso_code, :symbol
+
     = form.input :compra
-    = form.input :venta
   = form.buttons
 

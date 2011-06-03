@@ -146,7 +146,9 @@ $(function() {
   $('#cambio_new').click(function() {
     $.getScript("/cambios/new.js", togrid );
   });
-
+  $('#cotizacion_new').click(function() {
+    $.getScript("/cotizacions/new.js", togrid );
+  });
 
 
   $('.pagination a').live('click', function () {
