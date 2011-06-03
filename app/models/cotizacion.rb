@@ -20,5 +20,10 @@ class Cotizacion < ActiveRecord::Base
   #scopes
   #scope :baja, where(:hidden=>0)
   #metodos
+
+  # Agrega la cotización al default_bank.
+  def add_rate
+    Money.add_rate(moneda_venta, moneda_compra, compra)
+  end
 end
 
