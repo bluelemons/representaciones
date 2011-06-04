@@ -13,7 +13,15 @@ class Cambio < Movimiento
     c = cotizacion
     if c
       Money.add_rate(monto.currency,cuenta.monto.currency,c.compra)
+      Money.add_rate(cuenta.monto.currency,monto.currency,1/c.compra)
     end
+  end
+
+  #convierte todo lo que halla en la cuenta a la moneda del monto
+  def convertir_todo_a(m=cuenta.monto)
+     c = cotizacion
+     Money.add_rate(m.currency,monto.currency,1/c.compra)
+     m.exchange_to(monto.currency)
   end
 
   # valida que exista plata en la cuenta.
@@ -49,6 +57,10 @@ class Cambio < Movimiento
   #deposito el monto nuevo.
   def deposit
     cuenta.entidad.deposit(monto)
+  end
+
+  def cuenta_objetivo
+    entidad.cuenta(monto.currency,operadora)
   end
 end
 
