@@ -1,45 +1,70 @@
-class DirectosController < ApplicationController
-  #load_and_authorize_resource
-
+class DirectosController < InheritedResources::Base
   def index
   end
 
   def new
+    @deposito = Deposito.new
+    @pago = Pago.new
+    @cambio = Cambio.new
     @directo = Directo.new
-    @directo.build_monto
     @search = Reserva.baja.search(:agency_id_eq=>0)
     @reservas = @search.paginate :page => params[:page], :per_page =>10
   end
 
   def create
+    # 1. Deposita el dinera en saldo
+    # 2. Graba un cambio si lo hubiese
+    # 3. Graba el pago.
+
     @directo = Directo.new(params[:directo])
-    @directo.user = current_user
-    if @directo.save
-      agencia = @directo.entidad
-      operadora = Operadora.find(params[:search][:operadora_id_eq])
-      moneda_id =@directo.monto.moneda_id
-      #genero el deposito.
-      agencia.deposit_by(operadora,@directo.monto)
-
-      #genero el pago
-      # un pago de la agencia.
-      cuenta_a = agencia.cuenta(moneda_id,operadora)
-      valid = @directo.pago(agencia,cuenta_a)
-
-      #un pago de la operadora
-      cuenta_o = operadora.cuenta(moneda_id)
-      @directo.pago(operadora,cuenta_o)
+    @deposito = Deposito.new(params[:directo])
+    @pago = Pago.new(params[:directo])
 
 
-      flash[:notice] = "#{valid.errors}"
-      redirect_to :action => 'new', :format =>'js'
-    else
-      @search = Reserva.baja.search(params[:search])
-      @reservas = @search.paginate :page => params[:page], :per_page =>10
-      @directo.build_monto
-      render 'new.js'
+    #si el pago es sobre una serva con otra moneda tiene que
+    #tambien hacer un cambio
+
+    @deposito.user = current_user
+    @pago.user = current_user
+
+    ActiveRecord::Base.transaction do
+      if @deposito.save
+        if @deposito.monto.currency != @deposito.reserva.total.currency
+          @cambio = Cambio.new(params[:directo])
+
+          #actualizo la cuenta de cambio.
+          @cambio.cuenta = @deposito.cuenta
+
+          c = Cotizacion.buscar(@deposito.fecha,@deposito.reserva.total,@deposito.cuenta.monto).first
+          #Money.add_rate(@cambio.cuenta.monto.currency,@pago.monto.currency,c)
+          Money.add_rate(@pago.monto.currency,@cambio.cuenta.monto.currency,c)
+          c.add_rate
+
+          puts @cambio.monto
+          @cambio.monto = @cambio.monto.exchange_to(@deposito.reserva.total.currency)
+          @pago.cuenta = @cambio.cuenta_objetivo
+          @pago.monto = @cambio.monto
+          @cambio.user = current_user
+          puts @cambio.monto
+          puts @cambio.inspect
+          end
+          puts @cambio.monto.currency
+          puts @pago.monto.currency
+          puts @deposito.monto.currency
+          if @cambio.save and @pago.save
+            flash[:notice] = "El pago a sido registrado"
+            redirect_to :action => 'new', :format =>'js'
+          else
+            @search = Reserva.baja.search(:agency_id_eq=>0)
+            @reservas = @search.paginate :page => params[:page], :per_page =>10
+            render 'new.js'
+          end
+      else
+        @search = Reserva.baja.search(:agency_id_eq=>0)
+        @reservas = @search.paginate :page => params[:page], :per_page =>10
+        render 'new.js'
+      end
     end
   end
-
 end
 
