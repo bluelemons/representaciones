@@ -36,8 +36,6 @@ class DirectosController < InheritedResources::Base
           @cambio.cuenta = @deposito.cuenta
 
           c = Cotizacion.buscar(@deposito.fecha,@deposito.reserva.total,@deposito.cuenta.monto).first
-          #Money.add_rate(@cambio.cuenta.monto.currency,@pago.monto.currency,c)
-          Money.add_rate(@pago.monto.currency,@cambio.cuenta.monto.currency,c)
           c.add_rate
 
           puts @cambio.monto
