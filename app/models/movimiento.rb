@@ -18,6 +18,17 @@ class Movimiento < ActiveRecord::Base
   # scopes
   default_scope :include => [:reserva, :cuenta], :order => "id desc"
   scope :baja, where(:hidden=>0)
+
   # metodos
+  def self.total(movs)
+    movs = movs.group_by { |m| m.monto.currency_as_string }
+    totales = {}
+    movs = movs.each do |moneda, mvs|
+      mvs = mvs.map { |a| a.monto }
+      total = mvs.reduce(:+)
+      totales[moneda] = total
+    end
+    totales
+  end
 end
 
