@@ -14,5 +14,10 @@ class Deposito < Movimiento
   def depositar
     entidad.deposit(monto, operadora)
   end
+
+  def cuenta
+    entidad.cuenta(monto.currency,operadora)
+  end
+
 end
 
