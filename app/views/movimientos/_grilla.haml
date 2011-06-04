@@ -8,8 +8,6 @@
       %th Entidad
       %th Monto
 
-    - total = Hash.new
-
     - for movimiento in @movimientos
       %tr
 
@@ -22,19 +20,18 @@
           =movimiento.try(:entidad).try(:name)
         %td
           = movimiento.monto.to_money.format
-          -total[movimiento.monto.currency_as_string] = movimiento.monto
   %table.wide
     %tr
       %td
         Pesos $
         %b
-          =total["ARS"]
+          =@total["ARS"]
       %td
         Dolares u$s
         %b
-          =total["USD"]
+          =@total["USD"]
       %td
         Euros €
         %b
-          =total["EUR"]
+          =@total["EUR"]
 

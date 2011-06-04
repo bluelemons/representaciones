@@ -5,12 +5,9 @@ class MovimientosController < InheritedResources::Base
 
   # ver en inheritedresources como hacer para que solo haga index show, y restore.
   def index
-    if params[:search]
-      @search = Movimiento.search(params[:search])
-    else
-      @search = Movimiento.baja.search()
-    end
-      @movimientos = @search.paginate :page => params[:page], :per_page =>10
+    @search = Movimiento.baja.search((params[:search] if params[:search]))
+    @total = Movimiento.total(@search)
+    @movimientos = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
       format.js
       format.html
