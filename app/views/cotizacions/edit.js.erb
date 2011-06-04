@@ -1,4 +1,4 @@
-addTab("cotizacion","<%=@cotizacion.id%>","<%=@cotizacion.name%>");
+addTab("cotizacion","<%=@cotizacion.id%>","<%=@cotizacion.fecha%>");
 
 $('#cotizacion_form<%=@cotizacion.id%>').html('<%= raw escape_javascript(render("edit")) %>');
 
