@@ -17,6 +17,11 @@ end
   Tdoc.find_or_create_by_name tipo
 end
 
+# Cargo los tipos de habitacion
+%w( SGL DBL TPL CPL OTROS ).each do |hab|
+  Thabitacion.find_or_create_by_name(hab)
+end
+
 puts Role.find_or_create_by_name('Admin',
   {:desc=>'Es el Rol de administrador'})
 
