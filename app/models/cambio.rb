@@ -1,12 +1,11 @@
 class Cambio < Movimiento
 
   validates :cuenta, :presence => true
-  validates :monto, :presence => true
 
   after_save :withdraw
   before_save :deposit
 
-  validate :existe_cotizacion
+  validate :existe_cotizacion?
   validate :saldo_suficiente
 
   def rate
@@ -29,6 +28,8 @@ class Cambio < Movimiento
     end
   end
 
+  private
+  # La cotización de cuenta a monto
   def cotizacion
     if fecha and monto and cuenta
       Cotizacion.buscar(fecha,cuenta.monto,monto)
@@ -36,7 +37,7 @@ class Cambio < Movimiento
   end
 
   #valida que existe la cotizacion para el día exista.
-  def existe_cotizacion
+  def existe_cotizacion?
     monto(true)
     if !cotizacion
       errors.add(:base, "No se cargo la cotizacion para esta transaccion")
