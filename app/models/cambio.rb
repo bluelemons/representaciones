@@ -10,11 +10,9 @@ class Cambio < Movimiento
   validate :saldo_suficiente
 
   def rate
-    c = cotizacion
-    if c
-      Money.add_rate(monto.currency,cuenta.monto.currency,c.compra)
-      Money.add_rate(cuenta.monto.currency,monto.currency,1/c.compra)
-    end
+    if c = cotizacion
+      c.add_rate
+    end 
   end
 
   #convierte todo lo que halla en la cuenta a la moneda del monto
@@ -33,7 +31,7 @@ class Cambio < Movimiento
 
   def cotizacion
     if fecha and monto and cuenta
-      c = Cotizacion.buscar(fecha,cuenta.monto,monto).first
+      c = Cotizacion.buscar(fecha,cuenta.monto,monto).first || Cotizacion.buscar(fecha,monto,cuenta.monto).first
     end
   end
 

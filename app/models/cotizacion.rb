@@ -24,6 +24,7 @@ class Cotizacion < ActiveRecord::Base
   # Agrega la cotización al default_bank.
   def add_rate
     Money.add_rate(moneda_venta, moneda_compra, compra)
+    Money.add_rate(moneda_compra, moneda_venta, 1.0/compra)
   end
 end
 
