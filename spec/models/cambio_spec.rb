@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Cambio do
-  it_behaves_like "un movimiento"
+  it_behaves_like "un movimiento" do
+    let(:movimiento) { Factory(:working_cambio) }
+  end
   it { should validate_presence_of :cuenta }
 
   it "works" do

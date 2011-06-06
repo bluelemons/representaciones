@@ -15,6 +15,11 @@ class Movimiento < ActiveRecord::Base
   validates :monto_cents, :presence => true
   validates :monto_currency, :presence => true
 
+  # Los movimientos no pueden ser actualizados
+  def before_update
+    false
+  end
+  
   # scopes
   default_scope :include => [:reserva, :cuenta], :order => "id desc"
   scope :baja, where(:hidden=>0)
