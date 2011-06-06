@@ -34,6 +34,7 @@ class ReservasController < InheritedResources::Base
 
   def show
     @reserva.revert_to(params[:version].to_i) if params[:version]
+    @total = Movimiento.total(@reserva.pagos)
     show!
   end
 
