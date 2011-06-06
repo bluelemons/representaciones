@@ -31,7 +31,7 @@ class Cambio < Movimiento
 
   def cotizacion
     if fecha and monto and cuenta
-      c = Cotizacion.buscar(fecha,cuenta.monto,monto).first || Cotizacion.buscar(fecha,monto,cuenta.monto).first
+      Cotizacion.buscar(fecha,cuenta.monto,monto)
     end
   end
 

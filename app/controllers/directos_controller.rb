@@ -42,7 +42,7 @@ class DirectosController < InheritedResources::Base
       @cambio = Cambio.new(params[:directo])
       #actualizo la cuenta de cambio.
       @cambio.cuenta = @deposito.cuenta
-      c = Cotizacion.buscar(@deposito.fecha,@deposito.reserva.total,@deposito.cuenta.monto).first
+      c = Cotizacion.buscar(@deposito.fecha,@deposito.reserva.total,@deposito.cuenta.monto)
       c.add_rate
       @cambio.monto = @cambio.monto.exchange_to(@deposito.reserva.total.currency)
       @cambio.user = current_user
