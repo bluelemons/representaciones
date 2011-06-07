@@ -32,6 +32,7 @@ class EntidadsController < InheritedResources::Base
   def show
     @entidad = Entidad.find(params[:id])
     @entidad.revert_to(params[:version].to_i) if params[:version]
+    @total = Movimiento.total(@entidad.movimientos)
     render 'entidads/show.js'
   end
 
@@ -69,4 +70,3 @@ class EntidadsController < InheritedResources::Base
   end
 
 end
-
