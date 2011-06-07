@@ -18,6 +18,7 @@ class DirectosController < InheritedResources::Base
     @directo = Directo.new(params[:directo])
     @deposito = Deposito.new(params[:directo])
     @pago = Pago.new(params[:directo])
+    @cambio = Cambio.new(params[:directo])
     ActiveRecord::Base.transaction do
       if depositar_dinero && cambiar_dinero && realizar_pago
         flash[:notice] = "El pago a sido registrado"
@@ -39,7 +40,6 @@ class DirectosController < InheritedResources::Base
 
   def cambiar_dinero
     if cambio?
-      @cambio = Cambio.new(params[:directo])
       #actualizo la cuenta de cambio.
       @cambio.cuenta = @deposito.cuenta
       c = Cotizacion.buscar(@deposito.fecha,@deposito.reserva.total,@deposito.cuenta.monto)
@@ -54,9 +54,11 @@ class DirectosController < InheritedResources::Base
   end
 
   def cambio?
-    @deposito.monto.currency != @deposito.reserva.total.currency
+    if @deposito.reserva
+      @deposito.monto.currency != @deposito.reserva.total.currency
+    end
   end
-  
+
   def actualizar_monto_de_pago
     @pago.cuenta = @cambio.cuenta_objetivo
     @pago.monto = @cambio.monto
