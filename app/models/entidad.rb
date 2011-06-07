@@ -72,11 +72,7 @@ class Entidad < ActiveRecord::Base
     monto = monto.to_money
     moneda = monto.currency_as_string
     c = cuenta(moneda, operadora_id)
-    if c && c.monto >= monto
-      deposit(monto * -1, operadora_id)
-    else
-      raise "saldo insuficiente"
-    end
+    c && c.monto >= monto && deposit(monto * -1, operadora_id)
   end
 
   # Consulta las deudas de la entidad en cada reserva.

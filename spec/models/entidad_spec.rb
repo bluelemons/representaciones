@@ -37,8 +37,8 @@ describe Entidad do
     end
 
     context 'if there is not enough money' do
-      it 'raise exception' do
-        lambda { entidad.withdraw("5000 ARS") }.should raise_error
+      it 'returns false' do
+        entidad.withdraw("5000 ARS").should be_false
       end
     end
   end
