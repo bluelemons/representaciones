@@ -10,7 +10,8 @@ shared_examples_for "un movimiento" do
     movimiento.entidad = Factory(:agency)
     movimiento.save.should be_false
   end
-  it "pero si destruirlos" do
+  it "al destruirlos se desacen los cambios" do
+    movimiento.should_receive(:deshacer) { true }
     movimiento.destroy
     movimiento.destroyed?.should be_true
   end
