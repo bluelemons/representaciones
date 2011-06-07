@@ -18,5 +18,15 @@ describe Deposito do
       deposito.save!.should == true
     end
   end
+
+  describe "deshacer" do
+    let(:deposito) { Factory(:deposito)}
+    context 'with enough money' do
+      it 'withdraw the money and return true' do
+        deposito.entidad.should_receive(:withdraw).with(deposito.monto, deposito.operadora) { true }
+        deposito.send(:deshacer).should be_true
+      end
+    end
+  end
 end
 
