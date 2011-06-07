@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 class Pago < Movimiento
 
+  # Callbacks
+  before_save do
+    entidad.withdraw(monto, operadora)
+  end
+  before_destroy :deshacer
+
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
   validate  :saldo_suficiente
   validate  :coinciden_monedas
 
-  # quita la plata de la cuenta
-  before_save do |p|
-# TODO revisar para que ande el autosave
-#    puts "antes: " + p.cuenta.monto.format
-#    puts "changed_for_autosave?: " + p.cuenta.changed_for_autosave?.to_s
-    p.cuenta.monto -= p.monto
-#    puts "después: " + p.cuenta.monto.format
-#    puts "changed_for_autosave?: " + p.cuenta.changed_for_autosave?.to_s
-    p.cuenta.save
-  end
 
   # Asigna una cuenta a partir de la entidad y el monto si no tiene una asignada.
   before_validation do |p|
@@ -54,6 +50,10 @@ class Pago < Movimiento
     reserva.total.currency == monto.currency if reserva && monto
   end
 
+  # devuelve el dinero a la cuenta
+  def deshacer
+    entidad.deposit monto, operadora
+  end
 #  before_save       :conversion
 #
 #  # conversion realiza el exchange de dinero antes de el registro de

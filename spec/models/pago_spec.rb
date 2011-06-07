@@ -51,5 +51,12 @@ describe Pago do
       pago.cuenta(true).monto.should == (monto_anterior - pago.monto)
     end
   end
+  describe "deshacer" do
+    let(:pago) { Factory(:pago)}
+    it 'withdraw the money and return true' do
+      pago.entidad.should_receive(:deposit).with(pago.monto, pago.operadora) { true }
+      pago.send(:deshacer).should be_true
+    end
+  end
 end
 
