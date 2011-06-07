@@ -4,6 +4,7 @@ class Cambio < Movimiento
 
   after_save :withdraw
   before_save :deposit
+  before_destroy :deshacer
 
   validate :existe_cotizacion?
   validate :saldo_suficiente
@@ -11,7 +12,7 @@ class Cambio < Movimiento
   def rate
     if c = cotizacion
       c.add_rate
-    end 
+    end
   end
 
   #convierte todo lo que halla en la cuenta a la moneda del monto
@@ -26,6 +27,12 @@ class Cambio < Movimiento
     if (cuenta && rate && (cuenta.monto < monto))
        errors.add(:base, "Debe tener suficiente dinero para efectuar el cambio")
     end
+  end
+
+  # Indica la cuenta en la que se deposita el monto.
+  # @return [Cuenta]
+  def cuenta_objetivo
+    entidad.cuenta(monto.currency,operadora)
   end
 
   private
@@ -50,16 +57,18 @@ class Cambio < Movimiento
     #=> 4.1
     #>> Money.new(100,"USD").exchange_to("ARS")
     #=> #<Money cents:410 currency:ARS>
-    cuenta.entidad.withdraw(monto.exchange_to(cuenta.monto.currency))
+    entidad.withdraw(monto.exchange_to(cuenta.monto.currency), operadora)
   end
 
   #deposito el monto nuevo.
   def deposit
-    cuenta.entidad.deposit(monto)
+    entidad.deposit(monto, operadora)
   end
 
-  def cuenta_objetivo
-    entidad.cuenta(monto.currency,operadora)
+  def deshacer
+    rate &&
+    entidad.withdraw(monto, operadora) &&
+    entidad.deposit(monto.exchange_to(cuenta.monto.currency), operadora)
   end
 end
 
