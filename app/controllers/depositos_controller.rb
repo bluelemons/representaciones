@@ -1,4 +1,4 @@
-class DepositosController < ApplicationController
+class DepositosController < InheritedResources::Base
   #load_and_authorize_resource
 
   def index
@@ -18,6 +18,5 @@ class DepositosController < ApplicationController
       render 'new.js'
     end
   end
-
 end
 

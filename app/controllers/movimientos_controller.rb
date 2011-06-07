@@ -1,7 +1,7 @@
-class MovimientosController < InheritedResources::Base
-  load_and_authorize_resource
+class MovimientosController < ApplicationController
+#  load_and_authorize_resource
 
-  respond_to :html, :xml,:js
+#  respond_to :html, :xml, :js
 
   # ver en inheritedresources como hacer para que solo haga index show, y restore.
   def index
@@ -17,9 +17,7 @@ class MovimientosController < InheritedResources::Base
                          :type => "application/pdf"
       end
     end
-
   end
-
 
   def show
     @movimiento = Movimiento.find(params[:id])
@@ -30,8 +28,24 @@ class MovimientosController < InheritedResources::Base
   def restore
     @movimiento = Movimiento.find(params[:id])
     @movimiento.revert_to! params[:version_id]
-	  redirect_to :action => 'show', :id => @pago
+    redirect_to :action => 'show', :id => @movimiento
   end
 
+  def destroy
+    logger.debug "\e[1;32mDEBUG:\e[m Destroy called!"
+    @movimiento = Movimiento.find(params[:id])
+    logger.debug "Movimientos destruido:" + @movimiento.destroy.inspect
+    # hasta acá anda todo bien, pero que le tengo que pasar a render
+    # si le mando un js no se ejecuta, asi que no sirve de mucho
+    if @movimiento.destroyed?
+      # render 'destroy_exito.js', :layout => false
+      flash[:notice] = "El movimiento ha sido eliminado"
+      redirect_to :action => 'index', :format =>'js'
+    else
+      # Por otro lado estaria bueno poder mandar algo como un mensaje de error
+      flash[:notice] = "Este movimiento no puede ser eliminado."
+      redirect_to :action => 'index', :format =>'js'
+    end
+  end
 end
 

@@ -7,6 +7,8 @@
       %th Operacion
       %th Entidad
       %th Monto
+      -if can? :destroy, @movimientos.first
+        %th Acciones
 
     - for movimiento in @movimientos
       %tr
@@ -20,6 +22,10 @@
           =movimiento.try(:entidad).try(:name)
         %td
           = movimiento.monto.to_money.format
+        -if can? :destroy, @movimientos.first
+          %td
+            = link_to 'Eliminar', {:controller=>"movimientos", :action=>:destroy, :id=>movimiento.id}, :confirm => 'Está seguro? (esta acción no se puede deshacer)', :method => :delete, :remote=>true
+
   %table.wide
     %tr
       %td
