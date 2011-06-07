@@ -11,8 +11,5 @@ class Cuenta < ActiveRecord::Base
 
   # scopes
   default_scope :include => [:entidad, :operadora]
-
-  # metodos
-
 end
 
