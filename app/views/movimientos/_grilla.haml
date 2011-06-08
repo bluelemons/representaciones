@@ -1,3 +1,4 @@
+%p.notice=flash[:notice]
 #movimientos_grid
   %table.togrid{:id=>"movimientos_#{Time.now}"}
     %tr
@@ -24,7 +25,7 @@
           = movimiento.monto.to_money.format
         -if can? :destroy, @movimientos.first
           %td
-            = link_to 'Eliminar', {:controller=>"movimientos", :action=>:destroy, :id=>movimiento.id}, :confirm => 'Está seguro? (esta acción no se puede deshacer)', :method => :delete, :remote=>true
+            = link_to 'Eliminar', {:action=>:destroy, :id=>movimiento.id}, :confirm => 'Está seguro? (esta acción no se puede deshacer)', :method=>:delete, :remote=>true
 
   %table.wide
     %tr
