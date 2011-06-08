@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 #gem 'thin'
-gem 'rails', '~> 3.0.5'
+gem 'rails', '3.0.5'
 gem 'squeezer',"0.2.1"
 gem 'largentinas',"0.1.0"
 gem "will_paginate", "~> 3.0.pre2"
@@ -8,7 +8,7 @@ gem "haml"
 gem "devise", "~>1.1.rc2"
 gem "cancan"
 gem "paperclip"
-gem "jquery-rails"
+gem "jquery-rails", "~> 1.0.9"
 gem "inherited_resources"
 gem "meta_search"
 gem "builder"
