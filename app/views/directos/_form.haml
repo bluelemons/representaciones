@@ -10,6 +10,7 @@
     = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
       =form.inputs do
         =form.input :agency_id_or_operadora_id_eq,:collection => Entidad.all
+        =form.input :referencia_sw
 
     #reservas
       =render 'reservas/reservas'
