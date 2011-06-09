@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 #gem 'thin'
+gem 'rake', '~> 0.8.7'
 gem 'rails', '3.0.5'
 gem 'squeezer',"0.2.1"
 gem 'largentinas',"0.1.0"

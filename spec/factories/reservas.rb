@@ -1,5 +1,4 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
-# -- coding utf-8
 Factory.define :reserva do |f|
   f.fecha       Forgery(:date).date
   f.salida      Forgery(:date).date
@@ -7,7 +6,7 @@ Factory.define :reserva do |f|
   f.operado     Forgery(:name).first_name
   f.hotel       Forgery(:name).location
   f.periodo     "#{rand(10)} noches"
-  f.regimen     "media_pensión"
+  f.regimen     "media_pension"
   f.association :thabitacion
   f.association :programa
   f.association :operadora
