@@ -40,12 +40,15 @@ class DirectosController < InheritedResources::Base
     if cambio?
       #actualizo la cuenta de cambio.
       @cambio.cuenta = @deposito.cuenta
-      c = Cotizacion.buscar(@deposito.fecha,@deposito.reserva.total,@deposito.cuenta.monto)
-      c.add_rate
-      @cambio.monto = @cambio.monto.exchange_to(@deposito.reserva.total.currency)
-      @cambio.user = current_user
-      actualizar_monto_de_pago
-      @cambio.save
+      if cotizacion? 
+        @cambio.monto = @cambio.monto.exchange_to(@deposito.reserva.total.currency)
+        @cambio.user = current_user
+        actualizar_monto_de_pago
+        @cambio.save
+      else
+        flash.notice = "La cotización de esta fecha no está cargada"
+        false
+      end
     else
       true
     end
@@ -55,6 +58,11 @@ class DirectosController < InheritedResources::Base
     if @deposito.reserva
       @deposito.monto.currency != @deposito.reserva.total.currency
     end
+  end
+  
+  def cotizacion?
+    c = Cotizacion.buscar(@deposito.fecha, @deposito.reserva.total, @deposito.cuenta.monto)
+    c && c.add_rate
   end
 
   def actualizar_monto_de_pago
