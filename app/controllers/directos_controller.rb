@@ -19,16 +19,14 @@ class DirectosController < InheritedResources::Base
     @deposito = Deposito.new(params[:directo])
     @pago = Pago.new(params[:directo])
     @cambio = Cambio.new(params[:directo])
+    @search = Reserva.baja.search((params[:search] if params[:search]))
+    @reservas = @search.paginate :page => params[:page], :per_page =>10
     ActiveRecord::Base.transaction do
       if depositar_dinero && cambiar_dinero && realizar_pago
         flash[:notice] = "El pago a sido registrado"
-        redirect_to :action => 'new', :format =>'js'
-      else
-        @search = Reserva.baja.search(:agency_id_eq=>0)
-        @reservas = @search.paginate :page => params[:page], :per_page =>10
-        render 'new.js'
       end
     end
+    render 'new.js'
   end
 
   private
