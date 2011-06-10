@@ -1,41 +1,13 @@
 $('#directo_form').html('<%= raw escape_javascript(render("form")) %>');
 skin();
 
-  $("#search_agency_id_or_operadora_id_eq").change(function(){
-    $("#directo_entidad_id").val($("#search_agency_id_or_operadora_id_eq").val());
-    buscar();
-    });
-//  $("#directo_reserva_id").change(function(){
-//    buscar_cuenta();
-//  });
-
-  //busca la lista de reservas con los datos ingresados
-//  function buscar_cuenta(){
-//    var reserva = $("#directo_reserva_id").val();
-//    $.getJSON("/reservas/"+reserva+".json",function(data){
-//      moneda_id = data["reserva"]["moneda_id"];
-//
-//      $.get("/entidads/"+entidad+"/cuentas.js","moneda_id="+moneda_id, togrid, 'script');
-//
-//    });
-//
-//  }
-
-  function buscar(){
-    entidad = $('#search_agency_id_or_operadora_id_eq').val();
-    if($.get("/reservas.js","search[agency_id_or_operadora_id_eq="+entidad+"]", togrid, 'script')){
- //     buscar_cuenta();
-    }
-  }
-//  $("#change_button").button({icons: {primary: "ui-icon-transfer-e-w"},text: true});
-
-// $("#change_button").click(function(){
-//    $('#use_cuenta').toggle(function() {
-//        $(this).find(':checkbox').attr('checked', true);
-//    }, function() {
-//        $(this).find(':checkbox').attr('checked', false);
-//    });
-
-//    $(".pago_choise").toggle();
-//  });
+$('.search input').keyup(function () {
+// TODO: should be other function
+  $(this).parent().submit();
+});
+  
+$("#search_agency_id_or_operadora_id_eq").change(function(){
+  $("#directo_entidad_id").val($("#search_agency_id_or_operadora_id_eq").val());
+  $(this).parent().submit();
+});
 

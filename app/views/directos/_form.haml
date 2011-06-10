@@ -1,19 +1,21 @@
 =flash[:notice]
-= form_for(@directo, :remote => true) do |f|
+= semantic_form_for @search, :remote => true do |form|
+  =form.inputs do
+    =form.input :agency_id_or_operadora_id_eq, :collection => Entidad.all
+    =form.input :referencia_sw
+    =form.input :pasajeros_name_sw
+    =form.buttons
+
+    #reservas
+      =render 'reservas/reservas'
+
+= semantic_form_for(@directo, :remote => true) do |f|
   .ui-widget.ui-widget-content
     = error_message(@pago)
     = error_message(@deposito)
     = error_message(@cambio)
 
     = render :partial => "movimientos/comunes", :locals => { :f => f }
-
-    = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
-      =form.inputs do
-        =form.input :agency_id_or_operadora_id_eq,:collection => Entidad.all
-        =form.input :referencia_sw
-
-    #reservas
-      =render 'reservas/reservas'
 
     #entidad_form
 
