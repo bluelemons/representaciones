@@ -1,4 +1,4 @@
-=flash[:notice]
+%p.notice= flash[:notice]
 = semantic_form_for @search, :remote => true do |form|
   =form.inputs do
     =form.input :agency_id_or_operadora_id_eq, :collection => Entidad.all
