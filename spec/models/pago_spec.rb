@@ -53,7 +53,7 @@ describe Pago do
   end
   describe "deshacer" do
     let(:pago) { Factory(:pago)}
-    it 'withdraw the money and return true' do
+    it 'deposit the money to the entidad and return true' do
       pago.entidad.should_receive(:deposit).with(pago.monto, pago.operadora) { true }
       pago.send(:deshacer).should be_true
     end
