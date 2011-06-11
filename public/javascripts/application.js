@@ -48,9 +48,7 @@ function togrid(){
 
         var idx =$(this).getCell(id, 'ID');
         $("input[id$=_"+i+"_id]").val(idx).change();
-        },
-
-      caption: "Listado"
+        }
      });
 //    var top_rowid = $('#'+i+'_grid tbody:first-child tr:nth-child(2)').attr('id');
 //    $("input[id$=_"+i+"_id]").val(top_rowid);
