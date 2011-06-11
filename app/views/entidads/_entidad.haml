@@ -58,5 +58,5 @@
           %td=d
   #tabs-entidad-3
 
-    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.movimientos.where(:entidad_id=>@entidad.id)}
+    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.pagos}
 

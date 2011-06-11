@@ -8,6 +8,7 @@ class Entidad < ActiveRecord::Base
   belongs_to :localidad
   has_many :cuentas, :dependent => :destroy  #cuando se borra la entidad se borra la cuenta.
   has_many :movimientos
+  has_many :pagos
 
   attr_accessible :type, :name, :cuit, :localidad_id,
                   :calle, :legajo, :telefono, :web, :email
