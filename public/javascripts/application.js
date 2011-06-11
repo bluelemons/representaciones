@@ -157,8 +157,7 @@ $(function() {
   });
 
   $('.search input').keyup(function () {
-    $.get($('.search').attr('action'),$('.search').serialize(), togrid, 'script');
-    return false;
+    $(this).parent().submit();
   });
 
   $('.search').submit(function () {
