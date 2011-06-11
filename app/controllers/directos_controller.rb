@@ -7,8 +7,6 @@ class DirectosController < InheritedResources::Base
     @pago = Pago.new
     @cambio = Cambio.new
     @directo = Directo.new
-    @search = Reserva.baja.search(:agency_id_eq=>0)
-    @reservas = @search.paginate :page => params[:page], :per_page =>10
   end
 
   def create
@@ -19,11 +17,12 @@ class DirectosController < InheritedResources::Base
     @deposito = Deposito.new(params[:directo])
     @pago = Pago.new(params[:directo])
     @cambio = Cambio.new(params[:directo])
-    @search = Reserva.baja.search((params[:search] if params[:search]))
-    @reservas = @search.paginate :page => params[:page], :per_page =>10
+
     ActiveRecord::Base.transaction do
       if depositar_dinero && cambiar_dinero && realizar_pago
         flash[:notice] = "El pago a sido registrado"
+      else
+        raise ActiveRecord::Rollback
       end
     end
     render 'new.js'
@@ -40,7 +39,7 @@ class DirectosController < InheritedResources::Base
     if cambio?
       #actualizo la cuenta de cambio.
       @cambio.cuenta = @deposito.cuenta
-      if cotizacion? 
+      if cotizacion?
         @cambio.monto = @cambio.monto.exchange_to(@deposito.reserva.total.currency)
         @cambio.user = current_user
         actualizar_monto_de_pago
@@ -59,7 +58,7 @@ class DirectosController < InheritedResources::Base
       @deposito.monto.currency != @deposito.reserva.total.currency
     end
   end
-  
+
   def cotizacion?
     c = Cotizacion.buscar(@deposito.fecha, @deposito.reserva.total, @deposito.cuenta.monto)
     c && c.add_rate
