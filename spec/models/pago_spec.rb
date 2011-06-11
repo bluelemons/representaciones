@@ -26,6 +26,14 @@ describe Pago do
       pago.save.should be_true
       pago.errors.should be_empty
     end
+    context 'debt is less than monto' do
+      it 'change monto to the value of debt' do
+        method = (pago.entidad.type.downcase + "_deuda").to_sym
+        pago.reserva.stub(method) { "50".to_money(pago.monto.currency) }
+        pago.save
+        pago.monto.should <= "50".to_money(pago.monto.currency)
+      end
+    end
     context 'si no coinciden las monedas de cuenta y reserva' do
       it 'da un error si la cuenta está en una moneda distinta' do
         pago.cuenta.stub(:monto) { Money.parse("10000 AED") }

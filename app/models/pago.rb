@@ -2,17 +2,14 @@
 class Pago < Movimiento
 
   # Callbacks
-  before_save do
-    entidad.withdraw(monto, operadora)
-  end
-  before_destroy :deshacer
+  before_destroy     :deshacer
+  before_save        :check_deuda, :sacar_la_plata
 
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
   validate  :saldo_suficiente
   validate  :coinciden_monedas
-
 
   # Asigna una cuenta a partir de la entidad y el monto si no tiene una asignada.
   before_validation do |p|
@@ -54,6 +51,18 @@ class Pago < Movimiento
   def deshacer
     entidad.deposit monto, operadora
   end
+
+  def check_deuda
+    if entidad && reserva && monto
+      deuda = reserva.send(entidad.type.downcase + "_deuda")
+      self.monto = deuda if monto > deuda
+    end
+  end
+
+  def sacar_la_plata
+    entidad.withdraw(monto, operadora)
+  end
+
 #  before_save       :conversion
 #
 #  # conversion realiza el exchange de dinero antes de el registro de
