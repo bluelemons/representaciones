@@ -40,7 +40,7 @@ function togrid(){
 
     tableToGrid($(this),{
       datatype: "local",
-      width:700,
+      autowidth:true,
       //onSelectRow: function(id){$('#togrid').getCell(id, 'ID');},
       //onSelectRow: function(id){$.getScript('reservas/' + $('#togrid').getCell(id, 'ID') + '.js');},
       //onSelectRow: getSelectedRow(),
