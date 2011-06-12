@@ -48,8 +48,14 @@ Representaciones::Application.routes.draw do
   ##---
 
   ## Squeezer
-  resources :users
+  resources :users do
+    member do
+      get :roles
+    end
+  end
+
   resources :roles
+
   ##---
 
 
