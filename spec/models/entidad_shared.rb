@@ -39,28 +39,10 @@ shared_examples_for "Entidad" do
     it 'returns an array' do
       entidad.deudas.should be_a_kind_of(Array)
     end
-    it 'pregunta a cada reserva su deuda' do
-      entidad.should_receive(:reservas).once do
-        Array.new(rand(5)) do
-          r = double()
-          r.should_receive(:"#{entidad.type.downcase}_deuda").once do
-            Money.empty()
-          end
-          r
-        end
-      end
-      entidad.deudas
-    end
     it 'sum deudas by currency' do
-      entidad.stub(:reservas) do
-        deudas = ["2 ARS", "5 ARS", "3 USD", "2 ARS"]
-        Array.new(4) do |index|
-          r = double()
-          r.stub(:"#{entidad.type.downcase}_deuda") do
-            deudas[index].to_money
-          end
-          r
-        end
+      entidad.reservas.stub(:deudas) do
+        deudas = %w( 2ARS 5ARS 3USD 2ARS )
+        deudas.map { |m| m.to_money }
       end
       resultados = entidad.deudas
       resultados.should include("9 ARS".to_money, "3 USD".to_money)

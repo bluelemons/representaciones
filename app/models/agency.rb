@@ -6,7 +6,7 @@ class Agency < Entidad
     def deudas
       map do |reserva|
         reserva.send(:agency_deuda)
-      end
+      end.delete_if { |m| m.zero? }
     end
   end
   #validaciones

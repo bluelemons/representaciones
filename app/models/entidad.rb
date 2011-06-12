@@ -82,10 +82,7 @@ class Entidad < ActiveRecord::Base
   #   ya que las deudas con la misma moneda son sumadas.
 
   def deudas
-    deudas = reservas.map do |reserva|
-      reserva.send((type.downcase + "_deuda").to_sym)
-    end
-    deudas.reduce([]) do |memo, deuda|
+    reservas.deudas.reduce([]) do |memo, deuda|
       deuda_currency = deuda.currency
       coincidencia = memo.find_index { |mem| deuda_currency == mem.currency }
       if coincidencia

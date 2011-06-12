@@ -6,7 +6,7 @@ class Operadora < Entidad
     def deudas
       map do |reserva|
         reserva.send(:operadora_deuda)
-      end
+      end.delete_if { |m| m.zero? }
     end
   end
 
