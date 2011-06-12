@@ -66,5 +66,10 @@ shared_examples_for "Entidad" do
       resultados.should include("9 ARS".to_money, "3 USD".to_money)
     end
   end
+  describe 'reservas.deudas' do
+    it 'return an array' do
+      entidad.reservas.deudas.should be_a_kind_of(Array)
+    end
+  end
 end
 
