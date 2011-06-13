@@ -76,22 +76,33 @@ class Entidad < ActiveRecord::Base
     c && c.monto >= monto && deposit(monto * -1, operadora_id)
   end
 
-  # Consulta las deudas de la entidad en cada reserva.
+  # Consulta las deudas de la entidad en todas las reservas.
   #
-  # @return [Array] Un array de deudas de la entidad sin monedas repetidas,
-  #   ya que las deudas con la misma moneda son sumadas.
+  # @return [Hash] deudas de la entidad por moneda
 
   def deudas
-    reservas.deudas.reduce([]) do |memo, deuda|
-      deuda_currency = deuda.currency
-      coincidencia = memo.find_index { |mem| deuda_currency == mem.currency }
-      if coincidencia
-        memo[coincidencia] = memo[coincidencia] + deuda
-      else
-        memo << deuda
-      end
-      memo
+    @deudas_by_currency ||= _deudas_by_currency
+    @deudas_by_currency
+  end
+
+  # Consulta las deudas de la entidad en cada reserva en una moneda.
+  #
+  # @return [Money]
+
+  def deuda(currency)
+    @deudas_by_currency ||= _deudas_by_currency
+    @deudas_by_currency[currency.to_currency]
+  end
+
+  private
+
+  def _deudas_by_currency
+    deudas_by_currency = {}
+    reservas.deudas.group_by { |m| m.currency }.each do |c, d|
+      # a cada currency le asigno la suma correspondiente
+      deudas_by_currency[c] = d.sum(:+)
     end
+    deudas_by_currency
   end
 end
 

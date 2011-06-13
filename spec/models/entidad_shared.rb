@@ -28,24 +28,25 @@ shared_examples_for "Entidad" do
         entidad.reload.withdraw("3000 ARS").should be_true
       end
     end
-
     context 'if there is not enough money' do
       it 'returns false' do
         entidad.withdraw("5000 ARS").should be_false
       end
     end
   end
+
   describe '#deudas' do
-    it 'returns an array' do
-      entidad.deudas.should be_a_kind_of(Array)
-    end
-    it 'sum deudas by currency' do
+    before(:each) do
       entidad.reservas.stub(:deudas) do
-        deudas = %w( 2ARS 5ARS 3USD 2ARS )
-        deudas.map { |m| m.to_money }
+        %w( 2ARS 5ARS 3USD 2ARS ).map { |m| m.to_money }
       end
-      resultados = entidad.deudas
-      resultados.should include("9 ARS".to_money, "3 USD".to_money)
+    end
+    describe '#_deudas_by_currency' do
+      it 'sum deudas by currency' do
+        resultados = entidad.send(:_deudas_by_currency)
+        resultados[:ars.to_currency].should == "9 ARS".to_money
+        resultados[:usd.to_currency].should == "3 USD".to_money
+      end
     end
   end
   describe 'reservas.deudas' do
