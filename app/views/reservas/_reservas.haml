@@ -1,6 +1,6 @@
 =will_paginate @reservas
 #reservas_grid
-  =grilla(["ID","Titular","Salida","Hotel","Periodo","Deuda Agencias","Deuda Operadora","Acciones"],@reservas,[:id,:titular,:salida,:hotel,:periodo,:agencia_deuda_format,:operadora_deuda_format],{:id=>"reserva_grid",:class=>"togrid"} )
+  =grilla(["ID", "Titular", "Referencia", "Salida", "Deuda Agencias", "Deuda Operadora", "Acciones"], @reservas, [:id, :titular, :referencia, :salida, :agencia_deuda_format, :operadora_deuda_format], {:id=>"reserva_grid", :class=>"togrid"})
 .action_bar
   =link_to "imprimir",{:search=>params[:search],:format=>'pdf'}
 
