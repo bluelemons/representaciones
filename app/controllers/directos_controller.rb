@@ -43,10 +43,10 @@ class DirectosController < InheritedResources::Base
       #actualizo la cuenta de cambio.
       @cambio.cuenta = @deposito.cuenta
       if cotizacion?
+        @cambio.monto_original = @cambio.monto
         @cambio.monto = @cambio.monto.exchange_to(@deposito.reserva.total.currency)
         @cambio.user = current_user
-        actualizar_monto_de_pago
-        @cambio.save
+        @cambio.save && actualizar_monto_de_pago
       else
         flash.notice = "La cotización de esta fecha no está cargada"
         false

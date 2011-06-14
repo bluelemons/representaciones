@@ -22,6 +22,10 @@ class Cambio < Movimiento
      m.exchange_to(monto.currency)
   end
 
+  def monto_original=(money)
+    @monto_original = money
+  end
+
   # valida que exista plata en la cuenta.
   def saldo_suficiente
     if (cuenta && rate && (cuenta.monto < monto))
@@ -57,7 +61,7 @@ class Cambio < Movimiento
     #=> 4.1
     #>> Money.new(100,"USD").exchange_to("ARS")
     #=> #<Money cents:410 currency:ARS>
-    entidad.withdraw(monto.exchange_to(cuenta.monto.currency), operadora)
+    entidad.withdraw(@monto_original || monto.exchange_to(cuenta.monto.currency), operadora)
   end
 
   #deposito el monto nuevo.
