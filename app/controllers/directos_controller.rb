@@ -23,11 +23,11 @@ class DirectosController < InheritedResources::Base
     ActiveRecord::Base.transaction do
       if depositar_dinero && cambiar_dinero && realizar_pago
         flash[:notice] = "El pago a sido registrado"
+        @directo.monto = "0"
       else
         raise ActiveRecord::Rollback
       end
     end
-    @directo.monto = "0"
     render 'new.js'
   end
 
