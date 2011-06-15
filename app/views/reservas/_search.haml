@@ -24,4 +24,8 @@
       %tr
         %td=form.input :hidden_eq,:as=> :boolean
         %td=form.input :created_at_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado"
+      %tr
+        %td
+          = form.buttons do
+            = form.commit_button :label=>"Buscar"
 
