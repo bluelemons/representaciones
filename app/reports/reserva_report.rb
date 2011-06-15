@@ -10,7 +10,7 @@ class ReservaReport < Prawn::Document
 
     draw_text params, :at => [0,700]
 
-    myrow = [["ID","Titular","Pasajeros","Salida","Monto","Agencia" ,"Pagos","Deuda","Operadora","Pagos","Deuda" ]]
+    myrow = [["ID","#","Pasajeros","Salida","Total","Agencia" ,"Pagos","Deuda","Operadora","Pagos","Deuda" ]]
     totales = Array.new(4,0)
     agencia_pago = Array.new(4,0)
     operadora_pago = Array.new(4,0)
@@ -18,17 +18,21 @@ class ReservaReport < Prawn::Document
     operadora_deuda = Array.new(4,0)
 
     datos.each do |r|
-      myrow += [["#{r.id}","#{r.titular}","#{r.pasajeros.count}","#{r.salida}","#{r.monto.moneda.simbolo} #{r.monto.valor}","#{r.agency.try(:name)}" ,"#{r.agencia_pago}","#{r.agencia_deuda}","#{r.operadora.try(:name)}","#{r.operadora_pago}","#{r.operadora_deuda}" ]]
+      myrow += [["#{r.id}","#{r.pasajeros.count}","#{r.titular}","#{r.salida}","#{r.total.format}","#{r.agency.try(:name)}" ,"#{r.agencia_pago}","#{r.agencia_deuda}","#{r.operadora.try(:name)}","#{r.operadora_pago}","#{r.operadora_deuda}" ]]
 
-      agencia_pago[r.monto.moneda_id-1] += r.agencia_pago
-      operadora_pago[r.monto.moneda_id-1] += r.operadora_pago
-      agencia_deuda[r.monto.moneda_id-1] += r.agencia_deuda
-      operadora_deuda[r.monto.moneda_id-1] += r.operadora_deuda
+#      agencia_pago[r.monto.moneda_id-1] += r.agencia_pago
+#      operadora_pago[r.monto.moneda_id-1] += r.operadora_pago
+#      agencia_deuda[r.monto.moneda_id-1] += r.agencia_deuda
+#      operadora_deuda[r.monto.moneda_id-1] += r.operadora_deuda
     end
 
     bounding_box [0,690], :width => 500 do
       move_down 10
-      table(myrow,{:row_colors => %w[bbcef4 ffffff],:header=>true})do
+      table(myrow,{:row_colors => %w[bbcef4 ffffff],
+                   :header => true,
+                   :column_widths =>{0=>40,
+                                    1=>20,
+                                    3=>60}})do
 
         row(0).style :background_color => '87b6d9', :text_color => '000000'
         cells.style :borders => []
@@ -41,17 +45,17 @@ class ReservaReport < Prawn::Document
 
       end
       move_down 10
-      total =[["Totales","Pago Agencia","Operadora Pago","Agencia Deuda","Operadora Deuda"]]
-      total +=[["Pesos:","#{agencia_pago[0]}","#{operadora_pago[0]}","#{agencia_deuda[0]}","#{operadora_deuda[0]}"]]
-      total +=[["Dolares:","#{agencia_pago[1]}","#{operadora_pago[1]}","#{agencia_deuda[1]}","#{operadora_deuda[1]}"]]
-      total +=[["Euros:","#{agencia_pago[2]}","#{operadora_pago[2]}","#{agencia_deuda[2]}","#{operadora_deuda[2]}"]]
+#      total =[["Totales","Pago Agencia","Operadora Pago","Agencia Deuda","Operadora Deuda"]]
+#      total +=[["Pesos:","#{agencia_pago[0]}","#{operadora_pago[0]}","#{agencia_deuda[0]}","#{operadora_deuda[0]}"]]
+#      total +=[["Dolares:","#{agencia_pago[1]}","#{operadora_pago[1]}","#{agencia_deuda[1]}","#{operadora_deuda[1]}"]]
+#      total +=[["Euros:","#{agencia_pago[2]}","#{operadora_pago[2]}","#{agencia_deuda[2]}","#{operadora_deuda[2]}"]]
 
-      table(total,:row_colors => %w[ffffff],:header=>true)do
+#      table(total,:row_colors => %w[ffffff],:header=>true)do
 
-        row(0).style :background_color => 'edbc5e', :text_color => '000000'
-        cells.style :border_width =>0.5
-
-      end
+#        row(0).style :background_color => 'edbc5e', :text_color => '000000'
+#        cells.style :border_width =>0.5
+#
+#      end
 
     end
 
