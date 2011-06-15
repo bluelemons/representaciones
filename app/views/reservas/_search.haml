@@ -23,4 +23,5 @@
         %td=form.input :programa_id_eq,:collection => Programa.all
       %tr
         %td=form.input :hidden_eq,:as=> :boolean
+        %td=form.input :created_at_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado"
 
