@@ -3,28 +3,31 @@
     %tr
       %th ID
       %th Doc
-    
+
       %th Name
-    
+
       %th Nacimiento
-    
+
     %th Acciones
 
-      
-    - for pasajero in @pasajeros   
+
+    - for pasajero in @pasajeros
       %tr
-        %td= pasajero.try(:id) 
+        %td= pasajero.try(:id)
         %td
           = pasajero.try(:tdoc).try(:name)
-          = pasajero.try(:doc) 
-        
-        %td= pasajero.try(:name) 
-        
-        %td= pasajero.try(:nacimiento) 
-        
+          = pasajero.try(:doc)
+
+        %td= pasajero.try(:name)
+
+        %td= pasajero.try(:nacimiento)
+
         %td
-          = link_to 'Show', pasajero,:remote=>true 
+          = link_to 'Show', pasajero,:remote=>true
           -if can? :edit, pasajero
-            = link_to 'Edit', edit_pasajero_path(pasajero),:remote=>true  
+            = link_to 'Edit', edit_pasajero_path(pasajero),:remote=>true
           -if can? :destroy, pasajero
-            = link_to 'Destroy', pasajero, :confirm => 'Are you sure?', :method => :delete,:remote=>true  
+            = link_to 'Destroy', pasajero, :confirm => 'Are you sure?', :method => :delete,:remote=>true
+  %b total de pasajeros
+  =@pasajeros.count
+
