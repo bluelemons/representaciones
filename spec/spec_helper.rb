@@ -25,3 +25,11 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 end
+
+# autorizacion para los specs de controller
+shared_context "autorization", :type => :controller do
+  before(:each) do
+    @controller.current_ability.stub(:can?) { true }
+  end
+end
+
