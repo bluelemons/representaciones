@@ -21,7 +21,7 @@ class AgenciesController < EntidadsController
   end
 
   def new
-    @entidad = Entidad.new(:type=>"Agency")
+    @entidad = Agency.new
     render "entidads/new.js"
   end
 
