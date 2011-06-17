@@ -1,5 +1,6 @@
 class Movimiento < ActiveRecord::Base
-  #clases
+  # Callbacks
+  before_destroy :deshacer
 
   # Asociaciones
   belongs_to :user #es el usuario que lo crea o modifica

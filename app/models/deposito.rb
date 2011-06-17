@@ -1,7 +1,6 @@
 class Deposito < Movimiento
   # Callbacks
   after_save :depositar
-  before_destroy :deshacer
   # Validaciones
   validates_presence_of :tdeposito, :numero
 

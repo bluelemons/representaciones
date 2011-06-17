@@ -2,7 +2,6 @@
 class Pago < Movimiento
 
   # Callbacks
-  before_destroy     :deshacer
   before_save        :check_deuda, :sacar_la_plata
 
   validates :cuenta, :presence => true

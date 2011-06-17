@@ -4,7 +4,6 @@ class Cambio < Movimiento
 
   before_create :withdraw
   before_create :deposit
-  before_destroy :deshacer
 
   validate :existe_cotizacion?
   validate :saldo_suficiente
