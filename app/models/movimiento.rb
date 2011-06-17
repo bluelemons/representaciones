@@ -17,8 +17,8 @@ class Movimiento < ActiveRecord::Base
   validate  :monto_positivo
 
   # Los movimientos no pueden ser actualizados
-  def before_update
-    false
+  def readonly?
+    persisted?
   end
 
   # scopes
@@ -43,5 +43,4 @@ class Movimiento < ActiveRecord::Base
     errors.add(:monto, "debe ser positivo") if monto.cents <= 0
   end
 end
-
 

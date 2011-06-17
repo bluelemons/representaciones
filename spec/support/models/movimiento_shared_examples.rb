@@ -12,8 +12,8 @@ shared_examples_for "un movimiento" do
     movimiento.errors[:monto].should include("debe ser positivo")
   end
   it "no es posible actualizarlos" do
-    movimiento.entidad = Factory(:agency)
-    movimiento.save.should be_false
+    movimiento.monto = movimiento.monto / 2
+    expect { movimiento.save }.to raise_error(ActiveRecord::ReadOnlyRecord)
   end
   it "al destruirlos se desacen los cambios" do
     movimiento.should_receive(:deshacer) { true }

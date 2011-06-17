@@ -2,8 +2,8 @@ class Cambio < Movimiento
 
   validates :cuenta, :presence => true
 
-  after_save :withdraw
-  before_save :deposit
+  before_create :withdraw
+  before_create :deposit
   before_destroy :deshacer
 
   validate :existe_cotizacion?
