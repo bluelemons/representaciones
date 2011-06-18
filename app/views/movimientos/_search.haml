@@ -1,16 +1,21 @@
 %h3.ui-widget-header Busqueda
 = form_for @search,  :html => {:method => :get,:class => 'search'} do |f|
-   
+
   = f.label :fecha
-  %br 
-  = f.text_field :fecha_eq
+  %br
+  = f.text_field :fecha_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
   %br
   = f.label :tipo
   %br
   = f.text_field :type_sw
-  %br 
+  %br
   =f.label 'Baja'
   %br
   = f.check_box :hidden_eq
   %br
-  = f.submit('Buscar') 
+  = f.label :Creado
+  %br
+  = f.text_field :created_at_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+  %br
+  = f.submit('Buscar')
+
