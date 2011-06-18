@@ -41,4 +41,6 @@
         Euros €
         %b
           =@total["EUR"]
+  .action_bar
+    =link_to "imprimir",{:search=>params[:search],:format=>'pdf'}
 
