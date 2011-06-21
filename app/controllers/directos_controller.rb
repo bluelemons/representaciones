@@ -16,9 +16,15 @@ class DirectosController < InheritedResources::Base
     # 2. Graba un cambio si lo hubiese
     # 3. Graba el pago.
     @directo = Directo.new(params[:directo])
+
     @deposito = Deposito.new(params[:directo])
     @pago = Pago.new(params[:directo])
     @cambio = Cambio.new(params[:directo])
+
+    #deposito, pago y operadora para la operadora
+    @odeposito = Deposito.new(params[:directo])
+    @opago = Pago.new(params[:directo])
+    #@ocambio = Cambio.new(params[:directo])
 
     ActiveRecord::Base.transaction do
       if depositar_dinero && cambiar_dinero && realizar_pago
@@ -75,6 +81,22 @@ class DirectosController < InheritedResources::Base
   def realizar_pago
     @pago.user = current_user
     @pago.save
+    # si se realiza el pago a la operadora
+    operadora_paid
   end
+
+  def operadora_paid
+    if params[:operadora_paid]
+      @odeposito.monto = @pago.monto
+      @opago.monto = @pago.monto
+      @odeposito.entidad = @pago.reserva.operadora
+      @opago.entidad = @pago.reserva.operadora
+
+      @odeposito.save
+      @opago.save
+
+    end
+  end
+
 end
 

@@ -25,7 +25,8 @@
       = f.fields_for :monto_fields, @directo do |money_fields|
         = money_fields.text_field :monto, :class => "money"
         = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
-
+    %br
+    %input{:type=>"CHECKBOX",:name=>"operadora_paid"} Cargar pago a la operadora?
     .actions
       = f.submit
 
