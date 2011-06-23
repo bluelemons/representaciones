@@ -59,6 +59,22 @@ class Reserva < ActiveRecord::Base
   scope :sin_voucher, where("voucher is null")
   #metodos
 
+  def deuda(entidad)
+    if entidad == agency
+      agencia_deuda
+    elsif operadora == entidad
+      operadora_deuda
+    else
+      raise "Se ha pedido la deuda de #{entidad} en la reserva: #{self}, pero esta entidad no tiene nada que ver"
+    end
+  end
+
+  def actualizar_liquidadas
+    self.liquido_agencia = agencia_deuda.zero?
+    self.liquido_operadora = operadora_deuda.zero?
+    self.save
+  end
+
   def titular
     pasajeros.first.try(:name)
   end

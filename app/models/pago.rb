@@ -3,6 +3,7 @@ class Pago < Movimiento
 
   # Callbacks
   before_save        :check_deuda, :sacar_la_plata
+  after_save         :_marcar_reserva_como_liquidada
 
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
@@ -60,6 +61,10 @@ class Pago < Movimiento
 
   def sacar_la_plata
     entidad.withdraw(monto, operadora)
+  end
+
+  def _marcar_reserva_como_liquidada
+    reserva.actualizar_liquidadas
   end
 
 #  before_save       :conversion
