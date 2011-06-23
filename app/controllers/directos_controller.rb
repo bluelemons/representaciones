@@ -41,7 +41,11 @@ class DirectosController < InheritedResources::Base
 
   def depositar_dinero
     @deposito.user = current_user
-    @deposito.save
+    if !@deposito.save
+      flash[:notice] = "El deposito no pudo ser guardado"
+    else
+     true
+    end
   end
 
   def cambiar_dinero
@@ -80,9 +84,7 @@ class DirectosController < InheritedResources::Base
 
   def realizar_pago
     @pago.user = current_user
-    @pago.save
-    # si se realiza el pago a la operadora
-    operadora_paid
+    @pago.save && operadora_paid
   end
 
   def operadora_paid
@@ -94,8 +96,10 @@ class DirectosController < InheritedResources::Base
 
       @odeposito.save
       @opago.save
-
+    else
+      true
     end
+
   end
 
 end
