@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609152955) do
+ActiveRecord::Schema.define(:version => 20110623191934) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -269,6 +269,8 @@ ActiveRecord::Schema.define(:version => 20110609152955) do
     t.integer  "pago_minimo_cents"
     t.integer  "impuesto_cents"
     t.integer  "seguro_cents"
+    t.boolean  "liquido_agencia",                :default => false
+    t.boolean  "liquido_operadora",              :default => false
   end
 
   add_index "reserva_versions", ["reserva_id"], :name => "index_reserva_versions_on_reserva_id"
@@ -313,6 +315,8 @@ ActiveRecord::Schema.define(:version => 20110609152955) do
     t.integer  "pago_minimo_cents"
     t.integer  "impuesto_cents"
     t.integer  "seguro_cents"
+    t.boolean  "liquido_agencia",                :default => false
+    t.boolean  "liquido_operadora",              :default => false
   end
 
   create_table "roles", :force => true do |t|
