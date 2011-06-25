@@ -10,13 +10,15 @@ es-AR:
       name: "Nombre"
       name_eq: "Nombre es igual"
       name_sw: "Nombre comienza con"
+      created_at_gt: "Creado despues de"
+      created_at_lt: "Creado antes de"
       tdoc_id_eq: "Tipo de doc es igual"
       doc_eq: "Numero es igual"
       hidden_eq: "Incluir borrados"
       agency_id_eq: "Agencia es igual"
       thabitacion_id: "Tipo de habitacion es igual"
       agency_id_or_operadora_id_eq: "Agencia o Operadora"
-
+      pasajeros_name_contains: "Nombre de algun pasajero"
 
       pasajero:
         tdoc: "Tipo de documento"
