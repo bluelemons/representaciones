@@ -7,6 +7,9 @@
         %td
           %input{:type=>"checkbox",:name=>"sin_voucher"} Sin voucher
       %tr
+        %td=form.input :id_eq
+        %td=form.input :referencia_sw
+      %tr
         %td=form.input :agency_id_eq,:collection => Agency.all
         %td=form.input :operadora_id_eq,:collection => Operadora.all
     %br
