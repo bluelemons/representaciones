@@ -5,9 +5,12 @@ $('.search input').keyup(function () {
 // TODO: should be other function
   $(this).parent().submit();
 });
-  
+
 $("#search_agency_id_or_operadora_id_eq").change(function(){
-  $("#directo_entidad_id").val($("#search_agency_id_or_operadora_id_eq").val());
   $(this).parent().submit();
+});
+
+$("#directo_submit").click(function(){
+  $("#directo_entidad_id").val($("#search_agency_id_or_operadora_id_eq").val());
 });
 
