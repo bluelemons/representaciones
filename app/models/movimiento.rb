@@ -8,6 +8,8 @@ class Movimiento < ActiveRecord::Base
   belongs_to :entidad
   belongs_to :operadora
   belongs_to :cuenta
+  belongs_to :movimiento,:dependent => :destroy
+  has_many :movimientos
   monetize   :monto
 
   # Validaciones
@@ -18,9 +20,9 @@ class Movimiento < ActiveRecord::Base
   validate  :monto_positivo
 
   # Los movimientos no pueden ser actualizados
-  def readonly?
-    persisted?
-  end
+  #def readonly?
+  #  persisted?
+  #end
 
   # scopes
   default_scope :include => [:reserva, :cuenta], :order => "id desc"

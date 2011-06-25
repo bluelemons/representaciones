@@ -84,6 +84,13 @@ class DirectosController < InheritedResources::Base
 
   def realizar_pago
     @pago.user = current_user
+    if cambio?
+      @pago.movimiento_id = @cambio.id
+      @cambio.movimiento_id = @deposito.id
+      @cambio.save!
+    else
+      @pago.movimiento_id = @deposito.id
+    end
     @pago.save && operadora_paid
   end
 
