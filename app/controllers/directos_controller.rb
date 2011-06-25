@@ -100,9 +100,10 @@ class DirectosController < InheritedResources::Base
       @opago.monto = @pago.monto
       @odeposito.entidad = @pago.reserva.operadora
       @opago.entidad = @pago.reserva.operadora
-
-      @odeposito.save
-      @opago.save
+      if @odeposito.save
+        @opago.movimiento_id = @odeposito.id
+        @opago.save
+      end
     else
       true
     end
