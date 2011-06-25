@@ -2,19 +2,18 @@ class ReservasController < InheritedResources::Base
   load_and_authorize_resource
   respond_to :html, :xml, :js, :json
   def index
-    if params[:search]
-      @search = Reserva.search(params[:search])
-    else
-      @search = Reserva.baja.search()
-    end
-    @reservas = @search.paginate :page => params[:page], :per_page =>10
+    @search = Reserva.search((params[:search] if params[:search]))
+
     respond_to do |format|
       format.js
+          paginate
       format.html
+          paginate
       format.pdf do
-        output = ReservaReport.new.regular(@search,params[:search])
+        @reservas = @search
+        output = ReservaReport.new.regular(@reservas,params[:search])
         send_data output, :filename => "index_report.pdf",
-                         :type => "application/pdf"
+                          :type => "application/pdf"
       end
     end
   end
@@ -65,6 +64,10 @@ class ReservasController < InheritedResources::Base
       @pasajero = Pasajero.new
       render 'new.js'
     end
+  end
+
+  def paginate
+    @reservas = @search.paginate :page => params[:page], :per_page =>10
   end
 end
 
