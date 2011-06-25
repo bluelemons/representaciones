@@ -42,7 +42,7 @@
           =form.inputs do
             =form.input :agency_id_or_operadora_id_eq, :collection => Entidad.all
             =form.input :referencia_sw
-            =form.input :pasajeros_name_sw
+            =form.input :pasajeros_name_contains
             =form.input :liquido_agencia_or_liquido_operadora_eq, :as =>:boolean,:label=>"Mostrar reservas liquidadas"
             = form.buttons do
               = form.commit_button :label=>"Buscar"
