@@ -24,6 +24,10 @@ class Reserva < ActiveRecord::Base
     end
   end
 
+  def dia_creado
+     self.created_at.strftime("%d-%m-%Y")
+  end
+
   monetize :total
 #  def total_fields=(fields)
 #    self.total = fields[:total].to_money(fields[:total_currency])
@@ -84,7 +88,7 @@ class Reserva < ActiveRecord::Base
   end
 
   def liquidada?
-    (agencia_deuda.cents <= 0)
+    self.liquido_agencia and self.liquido_operadora
   end
 
   def agencia_pago
