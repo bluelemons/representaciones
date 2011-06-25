@@ -7,9 +7,6 @@
         %td=form.input :pasajeros_name_contains,:label=>"Pasajero"
         %td=form.input :referencia_sw
       %tr
-        %td=form.input :hotel_sw
-        %td=form.input :regimen_sw
-      %tr
         %td=form.input :fecha_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %td=form.input :fecha_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
       %tr
@@ -18,9 +15,6 @@
       %tr
         %td=form.input :agency_id_eq,:collection => Agency.all
         %td=form.input :operadora_id_eq,:collection => Operadora.all
-      %tr
-        %td=form.input :thabitacion_id_eq,:collection => Thabitacion.all
-        %td=form.input :programa_id_eq,:collection => Programa.all
       %tr
         %td=form.input :created_at_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado desde"
         %td=form.input :created_at_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado hasta"
