@@ -4,58 +4,54 @@ class ReservaReport < Prawn::Document
 
   def regular(datos,params)
 
-    self.font_size = 8
+    # Tamaño de la letra por defecto
+    self.font_size = 7
 
+    # Titulo del listado, definido en /app/reports/layout.rb
     header "Listado de Reservas"
 
-    draw_text params, :at => [0,700]
-
-    myrow = [["ID","#","Pasajeros","Salida","Total","Agencia" ,"Pagos","Deuda","Operadora","Pagos","Deuda" ]]
-    totales = Array.new(4,0)
-    agencia_pago = Array.new(4,0)
-    operadora_pago = Array.new(4,0)
-    agencia_deuda = Array.new(4,0)
-    operadora_deuda = Array.new(4,0)
-
-    datos.each do |r|
-      myrow += [["#{r.id}","#{r.pasajeros.count}","#{r.titular}","#{r.salida}","#{r.total.format}","#{r.agency.try(:name)}" ,"#{r.agencia_pago}","#{r.agencia_deuda}","#{r.operadora.try(:name)}","#{r.operadora_pago}","#{r.operadora_deuda}" ]]
-
-#      agencia_pago[r.monto.moneda_id-1] += r.agencia_pago
-#      operadora_pago[r.monto.moneda_id-1] += r.operadora_pago
-#      agencia_deuda[r.monto.moneda_id-1] += r.agencia_deuda
-#      operadora_deuda[r.monto.moneda_id-1] += r.operadora_deuda
-    end
+    # Header de la tabla
+    myrowheader = [["ID","#","Pasajeros","Salida","Hotel","Programa","Total","Agencia" ,"Pagos","Deuda","Pagos O","Deuda O" ]]
 
     bounding_box [0,690], :width => 500 do
-      move_down 10
-      table(myrow,{:row_colors => %w[bbcef4 ffffff],
-                   :header => true,
-                   :column_widths =>{0=>40,
-                                    1=>20,
-                                    3=>60}})do
 
-        row(0).style :background_color => '87b6d9', :text_color => '000000'
-        cells.style :borders => []
+      #hago una tabla por cada operadora
+      datos.group_by(&:dia_creado).each do |fecha, operadoras|
+        text "Fecha: #{fecha}",:size=>10
+        operadoras.group_by(&:operadora).each do |operadora, reservas|
+          if(operadora and reservas)
+
+            #escribo el nombre de la operadora antes de cada tabla
+            text "Operadora: #{operadora.name}",:size=>8
+
+            move_down 10
+            rows = myrowheader
+
+            reservas.each do|r|
+              rows += [["#{r.id}-#{r.try(:referencia)}","#{r.pasajeros.count}","#{r.titular}","#{r.salida}","#{r.hotel[0..15]}","#{r.programa[0..15]}","#{r.total.format}","#{r.agency.try(:name)}" ,"#{r.agencia_pago.format}","#{r.agencia_deuda.format}","#{r.operadora_pago.format}","#{r.operadora_deuda.format}"]]
+            end
+
+            table(rows,{:row_colors => %w[e2f0fb ffffff],
+                     :header => false,
+                     :column_widths =>{0=>60,
+                                      1=>20,
+                                      2=>60,
+                                      3=>50,
+                                      4=>50,
+                                      5=>60
+
+                                      }})do
+
+              row(0).style :background_color => '87b6d9', :text_color => '000000'
+              cells.style :borders => []
+            end
+
+          #despues de cada operadora se puede hacer un start_new_page que hace un salto de pagina o simplemente mover algunas posicion con move_down
+          #start_new_page
+            move_down 20
+          end
+        end
       end
-
-      move_down 10
-      stroke do
-        line bounds.top_left, bounds.top_right
-        line bounds.bottom_left, bounds.bottom_right
-
-      end
-      move_down 10
-#      total =[["Totales","Pago Agencia","Operadora Pago","Agencia Deuda","Operadora Deuda"]]
-#      total +=[["Pesos:","#{agencia_pago[0]}","#{operadora_pago[0]}","#{agencia_deuda[0]}","#{operadora_deuda[0]}"]]
-#      total +=[["Dolares:","#{agencia_pago[1]}","#{operadora_pago[1]}","#{agencia_deuda[1]}","#{operadora_deuda[1]}"]]
-#      total +=[["Euros:","#{agencia_pago[2]}","#{operadora_pago[2]}","#{agencia_deuda[2]}","#{operadora_deuda[2]}"]]
-
-#      table(total,:row_colors => %w[ffffff],:header=>true)do
-
-#        row(0).style :background_color => 'edbc5e', :text_color => '000000'
-#        cells.style :border_width =>0.5
-#
-#      end
 
     end
 
