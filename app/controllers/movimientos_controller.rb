@@ -13,7 +13,7 @@ class MovimientosController < ApplicationController
       format.js
       format.html
       format.pdf do
-        output = MovimientoReport.new.to_pdf(@search)
+        output = MovimientoReport.new.to_pdf(@search,@total)
         send_data output, :filename => "index_report.pdf",
                           :type     => "application/pdf"
       end
