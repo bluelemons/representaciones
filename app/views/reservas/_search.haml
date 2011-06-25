@@ -22,8 +22,10 @@
         %td=form.input :thabitacion_id_eq,:collection => Thabitacion.all
         %td=form.input :programa_id_eq,:collection => Programa.all
       %tr
+        %td=form.input :created_at_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado desde"
+        %td=form.input :created_at_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado hasta"
+      %tr
         %td=form.input :hidden_eq,:as=> :boolean
-        %td=form.input :created_at_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10},:label=>"Creado"
       %tr
         %td
           = form.buttons do
