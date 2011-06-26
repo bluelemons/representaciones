@@ -6,11 +6,11 @@ class MovimientoReport < Prawn::Document
 
     header "Listado de Movimientos"
 
-    theader = [["ID","Fecha","Entidad","Reserva","pasajeros","Tipo","Monto"]]
+    theader = [["ID","Fecha","Entidad","pasajeros","Tipo","Monto"]]
     myrow = theader
 
     datos.each do |r|
-      myrow += [["#{r.id}-#{r.try(:reserva).try(:referencia)}","#{r.fecha}","#{r.entidad.try(:type)} #{r.entidad.try(:name)}","#{r.reserva.titular if r.reserva}","#{r.reserva.try(:id)} - #{r.reserva.try(:referencia)}","#{r.type}","#{r.monto.format}"]]
+      myrow += [["#{r.try(:reserva).try(:id)}-#{r.try(:reserva).try(:referencia)}","#{r.fecha}","#{r.entidad.try(:type)} #{r.entidad.try(:name)}","#{r.try(:reserva).try(:titular)}","#{r.type}","#{r.monto.format}"]]
 
     end
     bounding_box [0,690], :width => 500 do
