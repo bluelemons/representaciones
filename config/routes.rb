@@ -31,8 +31,8 @@ Representaciones::Application.routes.draw do
     resources :pagos
   end
 
+  resources :tdepositos
   resources :thabitacions
-
   resources :programas
 
   devise_for :users
