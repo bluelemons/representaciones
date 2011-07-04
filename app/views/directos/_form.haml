@@ -27,6 +27,11 @@
         = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
     %br
     %input{:type=>"CHECKBOX",:name=>"operadora_paid"} Cargar pago a la operadora?
+    %br
+    Observaciones:
+    %br
+    =f.text_area :observaciones,:rows=>2
+    %br
     .actions
       = f.submit
 

@@ -7,6 +7,7 @@
       %th Titular
       %th Operacion
       %th Entidad
+      %th Observaciones
       %th Monto
       -if can? :destroy, @movimientos.first
         %th Acciones
@@ -22,7 +23,10 @@
           =movimiento.try(:entidad).type
           =movimiento.try(:entidad).try(:name)
         %td
+          = movimiento.observaciones
+        %td
           = movimiento.monto.to_money.format
+
         -if can? :destroy, @movimientos.first and movimiento.movimientos.count<=0
 
           %td
