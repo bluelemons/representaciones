@@ -27,7 +27,7 @@ class Cambio < Movimiento
 
   # valida que exista plata en la cuenta.
   def saldo_suficiente
-    if (cuenta && rate && (cuenta.monto < monto))
+    if (cuenta && rate && !alcanza_monto_de_la_cuenta?)
        errors.add(:base, "Debe tener suficiente dinero para efectuar el cambio")
     end
   end
@@ -56,10 +56,6 @@ class Cambio < Movimiento
 
   #retiro de la cuenta el monto que voy a cambiar
   def withdraw
-    #>>  Money.add_rate("USD","ARS",4.1)
-    #=> 4.1
-    #>> Money.new(100,"USD").exchange_to("ARS")
-    #=> #<Money cents:410 currency:ARS>
     entidad.withdraw(@monto_original || monto.exchange_to(cuenta.monto.currency), operadora)
   end
 
@@ -72,6 +68,10 @@ class Cambio < Movimiento
     rate &&
     entidad.withdraw(monto, operadora) &&
     entidad.deposit(monto.exchange_to(cuenta.monto.currency), operadora)
+  end
+
+  def alcanza_monto_de_la_cuenta?
+    (cuenta.monto - monto).cents >= -1
   end
 end
 

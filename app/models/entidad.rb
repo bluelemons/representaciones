@@ -73,6 +73,10 @@ class Entidad < ActiveRecord::Base
     monto = monto.to_money
     moneda = monto.currency_as_string
     c = cuenta(moneda, operadora_id)
+    # TODO fix it nicely.
+    if (monto - c.monto).cents < 3
+      monto = c.monto
+    end
     c && c.monto >= monto && deposit(monto * -1, operadora_id)
   end
 
