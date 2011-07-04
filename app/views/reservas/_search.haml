@@ -4,8 +4,8 @@
   =form.inputs do
     %table{:style=>'width:800px;'}
       %tr
-        %td=form.input :pasajeros_name_contains,:label=>"Pasajero"
-        %td=form.input :referencia_sw
+        %td=form.input :pasajeros_name_or_referencia_contains,:label=>"Pasajero o referencia"
+        %td=form.input :id_eq
       %tr
         %td=form.input :fecha_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %td=form.input :fecha_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
