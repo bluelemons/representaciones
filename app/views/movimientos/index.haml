@@ -4,7 +4,7 @@
   .action_bar
     = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'}
 
-  .mytabs
+  #tabs-movimientos.mytabs
     %ul
       %li
         %a{:href=>"#tabs-movimientos-1"} Movimientos
@@ -21,6 +21,8 @@
         %li
           %a#directo_new{:href=>"#tabs-movimientos-5"} Directo
 
+    #tabs-movimientos-6
+      #movimiento_form
 
     #tabs-movimientos-1
       = render :partial => "search"
