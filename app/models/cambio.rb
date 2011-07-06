@@ -71,7 +71,7 @@ class Cambio < Movimiento
   end
 
   def alcanza_monto_de_la_cuenta?
-    (cuenta.monto - monto).cents >= -1
+    (cuenta.monto - monto).cents >= -9
   end
 end
 
