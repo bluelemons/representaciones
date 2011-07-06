@@ -9,6 +9,7 @@ class Movimiento < ActiveRecord::Base
   belongs_to :operadora
   belongs_to :cuenta
   belongs_to :movimiento,:dependent => :destroy
+  belongs_to :tdeposito
   has_many :movimientos
   monetize   :monto
 
