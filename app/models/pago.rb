@@ -2,14 +2,14 @@
 class Pago < Movimiento
 
   # Callbacks
-  before_save        :check_deuda, :sacar_la_plata
+  before_create        :check_deuda, :sacar_la_plata
   after_save         :_marcar_reserva_como_liquidada
 
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
-  validate  :saldo_suficiente
-  validate  :coinciden_monedas
+  before_create  :saldo_suficiente
+  before_create  :coinciden_monedas
 
   # Asigna una cuenta a partir de la entidad y el monto si no tiene una asignada.
   before_validation do |p|
