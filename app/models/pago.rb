@@ -8,8 +8,8 @@ class Pago < Movimiento
   validates :cuenta, :presence => true
   validates :reserva, :presence => true
   validates :monto, :presence => true
-  before_create  :saldo_suficiente
-  before_create  :coinciden_monedas
+  validate  :saldo_suficiente, :on => :create
+  validate  :coinciden_monedas, :on => :create
 
   # Asigna una cuenta a partir de la entidad y el monto si no tiene una asignada.
   before_validation do |p|
