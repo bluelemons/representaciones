@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110623191934) do
+ActiveRecord::Schema.define(:version => 20110729124450) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -271,6 +271,8 @@ ActiveRecord::Schema.define(:version => 20110623191934) do
     t.integer  "seguro_cents"
     t.boolean  "liquido_agencia",                :default => false
     t.boolean  "liquido_operadora",              :default => false
+    t.integer  "comision"
+    t.integer  "habitaciones"
   end
 
   add_index "reserva_versions", ["reserva_id"], :name => "index_reserva_versions_on_reserva_id"
@@ -317,6 +319,8 @@ ActiveRecord::Schema.define(:version => 20110623191934) do
     t.integer  "seguro_cents"
     t.boolean  "liquido_agencia",                :default => false
     t.boolean  "liquido_operadora",              :default => false
+    t.integer  "comision"
+    t.integer  "habitaciones"
   end
 
   create_table "roles", :force => true do |t|
