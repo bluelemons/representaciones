@@ -53,7 +53,7 @@ class EntidadsController < InheritedResources::Base
   end
 
   def create
-    @entidad = Entidad.new(params[:entidad])
+    @entidad = Entidad.new(params[:agency] || params[:operadora])
     @entidad.user = current_user
     if @entidad.save
       flash[:notice]="Entidad guardada!"
