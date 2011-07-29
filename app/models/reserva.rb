@@ -87,8 +87,12 @@ class Reserva < ActiveRecord::Base
     total.currency.symbol
   end
 
+  def sin_tarifa?
+    total <=0
+  end
+
   def liquidada?
-    self.liquido_agencia and self.liquido_operadora
+    !self.sin_tarifa? and self.liquido_agencia and self.liquido_operadora
   end
 
   def agencia_pago
