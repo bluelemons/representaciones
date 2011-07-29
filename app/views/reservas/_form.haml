@@ -20,7 +20,10 @@
 
         %tr
           %td= form.input :programa
-          %td= form.input :thabitacion
+          %table
+            %tr
+              %td= form.input :thabitacion
+              %td= form.input :habitaciones,:input_html => {:size=>3}
         %tr
           %td= form.input :regimen
           %td= form.input :periodo,:input_html => {:size=>10}
