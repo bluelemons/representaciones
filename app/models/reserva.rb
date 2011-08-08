@@ -88,7 +88,7 @@ class Reserva < ActiveRecord::Base
   end
 
   def sin_tarifa?
-    total <=0
+    total.cents <= 0
   end
 
   def liquidada?
