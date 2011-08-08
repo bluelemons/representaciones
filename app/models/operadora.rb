@@ -12,6 +12,7 @@ class Operadora < Entidad
 
   #validaciones
 
+  validates :name, :presence => true, :uniqueness => true
   #scopes
 
   #metodos

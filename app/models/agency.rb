@@ -11,6 +11,7 @@ class Agency < Entidad
   end
   #validaciones
 
+  validates :name, :presence => true, :uniqueness => true
   #scopes
 
   #metodos

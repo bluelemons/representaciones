@@ -14,7 +14,6 @@ class Entidad < ActiveRecord::Base
                   :calle, :legajo, :telefono, :web, :email
 
   #validaciones
-  validates :name, :presence => true, :uniqueness => true
   #validates :calle, :presence => true
   #validates :cuit, :presence => true
   #validates :telefono, :presence => true
