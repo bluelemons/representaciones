@@ -2,9 +2,7 @@
 require 'spec_helper'
 
 describe Pago do
-  it_behaves_like "un movimiento"do
-    let(:movimiento) { Factory(:pago) }
-  end
+
   it { should validate_presence_of(:reserva) }
   it { should validate_presence_of(:cuenta) }
   it { should validate_presence_of(:entidad) }
@@ -35,6 +33,7 @@ describe Pago do
         pago.monto.should <= "50".to_money(pago.monto.currency)
       end
     end
+
     context 'si no coinciden las monedas de cuenta y reserva' do
       it 'da un error si la cuenta está en una moneda distinta' do
         pago.cuenta.stub(:monto) { Money.parse("10000 AED") }
@@ -47,6 +46,7 @@ describe Pago do
         pago.errors[:base].should include("Las monedas de la reserva y la cuenta no coinciden")
       end
     end
+
     context 'si no tiene suficiente plata en la cuenta' do
       it 'da un error explicativo' do
         pago.cuenta = mock_model Cuenta, :monto => Money.new(1, pago.monto.currency)
@@ -54,12 +54,8 @@ describe Pago do
         pago.errors[:base].should include("Debe tener suficiente dinero para efectuar el pago")
       end
     end
-    it 'quita dinero de la cuenta' do
-      monto_anterior = pago.cuenta(true).monto
-      pago.save.should be_true
-      pago.cuenta(true).monto.should == (monto_anterior - pago.monto)
-    end
   end
+
   describe "deshacer" do
     let(:pago) { Factory(:pago)}
     it 'deposit the money to the entidad and return true' do

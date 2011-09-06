@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Deposito do
-  it_behaves_like "un movimiento"do
-    let(:movimiento) { Factory(:deposito) }
-  end
   it { should validate_presence_of(:tdeposito) }
   it { should validate_presence_of(:numero) }
   it { should validate_presence_of(:entidad) }
