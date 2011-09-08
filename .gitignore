@@ -5,11 +5,8 @@ log/*.log
 
 ###########################
 # temporales
-test/tmp/*
-tmp/*/*
-Gemfile.lock
-**/*/tmp/*
-*~
+tmp/
+
 \#*#
 ###########################
 # datos
