@@ -10,7 +10,6 @@ pago_vikingo:
   user: susana
   monto_cents: 200000
   monto_currency: USD
-  movimiento: deposito_vikingo
   observaciones: DEP EN PESOS $8320 AL CAMBIO DE 4.16
 
 pago_ibero:

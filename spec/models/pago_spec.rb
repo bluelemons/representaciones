@@ -36,6 +36,7 @@ describe Pago do
 
     it 'permite cargar un pago correcto' do
       pago = Factory.build(:pago)
+      pago.errors.should be_empty
       pago.should be_valid
       pago.save.should be_true
     end

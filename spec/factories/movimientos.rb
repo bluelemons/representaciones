@@ -9,14 +9,6 @@ Factory.define :deposito do |d|
   d.monto             { Forgery(:monetary).money :max=>15000 }
 end
 
-Factory.define :pago do |p|
-  p.fecha       { Forgery(:date).date :max_delta => 3000 }
-  p.monto       { Forgery(:monetary).money :max=>15000 }
-  p.association :entidad, :factory => :agency
-  p.reserva     { |pago| Factory(:reserva, :agency => pago.entidad) }
-  p.cuenta      { |pago| Factory(:cuenta, :monto => pago.monto, :entidad => pago.entidad) }
-end
-
 Factory.define :cambio do |c|
   c.fecha       { Forgery(:date).date :max_delta=>150, :past => true }
   c.monto       { Forgery(:monetary).money(:max=>1).to_money([:usd, :eur].sample) }
