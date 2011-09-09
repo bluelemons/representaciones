@@ -170,6 +170,8 @@ GEM
     shoulda-matchers (1.0.0.beta3)
     slop (2.1.0)
     squeezer (0.2.1)
+    tabletastic (0.2.3)
+      activesupport (~> 3.0)
     thor (0.14.6)
     treetop (1.4.10)
       polyglot
@@ -216,5 +218,6 @@ DEPENDENCIES
   rspec-rails (~> 2.5)
   shoulda-matchers
   squeezer (= 0.2.1)
+  tabletastic
   webrat
   will_paginate (~> 3.0.pre2)

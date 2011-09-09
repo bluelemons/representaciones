@@ -13,6 +13,7 @@ gem "haml"
 gem 'prawn', :git => "git://github.com/sandal/prawn", :tag => '0.10.2', :submodules => true
 gem "builder"
 gem 'formtastic', '~> 1.2.3'
+gem "tabletastic"
 
 # autenticacion
 gem "devise", "~>1.1.rc2"
