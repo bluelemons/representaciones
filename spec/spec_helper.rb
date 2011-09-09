@@ -24,6 +24,14 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # Load all fixtures, all the time
+  config.global_fixtures = :all
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with :truncation
+    # DatabaseCleaner.strategy = :transaction
+  end
 end
 
 # autorizacion para los specs de controller
