@@ -3,64 +3,41 @@ require 'spec_helper'
 
 describe Pago do
 
-  it { should validate_presence_of(:reserva) }
-  it { should validate_presence_of(:cuenta) }
-  it { should validate_presence_of(:entidad) }
+  fixtures(:reservas)
 
-  describe 'before_validation' do
-    context 'if not given a Cuenta' do
-      let(:pago) { Factory.build(:pago, :cuenta => nil) }
-      it 'ask Entidad to assign one' do
-        pago.entidad.should_receive(:cuenta) do
-          Factory(:cuenta, :monto => Money.parse("5000000"))
-        end
-        pago.valid? #.should be_true
-        pago.cuenta.should_not be_nil
-      end
-    end
+  describe 'asociaciones' do
+    it { should belong_to(:entidad)   }
+    it { should belong_to(:reserva)   }
+    it { should belong_to(:tdeposito) }
   end
-  describe '#save' do
-    let(:pago) { Factory.build(:pago) }
-    it 'salva el pago con valores correctos' do
+
+  describe 'validaciones' do
+    it { should validate_presence_of(:reserva)   }
+    it { should validate_presence_of(:entidad)   }
+    it { should validate_presence_of(:fecha)     }
+    it { should validate_presence_of(:tdeposito) }
+
+    it 'la fecha debe ser pasada' do
+      pago = Factory.build(:pago, :fecha => Date.today + 1 )
+      pago.should be_invalid
+      # TODO: pago.errors.should include match flat
+    end
+
+    it { should ensure_inclusion_of(:monto_cents).in_range(1..1_000_000_00) }
+    it { should ensure_inclusion_of(:monto_original_cents).in_range(1..1_000_000_00) }
+
+    pending 'advierte la falta de datos del comprobante'
+
+    it 'monto debe tener la misma moneda que la reserva' do
+      # FIX: ver que onda con los fixtures
+      pago = Factory.build(:pago, :monto => "500 ARS", :reserva => reservas(:costa_magica))
+      pago.should be_invalid
+    end
+
+    it 'permite cargar un pago correcto' do
+      pago = Factory.build(:pago)
+      pago.should be_valid
       pago.save.should be_true
-      pago.errors.should be_empty
-    end
-    context 'debt is less than monto' do
-      it 'change monto to the value of debt' do
-        method = (pago.entidad.type.downcase + "_deuda").to_sym
-        pago.reserva.stub(method) { "50".to_money(pago.monto.currency) }
-        pago.save
-        pago.monto.should <= "50".to_money(pago.monto.currency)
-      end
-    end
-
-    context 'si no coinciden las monedas de cuenta y reserva' do
-      it 'da un error si la cuenta está en una moneda distinta' do
-        pago.cuenta.stub(:monto) { Money.parse("10000 AED") }
-        pago.valid?.should be_false
-        pago.errors[:base].should include("Las monedas de la reserva y la cuenta no coinciden")
-      end
-      it 'da un error si la reserva está en una moneda distinta' do
-        pago.reserva.stub(:total) { Money.parse("10000 AED") }
-        pago.valid?.should be_false
-        pago.errors[:base].should include("Las monedas de la reserva y la cuenta no coinciden")
-      end
-    end
-
-    context 'si no tiene suficiente plata en la cuenta' do
-      it 'da un error explicativo' do
-        pago.cuenta = mock_model Cuenta, :monto => Money.new(1, pago.monto.currency)
-        pago.valid?.should be_false
-        pago.errors[:base].should include("Debe tener suficiente dinero para efectuar el pago")
-      end
-    end
-  end
-
-  describe "deshacer" do
-    let(:pago) { Factory(:pago)}
-    it 'deposit the money to the entidad and return true' do
-      pago.entidad.should_receive(:deposit).with(pago.monto, pago.operadora) { true }
-      pago.send(:deshacer).should be_true
     end
   end
 end
