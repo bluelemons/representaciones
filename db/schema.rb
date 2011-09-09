@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729124450) do
+ActiveRecord::Schema.define(:version => 20110909185027) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -174,6 +175,24 @@ ActiveRecord::Schema.define(:version => 20110729124450) do
     t.text     "body"
     t.integer  "user_id"
     t.string   "menu"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pagos", :force => true do |t|
+    t.date     "fecha"
+    t.integer  "entidad_id"
+    t.integer  "reserva_id"
+    t.integer  "monto_cents"
+    t.string   "monto_currency",          :limit => 3
+    t.integer  "monto_original_cents"
+    t.string   "monto_original_currency", :limit => 3
+    t.integer  "operadora_id"
+    t.integer  "tdeposito_id"
+    t.string   "numero"
+    t.text     "observaciones"
+    t.integer  "user_id"
+    t.boolean  "hidden"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

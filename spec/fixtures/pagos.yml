@@ -1,22 +1,6 @@
-
-deposito_ibero:
-  entidad: ibero
-  reserva: grand_celebration
-  type: Deposito
-  tdeposito: deposito
-  numero: 31000061
-  fecha: 2011-08-30
-  created_at: 2011-09-03 14:01:04.000000000Z
-  updated_at: 2011-09-03 14:01:04.000000000Z
-  hidden: 0
-  monto_cents: 200000
-  monto_currency: USD
-  observaciones: DEP EN PESOS $8320 AL CAMBIO DE 4.16
-
-deposito_vikingo:
+pago_vikingo:
   entidad: vikingo
   reserva: grand_celebration
-  type: Deposito
   tdeposito: deposito
   numero: 31000061
   fecha: 2011-08-30
@@ -26,5 +10,18 @@ deposito_vikingo:
   user: susana
   monto_cents: 200000
   monto_currency: USD
+  movimiento: deposito_vikingo
   observaciones: DEP EN PESOS $8320 AL CAMBIO DE 4.16
 
+pago_ibero:
+  entidad: ibero
+  reserva: grand_celebration
+  tdeposito: deposito
+  numero: 31000061
+  fecha: 2011-08-30
+  created_at: 2011-09-03 14:01:04.000000000Z
+  updated_at: 2011-09-03 14:01:04.000000000Z
+  hidden: 0
+  monto_cents: 200000
+  monto_currency: USD
+  observaciones: DEP EN PESOS $8320 AL CAMBIO DE 4.16
