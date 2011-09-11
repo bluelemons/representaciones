@@ -63,6 +63,10 @@ class Reserva < ActiveRecord::Base
   scope :sin_voucher, where("voucher is null")
   #metodos
 
+  def entidades
+    [operadora,agency]
+  end
+
   def deuda(entidad)
     if entidad == agency
       agencia_deuda
