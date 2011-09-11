@@ -1,38 +1,28 @@
 class PagosController < InheritedResources::Base
   load_and_authorize_resource
 
-  def index
-  end
-
-  def new
-    @pago = Pago.new
-    @search = Reserva.baja.search(:agency_id_eq=>0)
-    @reservas = @search.paginate :page => params[:page], :per_page =>10
-  end
+  belongs_to :reserva, :optional => true
 
   def update
-    @movimiento = Pago.find(params[:id])
-    @movimiento.user = current_user
-    if @movimiento.update_attributes(params[:pago])
-      flash[:notice] = "El pago a sido actualizado"
-      render 'movimientos/edit.js'
-    else
-      flash[:notice] = "El pago no se ha podido actualizar, intente nuevamente"
-      render 'movimientos/edit.js'
-    end
+    @pago = Pago.find(params[:id])
+    @pago.user = current_user
+    update!
   end
 
   def create
-    @pago = Pago.new(params[:pago])
+    @reserva = Reserva.find(params[:reserva_id]) if params[:reserva_id]
+    @pago = if @reserva
+        @reserva.build_pago(params[:pago])
+      else
+        Pago.new(params[:pago])
+      end
     @pago.user = current_user
-    if @pago.save
-      flash[:notice] = "El pago a sido registrado"
-      redirect_to :action => 'new', :format =>'js'
-    else
-      @search = Reserva.baja.search(:agency_id_eq=>0)
-      @reservas = @search.paginate :page => params[:page], :per_page =>10
-      render 'new.js'
+    create! do
+      if @reserva
+        redirect_to reserva_url(@reserva)
+      else
+        redirect_to new_pago_url(@pago)
+      end
     end
   end
 end
-
