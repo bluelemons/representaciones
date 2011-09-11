@@ -1,31 +1,10 @@
 =flash[:notice]
-= form_for(@pago, :remote => true) do |f|
+= semantic_form_for(@pago) do |f|
   .ui-widget.ui-widget-content
     = error_message(@pago)
-
-    = render :partial => "movimientos/comunes", :locals => { :f => f }
-
-    = semantic_form_for @search,:html => {:method => :get,:class => 'search_reserva'}  do |form|
-      =form.inputs do
-        =form.input :agency_id_or_operadora_id_eq,:collection => Entidad.all
-
-    #reservas
-      =render 'reservas/reservas'
-
-    #entidad_form
-
-    = f.hidden_field :entidad_id
-    = f.hidden_field :reserva_id
-    = f.hidden_field :cuenta_id
-
-
-    #cuentas
-
-    %br
-      = f.fields_for :monto_fields, @pago do |money_fields|
-        = money_fields.text_field :monto, :class => "money"
-        = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
-
-    .actions
-      = f.submit
-
+    = f.inputs do
+      = f.input :entidad, :as => :radio, :collection => @pago.reserva.entidades
+    = f.inputs :monto_fields, :for => @pago do |money_fields|
+      = money_fields.input :monto  # , :httpclass => "money"
+      = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
+    = f.buttons
