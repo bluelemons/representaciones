@@ -1,0 +1,45 @@
+<h1>Listing pagos</h1>
+
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Entidad</th>
+    <th>Reserva</th>
+    <th>Monto cents</th>
+    <th>Monto currency</th>
+    <th>Monto original cents</th>
+    <th>Monto original currency</th>
+    <th>Operadora</th>
+    <th>Tdeposito</th>
+    <th>Numero</th>
+    <th>Observaciones</th>
+    <th>Hidden</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pagos.each do |pago| %>
+  <tr>
+    <td><%= pago.fecha %></td>
+    <td><%= pago.entidad_id %></td>
+    <td><%= pago.reserva_id %></td>
+    <td><%= pago.monto_cents %></td>
+    <td><%= pago.monto_currency %></td>
+    <td><%= pago.monto_original_cents %></td>
+    <td><%= pago.monto_original_currency %></td>
+    <td><%= pago.operadora_id %></td>
+    <td><%= pago.tdeposito_id %></td>
+    <td><%= pago.numero %></td>
+    <td><%= pago.observaciones %></td>
+    <td><%= pago.hidden %></td>
+    <td><%= link_to 'Show', pago %></td>
+    <td><%= link_to 'Edit', edit_pago_path(pago) %></td>
+    <td><%= link_to 'Destroy', pago, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pago', new_pago_path %>

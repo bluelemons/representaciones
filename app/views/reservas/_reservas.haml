@@ -11,7 +11,7 @@
       - t.cell :acciones, :heading => "Acciones", :cell_html => {:class => "acciones"} do |reserva|
         - cell_content = "<ul>\n  "
         - cell_content += "<li>#{link_to 'Detalles', reservas}</li>\n"
-        - cell_content += "<li>#{link_to 'Editar', edit_reserva_path(reserva)}</li>\n"
+        - cell_content += "<li>#{link_to 'Editar', edit_reserva_path(reserva, :format => :js)}</li>\n"
         - cell_content += "<li>#{link_to 'Ver pagos', reserva_pagos_path(reserva)}</li>\n"
         - cell_content += "<li>#{link_to 'Generar pago', new_reserva_pago_path(reserva)}</li>\n"
         - cell_content += "</ul>"

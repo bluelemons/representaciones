@@ -11,11 +11,7 @@ class PagosController < InheritedResources::Base
 
   def create
     @reserva = Reserva.find(params[:reserva_id]) if params[:reserva_id]
-    @pago = if @reserva
-        @reserva.build_pago(params[:pago])
-      else
-        Pago.new(params[:pago])
-      end
+    @pago = Pago.new(params[:pago])
     @pago.user = current_user
     create! do
       if @reserva

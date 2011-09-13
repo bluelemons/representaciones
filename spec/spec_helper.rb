@@ -29,6 +29,7 @@ RSpec.configure do |config|
   config.global_fixtures = :all
 
   config.before(:suite) do
+    # Me aseguro de tener una base de datos limpia
     DatabaseCleaner.clean_with :truncation
     # DatabaseCleaner.strategy = :transaction
   end

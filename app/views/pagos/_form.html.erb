@@ -1,0 +1,65 @@
+<%= form_for(@pago) do |f| %>
+  <% if @pago.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pago.errors.count, "error") %> prohibited this pago from being saved:</h2>
+
+      <ul>
+      <% @pago.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fecha %><br />
+    <%= f.date_select :fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :entidad_id %><br />
+    <%= f.text_field :entidad_id %>
+  </div>
+  <div class="field">
+    <%= f.label :reserva_id %><br />
+    <%= f.text_field :reserva_id %>
+  </div>
+  <div class="field">
+    <%= f.label :monto_cents %><br />
+    <%= f.text_field :monto_cents %>
+  </div>
+  <div class="field">
+    <%= f.label :monto_currency %><br />
+    <%= f.text_field :monto_currency %>
+  </div>
+  <div class="field">
+    <%= f.label :monto_original_cents %><br />
+    <%= f.text_field :monto_original_cents %>
+  </div>
+  <div class="field">
+    <%= f.label :monto_original_currency %><br />
+    <%= f.text_field :monto_original_currency %>
+  </div>
+  <div class="field">
+    <%= f.label :operadora_id %><br />
+    <%= f.text_field :operadora_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tdeposito_id %><br />
+    <%= f.text_field :tdeposito_id %>
+  </div>
+  <div class="field">
+    <%= f.label :numero %><br />
+    <%= f.text_field :numero %>
+  </div>
+  <div class="field">
+    <%= f.label :observaciones %><br />
+    <%= f.text_area :observaciones %>
+  </div>
+  <div class="field">
+    <%= f.label :hidden %><br />
+    <%= f.check_box :hidden %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

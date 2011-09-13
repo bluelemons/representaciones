@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fecha:</b>
+  <%= @pago.fecha %>
+</p>
+
+<p>
+  <b>Entidad:</b>
+  <%= @pago.entidad_id %>
+</p>
+
+<p>
+  <b>Reserva:</b>
+  <%= @pago.reserva_id %>
+</p>
+
+<p>
+  <b>Monto cents:</b>
+  <%= @pago.monto_cents %>
+</p>
+
+<p>
+  <b>Monto currency:</b>
+  <%= @pago.monto_currency %>
+</p>
+
+<p>
+  <b>Monto original cents:</b>
+  <%= @pago.monto_original_cents %>
+</p>
+
+<p>
+  <b>Monto original currency:</b>
+  <%= @pago.monto_original_currency %>
+</p>
+
+<p>
+  <b>Operadora:</b>
+  <%= @pago.operadora_id %>
+</p>
+
+<p>
+  <b>Tdeposito:</b>
+  <%= @pago.tdeposito_id %>
+</p>
+
+<p>
+  <b>Numero:</b>
+  <%= @pago.numero %>
+</p>
+
+<p>
+  <b>Observaciones:</b>
+  <%= @pago.observaciones %>
+</p>
+
+<p>
+  <b>Hidden:</b>
+  <%= @pago.hidden %>
+</p>
+
+
+<%= link_to 'Edit', edit_pago_path(@pago) %> |
+<%= link_to 'Back', pagos_path %>
