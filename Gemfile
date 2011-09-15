@@ -23,32 +23,18 @@ gem "paperclip"
 gem "inherited_resources"
 # also deprecated
 group :development, :test do
-  gem "nifty-generators"
   gem 'dbf'
-  gem 'autotest'
-  gem 'guard-livereload' # No anda
 end
 
-gem "jquery-rails", "~> 1.0.9"
+gem "jquery-rails"
 
 # modelos
 gem "mysql2", '~> 0.2.7'
 gem "meta_search"
 gem "acts_as_versioned"
-gem 'money', '~> 3.6.1'
+gem 'money'
 
 group :development, :test do
   gem 'pry'
-  gem 'rspec-rails', '~> 2.5'
-  gem 'factory_girl_rails'
   gem 'forgery'
-  gem 'guard-rspec'
-  gem 'rb-inotify'
-  gem 'libnotify'
 end
-
-group :test do
-  gem 'webrat'
-  gem 'shoulda-matchers'
-end
-

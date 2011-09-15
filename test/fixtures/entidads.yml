@@ -1,0 +1,42 @@
+costa:
+  cuit: '4612'
+  name: COSTA CRUCEROS
+  type: Operadora
+  created_at: 2011-04-28 18:40:08.000000000Z
+  updated_at: 2011-04-28 18:40:08.000000000Z
+  hidden: 0
+  version: 1
+
+ibero:
+  cuit: '4'
+  telefono: ! ' '
+  email: ! ' '
+  web: ! ' '
+  name: IBERO CRUCEROS
+  type: Operadora
+  created_at: 2011-04-28 18:40:08.000000000Z
+  updated_at: 2011-04-28 18:40:08.000000000Z
+  hidden: 0
+  version: 1
+
+litoraltur:
+  calle: SAN MARTIN 2984
+  cuit: R.I.30-52078462-0
+  telefono: 0342-4561444
+  name: LITORAL TUR S.A.
+  type: Agency
+  created_at: 2011-04-28 18:39:51.000000000Z
+  updated_at: 2011-04-28 18:39:51.000000000Z
+  hidden: 0
+  version: 1
+
+vikingo:
+  calle: CORRIENTES 563
+  cuit: R.I. 30-5799518
+  telefono: 0343-4232601
+  name: VIKINGO
+  type: Agency
+  created_at: 2011-04-28 18:39:51.000000000Z
+  updated_at: 2011-04-28 18:39:51.000000000Z
+  hidden: 0
+  version: 1
