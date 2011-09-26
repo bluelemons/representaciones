@@ -15,7 +15,6 @@ module Layout
       font_size 6 do
         draw_text "Impreso: #{Date.today}",:at => [0,0]
         draw_text "#{title}",:at => [100,0]
-        number_pages "<page> de <total>", [bounds.right - 50, 0]
         image("#{RAILS_ROOT}/public/images/blue-lemons.png",:at => [bounds.right - 150, 8],:scale=>0.30)
 
       end

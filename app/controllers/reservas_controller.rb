@@ -11,7 +11,7 @@ class ReservasController < InheritedResources::Base
           paginate
       format.pdf do
         @reservas = @search
-        output = ReservaReport.new.regular(@reservas,params[:search])
+        output = ReservaReport.new.situacion_operadora(@reservas, params[:search])
         send_data output, :filename => "index_report.pdf",
                           :type => "application/pdf"
       end
