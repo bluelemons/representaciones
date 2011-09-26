@@ -38,6 +38,7 @@ gem "acts_as_versioned"
 gem 'money', '~> 3.6.1'
 
 group :development, :test do
+  gem 'pry'
   gem 'rspec-rails', '~> 2.5'
   gem 'factory_girl_rails'
   gem 'forgery'
