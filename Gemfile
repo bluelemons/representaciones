@@ -10,7 +10,7 @@ gem 'largentinas',"0.1.0"
 # vistas
 gem "will_paginate", "~> 3.0.pre2"
 gem "haml"
-gem 'prawn', :git => "git://github.com/sandal/prawn", :tag => '0.10.2', :submodules => true
+gem 'prawn'
 gem "builder"
 gem 'formtastic', '~> 1.2.3'
 
