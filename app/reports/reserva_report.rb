@@ -126,8 +126,7 @@ class ReservaReport < Prawn::Document
   def informacion_de_busqueda(datos)
     busqueda = {}
     datos.search_attributes.except('meta_sort').select {|k, v| v.present?}.each do |key, value|
-      binding.pry
-      # busqueda[datos.class.human_attribute_name(key)] = value
+      busqueda[datos.class.human_attribute_name(key.dup)] = value
     end
     text busqueda.to_yaml
   end
