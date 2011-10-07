@@ -8,6 +8,9 @@ class Reserva < ActiveRecord::Base
 
   belongs_to :operadora
   belongs_to :agency
+
+  has_many :depositos
+
   has_many :pagos do
     def by_entidad(entidad)
       find_all_by_entidad_id(entidad.id)
