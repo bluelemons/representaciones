@@ -29,6 +29,7 @@ Representaciones::Application.routes.draw do
 
   resources :reservas do
     resources :pagos
+    resources :depositos
   end
 
   resources :tdepositos
