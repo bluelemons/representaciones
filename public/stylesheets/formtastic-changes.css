@@ -1,0 +1,7 @@
+/* inline inputs*/
+
+form.formtastic fieldset ol li.inline {
+  /* float: left; */
+  display: inline;
+  margin-right: 2em;
+  }
