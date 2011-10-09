@@ -10,9 +10,9 @@ class DepositosController < InheritedResources::Base
     @deposito.user = current_user
     if @deposito.save
       flash[:notice] = "El deposito fue registrado correctamente"
-      redirect_to :action => 'new', :format =>'js'
+      redirect_to reservas_path
     else
-      render 'new.js'
+      render 'new'
     end
   end
 end
