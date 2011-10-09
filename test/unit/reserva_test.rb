@@ -15,4 +15,7 @@ class ReservaTest < ActiveSupport::TestCase
     end
   end
 
+  test "#entidades should return an array of entidades" do
+    assert_equal [@reserva.agency, @reserva.operadora], @reserva.entidades, "reserva#entidades no funciona"
+  end
 end

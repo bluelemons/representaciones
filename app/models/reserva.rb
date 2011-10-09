@@ -64,7 +64,12 @@ class Reserva < ActiveRecord::Base
   scope :por_vencer, lambda {|fecha| where("fecha = ? and pago_minimo > 0",fecha) }
   search_methods :sin_voucher
   scope :sin_voucher, where("voucher is null")
-  #metodos
+
+  # metodos
+
+  def entidades
+    [agency, operadora]
+  end
 
   def deuda(entidad)
     if entidad == agency
