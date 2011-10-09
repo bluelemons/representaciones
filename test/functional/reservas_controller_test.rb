@@ -6,13 +6,13 @@ class ReservasControllerTest < ActionController::TestCase
     sign_in users(:susana)
   end
 
-  test "should have a link to show_reserva" do
+  test "should have a link to mostrar_reserva" do
     get :index
-    assert_select "td a", "Show"
+    assert_select "td a", "Mostrar"
   end
 
   test "should have a link to new_pago" do
     get :index
-    assert_select "td a", "Crear Pago"
+    assert_select "td a", "Pagar"
   end
 end
