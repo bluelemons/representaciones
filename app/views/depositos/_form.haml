@@ -1,7 +1,11 @@
 .ui-widget
   #tabs-movimientos-1
     = semantic_form_for [@reserva, @deposito] do |f|
+      = semantic_errors
       = f.inputs do
+        = f.input :fecha
+        = f.input :tdeposito
+        = f.input :numero
         = f.input :entidad, :as => :check_boxes, :collection => @reserva.entidades
         = f.semantic_fields_for :monto_fields, @deposito do |money_fields|
           = money_fields.input :monto, :wrapper_html => {:class => "inline money"}
