@@ -1,11 +1,8 @@
 class DepositosController < InheritedResources::Base
+  belongs_to :reserva
   load_and_authorize_resource
 
   def index
-  end
-
-  def new
-    @deposito = Deposito.new
   end
 
   def create
