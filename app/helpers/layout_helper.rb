@@ -1,5 +1,10 @@
 module LayoutHelper
 
+  # Output current time in a string without spaces
+  def time_id
+    Time.current.strftime("%F_%H:%M:%S,%N")
+  end
+
   def error_message(model)
     if model.errors.any?
       html = ""

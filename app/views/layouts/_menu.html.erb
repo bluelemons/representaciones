@@ -7,40 +7,40 @@
   </div>
 
 <ul class="tabs">
-   <li class="hasmore"><a href="#"><span>ABM</span></a>
-     <ul class="dropdown">
-       <li><%= link_to 'Operadoras',operadoras_path %></li>
-       <li><%= link_to 'Agencias',agencies_path %></li>
-       <li><%= link_to 'Programas',programas_path %></li>
-       <li><%= link_to 'Tipo de Habitacinoes',thabitacions_path %></li>
-       <li><%= link_to 'Cotizacion',cotizacions_path %></li>
-       <li class="last"><%= link_to 'Pasajeros',pasajeros_path %></li>
-     </ul>
+  <li class="hasmore"><a href="#"><span>ABM</span></a>
+    <ul class="dropdown">
+      <li><%= link_to 'Operadoras',operadoras_path %></li>
+      <li><%= link_to 'Agencias',agencies_path %></li>
+      <li><%= link_to 'Programas',programas_path %></li>
+      <li><%= link_to 'Tipo de Habitacinoes',thabitacions_path %></li>
+      <li><%= link_to 'Cotizacion',cotizacions_path %></li>
+      <li class="last"><%= link_to 'Pasajeros',pasajeros_path %></li>
+    </ul>
+  </li>
 
-   <li><%= link_to '<span>Pagos</span>'.html_safe,movimientos_path %></li>
-   <li class="hasmore"><%= link_to '<span>Reservas</span>'.html_safe,reservas_path %>
-     <ul class="dropdown">
-       <li><%= link_to 'Todas',reservas_path %></li>
-       <li><%= link_to 'Voucher',vouchers_path %></li>
-       <li class="last"><%= link_to 'A vencer',vencidas_path %></li>
-     </ul>
+  <li><%= link_to '<span>Pagos</span>'.html_safe,movimientos_path %></li>
+  <li class="hasmore"><%= link_to '<span>Reservas</span>'.html_safe,reservas_path %>
+    <ul class="dropdown">
+      <li><%= link_to 'Todas',reservas_path %></li>
+      <li><%= link_to 'Voucher',vouchers_path %></li>
+      <li class="last"><%= link_to 'A vencer',vencidas_path %></li>
+    </ul>
+  </li>
 
-
-   <li class="hasmore"><a href="#"><span>Administracion</span></a>
-     <ul class="dropdown">
-       <li><%= link_to 'Usuarios','/users' %></li>
-       <li class="last"><%= link_to 'Roles','/roles' %></li>
-     </ul>
+  <li class="hasmore"><a href="#"><span>Administracion</span></a>
+    <ul class="dropdown">
+      <li><%= link_to 'Usuarios','/users' %></li>
+      <li class="last"><%= link_to 'Roles','/roles' %></li>
+    </ul>
+  </li>
 
 	<% if user_signed_in? %>
-     <li><%= link_to "<span>Cerrar</span>".html_safe, destroy_user_session_path %></li>
-   <% else %>
-     <li><%= link_to "<span>Nuevo Usuario</span>".html_safe, new_user_registration_path %></li>
-     <li><%= link_to "<span>Conectarse</span>".html_safe, new_user_session_path %></li>
-   <% end %>
-
-
+    <li><%= link_to "<span>Cerrar</span>".html_safe, destroy_user_session_path %></li>
+  <% else %>
+    <li><%= link_to "<span>Nuevo Usuario</span>".html_safe, new_user_registration_path %></li>
+    <li><%= link_to "<span>Conectarse</span>".html_safe, new_user_session_path %></li>
+  <% end %>
 </ul>
 
-</div>
+</div> <!-- End menu -->
 
