@@ -91,16 +91,13 @@ function skin(){
   });*/
 
   // pone calendario en .datepicker
+  // TODO: delete the first one that is wrong, but first fix all forms
   $( ".datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
+  $( ".datepicker input" ).datepicker({ dateFormat: 'dd-mm-yy' });
   //$( "#tabs" ).tabs();
 
   //convierte los divisores con .mytabs en tab, sortable permite al usuario ordenarlos.
   $( ".mytabs" ).tabs().find( ".ui-tabs-nav" ).sortable({ axis: "x" });;
-
-
-
-
-
 
   togrid();
 }
