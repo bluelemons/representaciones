@@ -1,14 +1,27 @@
 class DepositosController < InheritedResources::Base
   belongs_to :reserva
-  load_and_authorize_resource
+  authorize_resource
 
   def index
   end
 
   def create
-    @deposito = Deposito.new(params[:deposito])
-    @deposito.user = current_user
-    if @deposito.save
+    entidades = params[:deposito].delete :entidades
+    error =false
+    entidades.each do |entidad|
+
+      if entidad !=""
+
+        @deposito = Deposito.new(params[:deposito])
+        @deposito.reserva_id = params[:reserva_id]
+        @deposito.user = current_user
+        @deposito.entidad_id = entidad
+        if !@deposito.save
+          error = true
+        end
+      end
+    end
+    if !error
       flash[:notice] = "El deposito fue registrado correctamente"
       redirect_to reservas_path
     else

@@ -6,7 +6,7 @@
         = f.input :fecha, :as => :string, :wrapper_html => {:class => "datepicker"}
         = f.input :tdeposito
         = f.input :numero
-        = f.input :entidad, :as => :select, :collection => %w[ Agencia Operadora Directo ]
+        = f.input :entidades, :as => :check_boxes, :collection => @reserva.entidades
       = f.semantic_fields_for :monto_fields, @deposito do |money_fields|
         = money_fields.input :monto, :wrapper_html => {:class => "inline money"}
         = money_fields.input :monto_currency, :as =>:select, :collection => Money.monedas, :wrapper_html => {:class => "inline"}
