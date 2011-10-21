@@ -32,8 +32,8 @@
 
 
         %td
-          -if can? :edit ,movimiento
-            =link_to "Editar",{:controller=> "movimientos", :action=>:edit,:id=>movimiento.id}, :remote=>true
+          -if can? :edit, movimiento
+            =link_to "Editar", edit_reserva_deposito_path(movimiento.reserva, movimiento)
           -if can? :destroy, @movimientos.first and movimiento.movimientos.count<=0
             = link_to 'Eliminar', {:controller=> "movimientos", :action=>:destroy, :id=>movimiento.id}, :confirm => 'Está seguro? (esta acción no se puede deshacer)', :method=>:delete, :remote=>true
 

@@ -1,8 +1,11 @@
 class DepositosController < InheritedResources::Base
-  belongs_to :reserva
+  belongs_to :reserva, :optional => true
   authorize_resource
 
   def index
+    @search = Movimiento.baja.search((params[:search] if params[:search]))
+    @total = Movimiento.total(@search)
+    @movimientos = @search.paginate :page => params[:page], :per_page =>10
   end
 
   def create
