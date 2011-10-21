@@ -6,8 +6,8 @@
       %th Titular
       %th Referencia
       %th Salida
-      %th Deuda Agencia
-      %th Deuda Operadora
+      %th Saldo Agencia
+      %th Saldo Operadora
       %th Acciones
 
     - for reserva in @reservas
@@ -16,8 +16,8 @@
         %td= reserva.titular
         %td= reserva.referencia
         %td= reserva.salida
-        %td= reserva.agencia_deuda.format
-        %td= reserva.operadora_deuda.format
+        %td.money= reserva.saldo_agencia.format
+        %td.money= reserva.saldo_operadora.format
         %td= link_to("Mostrar", reserva_path(reserva), :remote => true) + " " + link_to("Editar", edit_reserva_path(reserva), :remote => true) + " " + link_to("Pagar", new_reserva_deposito_path(reserva))
 
 .action_bar

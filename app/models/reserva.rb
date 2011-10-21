@@ -71,6 +71,24 @@ class Reserva < ActiveRecord::Base
     [agency, operadora]
   end
 
+  def saldo(entidad)
+    deps = depositos.where(:entidad_id => entidad.id, :monto_currency => total_currency)
+    sumdeps = deps.map {|d| d.monto }.reduce(:+)
+    if sumdeps
+      sumdeps - total
+    else
+      total * -1
+    end
+  end
+
+  def saldo_agencia
+    saldo agency
+  end
+
+  def saldo_operadora
+    saldo operadora
+  end
+
   def deuda(entidad)
     if entidad == agency
       agencia_deuda
