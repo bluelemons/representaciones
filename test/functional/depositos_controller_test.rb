@@ -11,6 +11,24 @@ class DepositosControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should create a single deposito for reserva" do
+    post :create, :reserva_id => reservas(:grand_celebration).to_param, :deposito => {
+      :fecha => Date.today, :tdeposito_id => tdepositos(:banco).to_param, :numero => "1234",
+      :entidades => ["", entidads(:vikingo).to_param]
+    }
+    assert_response :success
+    #   assert_redirected_to new_pago_path
+  end
+
+  test "should create a double deposito for reserva" do
+    post :create, :reserva_id => reservas(:grand_celebration).to_param,
+      :deposito => {
+        :fecha => Date.today, :tdeposito_id => tdepositos(:banco).to_param, :numero => "1234",
+        :entidades => ["", entidads(:vikingo).to_param, entidades(:ibero).to_param]
+      }
+    assert_response :success
+    #   assert_redirected_to new_pago_path
+  end
   # test "should create pago" do
   #   assert_difference('Pago.count') do
   #     post :create, :pago => @pago.attributes

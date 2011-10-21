@@ -5,3 +5,7 @@ deposito:
   hidden: 0
   user: susana
   version: 2
+banco:
+  name: Banco
+  hidden: 0
+  user: susana
