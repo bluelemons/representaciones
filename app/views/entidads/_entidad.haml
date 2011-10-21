@@ -3,8 +3,6 @@
     %li
       %a{:href=>"#tabs-entidad-1"}=@entidad.type
     %li
-      %a{:href=>"#tabs-entidad-2"} Cuenta
-    %li
       %a{:href=>"#tabs-entidad-3"} Pagos
 
   #tabs-entidad-1.ui-widget.ui-widget-content
@@ -44,18 +42,6 @@
       = @entidad.web
     %br
     = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
-  #tabs-entidad-2
-    %h3 Cuenta corriente
-    = render :partial => "cuentas/cuentas", :locals=>{:@cuentas=>@entidad.cuentas}
-    %h3 Deuda total
-    %table.togrid{:id=>"deuda_grid_#{Time.now}"}
-      %tr
-        %th Pesos
-        %th Dolares
-        %th Euros
-      %tr
-        - %w( ars usd eur ).each do |c|
-          %td= @entidad.deuda(c).format if @entidad.deuda(c)
   #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.pagos}
