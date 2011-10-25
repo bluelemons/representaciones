@@ -24,10 +24,12 @@ class DepositosController < InheritedResources::Base
         end
       end
     end
+
     if !error
       flash[:notice] = "El deposito fue registrado correctamente"
       redirect_to reservas_path
     else
+      @reserva = Reserva.find params[:reserva_id]
       render 'new'
     end
   end
