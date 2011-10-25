@@ -79,7 +79,7 @@ class ReservaReport < Prawn::Document
 
     valores_tabla = datos.all.map do |r|
       data_row = %W[  #{r.id}-#{r.try(:referencia)}
-                      #{r.titular.split(/,/)[0][0,8]}(#{r.pasajeros.count})
+                      #{format_titular_and_pasajeros_count r}
                       #{r.agency.try(:name)[0,10]}
                       #{r.salida}
                       #{r.total.format}
@@ -121,6 +121,14 @@ class ReservaReport < Prawn::Document
     number_pages "<page> de <total>", {:at => [bounds.right - 50, 0], :align => :right}
 
     render
+  end
+
+  def format_titular_and_pasajeros_count(reserva)
+    if reserva.titular
+      "#{reserva.titular.split(/,/)[0][0,8]}(#{reserva.pasajeros.count})"
+    else
+      "sin pasajeros"
+    end
   end
 
   def informacion_de_busqueda(datos)
