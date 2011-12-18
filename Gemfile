@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-#gem 'thin'
+gem 'thin'
 
 gem 'rails', '3.0.10'
 
@@ -38,3 +38,4 @@ group :development, :test do
   gem 'pry'
   gem 'forgery'
 end
+

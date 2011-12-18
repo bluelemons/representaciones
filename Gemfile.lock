@@ -37,6 +37,7 @@ GEM
     cancan (1.6.5)
     cocaine (0.2.0)
     coderay (1.0.0)
+    daemons (1.1.4)
     dbf (1.6.0)
       fastercsv (= 1.5.4)
     devise (1.4.7)
@@ -45,6 +46,7 @@ GEM
       warden (~> 1.0.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    eventmachine (0.12.10)
     fastercsv (1.5.4)
     forgery (0.5.0)
     formtastic (1.2.4)
@@ -121,6 +123,10 @@ GEM
     sexp_processor (3.0.7)
     slop (2.1.0)
     squeezer (0.2.1)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.14.6)
     treetop (1.4.10)
       polyglot
@@ -154,4 +160,5 @@ DEPENDENCIES
   pry
   rails (= 3.0.10)
   squeezer (= 0.2.1)
+  thin
   will_paginate (~> 3.0.pre2)
