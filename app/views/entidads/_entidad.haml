@@ -54,8 +54,9 @@
         %th Dolares
         %th Euros
       %tr
+        %p "en reparación"
         - %w( ars usd eur ).each do |c|
-          %td= @entidad.deuda(c).format if @entidad.deuda(c)
+          -#%td= @entidad.deuda(c).format if @entidad.deuda(c)
   #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.pagos}
