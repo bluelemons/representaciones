@@ -37,7 +37,7 @@ GEM
     cancan (1.6.5)
     cocaine (0.2.0)
     coderay (1.0.0)
-    daemons (1.1.4)
+    daemons (1.1.5)
     dbf (1.6.0)
       fastercsv (= 1.5.4)
     devise (1.4.7)
