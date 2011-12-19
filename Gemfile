@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 gem 'thin'
 
-gem 'rails', '3.0.10'
+gem 'rails', '3.0.11'
 
 # gemas propias
 gem 'squeezer',"0.2.1"
