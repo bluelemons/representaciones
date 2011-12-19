@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
-#gem 'thin'
+gem 'thin'
 
-gem 'rails', '3.0.10'
+gem 'rails', '3.0.11'
 
 # gemas propias
 gem 'squeezer',"0.2.1"
 gem 'largentinas',"0.1.0"
 
 # vistas
-gem "will_paginate", "~> 3.0.pre2"
+gem 'will_paginate', '~> 3.0'
 gem "haml"
 gem 'prawn'
 gem "builder"
@@ -38,3 +38,4 @@ group :development, :test do
   gem 'pry'
   gem 'forgery'
 end
+

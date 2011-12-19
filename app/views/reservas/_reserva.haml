@@ -4,9 +4,9 @@
     %li
       %a{:href=>"#tabs-reserva-1"} Reserva
     %li
-      %a{:href=>"#tabs-reserva-2"}=@reserva.try(:agency).try(:name)
+      %a{:href=>"#tabs-reserva-2"} Agencia
     %li
-      %a{:href=>"#tabs-reserva-3"}=@reserva.try(:operadora).try(:name)
+      %a{:href=>"#tabs-reserva-3"} Operadora
     %li
       %a{:href=>"#tabs-reserva-4"} Tarifa
     %li
@@ -45,10 +45,10 @@
 
   #tabs-reserva-2.ui-widget.ui-widget-content
     .div{:id=>"entidad_form#{@reserva.agency.id}"}
-      = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.agency}
+      = render :partial => "entidads/entidad_info",:locals=>{:@entidad=>@reserva.agency}
   #tabs-reserva-3.ui-widget.ui-widget-content
     .div{:id=>"entidad_form#{@reserva.operadora.id}"}
-      = render :partial => "entidads/entidad",:locals=>{:@entidad=>@reserva.operadora}
+      = render :partial => "entidads/entidad_info",:locals=>{:@entidad=>@reserva.operadora}
 
   #tabs-reserva-4.ui-widget.ui-widget-content
     %p

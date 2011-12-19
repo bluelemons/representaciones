@@ -16,34 +16,7 @@
         = link_to 'Editar', edit_entidad_path(@entidad),:remote=>true,:width =>'200px'
     %br
 
-    %p
-      %b Nombre:
-      = @entidad.try(:name)
-    %p
-      %b Calle:
-      = @entidad.calle
-      = @entidad.try(:localidad).try(:name)
-    %p
-      %b Cuit:
-      = @entidad.cuit
-
-    %p
-      %b Telefono:
-      = @entidad.telefono
-
-    %p
-      %b Legajo:
-      = @entidad.legajo
-
-    %p
-      %b Email:
-      = @entidad.email
-
-    %p
-      %b Web:
-      = @entidad.web
-    %br
-    = render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
+    = render :partial => "entidads/entidad_info"
   #tabs-entidad-2
     %h3 Cuenta corriente
     = render :partial => "cuentas/cuentas", :locals=>{:@cuentas=>@entidad.cuentas}
@@ -54,8 +27,9 @@
         %th Dolares
         %th Euros
       %tr
+        %p "en reparación"
         - %w( ars usd eur ).each do |c|
-          %td= @entidad.deuda(c).format if @entidad.deuda(c)
+          -#%td= @entidad.deuda(c).format if @entidad.deuda(c)
   #tabs-entidad-3
 
     =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@entidad.pagos}
