@@ -1,0 +1,29 @@
+%p
+  %b Nombre:
+  = @entidad.try(:name)
+%p
+  %b Calle:
+  = @entidad.calle
+  = @entidad.try(:localidad).try(:name)
+%p
+  %b Cuit:
+  = @entidad.cuit
+
+%p
+  %b Telefono:
+  = @entidad.telefono
+
+%p
+  %b Legajo:
+  = @entidad.legajo
+
+%p
+  %b Email:
+  = @entidad.email
+
+%p
+  %b Web:
+  = @entidad.web
+%br
+= render :partial => "layouts/version",:locals=>{:model=>@entidad,:controller=>:entidads}
+
