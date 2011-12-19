@@ -93,7 +93,7 @@ class Entidad < ActiveRecord::Base
   # @return [Money]
 
   def deuda(currency)
-    @deudas_by_currency ||= _deudas_by_currency
+    @deudas_by_currency ||= _deudas_by_currency || 1
     @deudas_by_currency[currency.to_currency]
   end
 
