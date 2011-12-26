@@ -7,6 +7,7 @@ class Deposito < Movimiento
   # Asociaciones
   belongs_to :tdeposito
   monetize   :monto
+  monetize   :monto_final
 
   # Indica la cuenta en que fue depositado el dinero
   def cuenta
