@@ -1,3 +1,14 @@
 $('#deposito_form').html('<%= raw escape_javascript(render("form")) %>');
 skin();
 
+$('.search input').keyup(function () {
+// TODO: should be other function
+  $(this).parent().submit();
+});
+
+$("#search_agency_id_or_operadora_id_eq").change(function(){
+  $(this).parent().submit();
+});
+$("#deposito_submit").click(function(){
+  $("#deposito_entidad_id").val($("#search_agency_id_or_operadora_id_eq").val());
+});

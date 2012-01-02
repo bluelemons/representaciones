@@ -47,7 +47,9 @@ function togrid(){
       onSelectRow: function(id){
 
         var idx =$(this).getCell(id, 'ID');
+        var moneda =$(this).getCell(id, 'Mon');
         $("input[id$=_"+i+"_id]").val(idx).change();
+        $("input[id$=final_currency]").val(moneda).change();
         }
      });
 //    var top_rowid = $('#'+i+'_grid tbody:first-child tr:nth-child(2)').attr('id');
@@ -165,4 +167,3 @@ $(function() {
 
   skin();
   });
-
