@@ -1,0 +1,29 @@
+#movimientos_grid
+  %table.togrid{ :id=>"pagos_#{type}_#{Time.now}" }
+    %tr
+      %th Fecha
+      %th Medio
+      %th Numero
+      %th Observaciones
+      %th Monto
+
+    - for pago in pagos
+      %tr
+        %td= pago.try(:fecha)
+        %td= pago.try(:tdeposito).try(:name)
+        %td= pago.try(:numero)
+        %td
+          = pago.observaciones
+        %td
+          = pago.format_monto
+  %table.wide
+    %tr
+      %td
+        Pesos $
+        %b
+          =Movimiento.total(pagos)["ARS"]
+      %td
+        Dolares u$s
+        %b
+          =Movimiento.total(pagos)["USD"]
+
