@@ -1,10 +1,2 @@
-.action_bar
-
-  =link_to "Resertear",new_entidad_path,:remote=>true
-= semantic_form_for @movimiento,:remote=>true do |form|
-  = form.inputs do
-    = error_message(@movimiento)
-    =form.text_area :observaciones,:rows=>2
-
-  = form.buttons
-
+- @deposito = @movimiento
+=render :partial => "/depositos/form"

@@ -7,8 +7,8 @@
 
     #entidad_form
 
-    = f.input :entidad_id
-    = f.input :reserva_id
+    = f.hidden_field :entidad_id
+    = f.hidden_field :reserva_id
 
     #cuentas
     = f.label :Tipo_de_deposito
@@ -25,13 +25,14 @@
     %br
       = f.fields_for :monto_final_fields, @deposito do |money_fields|
         = money_fields.text_field :monto_final, :class => "money"
-        = money_fields.text_field :monto_final_currency
+        = money_fields.text_field :monto_final_currency, :disabled => true
     %br
-    %input{:type=>"CHECKBOX",:name=>"operadora_paid"} Cargar a la contraparte?
-    %br
+    - if action_name == "new"
+      %input{:type=>"CHECKBOX", :name=>"operadora_paid"} Cargar a la contraparte?
+      %br
     Observaciones:
     %br
-    =f.text_area :observaciones,:rows=>2
+    =f.text_area :observaciones, :rows=>2
     %br
     .actions
       = f.submit

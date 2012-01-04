@@ -32,6 +32,7 @@
 
 
         %td
+          = link_to "Mostrar", movimiento_path(movimiento), :remote => true
           -if can? :edit ,movimiento
             =link_to "Editar",{:controller=> "movimientos", :action=>:edit,:id=>movimiento.id}, :remote=>true
           -if can? :destroy, @movimientos.first and movimiento.movimientos.count<=0

@@ -1,5 +1,9 @@
 %p.notice=flash[:notice]
 %h2.ui-widget-header Modificando Movimiento
-
+%p
+  %b Reserva:
+  = @movimiento.reserva_id
+%p
+  %b="#{@movimiento.entidad.type}:"
+  = @movimiento.entidad.name
 = render 'movimientos/form'
-
