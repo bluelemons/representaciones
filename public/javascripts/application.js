@@ -137,15 +137,7 @@ $(function() {
   $('#deposito_new').click(function() {
     $.getScript("/depositos/new.js", togrid );
   });
-  $('#pago_new').click(function() {
-    $.getScript("/pagos/new.js", togrid );
-  });
-  $('#directo_new').click(function() {
-    $.getScript("/directos/new.js", togrid );
-  });
-  $('#cambio_new').click(function() {
-    $.getScript("/cambios/new.js", togrid );
-  });
+
   $('#cotizacion_new').click(function() {
     $.getScript("/cotizacions/new.js", togrid );
   });
