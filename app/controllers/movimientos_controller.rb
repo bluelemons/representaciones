@@ -31,4 +31,3 @@ class MovimientosController < ApplicationController
     end
   end
 end
-
