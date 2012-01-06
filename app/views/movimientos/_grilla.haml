@@ -5,7 +5,6 @@
       %th Fecha
       %th Reserva
       %th Titular
-      %th Operacion
       %th Entidad
       %th Observaciones
       %th Monto
@@ -18,8 +17,6 @@
         %td= movimiento.try(:fecha)
         %td= movimiento.try(:reserva_id)
         %td= movimiento.try(:reserva).try(:pasajeros).try(:first).try(:name)
-        %td
-          = "#{movimiento.type} - #{movimiento.try(:tdeposito).try(:name)}"
         %td
           =movimiento.try(:entidad).type
           =movimiento.try(:entidad).try(:name)
