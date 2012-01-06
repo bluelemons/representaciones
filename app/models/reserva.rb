@@ -14,10 +14,14 @@ class Reserva < ActiveRecord::Base
     self.agency
   end
 
-  has_many :pagos do
+  has_many :depositos do
     def by_entidad(entidad)
       find_all_by_entidad_id(entidad.id)
     end
+  end
+
+  def pagos
+    depositos
   end
 
   has_many :viajeros
@@ -59,7 +63,7 @@ class Reserva < ActiveRecord::Base
   validates :total, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:agency,:programa,:thabitacion,:pagos,:pasajeros],
+  default_scope :include => [:operadora,:agency,:programa,:thabitacion,:depositos,:pasajeros],
                 :order => "id desc"
 
   scope :baja, where(:hidden=>0)
@@ -102,11 +106,13 @@ class Reserva < ActiveRecord::Base
   end
 
   def agencia_pago
-    pagos.by_entidad(agency).map {|p| p.monto.to_money }.reduce(:+) || Money.empty(total.currency)
+    pagos.by_entidad(agency).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
   end
 
   def operadora_pago
-    pagos.by_entidad(operadora).map {|p| p.monto.to_money }.reduce(:+) || Money.empty(total.currency)
+    pagos.by_entidad(operadora).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
+    rescue
+    puts "Reserva con errores id:#{reserva_id}"
   end
 
   def agencia_deuda

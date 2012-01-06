@@ -1,9 +1,7 @@
 %p.notice=flash[:notice]
-= semantic_form_for(@directo, :remote => true) do |f|
+= semantic_form_for(@deposito, :remote => true) do |f|
   .ui-widget.ui-widget-content
-    = error_message(@pago)
     = error_message(@deposito)
-    = error_message(@cambio)
 
     = render :partial => "movimientos/comunes", :locals => { :f => f }
 
@@ -22,7 +20,11 @@
     = f.text_field :numero,:size=>10
 
     %br
-      = f.fields_for :monto_fields, @directo do |money_fields|
+      = f.fields_for :monto_final_fields, @deposito do |money_fields|
+        = money_fields.text_field :monto_final, :class => "money"
+        = money_fields.collection_select :monto_final_currency, Money.monedas, :iso_code, :symbol
+    %br
+      = f.fields_for :monto_fields, @deposito do |money_fields|
         = money_fields.text_field :monto, :class => "money"
         = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
     %br
@@ -34,4 +36,3 @@
     %br
     .actions
       = f.submit
-

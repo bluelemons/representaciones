@@ -5,7 +5,6 @@
       %th Fecha
       %th Reserva
       %th Titular
-      %th Operacion
       %th Entidad
       %th Observaciones
       %th Monto
@@ -19,8 +18,6 @@
         %td= movimiento.try(:reserva_id)
         %td= movimiento.try(:reserva).try(:pasajeros).try(:first).try(:name)
         %td
-          = "#{movimiento.type} - #{movimiento.try(:tdeposito).try(:name)}"
-        %td
           =movimiento.try(:entidad).type
           =movimiento.try(:entidad).try(:name)
         %td
@@ -32,6 +29,7 @@
 
 
         %td
+          = link_to "Mostrar", movimiento_path(movimiento), :remote => true
           -if can? :edit ,movimiento
             =link_to "Editar",{:controller=> "movimientos", :action=>:edit,:id=>movimiento.id}, :remote=>true
           -if can? :destroy, @movimientos.first and movimiento.movimientos.count<=0
@@ -53,4 +51,3 @@
           =@total["EUR"]
   .action_bar
     =link_to "imprimir",{:controller=>"movimientos",:search=>params[:search],:format=>'pdf'}
-

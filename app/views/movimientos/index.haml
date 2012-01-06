@@ -10,16 +10,7 @@
         %a{:href=>"#tabs-movimientos-1"} Movimientos
       -if can? :create, Deposito
         %li
-          %a#deposito_new{:href=>"#tabs-movimientos-2"} Deposito
-      -if can? :create, Pago
-        %li
-          %a#pago_new{:href=>"#tabs-movimientos-3"} Pago
-      -if can? :create, Cambio
-        %li
-          %a#cambio_new{:href=>"#tabs-movimientos-4"} Cambio
-      -if can? :create, Movimiento
-        %li
-          %a#directo_new{:href=>"#tabs-movimientos-5"} Directo
+          %a#deposito_new{:href=>"#tabs-movimientos-2"} Pago
 
     #tabs-movimientos-6
       #movimiento_form
@@ -30,15 +21,6 @@
         =render 'movimientos'
 
     #tabs-movimientos-2
-      #deposito_form
-
-    #tabs-movimientos-3
-      #pago_form
-
-    #tabs-movimientos-4
-      #cambio_form
-
-    #tabs-movimientos-5
       -if can? :create, Movimiento
         = semantic_form_for @reservas_search, :remote => true do |form|
           =form.inputs do
@@ -51,5 +33,4 @@
         #reservas
           =render 'reservas/reservas'
 
-        #directo_form
-
+        #deposito_form

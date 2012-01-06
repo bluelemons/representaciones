@@ -26,7 +26,7 @@ class Movimiento < ActiveRecord::Base
   #end
 
   # scopes
-  default_scope :include => [:reserva, :cuenta], :order => "id desc"
+#  default_scope :include => [:reserva, :cuenta], :order => "id desc"
   scope :baja, where(:hidden=>0)
 
   # metodos

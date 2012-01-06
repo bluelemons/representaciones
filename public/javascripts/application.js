@@ -47,7 +47,9 @@ function togrid(){
       onSelectRow: function(id){
 
         var idx =$(this).getCell(id, 'ID');
+        var moneda =$(this).getCell(id, 'Mon');
         $("input[id$=_"+i+"_id]").val(idx).change();
+        $("input[id$=final_currency]").val(moneda).change();
         }
      });
 //    var top_rowid = $('#'+i+'_grid tbody:first-child tr:nth-child(2)').attr('id');
@@ -135,15 +137,7 @@ $(function() {
   $('#deposito_new').click(function() {
     $.getScript("/depositos/new.js", togrid );
   });
-  $('#pago_new').click(function() {
-    $.getScript("/pagos/new.js", togrid );
-  });
-  $('#directo_new').click(function() {
-    $.getScript("/directos/new.js", togrid );
-  });
-  $('#cambio_new').click(function() {
-    $.getScript("/cambios/new.js", togrid );
-  });
+
   $('#cotizacion_new').click(function() {
     $.getScript("/cotizacions/new.js", togrid );
   });
@@ -165,4 +159,3 @@ $(function() {
 
   skin();
   });
-
