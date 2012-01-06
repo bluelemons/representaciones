@@ -1,3 +1,8 @@
+DEVELOPMENT
+----------
+
+* Exportación básica a CSV en reservas.
+
 VERSION 0.1.1
 -------------
 

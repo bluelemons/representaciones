@@ -15,6 +15,11 @@ class ReservasController < InheritedResources::Base
         send_data output, :filename => "index_report.pdf",
                           :type => "application/pdf"
       end
+      format.csv do
+        csv = to_csv(@search)
+        send_data csv, :filename => "reservas_#{Time.now}.csv",
+                  :type => "text/csv; charset=utf-8; header=present"
+      end
     end
   end
 
@@ -68,6 +73,17 @@ class ReservasController < InheritedResources::Base
 
   def paginate
     @reservas = @search.paginate :page => params[:page], :per_page =>10
+  end
+
+  private
+
+  def to_csv(relation)
+    CSV.generate(:col_sep => ";") do |csv|
+      csv << %w[ id agencia operadora fecha salida referencia programa periodo regimen titular pasajeros seguro tarifa moneda ]
+      relation.each do |r|
+        csv << %W[ #{r.id} #{r.agencia.name} #{r.operadora.name} #{r.fecha} #{r.salida} #{r.referencia} #{r.programa.try(:name)} #{r.periodo} #{r.regimen} #{r.titular} #{r.pasajeros.size} #{r.seguro.try(:localize)} #{r.total} #{r.total_currency}]
+      end
+    end
   end
 end
 

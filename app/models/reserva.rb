@@ -8,6 +8,12 @@ class Reserva < ActiveRecord::Base
 
   belongs_to :operadora
   belongs_to :agency
+
+  # I alias the relations to have no problems
+  def agencia
+    self.agency
+  end
+
   has_many :pagos do
     def by_entidad(entidad)
       find_all_by_entidad_id(entidad.id)

@@ -2,5 +2,6 @@
 #reservas_grid
   =grilla(["ID", "Titular", "Referencia", "Salida", "Deuda Agencias", "Deuda Operadora", "Acciones"], @reservas, [:id, :titular, :referencia, :salida, :agencia_deuda_format, :operadora_deuda_format], {:id=>"reserva_grid", :class=>"togrid"})
 .action_bar
-  =link_to "imprimir",{:search=>params[:search],:format=>'pdf'}
+  =link_to "Imprimir", {:search=>params[:search], :format=>'pdf'}
+  =link_to "Exportar", {:search=>params[:search], :format=>'csv'}
 
