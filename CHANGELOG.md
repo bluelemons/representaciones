@@ -1,4 +1,4 @@
-DEVELOPMENT
+VERSION 0.2
 ----------
 
 * Exportación básica a CSV en reservas.
