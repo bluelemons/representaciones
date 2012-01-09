@@ -78,6 +78,8 @@ class ReservasController < InheritedResources::Base
   private
 
   def to_csv(relation)
+    require 'csv'
+
     CSV.generate(:col_sep => ";") do |csv|
       csv << %w[ id agencia operadora fecha salida referencia programa periodo regimen titular pasajeros seguro tarifa moneda ]
       relation.each do |r|
