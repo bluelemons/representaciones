@@ -23,7 +23,7 @@
         %td
           = movimiento.observaciones
         %td
-          = movimiento.monto.to_money.format
+          = movimiento.format_monto
 
         -#if can? :edit, movimiento
 
