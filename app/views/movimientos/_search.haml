@@ -5,7 +5,6 @@
       %tr
         %td=form.input :reserva_referencia_sw,:label=>"Referencia"
         %td=form.input :id_eq
-
       %tr
         %td=form.input :fecha_eq, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %td=form.input :type_sw,:label=>"Tipo"
@@ -13,7 +12,7 @@
         %td=form.input :created_at_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %td=form.input :created_at_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
       %tr
-        %td
+        %td{:colspan => '2'}
           = form.buttons do
             = form.commit_button :label=>"Buscar"
 
