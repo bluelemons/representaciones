@@ -63,8 +63,7 @@ class Reserva < ActiveRecord::Base
   validates :total, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:agency,:programa,:thabitacion,:depositos,:pasajeros],
-                :order => "id desc"
+  default_scope :order => "id desc"
 
   scope :baja, where(:hidden=>0)
 
