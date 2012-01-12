@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120110123837) do
+ActiveRecord::Schema.define(:version => 20120112122545) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -468,10 +468,8 @@ ActiveRecord::Schema.define(:version => 20120110123837) do
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "viajeros", :id => false, :force => true do |t|
-    t.integer  "reserva_id"
-    t.integer  "pasajero_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "reserva_id"
+    t.integer "pasajero_id"
   end
 
 end
