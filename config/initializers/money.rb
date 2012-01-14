@@ -2,13 +2,14 @@
 Money::Currency::TABLE[:usd].update(
   { :priority    => 2,
     :subunit     => "Centavo",
-    :symbol      => "u$s",
-    :html_entity => "u$s"
+    :symbol      => "u$s ",
+    :html_entity => "u$s "
   })
 Money::Currency::TABLE[:ars].update(
   { :priority    => 1,
     :name        => "Peso Argentino",
-    :html_entity => "&#36;"
+    :html_entity => "&#36; ",
+    :symbol      => "$ "
   })
 Money::Currency::TABLE[:eur][:priority] = 3
 Money::Currency::TABLE[:gbp][:priority] = 4

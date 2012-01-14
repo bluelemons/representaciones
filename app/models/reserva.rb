@@ -8,10 +8,20 @@ class Reserva < ActiveRecord::Base
 
   belongs_to :operadora
   belongs_to :agency
-  has_many :pagos do
+
+  # I alias the relations to have no problems
+  def agencia
+    self.agency
+  end
+
+  has_many :depositos do
     def by_entidad(entidad)
       find_all_by_entidad_id(entidad.id)
     end
+  end
+
+  def pagos
+    depositos
   end
 
   has_many :viajeros
@@ -53,10 +63,11 @@ class Reserva < ActiveRecord::Base
   validates :total, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:agency,:programa,:thabitacion,:pagos,:pasajeros],
-                :order => "id desc"
+  default_scope :order => "id desc"
 
   scope :baja, where(:hidden=>0)
+  scope :with_includes, includes(:operadora, :agency, :programa, :thabitacion,
+                                 :depositos, :pasajeros)
 
   scope :por_vencer, lambda {|fecha| where("fecha = ? and pago_minimo > 0",fecha) }
   search_methods :sin_voucher
@@ -96,11 +107,13 @@ class Reserva < ActiveRecord::Base
   end
 
   def agencia_pago
-    pagos.by_entidad(agency).map {|p| p.monto.to_money }.reduce(:+) || Money.empty(total.currency)
+    pagos.by_entidad(agency).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
   end
 
   def operadora_pago
-    pagos.by_entidad(operadora).map {|p| p.monto.to_money }.reduce(:+) || Money.empty(total.currency)
+    pagos.by_entidad(operadora).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
+    rescue
+    puts "Reserva con errores id:#{reserva_id}"
   end
 
   def agencia_deuda

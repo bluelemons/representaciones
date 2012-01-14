@@ -1,3 +1,9 @@
+VERSION 0.2
+----------
+
+* Exportación básica a CSV en reservas.
+* Se utilizan solo depositos, no hay más pagos ni cambio.
+
 VERSION 0.1.2
 -------------
 * Change destroy metohd in Reserva

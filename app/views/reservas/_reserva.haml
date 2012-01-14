@@ -69,8 +69,10 @@
     =render :partial=>'pasajeros/grilla',:locals=>{:@pasajeros=>@reserva.pasajeros}
 
   #tabs-reserva-6.ui-widget.ui-widget-content
-    %h2="Pagos de agencia #{@reserva.try(:agency).try(:name)}"
-    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.pagos.where(:entidad_id=>@reserva.agency_id)}
-    %h2="Pagos de operadora #{@reserva.try(:operadora).try(:name)}"
-    =render :partial=>'movimientos/grilla',:locals=>{:@movimientos=>@reserva.pagos.where(:entidad_id=>@reserva.operadora_id)}
+    %h2="Pagos de la agencia #{@reserva.try(:agency).try(:name)}"
+    = render :partial => "reservas/pagos",
+      :locals => { :pagos=>@reserva.pagos.where(:entidad_id=>@reserva.agency_id), :type => "Agencia"}
+    %h2="Pagos a la operadora #{@reserva.try(:operadora).try(:name)}"
+    = render :partial => "reservas/pagos",
+      :locals => { :pagos=>@reserva.pagos.where(:entidad_id=>@reserva.operadora_id), :type => "Operadora"}
 

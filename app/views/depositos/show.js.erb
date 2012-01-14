@@ -1,0 +1,5 @@
+addTab("Pago","<%=@deposito.id%>","Pago");
+
+$('#movimiento_form<%=@deposito.id%>').html('<%= raw escape_javascript(render("deposito")) %>');
+
+skin();

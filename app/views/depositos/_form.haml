@@ -1,24 +1,43 @@
-= form_for(@deposito,:remote=>true) do |f|
-  =flash[:notice]
+%p.notice=flash[:notice]
+= semantic_form_for(@deposito, :remote => true) do |f|
   .ui-widget.ui-widget-content
     = error_message(@deposito)
 
-    = render :partial => "movimientos/comunes",:locals=>{:f=>f}
-    = f.collection_select(:entidad_id, Entidad.all, :id, :name, :prompt => false)
-    %br
-    = f.collection_select(:operadora_id, Operadora.all, :id, :name,:prompt=>true)
-    %table
-      %tr
-        = f.fields_for :monto_fields, @deposito do |money_fields|
-          = money_fields.text_field :monto, :class => "money"
-          = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
+    = render :partial => "movimientos/comunes", :locals => { :f => f }
 
+    #entidad_form
+
+    = f.hidden_field :entidad_id
+    = f.hidden_field :reserva_id
+
+    #cuentas
     = f.label :Tipo_de_deposito
     %br
     = collection_select(:deposito, :tdeposito_id, Tdeposito.all, :id, :name, :prompt => false)
 
     = f.text_field :numero,:size=>10
 
+    %br
+      = f.fields_for :monto_fields, @deposito do |money_fields|
+        = money_fields.text_field :monto, :class => "money"
+        = money_fields.collection_select :monto_currency, Money.monedas, :iso_code, :symbol
+
+    %br
+      = f.fields_for :monto_final_fields, @deposito do |money_fields|
+        = money_fields.text_field :monto_final, :class => "money"
+        - if action_name == "new"
+          = money_fields.text_field :monto_final_currency, :disabled => true
+
+        - else
+          = money_fields.label @deposito.reserva.total.currency.symbol
+        = money_fields.hidden_field :monto_final_currency
+    %br
+    - if action_name == "new"
+      %input{:type=>"CHECKBOX", :name=>"operadora_paid"} Cargar a la contraparte?
+      %br
+    Observaciones:
+    %br
+    =f.text_area :observaciones, :rows=>2
+    %br
     .actions
       = f.submit
-

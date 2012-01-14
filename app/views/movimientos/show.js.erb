@@ -1,2 +1,5 @@
-$('#movimiento').html('<%= raw escape_javascript(render("movimiento")) %>');
+addTab("movimiento","<%=@movimiento.id%>","Deposito");
+
+$('#movimiento_form<%=@movimiento.id%>').html('<%= raw escape_javascript(render("movimiento")) %>');
+
 skin();
