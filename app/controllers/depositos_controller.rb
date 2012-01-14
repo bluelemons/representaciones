@@ -36,6 +36,17 @@ class DepositosController < InheritedResources::Base
     end
   end
 
+  def update
+    @deposito = Deposito.find(params[:id])
+    @deposito.user = current_user
+    if @deposito.update_attributes(params[:deposito])
+
+      redirect_to :action => 'show', :id => @deposito.id, :format =>'js',:controller=>'depositos'
+    else
+      render 'depositos/edit.js'
+    end
+  end
+
   def destroy
     @movimiento = Movimiento.find(params[:id])
     if @movimiento.destroy
