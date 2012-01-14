@@ -1,4 +1,11 @@
 class Deposito < Movimiento
+
+  #
+  # Validaciones
+  #
+  before_validation :completar_monto
+
+
   #
   # Validaciones
   #
@@ -18,5 +25,14 @@ class Deposito < Movimiento
       "#{self.monto.format} -> #{self.monto_final.format}"
     end
   end
-end
 
+  private
+
+  def completar_monto
+    binding.pry
+    if monto.zero? and monto_final.nonzero?
+      self.monto = monto_final
+    end
+  end
+
+end
