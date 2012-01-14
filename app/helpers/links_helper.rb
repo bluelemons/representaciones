@@ -18,7 +18,7 @@ module LinksHelper
 
   def destroy(model)
     if can? :destroy, model
-      link_to 'Destroy', model, :confirm => 'Are you sure?', :method => :delete,:remote=>true
+      link_to 'Destroy', model, :confirm => 'Are you sure?', :method => :delete
     end
   end
 
@@ -45,4 +45,3 @@ module LinksHelper
   end
 
 end
-
