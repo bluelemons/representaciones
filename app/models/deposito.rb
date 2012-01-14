@@ -29,7 +29,6 @@ class Deposito < Movimiento
   private
 
   def completar_monto
-    binding.pry
     if monto.zero? and monto_final.nonzero?
       self.monto = monto_final
     end
