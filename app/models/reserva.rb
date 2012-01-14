@@ -134,5 +134,10 @@ class Reserva < ActiveRecord::Base
     warn "`pasajero_symbols` is deprecated. Use `pasajeros.as_symbols` instead."
     pasajeros.as_symbols
   end
-end
 
+  def destroy
+    self.hidden = true
+    self.save
+  end
+
+end
