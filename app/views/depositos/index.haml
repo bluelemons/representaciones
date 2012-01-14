@@ -1,0 +1,36 @@
+.ui-widget
+  %h1.ui-widget-header Movimientos
+
+  .action_bar
+    = link_to 'Imprimir', {:search=>params[:search],:format=>'pdf'}
+
+  #tabs-movimientos.mytabs
+    %ul
+      %li
+        %a{:href=>"#tabs-movimientos-1"} Movimientos
+      -if can? :create, Deposito
+        %li
+          %a#deposito_new{:href=>"#tabs-movimientos-2"} Pago
+
+    #tabs-movimientos-6
+      #movimiento_form
+
+    #tabs-movimientos-1
+      = render :partial => "search"
+      #movimientos
+        =render 'depositos'
+
+    #tabs-movimientos-2
+      -if can? :create, Movimiento
+        = semantic_form_for @reservas_search, :remote => true do |form|
+          =form.inputs do
+            =form.input :agency_id_or_operadora_id_eq, :collection => Entidad.all
+            =form.input :referencia_sw
+            =form.input :pasajeros_name_contains
+            =form.input :liquido_agencia_or_liquido_operadora_eq, :as =>:boolean,:label=>"Mostrar reservas liquidadas"
+            = form.buttons do
+              = form.commit_button :label=>"Buscar"
+        #reservas
+          =render 'reservas/reservas'
+
+        #deposito_form
