@@ -21,7 +21,7 @@
         =render 'depositos'
 
     #tabs-movimientos-2
-      -if can? :create, Movimiento
+      -if can? :create, Deposito
         = semantic_form_for @reservas_search, :remote => true do |form|
           =form.inputs do
             =form.input :agency_id_or_operadora_id_eq, :collection => Entidad.all
