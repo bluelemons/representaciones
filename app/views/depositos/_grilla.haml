@@ -32,8 +32,9 @@
           = link_to "Mostrar", movimiento_path(movimiento), :remote => true
           -if can? :edit ,movimiento
             =link_to "Editar",{:controller=> "movimientos", :action=>:edit,:id=>movimiento.id}, :remote=>true
-          -if can? :destroy, @depositos.first and movimiento.movimientos.count<=0
+          -if can? :destroy, @depositos.first
             = link_to 'Eliminar', {:controller=> "movimientos", :action=>:destroy, :id=>movimiento.id}, :confirm => 'Está seguro? (esta acción no se puede deshacer)', :method=>:delete, :remote=>true
 
   .action_bar
     =link_to "imprimir",{:controller=>"movimientos",:search=>params[:search],:format=>'pdf'}
+
