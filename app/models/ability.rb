@@ -25,8 +25,8 @@ class Ability
 
   #puede dar altas y bajas de pagos depostios y cambios
   def pagos
-    can :create, Movimiento,Pago,Deposito,Cambio
-    can :desrtoy, Movimiento,Pago,Deposito,Cambio
+    can :create, [Movimiento, Pago, Deposito, Cambio]
+    can :destroy, [Movimiento, Pago, Deposito, Cambio]
   end
 
   def tablas
@@ -38,4 +38,3 @@ class Ability
     can :manage, Pasajero
   end
 end
-

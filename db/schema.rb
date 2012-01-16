@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120103131914) do
+ActiveRecord::Schema.define(:version => 20120112122545) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -171,6 +171,10 @@ ActiveRecord::Schema.define(:version => 20120103131914) do
     t.integer  "monto_final_cents"
     t.string   "monto_final_currency", :limit => 3
   end
+
+  add_index "movimientos", ["entidad_id"], :name => "index_movimientos_on_entidad_id"
+  add_index "movimientos", ["reserva_id"], :name => "index_movimientos_on_reserva_id"
+  add_index "movimientos", ["type"], :name => "index_movimientos_on_type"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -349,6 +353,10 @@ ActiveRecord::Schema.define(:version => 20120103131914) do
     t.integer  "habitaciones"
   end
 
+  add_index "reservas", ["agency_id"], :name => "index_reservas_on_agency_id"
+  add_index "reservas", ["operadora_id"], :name => "index_reservas_on_operadora_id"
+  add_index "reservas", ["programa_id"], :name => "index_reservas_on_programa_id"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.text     "desc"
@@ -460,10 +468,8 @@ ActiveRecord::Schema.define(:version => 20120103131914) do
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
   create_table "viajeros", :id => false, :force => true do |t|
-    t.integer  "reserva_id"
-    t.integer  "pasajero_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "reserva_id"
+    t.integer "pasajero_id"
   end
 
 end

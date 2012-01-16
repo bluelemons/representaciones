@@ -63,10 +63,11 @@ class Reserva < ActiveRecord::Base
   validates :total, :presence => true
   #scopes
 
-  default_scope :include => [:operadora,:agency,:programa,:thabitacion,:depositos,:pasajeros],
-                :order => "id desc"
+  default_scope :order => "id desc"
 
   scope :baja, where(:hidden=>0)
+  scope :with_includes, includes(:operadora, :agency, :programa, :thabitacion,
+                                 :depositos, :pasajeros)
 
   scope :por_vencer, lambda {|fecha| where("fecha = ? and pago_minimo > 0",fecha) }
   search_methods :sin_voucher

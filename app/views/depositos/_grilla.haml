@@ -8,10 +8,10 @@
       %th Entidad
       %th Observaciones
       %th Monto
-      -if can? :destroy, @movimientos.first
+      -if can? :destroy, @depositos.first
         %th Acciones
 
-    - for movimiento in @movimientos
+    - for movimiento in @depositos
       %tr
 
         %td= movimiento.try(:fecha)
@@ -32,7 +32,7 @@
           = link_to "Mostrar", movimiento_path(movimiento), :remote => true
           -if can? :edit ,movimiento
             =link_to "Editar",{:controller=> "movimientos", :action=>:edit,:id=>movimiento.id}, :remote=>true
-          -if can? :destroy, @movimientos.first and movimiento.movimientos.count<=0
+          -if can? :destroy, @depositos.first and movimiento.movimientos.count<=0
             = link_to 'Eliminar', {:controller=> "movimientos", :action=>:destroy, :id=>movimiento.id}, :confirm => 'Está seguro? (esta acción no se puede deshacer)', :method=>:delete, :remote=>true
 
   .action_bar

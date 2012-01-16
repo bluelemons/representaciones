@@ -25,7 +25,12 @@
     %br
       = f.fields_for :monto_final_fields, @deposito do |money_fields|
         = money_fields.text_field :monto_final, :class => "money"
-        = money_fields.text_field :monto_final_currency, :disabled => true
+        - if action_name == "new"
+          = money_fields.text_field :monto_final_currency, :disabled => true
+
+        - else
+          = money_fields.label @deposito.reserva.total.currency.symbol
+        = money_fields.hidden_field :monto_final_currency
     %br
     - if action_name == "new"
       %input{:type=>"CHECKBOX", :name=>"operadora_paid"} Cargar a la contraparte?
