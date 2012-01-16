@@ -1,6 +1,8 @@
 DEVELOPMENT
 =========
 
+* Validaciones varias en Deposito.
+
 VERSION 0.2
 ----------
 
