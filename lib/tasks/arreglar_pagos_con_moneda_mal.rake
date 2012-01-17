@@ -26,7 +26,7 @@ task :arreglar_pagos_con_moneda_mal => :environment do
   end
 
   File.open "log/problemas.log", "a" do |f|
-    problemas.each do |p|
+    problemas.each do |deposito|
       f.puts "Pago:"
       f.puts "  id: #{deposito.id}"
       f.puts "  tipo_deposito: #{deposito.tdeposito.name}"
@@ -35,8 +35,8 @@ task :arreglar_pagos_con_moneda_mal => :environment do
       f.puts "  fecha: #{deposito.fecha}"
       f.puts "  observaciones: #{deposito.observaciones}"
       f.puts "  reserva:"
-      f.puts "    id: #{deposito.reserva.id}"
-      f.puts "    ref: #{deposito.reserva.referencia}"
+      f.puts "    id: #{deposito.reserva.try(:id)}"
+      f.puts "    ref: #{deposito.reserva.try(:referencia)}"
       f.puts "\n #====  FIN REGISTRO ===="
     end
   end unless problemas.empty?
