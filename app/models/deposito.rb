@@ -16,6 +16,8 @@ class Deposito < Movimiento
   validates :monto_final_currency, :presence => true
   validate  :monto_final_positivo
 
+  validate :concordancia_entidad_reserva
+
   #
   # Asociaciones
   #
@@ -47,6 +49,12 @@ class Deposito < Movimiento
   def monto_final_en_moneda_de_la_reserva
     if reserva and monto_final.nonzero?
       errors.add(:base, "La moneda de la reserva y del deposito no coinciden, seleccione la reserva nuevamente") unless monto_final.currency == reserva.total.currency
+    end
+  end
+
+  def concordancia_entidad_reserva
+    if reserva and entidad
+      errors.add(:base, "La entidad y la reserva no coinciden, vuelva a seleccionar la reserva") unless entidad == reserva.agency or entidad == reserva.operadora
     end
   end
 
