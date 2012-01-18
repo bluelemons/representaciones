@@ -61,6 +61,8 @@ class Reserva < ActiveRecord::Base
   validates :operadora_id, :presence => true
   validates :agency_id, :presence => true
   validates :total, :presence => true
+
+  validate :monto_total_si_hay_pagos, :on => :update
   #scopes
 
   default_scope :order => "id desc"
@@ -153,4 +155,14 @@ class Reserva < ActiveRecord::Base
     self.save
   end
 
+  private
+
+  def monto_total_si_hay_pagos
+    if depositos and total
+      errors.add(:total, "No se puede cambiar la moneda de la reserva habiendo pagos cargados, borre primero los pagos") unless
+        pagos.all? { |p| p.monto_final.currency == total.currency }
+    end
+  end
+
 end
+
