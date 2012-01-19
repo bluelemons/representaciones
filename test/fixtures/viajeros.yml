@@ -2,35 +2,24 @@
 carla_costa_magica:
   reserva: costa magica
   pasajero: carla
-  created_at: 2011-05-27 21:20:59.000000000Z
-  updated_at: 2011-05-27 21:20:59.000000000Z
 
 julieta_costa_magica:
   reserva: costa_magica
   pasajero: julieta
-  created_at: 2011-05-27 21:20:59.000000000Z
-  updated_at: 2011-05-27 21:20:59.000000000Z
 
 julieta_grand_celebration:
     reserva: grand_celebration
     pasajero: julieta
-    created_at: 2011-07-08 15:35:49.000000000Z
-    updated_at: 2011-07-08 15:35:49.000000000Z
 
 claudia_grand_celebration:
   reserva: grand_celebration
   pasajero: claudia
-  created_at: 2011-07-08 15:35:49.000000000Z
-  updated_at: 2011-07-08 15:35:49.000000000Z
 
 francisco_grand_celebration:
   reserva: grand_celebration
   pasajero: francisco
-  created_at: 2011-07-08 15:35:49.000000000Z
-  updated_at: 2011-07-08 15:35:49.000000000Z
 
 maria_grand_celebration:
   reserva: grand_celebration
   pasajero: maria
-  created_at: 2011-07-08 15:35:49.000000000Z
-  updated_at: 2011-07-08 15:35:49.000000000Z
+
