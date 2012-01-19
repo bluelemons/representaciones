@@ -1,6 +1,9 @@
 DEVELOPMENT
 =========
 
+VERSION 0.3
+----------
+
 * Validacion en Reserva para evitar que se cambie la moneda.
 * Validaciones varias en Deposito.
 
