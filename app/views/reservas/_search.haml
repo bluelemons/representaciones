@@ -7,11 +7,8 @@
         %td=form.input :pasajeros_name_contains,:label=>"Pasajero"
         %td=form.input :referencia_sw,:label=>"Referencia"
       %tr
-        %td
+        %td=form.input :programa_name_sw, :label => "Programa"
         %td=form.input :id_eq
-      %tr
-        %td=form.input :fecha_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
-        %td=form.input :fecha_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
       %tr
         %td=form.input :salida_gt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %td=form.input :salida_lt, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
@@ -27,4 +24,3 @@
         %td
           = form.buttons do
             = form.commit_button :label=>"Buscar"
-
