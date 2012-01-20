@@ -1,6 +1,6 @@
 class DepositosController < InheritedResources::Base
   load_and_authorize_resource
-
+  respond_to :html, :xml, :js, :json
   def index
     @search = Deposito.baja.search(params[:search])
     @depositos = @search.paginate(:page=>params[:page], :per_page=>10)
