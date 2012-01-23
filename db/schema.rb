@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112122545) do
+ActiveRecord::Schema.define(:version => 20120123135350) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -260,7 +260,6 @@ ActiveRecord::Schema.define(:version => 20120112122545) do
   create_table "reserva_versions", :force => true do |t|
     t.integer  "reserva_id"
     t.integer  "version"
-    t.date     "fecha"
     t.date     "salida"
     t.string   "reservado"
     t.string   "operado"
@@ -308,7 +307,6 @@ ActiveRecord::Schema.define(:version => 20120112122545) do
   add_index "reserva_versions", ["reserva_id"], :name => "index_reserva_versions_on_reserva_id"
 
   create_table "reservas", :force => true do |t|
-    t.date     "fecha"
     t.date     "salida"
     t.string   "reservado"
     t.string   "operado"
