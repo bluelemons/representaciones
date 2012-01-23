@@ -1,5 +1,4 @@
 costa_magica:
-  fecha: 2011-05-27
   salida: 2012-03-19
   reservado: GUSTAVO
   operado: VIRGINIA
@@ -29,7 +28,6 @@ costa_magica:
   thabitacion: cuadruple
 
 grand_celebration:
-  fecha: 2011-07-08
   salida: 2011-12-27
   reservado: ELIZABETH
   operado: ELIZABETH
@@ -56,3 +54,4 @@ grand_celebration:
   agency: vikingo
   programa: cuba
   thabitacion: cuadruple
+
