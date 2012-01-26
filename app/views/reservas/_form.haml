@@ -5,10 +5,9 @@
       %br
       %br
       = error_message(@reserva)
-      = form.input :referencia, :input_html => {:rows => 3}
       %table.wide
         %tr
-          %td= form.input :fecha, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
+          %td= form.input :referencia, :input_html => {:rows => 3}
           %td= form.input :salida, :as=>:string,:input_html => {:class => 'datepicker',:size=>10}
         %tr
           %td= form.input :agency,:collection => Agency.all

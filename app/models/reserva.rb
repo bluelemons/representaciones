@@ -48,7 +48,6 @@ class Reserva < ActiveRecord::Base
   #accepts_nested_attributes_for :pasajeros, :reject_if => lambda { |a| a[:name].blank? }
   #validaciones
 
-  validates :fecha, :presence => true
   validates :salida, :presence => true
   #validates :activa, :presence => true
   #validates :reservado, :presence => true
@@ -71,7 +70,6 @@ class Reserva < ActiveRecord::Base
   scope :with_includes, includes(:operadora, :agency, :programa, :thabitacion,
                                  :depositos, :pasajeros)
 
-  scope :por_vencer, lambda {|fecha| where("fecha = ? and pago_minimo > 0",fecha) }
   search_methods :sin_voucher
   scope :sin_voucher, where("voucher is null")
   #metodos

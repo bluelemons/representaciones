@@ -75,9 +75,9 @@ class ReservasController < InheritedResources::Base
     require 'csv'
 
     CSV.generate(:col_sep => ";") do |csv|
-      csv << %w[ id agencia operadora fecha salida referencia programa periodo regimen titular pasajeros bruto seguro neto moneda ]
+      csv << %w[ id agencia operadora salida referencia programa periodo regimen titular pasajeros bruto seguro neto moneda ]
       relation.each do |r|
-        csv << %W[ #{r.id} #{r.agencia.name} #{r.operadora.name} #{r.fecha} #{r.salida} #{r.referencia} #{r.programa.try(:name)} #{r.periodo} #{r.regimen} #{r.titular} #{r.pasajeros.size} #{r.tarifa.try(:localize)} #{r.seguro.try(:localize)} #{r.total} #{r.total_currency}]
+        csv << %W[ #{r.id} #{r.agencia.name} #{r.operadora.name} #{r.salida} #{r.referencia} #{r.programa.try(:name)} #{r.periodo} #{r.regimen} #{r.titular} #{r.pasajeros.size} #{r.tarifa.try(:localize)} #{r.seguro.try(:localize)} #{r.total} #{r.total_currency}]
       end
     end
   end

@@ -11,9 +11,8 @@ por una *agencia* y comprado a una *operadora*.
     (tipo se servicio, habitaciones, etc.).
     - También dispone de una *tarifa* que es el monto que debe ser pagado por la
     agencia a la operadora.
-    - Indica también dos fechas, una es la fecha de *salida* del
-    viaje (en que el mismo debe estar totalmente pago) y la fecha de
-    *vencimiento*, que es la fecha en que debe ser pagada la seña.
+    - Indica también la fecha de *salida* del viaje (en que el mismo debe estar
+    totalmente pago).
 
 2. Entidades: Clase que engloba a las agencias y a las operadoras. Sobre las
 mismas se registran datos de contacto.
