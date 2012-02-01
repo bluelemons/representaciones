@@ -2,5 +2,6 @@ testing_permision:
   role: admin
   user: susana
 other_permision:
-  role: admin
+  role: tablas
   user: tester
+

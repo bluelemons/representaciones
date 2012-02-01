@@ -31,6 +31,7 @@ class Ability
   def tablas
     can :manage, Operadora
     can :manage, Agency
+    can :manage, Entidad
     can :manage, Programa
     can :manage, Thabitacion
     can :manage, Cotizacion

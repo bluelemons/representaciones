@@ -1,3 +1,7 @@
 admin:
   name: Admin
   desc: Administrador
+tablas:
+  name: Tablas
+  desc: acceso a los abm
+
