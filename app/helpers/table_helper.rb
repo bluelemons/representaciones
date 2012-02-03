@@ -10,7 +10,12 @@ module TableHelper
 
   def table_form_data(model,a)
     if a[:value]
-      return model.send(a[:value])
+      value = model.send(a[:value])
+      if value.acts_like?(:date) or value.acts_like?(:time)
+        return beauty_date(value)
+      else
+        return model.send(a[:value])
+      end
     else
       return a[:string]
     end
