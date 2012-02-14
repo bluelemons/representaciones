@@ -1,7 +1,7 @@
-admin:
-  name: Admin
-  desc: Administrador
-tablas:
-  name: Tablas
-  desc: acceso a los abm
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
+one:
+  name: MyString
+
+two:
+  name: MyString

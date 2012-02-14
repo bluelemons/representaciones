@@ -11,8 +11,3 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
-
-class ActionController::TestCase
-  # Los test helpers de devise para los functional test
-  include Devise::TestHelpers
-end
