@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Entidad < ActiveRecord::Base
   # clases
-  acts_as_versioned
+  #acts_as_versioned
 
   # asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
@@ -26,6 +26,8 @@ class Entidad < ActiveRecord::Base
   default_scope order(:name)
 
   scope :baja, where(:hidden=>0)
+  scope :agencias, where(:type => "Agency")
+  scope :operadoras, where(:type => "Operadora")
 
   # metodos
 
@@ -108,4 +110,3 @@ class Entidad < ActiveRecord::Base
     deudas_by_currency
   end
 end
-

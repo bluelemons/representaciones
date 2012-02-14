@@ -1,6 +1,5 @@
 class Pasajero < ActiveRecord::Base
   #clases
-  acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :tdoc
@@ -17,4 +16,3 @@ class Pasajero < ActiveRecord::Base
 
   #metodos
 end
-
