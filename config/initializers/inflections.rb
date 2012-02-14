@@ -8,4 +8,3 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'cuenta', 'cuentas'
 #   inflect.uncountable %w( fish sheep )
 end
-

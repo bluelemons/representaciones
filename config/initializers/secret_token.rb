@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Representaciones::Application.config.secret_token = '94fb3d7e5b09b3e73d4bbb5095833a0db42f9d04966dda521128ce4b73a13c3c9296252f53becfb151f43e05101d2811c299cfc2f30e0a9edf7c763fbcdfc079'
+Representaciones::Application.config.secret_token = '3c076bf275ef478feb66c4e388fd535b509ddbf918af73ac8096670e9259dd9ba269be8239af83ddaea444f9ce5c19a55ad79585b4f65a438d85da08fca01a3b'
