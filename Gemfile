@@ -1,41 +1,52 @@
 source 'http://rubygems.org'
+
+gem 'rails', "~> 3.1.1"
+
+gem 'mysql2'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+  gem "compass", "~> 0.12.alpha.0"
+end
+gem 'rack', '1.3.3'
+gem "sprockets"#, :git => "git://github.com/sstephenson/sprockets.git"
+gem 'rails-i18n'
+gem 'cancan','1.6.7'
+# Javascripts runtime
+gem 'therubyracer'
+gem 'activeadmin','0.4.0'
+gem 'jquery-rails'
+gem "paper_trail"
+gem "acts_as_versioned"
+# paginacion
+gem 'kaminari'
+# busqueda
+gem "meta_search"
+# formularios
+gem 'formtastic', "<= 2.0.0"
+# tablas
+gem "tabletastic"
+# controladores
+gem 'inherited_resources'
+
+# Use thin as the web server
 gem 'thin'
 
-gem 'rails', '3.0.11'
-
-# gemas propias
-gem 'squeezer',"0.2.1"
-gem 'largentinas',"0.1.0"
-
-# vistas
-gem 'will_paginate', '~> 3.0'
-gem "haml"
-gem 'prawn'
-gem "builder"
-gem 'formtastic', '~> 1.2.3'
-
-# autenticacion
-gem "devise", "~>1.1.rc2"
-gem "cancan"
-
-# deprecated
+#wysiwyg
+gem "ckeditor", "3.7.0.rc2"
 gem "paperclip"
-gem "inherited_resources"
-# also deprecated
-group :development, :test do
-  gem 'dbf'
-end
-
-gem "jquery-rails"
-
-# modelos
-gem "mysql2", '~> 0.2.7'
-gem "meta_search"
-gem "acts_as_versioned"
 gem 'money'
+gem 'prawn', :git => "git://github.com/sandal/prawn.git", :tag => '0.10.2', :submodules => true
 
-group :development, :test do
-  gem 'pry'
-  gem 'forgery'
-end
+gem 'locked', :git => 'git://github.com/BlueLemon/Lockable.git'
 
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'pry', :groups => [:development, :test]
