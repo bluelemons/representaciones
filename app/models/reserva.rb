@@ -8,6 +8,7 @@ class Reserva < ActiveRecord::Base
   belongs_to :operadora
   belongs_to :agency
 
+  alias_attribute :name ,:id
   # I alias the relations to have no problems
   def agencia
     self.agency
