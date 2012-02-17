@@ -1,10 +1,8 @@
 module DateHelper
   def beauty_date(value)
-    string = value.to_date.today? ? I18n.localize(value.to_time) : I18n.localize(value.to_date, :format => :long)
-    hace_o_en = value.past? ? "hace" : "en"
-    distance = distance_of_time_in_words_to_now value
-    string << " (#{hace_o_en} #{distance})"
-    string
+    format = value.acts_like?(:time) ? "%a %d/%b/%Y, %H:%M" : "%a %d/%b/%Y"
+    contents = I18n.localize(value, :format => format)
+    content_tag(:time, contents, :datetime => value.to_time.getutc.iso8601, :class => 'appendTimeago')
   end
 end
 
