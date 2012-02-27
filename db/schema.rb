@@ -78,8 +78,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",       :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
@@ -108,8 +106,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.string   "simbolo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
@@ -150,8 +146,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.date     "fecha"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",                            :default => false
-    t.integer  "user_id"
     t.integer  "version"
     t.integer  "operadora_id"
     t.integer  "monto_cents"
@@ -197,8 +191,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.integer  "tdoc_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
@@ -236,8 +228,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.text     "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
@@ -322,8 +312,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.float    "pago_minimo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",                         :default => false
-    t.integer  "user_id"
     t.integer  "version"
     t.date     "voucher"
     t.integer  "total_cents"
@@ -387,8 +375,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
@@ -408,8 +394,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
@@ -429,8 +413,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "hidden",     :default => false
-    t.integer  "user_id"
     t.integer  "version"
   end
 
