@@ -1,9 +1,0 @@
-cuenta_ibero:
-  entidad: ibero
-  monto_cents: 0
-  monto_currency: USD
-
-cuenta_vikingo:
-  entidad: vikingo
-  monto_cents: 0
-  monto_currency: USD
