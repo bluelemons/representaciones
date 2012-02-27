@@ -9,7 +9,7 @@ class EntidadsController < InheritedResources::Base
     if params[:search]
       @search = Entidad.search(params[:search])
     else
-      @search = Entidad.baja.search()
+      @search = Entidad.search()
     end
       @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|

@@ -5,7 +5,7 @@ class TdepositosController < InheritedResources::Base
     if params[:search]
       @search = Tdeposito.search(params[:search])
     else
-      @search = Tdeposito.baja.search()
+      @search = Tdeposito.search()
     end
       @tdepositos = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|

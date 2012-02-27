@@ -5,7 +5,7 @@ class AgenciesController < EntidadsController
     if params[:search]
       @search = Agency.search(params[:search])
     else
-      @search = Agency.baja.search()
+      @search = Agency.search()
     end
     @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
@@ -26,4 +26,3 @@ class AgenciesController < EntidadsController
   end
 
 end
-

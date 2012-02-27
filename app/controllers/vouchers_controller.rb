@@ -11,7 +11,7 @@ class VouchersController < InheritedResources::Base
     if params[:search]
       @search = r.search(params[:search])
     else
-      @search = r.baja.search()
+      @search = r.search()
     end
 
     @reservas = @search
@@ -39,4 +39,3 @@ class VouchersController < InheritedResources::Base
   end
 
 end
-

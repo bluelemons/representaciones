@@ -5,7 +5,7 @@ class VencidasController < InheritedResources::Base
     if params[:search]
       @search = r.search(params[:search])
     else
-      @search = r.baja.search()
+      @search = r.search()
     end
 
     #quita del array las reservas que tienen pagos mayores a pago_minimo
@@ -25,4 +25,3 @@ class VencidasController < InheritedResources::Base
     end
   end
 end
-

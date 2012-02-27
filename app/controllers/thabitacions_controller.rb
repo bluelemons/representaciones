@@ -5,7 +5,7 @@ class ThabitacionsController < InheritedResources::Base
     if params[:search]
       @search = Thabitacion.search(params[:search])
     else
-      @search = Thabitacion.baja.search()
+      @search = Thabitacion.search()
     end
       @thabitacions = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|

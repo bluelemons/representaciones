@@ -1,26 +1,26 @@
 class PasajerosController < InheritedResources::Base
-  
+
   respond_to :html, :xml,:js
   def index
     if params[:search]
       @search = Pasajero.search(params[:search])
     else
-      @search = Pasajero.baja.search()
+      @search = Pasajero.search()
     end
       @pasajeros = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
-      format.js 
+      format.js
       format.xml
       format.html
       format.pdf do
         output = PasajeroReport.new.to_pdf(@search)
-        send_data output, :filename => "index_report.pdf", 
+        send_data output, :filename => "index_report.pdf",
                          :type => "application/pdf"
       end
     end
-    
+
   end
-  
+
   def show
     if params[:doc]
       @pasajero = Pasajero.where(:doc =>params[:doc]).limit(1)
@@ -55,6 +55,6 @@ class PasajerosController < InheritedResources::Base
     else
       render 'pasajeros/new.js'
     end
-  end 
-  
+  end
+
 end

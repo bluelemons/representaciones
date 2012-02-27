@@ -11,7 +11,7 @@ class MonedasController < InheritedResources::Base
     if params[:search]
       @search = Moneda.search(params[:search])
     else
-      @search = Moneda.baja.search()
+      @search = Moneda.search()
     end
       @monedas = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|

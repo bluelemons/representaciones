@@ -5,7 +5,7 @@ class ProgramasController < InheritedResources::Base
     if params[:search]
       @search = Programa.search(params[:search])
     else
-      @search = Programa.baja.search()
+      @search = Programa.search()
     end
       @programas = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
