@@ -26,7 +26,6 @@ class DepositosController < InheritedResources::Base
 
   def create
     @deposito = Deposito.new(params[:deposito])
-    @deposito.user = current_user
     if @deposito.save
       operadora_paid if params[:operadora_paid]
       flash[:notice] = "El deposito fue registrado correctamente"
@@ -38,7 +37,6 @@ class DepositosController < InheritedResources::Base
 
   def update
     @deposito = Deposito.find(params[:id])
-    @deposito.user = current_user
     if @deposito.update_attributes(params[:deposito])
 
       redirect_to :action => 'show', :id => @deposito.id, :format =>'js',:controller=>'depositos'

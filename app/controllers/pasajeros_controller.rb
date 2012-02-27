@@ -30,20 +30,13 @@ class PasajerosController < InheritedResources::Base
       @reservas = @pasajero.reservas.paginate :page => params[:page], :per_page =>10
     end
     show! do |format|
-      format.html 
+      format.html
       format.xml { render :xml => @pasajero }
     end
   end
 
-  def restore
-    @pasajero = Pasajero.find(params[:id])
-    @pasajero.revert_to! params[:version_id]
-	  redirect_to :action => 'show', :id => @pasajero
-  end
-  
   def update
     @pasajero = Pasajero.find(params[:id])
-    @pasajero.user = current_user
     if @pasajero.update_attributes(params[:pasajero])
       redirect_to :action => 'show', :id => @pasajero, :format =>'js'
     else
@@ -53,7 +46,6 @@ class PasajerosController < InheritedResources::Base
 
   def create
     @pasajero = Pasajero.new(params[:pasajero])
-    @pasajero.user = current_user
     if @pasajero.save
       #que vuelva para cargar otro pasajero.
       #redirect_to :action => 'show',:controller=>'pasajeros', :id => @pasajero, :format =>'js'

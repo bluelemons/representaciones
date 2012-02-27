@@ -32,15 +32,8 @@ class MonedasController < InheritedResources::Base
     show!
   end
 
-  def restore
-    @moneda = Moneda.find(params[:id])
-    @moneda.revert_to! params[:version_id]
-	  redirect_to :action => 'show', :id => @moneda
-  end
-
   def update
     @moneda = Moneda.find(params[:id])
-    @moneda.user = current_user
     if @moneda.update_attributes(params[:moneda])
       redirect_to :action => 'show', :id => @moneda, :format =>'js'
     else
@@ -50,7 +43,6 @@ class MonedasController < InheritedResources::Base
 
   def create
     @moneda = Moneda.new(params[:moneda])
-    @moneda.user = current_user
     if @moneda.save
       redirect_to :action => 'show', :id => @moneda, :format =>'js'
     else
@@ -59,4 +51,3 @@ class MonedasController < InheritedResources::Base
   end
 
 end
-

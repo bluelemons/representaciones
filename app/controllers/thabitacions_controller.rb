@@ -26,15 +26,8 @@ class ThabitacionsController < InheritedResources::Base
     show!
   end
 
-  def restore
-    @thabitacion = Thabitacion.find(params[:id])
-    @thabitacion.revert_to! params[:version_id]
-	  redirect_to :action => 'show', :id => @thabitacion
-  end
-
   def update
     @thabitacion = Thabitacion.find(params[:id])
-    @thabitacion.user = current_user
     if @thabitacion.update_attributes(params[:thabitacion])
       redirect_to :action => 'show', :id => @thabitacion, :format =>'js'
     else
@@ -44,7 +37,6 @@ class ThabitacionsController < InheritedResources::Base
 
   def create
     @thabitacion = Thabitacion.new(params[:thabitacion])
-    @thabitacion.user = current_user
     if @thabitacion.save
 
       if params[:another_one]
@@ -58,4 +50,3 @@ class ThabitacionsController < InheritedResources::Base
   end
 
 end
-

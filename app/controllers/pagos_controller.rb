@@ -12,7 +12,6 @@ class PagosController < InheritedResources::Base
 
   def update
     @movimiento = Pago.find(params[:id])
-    @movimiento.user = current_user
     if @movimiento.update_attributes(params[:pago])
       flash[:notice] = "El pago a sido actualizado"
       render 'movimientos/edit.js'
@@ -24,7 +23,6 @@ class PagosController < InheritedResources::Base
 
   def create
     @pago = Pago.new(params[:pago])
-    @pago.user = current_user
     if @pago.save
       flash[:notice] = "El pago a sido registrado"
       redirect_to :action => 'new', :format =>'js'
@@ -35,4 +33,3 @@ class PagosController < InheritedResources::Base
     end
   end
 end
-

@@ -36,15 +36,8 @@ class EntidadsController < InheritedResources::Base
     render 'entidads/show.js'
   end
 
-  def restore
-    @entidad = Entidad.find(params[:id])
-    @entidad.revert_to! params[:version_id]
-	  redirect_to :action => 'show', :id => @entidad
-  end
-
   def update
     @entidad = Entidad.find(params[:id])
-    @entidad.user = current_user
     if @entidad.update_attributes(params[@entidad.type.downcase.to_sym])
       redirect_to :action => 'show',:controller=>"entidads", :id => @entidad, :format =>'js'
     else
@@ -54,7 +47,6 @@ class EntidadsController < InheritedResources::Base
 
   def create
     @entidad = Entidad.new(params[:agency] || params[:entidad])
-    @entidad.user = current_user
     if @entidad.save
       flash[:notice]="Entidad guardada!"
       # creo la cuenta para cada tipo de moneda

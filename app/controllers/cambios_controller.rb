@@ -12,7 +12,6 @@ class CambiosController < InheritedResources::Base
 
   def create
     @cambio = Cambio.new(params[:cambio])
-    @cambio.user = current_user
     if @cambio.save
       flash[:notice] = "El cambio de monedas fue realizado correctamente"
       redirect_to :action => 'new', :format =>'js'
@@ -23,4 +22,3 @@ class CambiosController < InheritedResources::Base
     end
   end
 end
-

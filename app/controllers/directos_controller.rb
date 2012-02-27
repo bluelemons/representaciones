@@ -40,7 +40,6 @@ class DirectosController < InheritedResources::Base
   private
 
   def depositar_dinero
-    @deposito.user = current_user
     if !@deposito.save
       flash[:notice] = "El deposito no pudo ser guardado"
     else
@@ -111,4 +110,3 @@ class DirectosController < InheritedResources::Base
   end
 
 end
-
