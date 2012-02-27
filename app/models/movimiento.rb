@@ -27,7 +27,6 @@ class Movimiento < ActiveRecord::Base
 
   # scopes
 #  default_scope :include => [:reserva, :cuenta], :order => "id desc"
-  scope :baja, where(:hidden=>0)
 
   # metodos
   def self.total(movs)
@@ -47,4 +46,3 @@ class Movimiento < ActiveRecord::Base
     errors.add(:monto, "debe ser positivo") if monto.cents <= 0
   end
 end
-

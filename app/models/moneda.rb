@@ -9,7 +9,6 @@ class Moneda < ActiveRecord::Base
   #validacioness
   validates :name, :presence => true
   #scopes
-  scope :baja, where(:hidden=>0)
 
   #metodos
 

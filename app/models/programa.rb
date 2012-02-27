@@ -7,7 +7,6 @@ class Programa < ActiveRecord::Base
   #validaciones
   validates :name, :presence => true
   #scopes
-  scope :baja, where(:hidden=>0)
 
   #metodos
 

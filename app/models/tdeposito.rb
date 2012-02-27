@@ -9,7 +9,6 @@ class Tdeposito < ActiveRecord::Base
 
   #validates :name, :presence => true
   #scopes
-  scope :baja, where(:hidden=>0)
 
   #metodos
 
