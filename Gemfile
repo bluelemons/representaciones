@@ -31,11 +31,9 @@ gem "jquery-rails"
 # modelos
 gem "mysql2", '~> 0.2.7'
 gem "meta_search"
-gem "acts_as_versioned"
 gem 'money'
 
 group :development, :test do
   gem 'pry'
   gem 'forgery'
 end
-

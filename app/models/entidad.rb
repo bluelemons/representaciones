@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 class Entidad < ActiveRecord::Base
   # clases
-  acts_as_versioned
 
   # asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
@@ -108,4 +107,3 @@ class Entidad < ActiveRecord::Base
     deudas_by_currency
   end
 end
-
