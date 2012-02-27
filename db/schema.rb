@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.string   "moneda_venta",  :limit => 3
   end
 
-  create_table "cuentas", :force => true do |t|
-    t.integer  "entidad_id"
-    t.integer  "operadora_id"
-    t.integer  "moneda_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "monto_cents"
-    t.string   "monto_currency", :limit => 3
-  end
-
   create_table "departamentos", :force => true do |t|
     t.string   "name"
     t.integer  "provincia_id"
