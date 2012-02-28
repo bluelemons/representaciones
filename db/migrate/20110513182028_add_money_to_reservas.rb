@@ -1,6 +1,6 @@
 class AddMoneyToReservas < ActiveRecord::Migration
   def self.up
-    [:reservas, :reserva_versions].each do |tabla|
+    [:reservas].each do |tabla|
       change_table tabla do |t|
         t.integer :total_cents
         t.string  :total_currency, :limit => 3
@@ -16,7 +16,7 @@ class AddMoneyToReservas < ActiveRecord::Migration
   end
 
   def self.down
-    [:reservas, :reserva_versions].each do |tabla|
+    [:reservas].each do |tabla|
       change_table tabla do |t|
         t.remove :total_cents
         t.remove :total_currency
@@ -31,4 +31,3 @@ class AddMoneyToReservas < ActiveRecord::Migration
     end
   end
 end
-
