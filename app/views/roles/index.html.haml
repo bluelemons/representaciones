@@ -1,0 +1,19 @@
+%h2.ui-widget-header Listing roles
+.ui-widget-content  
+  %table{:class=>'mytable'}
+    %tr
+      %th Name
+      %th Descripcion
+  
+    - @roles.each do |role| 
+      %tr
+        %td
+          = link_to role.name, role
+        %td
+          = role.desc
+        %td
+          = link_to 'Edit', edit_role_path(role)
+        %td      
+          = link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete
+  %br
+  = link_to 'New role', new_role_path 

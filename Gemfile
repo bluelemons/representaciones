@@ -4,7 +4,7 @@ gem 'thin'
 gem 'rails', '3.0.11'
 
 # gemas propias
-gem 'squeezer',"0.2.1"
+#gem 'squeezer',"0.2.1"
 #gem 'largentinas',"0.1.0"
 
 # vistas
