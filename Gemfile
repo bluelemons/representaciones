@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 gem 'thin'
 
-gem 'rails', '3.0.11'
+gem 'rails', '3.2.1'
 
 # gemas propias
 #gem 'squeezer',"0.2.1"
@@ -29,7 +29,7 @@ end
 gem "jquery-rails"
 
 # modelos
-gem "mysql2", '~> 0.2.7'
+gem "mysql2", '~> 0.3.x'
 gem "meta_search"
 gem 'money'
 
