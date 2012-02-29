@@ -109,7 +109,7 @@ ul.dropdown li a
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
-	background: #ffb35a url(/images/topbg.gif) repeat-x;
+	background: #ffb35a url(/assets/topbg.gif) repeat-x;
 	border-bottom: 1px solid #000;
 }
 
@@ -120,7 +120,7 @@ ul.dropdown li a
 
 #menu ul li.hasmore
 {
-	background: url(/images/drophighlight.png) no-repeat center 27px;
+	background: url(/assets/drophighlight.png) no-repeat center 27px;
 }
 
 #menu ul li h4
@@ -150,7 +150,7 @@ ul.dropdown li a
 
 #menu ul li a:hover
 {
-	background: url(/images/topselectionleft.png) top left no-repeat;
+	background: url(/assets/topselectionleft.png) top left no-repeat;
 }
 
 #menu ul li a span
@@ -161,13 +161,13 @@ ul.dropdown li a
 
 #menu ul li a:hover span
 {
-	background: url(/images/topselectionright.png) top right;
+	background: url(/assets/topselectionright.png) top right;
 }
 
 #menu ul.dropdown
 {
 	padding: 10px;
-	background-image: url(/images/dropdown.png);
+	background-image: url(/assets/dropdown.png);
 	overflow:hidden;
 	border-bottom: 1px solid #dc902f;
 	width: 290px;
@@ -188,7 +188,7 @@ ul.dropdown li a
 
 #menu ul.dropdown li a:hover
 {
-	background: url(/images/menuarrow.png) no-repeat left center;
+	background: url(/assets/menuarrow.png) no-repeat left center;
 }
 
 #menu ul li h4 a:hover
