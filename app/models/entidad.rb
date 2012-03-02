@@ -3,7 +3,6 @@ class Entidad < ActiveRecord::Base
   # clases
 
   # asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :localidad
   has_many :cuentas, :dependent => :destroy  #cuando se borra la entidad se borra la cuenta.
   has_many :movimientos
@@ -23,8 +22,6 @@ class Entidad < ActiveRecord::Base
 
   #scopes
   default_scope order(:name)
-
-  scope :baja, where(:hidden=>0)
 
   # metodos
 

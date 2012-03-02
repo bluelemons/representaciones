@@ -2,7 +2,6 @@ class Pasajero < ActiveRecord::Base
   #clases
 
   #asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :tdoc
 
   has_many :viajeros

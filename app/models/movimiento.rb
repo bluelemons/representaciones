@@ -3,7 +3,6 @@ class Movimiento < ActiveRecord::Base
 #  before_destroy :deshacer
 
   # Asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :reserva
   belongs_to :entidad
   belongs_to :operadora
