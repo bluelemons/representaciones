@@ -1,7 +1,7 @@
 ;(function($){
 /**
  * jqGrid Portuguese Translation
-* Tradução da jqGrid em Portugues por Frederico Carvalho, http://www.eyeviewdesign.pt
+* TraduÃ§Ã£o da jqGrid em Portugues por Frederico Carvalho, http://www.eyeviewdesign.pt
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -33,11 +33,11 @@ $.jgrid = {
 		bNo : "No",
 		bExit : "Cancel",
 	    msg: {
-	        required:"Campo obrigatório",
+	        required:"Campo obrigatÃ³rio",
 	        number:"Por favor, introduza um numero",
 	        minValue:"O valor deve ser maior ou igual que",
 	        maxValue:"O valor deve ser menor ou igual a",
-	        email: "Não é um endereço de email válido",
+	        email: "NÃ£o Ã© um endereÃ§o de email vÃ¡lido",
 	        integer: "Por favor, introduza um numero inteiro",
 			url: "is not a valid URL. Prefix required ('http://' or 'https://')",
 			nodefined : " is not defined!",
@@ -79,8 +79,8 @@ $.jgrid = {
 	},
 	errors : {
 		errcap : "Erro",
-		nourl : "Não especificou um url",
-		norecords: "Não existem dados para processar",
+		nourl : "NÃ£o especificou um url",
+		norecords: "NÃ£o existem dados para processar",
 	    model : "Tamanho do colNames <> colModel!"
 	},
 	formatter : {
@@ -90,14 +90,14 @@ $.jgrid = {
 		date : {
 			dayNames:   [
 				"Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab",
-				"Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"
+				"Domingo", "Segunda-Feira", "TerÃ§a-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "SÃ¡bado"
 			],
 			monthNames: [
 				"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez",
-				"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+				"Janeiro", "Fevereiro", "MarÃ§o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 			],
 			AmPm : ["am","pm","AM","PM"],
-			S: function (j) {return j < 11 || j > 13 ? ['º', 'º', 'º', 'º'][Math.min((j - 1) % 10, 3)] : 'º'},
+			S: function (j) {return j < 11 || j > 13 ? ['Âº', 'Âº', 'Âº', 'Âº'][Math.min((j - 1) % 10, 3)] : 'Âº'},
 			srcformat: 'Y-m-d',
 			newformat: 'd/m/Y',
 			masks : {
