@@ -1,7 +1,7 @@
 /**
-* Easing 
+* Easing
 * <http://gsgd.co.uk/sandbox/jquery/easing/>
-* 
+*
 * @author     GSGD
 * @author     Robert Penners
 */
@@ -15,7 +15,7 @@ else var s=p/(2*Math.PI)*Math.asin(c/a);if(t<1)return-.5*(a*Math.pow(2,10*(t-=1)
 /**
 * hoverIntent r5 // 2007.03.27 // jQuery 1.1.2+
 * <http://cherne.net/brian/resources/jquery.hoverIntent.html>
-* 
+*
 * @param  f  onMouseOver function || An object with configuration options
 * @param  g  onMouseOut function  || Nothing (use configuration options object)
 * @author    Brian Cherne <brian@cherne.net>
@@ -29,7 +29,7 @@ else var s=p/(2*Math.PI)*Math.asin(c/a);if(t<1)return-.5*(a*Math.pow(2,10*(t-=1)
 */
 
 $(function () {
-	
+
 	$('.dropdown').each(function () {
 		$(this).parent().eq(0).hoverIntent({
 			timeout: 100,
@@ -43,19 +43,20 @@ $(function () {
 			}
 		});
 	});
-	
+
 	$('.dropdown a').hover(function () {
 		$(this).stop(true).animate({paddingLeft: '35px'}, {speed: 100, easing: 'easeOutBack'});
 	}, function () {
 		$(this).stop(true).animate({paddingLeft: '0'}, {speed: 100, easing: 'easeOutBounce'});
 	});
-	
+
 	pic1 = new Image(310, 672);
-	pic1.src = "/images/dropdown.png"; 
-	
+	pic1.src = "/assets/dropdown.png";
+
 	pic2 = new Image(4, 40);
-	pic2.src = "/images/dropselectionleft.png"; 
-	
+	pic2.src = "/assets/dropselectionleft.png";
+
 	pic3 = new Image(394, 40);
-	pic3.src = "/images/dropselectionright.png";
+	pic3.src = "/assets/dropselectionright.png";
 });
+
