@@ -6,7 +6,6 @@ class Movimiento < ActiveRecord::Base
   belongs_to :reserva
   belongs_to :entidad
   belongs_to :operadora
-  belongs_to :cuenta
   belongs_to :movimiento,:dependent => :destroy
   belongs_to :tdeposito
   has_many :movimientos
@@ -45,3 +44,4 @@ class Movimiento < ActiveRecord::Base
     errors.add(:monto, "debe ser positivo") if monto.cents <= 0
   end
 end
+
