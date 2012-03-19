@@ -3,11 +3,9 @@ class Movimiento < ActiveRecord::Base
 #  before_destroy :deshacer
 
   # Asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :reserva
   belongs_to :entidad
   belongs_to :operadora
-  belongs_to :cuenta
   belongs_to :movimiento,:dependent => :destroy
   belongs_to :tdeposito
   has_many :movimientos
@@ -27,7 +25,6 @@ class Movimiento < ActiveRecord::Base
 
   # scopes
 #  default_scope :include => [:reserva, :cuenta], :order => "id desc"
-  scope :baja, where(:hidden=>0)
 
   # metodos
   def self.total(movs)

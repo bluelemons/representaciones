@@ -1,11 +1,12 @@
 class AddVersionateThabitacions < ActiveRecord::Migration
 
   def self.up
-    Thabitacion.create_versioned_table
+    create_table :thabitacion_versions
   end
 
   def self.down
     drop_table :thabitacion_versions
   end
-  
+
 end
+

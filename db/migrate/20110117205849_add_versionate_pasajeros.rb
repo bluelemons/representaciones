@@ -1,11 +1,12 @@
 class AddVersionatePasajeros < ActiveRecord::Migration
 
   def self.up
-    Pasajero.create_versioned_table
+    create_table :pasajero_versions
   end
 
   def self.down
     drop_table :pasajero_versions
   end
-  
+
 end
+

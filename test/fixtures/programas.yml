@@ -2,10 +2,6 @@ punta_del_este:
   name: PUNTA DEL ESTE
   created_at: 2011-04-28 21:22:54.000000000Z
   updated_at: 2011-04-28 21:22:54.000000000Z
-  hidden: 0
-  version: 1
 
 cuba:
   name: $LABEL
-  hidden: 0
-  version: 1

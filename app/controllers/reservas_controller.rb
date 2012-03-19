@@ -40,15 +40,8 @@ class ReservasController < InheritedResources::Base
     show!
   end
 
-  def restore
-    @reserva = Reserva.find(params[:id])
-    @reserva.revert_to! params[:version_id]
-    redirect_to :action => 'show', :id => @reserva
-  end
-
   def update
     @reserva = Reserva.find(params[:id])
-    @reserva.user = current_user
     if @reserva.update_attributes(params[:reserva])
 
       redirect_to :action => 'show', :id => @reserva, :format =>'js',:controller=>'reservas'
@@ -59,7 +52,6 @@ class ReservasController < InheritedResources::Base
 
   def create
     @reserva = Reserva.new(params[:reserva])
-    @reserva.user = current_user
     if @reserva.save
       flash[:notice]="Reserva creada"
       redirect_to :action => 'show', :id => @reserva, :format =>'js'
@@ -82,4 +74,3 @@ class ReservasController < InheritedResources::Base
     end
   end
 end
-

@@ -2,11 +2,11 @@ class DepositosController < InheritedResources::Base
   load_and_authorize_resource
   respond_to :html, :xml, :js, :json
   def index
-    @search = Deposito.baja.search(params[:search])
+    @search = Deposito.search(params[:search])
     @depositos = @search.paginate(:page=>params[:page], :per_page=>10)
     @depositos = @depositos.includes :entidad, :reserva => :pasajeros
 
-    @reservas_search = Reserva.baja.search()
+    @reservas_search = Reserva.search()
     @reservas = @reservas_search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
       format.js
@@ -26,7 +26,6 @@ class DepositosController < InheritedResources::Base
 
   def create
     @deposito = Deposito.new(params[:deposito])
-    @deposito.user = current_user
     if @deposito.save
       operadora_paid if params[:operadora_paid]
       flash[:notice] = "El deposito fue registrado correctamente"
@@ -38,7 +37,6 @@ class DepositosController < InheritedResources::Base
 
   def update
     @deposito = Deposito.find(params[:id])
-    @deposito.user = current_user
     if @deposito.update_attributes(params[:deposito])
 
       redirect_to :action => 'show', :id => @deposito.id, :format =>'js',:controller=>'depositos'

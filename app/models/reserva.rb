@@ -1,8 +1,7 @@
 class Reserva < ActiveRecord::Base
   # clases
-  acts_as_versioned
+
   # asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
   belongs_to :thabitacion
   belongs_to :programa
 
@@ -163,4 +162,3 @@ class Reserva < ActiveRecord::Base
   end
 
 end
-

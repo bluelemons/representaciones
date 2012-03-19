@@ -1,11 +1,12 @@
 class AddVersionateReservas < ActiveRecord::Migration
 
   def self.up
-    Reserva.create_versioned_table
+    create_table :reserva_versions
   end
 
   def self.down
     drop_table :reserva_versions
   end
-  
+
 end
+

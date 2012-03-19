@@ -6,13 +6,12 @@ class CambiosController < InheritedResources::Base
 
   def new
     @cambio = Cambio.new
-    @search = Reserva.baja.search(:agency_id_eq=>0)
+    @search = Reserva.search(:agency_id_eq=>0)
     @reservas = @search.paginate :page => params[:page], :per_page =>10
   end
 
   def create
     @cambio = Cambio.new(params[:cambio])
-    @cambio.user = current_user
     if @cambio.save
       flash[:notice] = "El cambio de monedas fue realizado correctamente"
       redirect_to :action => 'new', :format =>'js'
@@ -23,4 +22,3 @@ class CambiosController < InheritedResources::Base
     end
   end
 end
-

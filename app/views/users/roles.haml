@@ -1,0 +1,15 @@
+.ui-widget-content  
+  %b
+    usuario:
+  =@user.username
+  %br
+  
+  %h3 Permisos
+  - form_for @user, do |f|
+    %p
+      - for role in Role.find(:all)
+        %div
+          = check_box_tag "user[role_ids][]",role.id, @user.roles.include?(role) 
+          = role.name 
+      
+    %p= f.submit "Update" 

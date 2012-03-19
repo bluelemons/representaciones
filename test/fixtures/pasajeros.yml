@@ -2,35 +2,21 @@ julieta:
   name: MOLINARI MARIA JULIETA
   created_at: 2011-05-27 21:16:56.000000000Z
   updated_at: 2011-05-27 21:16:56.000000000Z
-  hidden: 0
-  user: susana
 
 carla:
   name: BIASIOL CALVO CARLA
   created_at: 2011-05-27 21:17:51.000000000Z
   updated_at: 2011-05-27 21:17:51.000000000Z
-  hidden: 0
-  user: susana
-  version: 1
 
 claudia:
   name: "CARDU CLAUDIA ALEJANDRA"
   created_at: "2011-07-08 15:35:27"
   updated_at: "2011-07-08 15:35:27"
-  hidden: 0
-  user: susana
-  version: 1
 
 francisco:
   name: DAMONTE FRANCISCO
   created_at: 2011-07-08 15:35:48.000000000Z
   updated_at: 2011-07-08 15:35:48.000000000Z
-  hidden: 0
-  user: susana
-  version: 1
 
 maria:
   name: DAMONTE MARIA FLORENCIA
-  hidden: 0
-  user: susana
-  version: 1

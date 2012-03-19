@@ -5,7 +5,7 @@ class OperadorasController < EntidadsController
     if params[:search]
       @search = Operadora.search(params[:search])
     else
-      @search = Operadora.baja.search()
+      @search = Operadora.search()
     end
     @entidads = @search.paginate :page => params[:page], :per_page =>10
     respond_to do |format|
@@ -26,4 +26,3 @@ class OperadorasController < EntidadsController
   end
 
 end
-

@@ -2,7 +2,6 @@ class Cotizacion < ActiveRecord::Base
   #clases
   #acts_as_versioned
   #asociaciones
-  #belongs_to :user #es el usuario que lo crea o modifica
   #belongs_to :moneda
 #  scope :por_fecha, lambda {|fecha| where("fecha = ?",fecha) }
 #  scope :por_moneda_compra, lambda {|moneda| where("moneda_compra = ?",moneda.currency.id)}
@@ -17,8 +16,6 @@ class Cotizacion < ActiveRecord::Base
   validates :moneda_venta, :presence => true
   validates :compra, :presence => true
   #validates :venta, :presence => true
-  #scopes
-  #scope :baja, where(:hidden=>0)
   #metodos
 
   # Agrega la cotización al default_bank.

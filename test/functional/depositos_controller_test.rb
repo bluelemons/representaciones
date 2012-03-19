@@ -10,8 +10,8 @@ class DepositosControllerTest < ActionController::TestCase
   def test_redirection_after_update
     deposito = movimientos(:deposito_ibero)
     deposito.numero = "31000062"
-    xhr :post, :update, :id => deposito.to_param, :deposito => deposito, :format => "js"
-
+    form_data = deposito.attributes.slice :tdeposito_id, :fecha, :observaciones
+    xhr :post, :update, :id => deposito.id, :deposito => form_data, :format => "js"
     assert_redirected_to :action => 'show', :id => deposito.id, :format =>'js'
   end
 

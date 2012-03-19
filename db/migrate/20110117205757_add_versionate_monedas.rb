@@ -1,11 +1,12 @@
 class AddVersionateMonedas < ActiveRecord::Migration
 
   def self.up
-    Moneda.create_versioned_table
+    create_table :moneda_versions
   end
 
   def self.down
     drop_table :moneda_versions
   end
-  
+
 end
+
