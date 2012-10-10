@@ -26,5 +26,11 @@ class DepositoTest < ActiveSupport::TestCase
     assert @deposito.invalid?, "Deposito valido, por una entidad que no corresponde a la reserva"
   end
 
+  def test_funcionamiento_con_numero_de_deposito_grandes
+    @deposito.numero = "2147483648"
+    assert @deposito.save
+    assert_equal "2147483648", @deposito.reload.numero, "el numero no es el que debe"
+  end
+
 end
 

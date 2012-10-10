@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123135350) do
+ActiveRecord::Schema.define(:version => 20121010001024) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20120123135350) do
     t.integer  "tdeposito_id"
     t.integer  "cuenta_id"
     t.integer  "monto_id"
-    t.integer  "numero"
+    t.string   "numero"
     t.date     "fecha"
     t.datetime "created_at"
     t.datetime "updated_at"
