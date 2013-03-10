@@ -39,3 +39,9 @@ group :development, :test do
   gem 'forgery'
 end
 
+group :development do
+  gem 'rails-erd'
+  gem 'railroady'
+  gem 'yard'
+end
+
