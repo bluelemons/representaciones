@@ -1,0 +1,704 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Entidad
+  
+    &mdash; Documentation by YARD 0.8.5.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!" + escape(window.location.href);
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (E)</a> &raquo;
+    
+    
+    <span class="title">Entidad</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Entidad
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Entidad</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/entidad.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Agency.html" title="Agency (class)">Agency</a></span>, <span class='object_link'><a href="Operadora.html" title="Operadora (class)">Operadora</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cuenta-instance_method" title="#cuenta (instance method)">- (Cuenta<sup>?</sup>) <strong>cuenta</strong>(moneda, operadora_id = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Consulta la cuenta de una entidad en la moneda especificada.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deposit-instance_method" title="#deposit (instance method)">- (Bool) <strong>deposit</strong>(money, operadora = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Incrementa la cuenta de la entidad segun un monto.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deuda-instance_method" title="#deuda (instance method)">- (Money) <strong>deuda</strong>(currency) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Consulta las deudas de la entidad en cada reserva en una moneda.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deudas-instance_method" title="#deudas (instance method)">- (Hash) <strong>deudas</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Consulta las deudas de la entidad en todas las reservas.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#withdraw-instance_method" title="#withdraw (instance method)">- (Bool) <strong>withdraw</strong>(monto, operadora_id = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sustrae un monto de la cuenta de la entidad.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="cuenta-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Cuenta.html" title="Cuenta (class)">Cuenta</a></span></tt><sup>?</sup>) <strong>cuenta</strong>(moneda, operadora_id = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Consulta la cuenta de una entidad en la moneda especificada.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>moneda</span>
+      
+      
+        <span class='type'>(<tt>#to_currency</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>de la cuenta buscada.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operadora_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>id de la operadora que dispone del dinero.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cuenta.html" title="Cuenta (class)">Cuenta</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/entidad.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cuenta'>cuenta</span><span class='lparen'>(</span><span class='id identifier rubyid_moneda'>moneda</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora_id'>operadora_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_moneda'>moneda</span> <span class='op'>=</span> <span class='const'>Money</span><span class='op'>::</span><span class='const'>Currency</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_moneda'>moneda</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_cuentas'>cuentas</span><span class='period'>.</span><span class='id identifier rubyid_find_by_monto_currency_and_operadora_id'>find_by_monto_currency_and_operadora_id</span><span class='lparen'>(</span><span class='id identifier rubyid_moneda'>moneda</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora_id'>operadora_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deposit-instance_method">
+  
+    - (<tt>Bool</tt>) <strong>deposit</strong>(money, operadora = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Incrementa la cuenta de la entidad segun un monto. Si la cuenta no existe
+es creada.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>moneda</span>
+      
+      
+        <span class='type'>(<tt>#to_money</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Moneda de la cuenta buscada.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operadora_id</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Operadora.html" title="Operadora (class)">Operadora</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>operadora que dispone del dinero.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/entidad.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_deposit'>deposit</span><span class='lparen'>(</span><span class='id identifier rubyid_money'>money</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora'>operadora</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_money'>money</span> <span class='op'>=</span> <span class='id identifier rubyid_money'>money</span><span class='period'>.</span><span class='id identifier rubyid_to_money'>to_money</span>
+  <span class='id identifier rubyid_moneda'>moneda</span> <span class='op'>=</span> <span class='id identifier rubyid_money'>money</span><span class='period'>.</span><span class='id identifier rubyid_currency_as_string'>currency_as_string</span>
+  <span class='comment'># permite que el metodo acepte tanto operadora como id.
+</span>  <span class='kw'>unless</span> <span class='id identifier rubyid_operadora'>operadora</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_operadora'>operadora</span> <span class='op'>=</span> <span class='id identifier rubyid_operadora'>operadora</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_operadora'>operadora</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span> <span class='const'>Integer</span>
+  <span class='kw'>end</span>
+ <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='const'>Cuenta</span><span class='period'>.</span><span class='id identifier rubyid_find_or_initialize_by_entidad_id_and_monto_currency_and_operadora_id'>find_or_initialize_by_entidad_id_and_monto_currency_and_operadora_id</span><span class='lparen'>(</span> \
+    <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_moneda'>moneda</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora'>operadora</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:monto_cents</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_monto'>monto</span> <span class='op'>+=</span> <span class='id identifier rubyid_money'>money</span>
+  <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deuda-instance_method">
+  
+    - (<tt>Money</tt>) <strong>deuda</strong>(currency) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Consulta las deudas de la entidad en cada reserva en una moneda.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Money</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/entidad.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_deuda'>deuda</span><span class='lparen'>(</span><span class='id identifier rubyid_currency'>currency</span><span class='rparen'>)</span>
+  <span class='ivar'>@deudas_by_currency</span> <span class='op'>||=</span> <span class='id identifier rubyid__deudas_by_currency'>_deudas_by_currency</span> <span class='op'>||</span> <span class='int'>1</span>
+  <span class='ivar'>@deudas_by_currency</span><span class='lbracket'>[</span><span class='id identifier rubyid_currency'>currency</span><span class='period'>.</span><span class='id identifier rubyid_to_currency'>to_currency</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="deudas-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>deudas</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Consulta las deudas de la entidad en todas las reservas.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>deudas de la entidad por moneda</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/entidad.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_deudas'>deudas</span>
+  <span class='ivar'>@deudas_by_currency</span> <span class='op'>||=</span> <span class='id identifier rubyid__deudas_by_currency'>_deudas_by_currency</span>
+  <span class='ivar'>@deudas_by_currency</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="withdraw-instance_method">
+  
+    - (<tt>Bool</tt>) <strong>withdraw</strong>(monto, operadora_id = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sustrae un monto de la cuenta de la entidad. Si el saldo es insuficiente,
+da un error.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>monto</span>
+      
+      
+        <span class='type'>(<tt>Money</tt>, <tt>#to_money</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Cantidad a sustraer.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>operadora_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>id de la operadora que dispone del dinero.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Bool</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>"saldo insuficiente"</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/entidad.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_withdraw'>withdraw</span><span class='lparen'>(</span><span class='id identifier rubyid_monto'>monto</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora_id'>operadora_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_monto'>monto</span> <span class='op'>=</span> <span class='id identifier rubyid_monto'>monto</span><span class='period'>.</span><span class='id identifier rubyid_to_money'>to_money</span>
+  <span class='id identifier rubyid_moneda'>moneda</span> <span class='op'>=</span> <span class='id identifier rubyid_monto'>monto</span><span class='period'>.</span><span class='id identifier rubyid_currency_as_string'>currency_as_string</span>
+  <span class='id identifier rubyid_c'>c</span> <span class='op'>=</span> <span class='id identifier rubyid_cuenta'>cuenta</span><span class='lparen'>(</span><span class='id identifier rubyid_moneda'>moneda</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora_id'>operadora_id</span><span class='rparen'>)</span>
+  <span class='comment'># TODO fix it nicely.
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_monto'>monto</span> <span class='op'>-</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_monto'>monto</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_cents'>cents</span> <span class='op'>&lt;</span> <span class='int'>3</span>
+    <span class='id identifier rubyid_monto'>monto</span> <span class='op'>=</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_monto'>monto</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_c'>c</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_monto'>monto</span> <span class='op'>&gt;=</span> <span class='id identifier rubyid_monto'>monto</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_deposit'>deposit</span><span class='lparen'>(</span><span class='id identifier rubyid_monto'>monto</span> <span class='op'>*</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span> <span class='id identifier rubyid_operadora_id'>operadora_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Sat Mar  9 21:42:38 2013 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.5.2 (ruby-2.0.0).
+</div>
+
+  </body>
+</html>
