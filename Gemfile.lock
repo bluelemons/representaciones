@@ -63,7 +63,7 @@ GEM
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
-    json (1.6.4)
+    json (1.7.7)
     largentinas (0.1.0)
     mail (2.2.19)
       activesupport (>= 2.3.6)
