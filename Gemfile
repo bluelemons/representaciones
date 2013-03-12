@@ -43,5 +43,6 @@ group :development do
   gem 'rails-erd'
   gem 'railroady'
   gem 'yard'
+  gem 'redcarpet' # for markdown documentation
 end
 
