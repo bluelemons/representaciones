@@ -1,8 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Cotizacion do
   let! :cotizacion do
-    Factory(:cotizacion, :moneda_venta => 'ARS', :moneda_compra => 'USD',
+    FactoryGirl(:cotizacion, :moneda_venta => 'ARS', :moneda_compra => 'USD',
         :compra => ("1.0".to_d / "4.5".to_d).to_f)
   end
   it 'I can search them' do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Deposito do
   it { should validate_presence_of(:tdeposito) }
@@ -6,7 +6,7 @@ describe Deposito do
   it { should validate_presence_of(:entidad) }
 
   describe '#save' do
-    let(:deposito) { Factory.build(:deposito) }
+    let(:deposito) { FactoryGirl.build(:deposito) }
     it 'aumenta el saldo en la cuenta de la entidad' do
       deposito.entidad.should_receive(:deposit).once do
         true

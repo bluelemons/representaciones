@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Reserva do
-  it { have_many(:pasajeros).through(:viajeros) }
+  it { should have_many(:pasajeros).through(:viajeros) }
 
   describe '#pasajeros' do
     let(:reserva) do
-      reserva = Factory(:reserva)
-      reserva.pasajeros << Factory(:pasajero, :name => 'Roberto, Jimenez')
+      reserva = FactoryGirl.build(:reserva)
+      reserva.pasajeros << FactoryGirl.build(:pasajero, :name => 'Roberto, Jimenez')
       reserva
     end
     describe '#names' do
@@ -23,7 +23,7 @@ describe Reserva do
     end
   end
   describe 'total' do
-    let(:reserva) { Factory(:reserva) }
+    let(:reserva) { FactoryGirl.build(:reserva) }
     it "return a Money object" do
       reserva.total.should be_a_kind_of(Money)
     end

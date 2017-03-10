@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Cuenta do
   it { should belong_to :entidad }
@@ -8,7 +8,7 @@ describe Cuenta do
   it { should validate_presence_of :monto_currency }
 
   describe '#monto' do
-    let(:cuenta) { Factory(:cuenta) }
+    let(:cuenta) { FactoryGirl(:cuenta) }
 
     it 'Indica el monto de la cuenta como un objeto Money' do
       cuenta.monto.should be_a_kind_of(Money)
@@ -24,7 +24,7 @@ describe Cuenta do
 
     it 'Read the data in the columns monto_cents, monto_currency' do
       cents, currency = rand(500000), ["ARS", "USD", "EUR"][rand(3)]
-      cuenta = Cuenta.create(:entidad => Factory(:entidad), :monto_cents => cents,
+      cuenta = Cuenta.create(:entidad => FactoryGirl(:entidad), :monto_cents => cents,
                            :monto_currency => currency)
 #      cuenta.monto_cents = cents
 #      cuenta.monto_currency = currency

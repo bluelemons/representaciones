@@ -1,6 +1,8 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
-Factory.define :moneda do |f|
-  f.name "MyString"
-  f.simbolo "MyString"
+FactoryGirl.define do
+  factory :moneda do
+    name "MyString"
+    simbolo "MyString"
+  end
 end
