@@ -5,8 +5,8 @@ class Localidad < ActiveRecord::Base
   # select('localidads.*, departamentos.name as dpto')
   default_scope :include => :departamento
 
-  delegate :name, :provincia, to: :departamento, prefix: true
-  delegate :name, to: :departamento_provincia, prefix: true
+  delegate :name, :provincia, to: :departamento, prefix: true, allow_nil: true
+  delegate :name, to: :departamento_provincia, prefix: true, allow_nil: true
 
   alias_method :d, :departamento
   alias_method :dname, :departamento_name
