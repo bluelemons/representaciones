@@ -13,6 +13,7 @@ gem "haml"
 gem 'prawn'
 gem "builder"
 gem 'formtastic', '~> 1.2.3'
+gem 'test-unit'
 
 # autenticacion
 gem "devise", "~> 1.1"

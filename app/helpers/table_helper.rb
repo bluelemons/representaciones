@@ -1,5 +1,4 @@
 module TableHelper
-
   def table_form(model,data,html)
     tt=""
     for a in data
@@ -19,7 +18,6 @@ module TableHelper
   def table_form_name(a)
     (a[:name] || a[:value]).capitalize
   end
-
 
   def grilla(header,model,data,html)
     raw "<table id ='#{html[:id]}' class='#{html[:class]}'><tr>#{table_th(header)}</tr>#{body(model,data)}</table>"
@@ -57,9 +55,5 @@ module TableHelper
     end
 
     raw tt
-
-
   end
-
 end
-
