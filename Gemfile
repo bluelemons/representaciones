@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
-gem 'thin'
+gem 'thin', '1.5.1'
 
-gem 'rails', '3.0.11'
+gem 'rails', '3.0.20'
 
 # gemas propias
 gem 'squeezer',"0.2.1"
@@ -15,7 +15,7 @@ gem "builder"
 gem 'formtastic', '~> 1.2.3'
 
 # autenticacion
-gem "devise", "~>1.1.rc2"
+gem "devise", "~> 1.1"
 gem "cancan"
 
 # deprecated

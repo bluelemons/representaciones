@@ -27,16 +27,16 @@ puts Role.find_or_create_by_name('Admin',
 
 [{:username=>'olvap', :details => {
   :email=>'youre-mail@mail.com', :password_confirmation=>'admin6',
-  :password=>'admin6', :role_ids=>[1]}},
+  :password=>'admin6' }},
   {:username=>'eloy', :details => {
   :email=>'eloy-mail@mail.com', :password_confirmation=>'admin8',
-  :password=>'admin8', :role_ids=>[1]
-  }},
+  :password=>'admin8' }},
   {:username=>'susana', :details => {
   :email=>'susana@gmail.com', :password_confirmation=>'susana1',
-  :password=>'susana1', :role_ids=>[1]
-  }}].each do |user_hash|
-    User.find_or_create_by_username(user_hash[:username], user_hash[:details])
+  :password=>'susana1' }}].each do |user_hash|
+    user = User.find_or_create_by_username(user_hash[:username], user_hash[:details])
+    user.roles = [Role.find_by_name("Admin")]
+    user
 end
 
 require "#{RAILS_ROOT}/db/seeds/agencias/agencias"
