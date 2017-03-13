@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
-gem 'thin', '1.5.1'
 
 gem 'rails', '3.0.20'
+
+gem 'passenger'
 
 # gemas propias
 gem 'squeezer',"0.2.1"
@@ -34,6 +35,12 @@ gem "mysql2", '~> 0.2.7'
 gem "meta_search"
 gem "acts_as_versioned"
 gem 'money'
+
+group :deployment do
+  gem 'capistrano', '~> 3.8'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+end
 
 group :development, :test do
   gem 'pry'
