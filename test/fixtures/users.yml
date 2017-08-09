@@ -1,7 +1,7 @@
 susana:
   username: susana
   email: susana@gmail.com
-  encrypted_password: $2a$10$d68gcsjgZlnyJ3MdVdfg/u1q53lDkCzvrEezunD5yi/qlbj2uWz/S
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   sign_in_count: 461
   current_sign_in_at: 2011-09-05 18:42:49.000000000Z
   last_sign_in_at: 2011-09-05 18:24:05.000000000Z
