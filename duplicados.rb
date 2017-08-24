@@ -36,13 +36,13 @@ class Duplicados
   def process
     case marcadas_como_duplicadas.size
     when (reservas.size - 1)
-      print "·"
+      print "·".green
       $correcto += 1
     when 0
-      print "F"
+      print "F".red
       $fallos << "[#{ ref }] (#{ reservas.size }) no pudimos identificar duplicado. Observaciones: #{ reservas.map(&:obs).join('|') }".brown
     else
-      print "P"
+      print "E".red
       $errores << "[#{ ref }] (#{ reservas.size }) tiene algun problema raro".red
     end
   end
@@ -52,10 +52,11 @@ class Duplicados
       begin
         reservas.select do |res|
           if res.obs =~ DUPLICATE_REGEX && !res.depositos.empty?
-            warn "Se borra reserva #{ res.id } con movimientos cargados".red
+            # warn "No se borra reserva #{ res.id } con movimientos cargados Obs: #{ res.obs }".red
+            print 'W'.magenta
           end
 
-          res.obs =~ DUPLICATE_REGEX
+          res.obs =~ DUPLICATE_REGEX && res.depositos.empty?
         end
       end
   end
