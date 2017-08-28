@@ -153,6 +153,12 @@ class Reserva < ActiveRecord::Base
     self.save
   end
 
+  def cancel
+    if depositos.empty?
+      update_attributes(hidden: true)
+    end
+  end
+
   private
 
   def monto_total_si_hay_pagos

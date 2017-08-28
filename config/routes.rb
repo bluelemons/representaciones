@@ -28,6 +28,7 @@ Representaciones::Application.routes.draw do
   match 'pasajeros_dni/:doc' => 'pasajeros#show' #Busca el pasajoer por DNI en /pasajeros_din/:doc
 
   resources :reservas do
+    post :cancel, on: :member
     resources :pagos
   end
 

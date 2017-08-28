@@ -15,6 +15,7 @@
       %a{:href=>"#tabs-reserva-6"} Pagos
 
   #tabs-reserva-1.ui-widget.ui-widget-content
+    = button_to "Cancelar", cancel_reserva_path(@reserva), remote: true
     =action_bar(@reserva)
     -if @reserva.liquidada?
       .green La Reserva está liquidada

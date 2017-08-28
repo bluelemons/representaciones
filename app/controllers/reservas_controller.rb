@@ -69,6 +69,18 @@ class ReservasController < InheritedResources::Base
     end
   end
 
+  def cancel
+    @reserva = Reserva.find(params[:id])
+    @reserva.user = current_user
+    if @reserva.cancel
+      flash[:notice] = "La reserva ha sido cancelada, no volverá a aparecer en las búsquedas"
+    else
+      flash[:notice] = "La reserva tiene depositos, por lo que no será ocultada"
+    end
+
+    redirect_to reserva_path(@reserva, format: 'js')
+  end
+
   private
 
   def to_csv(relation)
