@@ -40,10 +40,12 @@ class Duplicados
     elsif borrar_las_que_estan_marcadas_como_duplicadas
       print "2".green
       $correcto += 1
-    else
-      borrar_la_de_monto_menor
+    elsif borrar_la_de_monto_menor
       print "3".green
       $correcto += 1
+    else
+      print "F".red
+      $fallos << "[#{ ref }] (#{ reservas.size }) no se cual borrar".brown
     end
   rescue RuntimeError
     print "F".red
@@ -101,33 +103,6 @@ class Duplicados
     else
       raise "totales muy raros"
     end
-  end
-
-#     case marcadas_como_duplicadas.size
-#     when (reservas.size - 1)
-#       print "·".green
-#       $correcto += 1
-#     when 0
-#       print "F".red
-#       $fallos << "[#{ ref }] (#{ reservas.size }) no pudimos identificar duplicado. Observaciones: #{ reservas.map(&:obs).join('|') }".brown
-#     else
-#       print "E".red
-#       $errores << "[#{ ref }] (#{ reservas.size }) tiene algun problema raro".red
-#     end
-#   end
-
-  def marcadas_como_duplicadas
-    @marcadas_como_duplicadas ||=
-      begin
-        reservas.select do |res|
-          if res.obs =~ DUPLICATE_REGEX && !res.depositos.empty?
-            # warn "No se borra reserva #{ res.id } con movimientos cargados Obs: #{ res.obs }".red
-            print 'W'.magenta
-          end
-
-          res.obs =~ DUPLICATE_REGEX && res.depositos.empty?
-        end
-      end
   end
 
   def reservas
