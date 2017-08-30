@@ -19,9 +19,15 @@ $correcto = 0
 $fallos = []
 $errores = []
 
+# Empiezo reemplazando las referencia = id por referencia = id:#{ id }
+p "Reservas en que se modifica la referencia por ser igual que el id:",
+  Reserva.where(referencia: ref_duplicadas)
+         .where('referencia = id')
+         .update_all('referencia = concat("id:", id)')
+
 class Duplicados
 
-  DUPLICATE_REGEX = /cancela|anula(da|ar)|repetid|repite|duplica|EN OTRO ID|EN ESTE ID|ESTA EN ID/i
+  DUPLICATE_REGEX = /repetid|repite|duplica|EN OTRO ID|EN ESTE ID|ESTA EN ID/i
 
   attr_reader :ref
 
@@ -34,25 +40,29 @@ class Duplicados
   end
 
   def process
-    if borrar_las_que_no_tienen_depositos
+    if reservas.size == 1
+      # ya está corregida
       print "1".green
       $correcto += 1
-    elsif borrar_las_que_estan_marcadas_como_duplicadas
+    elsif borrar_las_que_no_tienen_depositos
       print "2".green
       $correcto += 1
-    elsif borrar_si_son_viejas
+    elsif borrar_las_que_estan_marcadas_como_duplicadas
       print "3".green
+      $correcto += 1
+    elsif borrar_si_son_viejas
+      print "4".green
       $correcto += 1
     else
       print "F".red
       $fallos << "[#{ ref }] (#{ reservas.size }) no se cual borrar".brown
     end
   rescue RuntimeError
-    print "F".red
-    $fallos << "[#{ ref }] (#{ reservas.size }) #{ $!.message }".brown
+    print "E".red
+    $errores << "[#{ ref }] (#{ reservas.size }) #{ $!.message }".brown
   rescue Money::Bank::UnknownRate
-    print "F".red
-    $fallos << "[#{ ref }] (#{ reservas.size }) #{ $!.message }".brown
+    print "E".red
+    $errores << "[#{ ref }] (#{ reservas.size }) #{ $!.message }".brown
   end
 
   def debug
@@ -83,10 +93,8 @@ class Duplicados
     end
     if a_borrar.size == reservas.size - 1
       true
-    elsif a_borrar.size == 0
-      false
     else
-      raise "Duplicadas con observaciones duplicadas"
+      false
     end
   end
 
@@ -98,21 +106,6 @@ class Duplicados
       true
     else
       false
-    end
-  end
-
-  def borrar_la_de_monto_menor
-    totales = reservas.uniq(&:total)
-    if totales.size == 1
-      false
-    elsif totales.size == reservas.size
-      a_borrar = reservas.sort_by(&:total)[0..-1]
-      a_borrar.map(&:obs).reject(&:empty?).each do |o|
-        $errores << "[#{ ref }] Se borra el siguiente comentario: #{ o }".red
-      end
-      true
-    else
-      raise "totales muy raros"
     end
   end
 
