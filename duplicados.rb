@@ -40,7 +40,7 @@ class Duplicados
     elsif borrar_las_que_estan_marcadas_como_duplicadas
       print "2".green
       $correcto += 1
-    elsif borrar_la_de_monto_menor
+    elsif borrar_si_son_viejas
       print "3".green
       $correcto += 1
     else
@@ -87,6 +87,17 @@ class Duplicados
       false
     else
       raise "Duplicadas con observaciones duplicadas"
+    end
+  end
+
+  def borrar_si_son_viejas
+    a_borrar = reservas.select do |r|
+      r.updated_at < Date.new(2017,1,1)
+    end
+    if a_borrar.size == reservas.size
+      true
+    else
+      false
     end
   end
 
