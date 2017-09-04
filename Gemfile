@@ -43,6 +43,7 @@ group :deployment do
 end
 
 group :development, :test do
+  gem 'simplecov', require: false
   gem 'pry-rails'
   gem 'forgery'
 end
