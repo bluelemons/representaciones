@@ -21,3 +21,31 @@ class ActionController::TestCase
   # Los test helpers de devise para los functional test
   include Devise::TestHelpers
 end
+
+require 'capybara/rails'
+require 'capybara/minitest'
+
+Capybara.default_driver = :selenium
+
+class ActionDispatch::IntegrationTest
+  # Make the Capybara DSL available in all integration tests
+  include Capybara::DSL
+  # Make `assert_*` methods behave like Minitest assertions
+  # include Capybara::Minitest::Assertions
+
+  # Reset sessions and driver between tests
+  # Use super wherever this method is redefined in your individual test classes
+  teardown do
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
+  end
+
+  def sign_in user
+    visit '/'
+    click_on 'Conectarse'
+    fill_in('user_username', with: user.username)
+    fill_in('user_password', with: 'password')
+    click_button 'Conectar'
+    assert_text 'Ingresaste correctamente'
+  end
+end
