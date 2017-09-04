@@ -30,6 +30,18 @@ class Movimiento < ActiveRecord::Base
   scope :baja, where(:hidden=>0)
 
   # metodos
+
+  monetize   :monto
+  monetize   :monto_final
+
+  def format_monto
+    if self.monto == self.monto_final
+      self.monto_final.format
+    else
+      "#{self.monto.format} -> #{self.monto_final.format}"
+    end
+  end
+
   def self.total(movs)
     movs = movs.group_by { |m| m.monto.currency_as_string }
     totales = {}
