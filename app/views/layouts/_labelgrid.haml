@@ -1,8 +1,0 @@
-= javascript_include_tag('autocomplete')
-%table
-  %tr
-    %td= f.input field, :input_html => {:size=>6}
-    %td
-      %input.autocomplete{:id=>"#{field[0..-4]}_name",:table => field.to_s[0..-4],:AUTOCOMPLETE =>"OFF",
-  :value=> if action_name == "edit";data.try(field[0..-4].to_sym).try(:name);end}
-
