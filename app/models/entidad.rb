@@ -5,12 +5,11 @@ class Entidad < ActiveRecord::Base
 
   # asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
-  belongs_to :localidad
   has_many :cuentas, :dependent => :destroy  #cuando se borra la entidad se borra la cuenta.
   has_many :movimientos
   has_many :pagos
 
-  attr_accessible :type, :name, :cuit, :localidad_id,
+  attr_accessible :type, :name, :cuit,
                   :calle, :legajo, :telefono, :web, :email
 
   #validaciones
@@ -20,7 +19,6 @@ class Entidad < ActiveRecord::Base
   #validates :legajo, :presence => true
   #validates :email, :presence => true
   #validates :web, :presence => true
-  #validates :localidad_id, :presence => true
 
   #scopes
   default_scope order(:name)

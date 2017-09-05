@@ -18,7 +18,7 @@ class EntidadReport < Prawn::Document
       r.reservas.each do |reserva|
         deuda[reserva.moneda_id] += reserva.send((r.type.downcase + "_deuda").to_sym)
       end
-      myrow += [["#{r.id}","#{r.name}" ,"#{r.cuit}" ,"#{r.telefono}" ,"#{r.legajo}" ,"#{r.calle} #{r.localidad.try(:name)}" ,"#{deuda[0]}","#{deuda[1]}","#{deuda[2]}"]]
+      myrow += [["#{r.id}","#{r.name}" ,"#{r.cuit}" ,"#{r.telefono}" ,"#{r.legajo}" , r.calle,"#{deuda[0]}","#{deuda[1]}","#{deuda[2]}"]]
 
     end
 

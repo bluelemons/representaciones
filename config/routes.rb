@@ -39,14 +39,6 @@ Representaciones::Application.routes.draw do
 
   root :to =>'reservas#index'
 
-  ##Localidades
-  #resources :departamentos
-
-  resources :localidads
-
-  #resources :provincias
-  ##---
-
   ## Squeezer
   resources :users do
     member do
