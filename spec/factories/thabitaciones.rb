@@ -1,5 +1,7 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
-Factory.define :thabitacion do |f|
-  f.name "MyString"
+FactoryGirl.define do
+  factory :thabitacion do
+    name "MyString"
+  end
 end

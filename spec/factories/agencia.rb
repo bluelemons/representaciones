@@ -1,11 +1,13 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
-Factory.define :agency do |f|
-  f.name      { Forgery(:name).company_name }
-  f.calle     "Albear 5234"
-  f.telefono  "456-8791"
-  f.legajo    "186324"
-  f.email     "turismo@albear.com.ar"
-  f.web       "www.myweb.com"
+FactoryGirl.define do
+  factory :agency do
+    name      { Forgery(:name).company_name }
+    calle     "Albear 5234"
+    telefono  "456-8791"
+    legajo    "186324"
+    email     "turismo@albear.com.ar"
+    web       "www.myweb.com"
+  end
 end
 

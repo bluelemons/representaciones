@@ -47,3 +47,9 @@ group :development, :test do
   gem 'forgery'
 end
 
+group :test do
+  gem 'rspec-collection_matchers'
+  gem 'shoulda-matchers'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end

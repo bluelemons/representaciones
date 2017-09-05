@@ -1,7 +1,9 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
-Factory.define :cotizacion do |f|
-  f.fecha "2011-03-01"
-  f.compra 1.5
+FactoryGirl.define do
+  factory :cotizacion do
+    fecha "2011-03-01"
+    compra 1.5
+  end
 end
 
