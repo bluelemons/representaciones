@@ -47,4 +47,5 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'pry-rails'
   gem 'forgery'
+  gem 'minitest'
 end
