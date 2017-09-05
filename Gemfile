@@ -6,7 +6,6 @@ gem 'passenger'
 
 # gemas propias
 gem 'squeezer',"0.2.1"
-gem 'largentinas',"0.1.0"
 
 # vistas
 gem 'will_paginate', '~> 3.0'
