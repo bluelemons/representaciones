@@ -8,6 +8,5 @@ Factory.define :operadora do |f|
   f.legajo "MyString"
   f.email "email@email.com"
   f.web "www.myweb.com"
-  f.localidad_id 4
 end
 
