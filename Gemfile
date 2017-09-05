@@ -4,9 +4,6 @@ gem 'rails', '3.0.20'
 
 gem 'passenger'
 
-# gemas propias
-gem 'squeezer',"0.2.1"
-
 # vistas
 gem 'will_paginate', '~> 3.0'
 gem "haml"
