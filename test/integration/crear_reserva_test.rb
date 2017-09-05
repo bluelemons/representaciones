@@ -3,34 +3,27 @@ require 'test_helper'
 class CrearReservaTest < ActionDispatch::IntegrationTest
   fixtures :all
 
-  test "crear una reserva nueva" do
+  test "visit" do
     sign_in users(:susana)
-    get "/"
-    assert_select "h1", "Reservas"
-    assert_select "#reserva_new"
-    get "/reservas/new.js"
-    post "/reservas.js",
-      reserva: { referencia: "1047793",
-                 salida: 3.days.ago.strftime("%d-%m-%Y"),
-                 agency_id: entidads(:litoraltur).id,
-                 reservado: "paula",
-                 operadora_id: entidads(:ibero).id,
-                 operado: "",
-                 programa_id: programas(:cuba).id,
-                 thabitacion_id: thabitacions(:cuadruple).id,
-                 habitaciones: "1",
-                 regimen: "des",
-                 periodo: "7 noches",
-                 hotel: "w fort lauderdale",
-                 total_fields: { total: "9669,00", total_currency: "USD" },
-                 tarifa: "11208",
-                 pasajero_ids: ["", pasajeros(:julieta).id] }
-    assert_equal 302, response.status
-    assert_equal "Reserva creada", flash[:notice]
-  end
-
-  def sign_in user
-    post '/users/sign_in',
-      user: { username: user.username, password: 'password' }
+    visit '/reservas'
+    click_on 'Alta'
+    fill_in 'Referencia', with: "1047793"
+    fill_in 'Salida', with: 3.days.ago.strftime("%d-%m-%Y")
+    select entidads(:litoraltur).name, from: 'Agencia'
+    fill_in 'Reservado', with: "paula"
+    select entidads(:ibero).name, from: 'Operadora'
+    select programas(:cuba).name, from: 'Programa'
+    select thabitacions(:cuadruple).name, from: 'Tipo de habitacion'
+    fill_in 'Regimen', with: "des"
+    fill_in 'Periodo', with: "7 noches"
+    fill_in 'Hotel', with: "w fort lauderdale"
+    fill_in 'reserva[total_fields][total]', with: '9669,00'
+    select 'u$s', from: 'reserva[total_fields][total_currency]'
+    fill_in 'Tarifa', with: "11208"
+    fill_in 'Nombre', with: 'Tito Puente'
+    fill_in 'Numero', with: '12345678'
+    click_on 'Crear Pasajero'
+    click_on 'Crear Reserva'
+    assert_text 'Reserva creada'
   end
 end

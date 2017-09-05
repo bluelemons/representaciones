@@ -43,7 +43,9 @@ group :deployment do
 end
 
 group :development, :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'pry-rails'
   gem 'forgery'
 end
-
