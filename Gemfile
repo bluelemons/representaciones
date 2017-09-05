@@ -6,7 +6,6 @@ gem 'passenger'
 
 # gemas propias
 gem 'squeezer',"0.2.1"
-gem 'largentinas',"0.1.0"
 
 # vistas
 gem 'will_paginate', '~> 3.0'
@@ -47,3 +46,9 @@ group :development, :test do
   gem 'forgery'
 end
 
+group :test do
+  gem 'rspec-collection_matchers'
+  gem 'shoulda-matchers'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end

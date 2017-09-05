@@ -1,7 +1,8 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :tdeposito do
-    name "MyString"
+  factory :provincia do
+    name "Santa Fe"
   end
 end
+

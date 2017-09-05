@@ -4,25 +4,17 @@ class Localidad < ActiveRecord::Base
   #scope :dpto, joins('left join departamentos on (localidads.departamento_id = departamentos.id)') &
   # select('localidads.*, departamentos.name as dpto')
   default_scope :include => :departamento
-  def pname
-    try(:departamento).try(:provincia).try(:name)
-  end
 
-  def p
-    try(:departamento).try(:provincia)
-  end
+  delegate :name, :provincia, to: :departamento, prefix: true, allow_nil: true
+  delegate :name, to: :departamento_provincia, prefix: true, allow_nil: true
 
-  def d
-    try(:departamento)
-  end
-
-  def dname
-    try(:departamento).try(:name)
-  end
+  alias_method :d, :departamento
+  alias_method :dname, :departamento_name
+  alias_method :p, :departamento_provincia
+  alias_method :pname, :departamento_provincia_name
 
   def lname
-    try(:name)
+    name
   end
-
 end
 
