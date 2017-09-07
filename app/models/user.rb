@@ -5,21 +5,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation,:username,:role_ids
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  attr_accessible(
+    :email,
+    :password,
+    :password_confirmation,
+    :username,
+    :role_ids
+  )
 
   has_many :permitions
   has_many :roles ,:through => :permitions
 
-  def role #array con los roles del usuario
-    roles.map do |role|
-      role.name
-    end
+  def role
+    roles.map(&:name)
   end
 
-  def role?(rol) #true si el usuario tiene el rol
+  def role?(rol)
     role.include?(rol)
   end
 
@@ -28,6 +29,4 @@ class User < ActiveRecord::Base
       role.name.underscore.to_sym
     end
   end
-
 end
-

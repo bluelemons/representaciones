@@ -1,0 +1,13 @@
+%h2.ui-widget-header Users
+.ui-widget-content
+  %table
+    %tr
+      %th Nombre
+      %th Permisos
+    - for user in @users
+      %tr
+        %td
+          %b=user.username
+        %td
+          -if can? :roles, user
+            =link_to "Permisos", {:action=>:roles,:id=>user.id}
