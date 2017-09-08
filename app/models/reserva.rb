@@ -158,6 +158,11 @@ class Reserva < ActiveRecord::Base
     self.save
   end
 
+  def to_s
+    referencia_o_titular = referencia.present? ? "ref: #{ referencia }" : "pax: #{ titular }"
+    "Reserva ##{ id } #{ referencia_o_titular }"
+  end
+
   private
 
   def monto_total_si_hay_pagos
