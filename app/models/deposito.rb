@@ -14,7 +14,6 @@ class Deposito < Movimiento
 
   validates :monto_final_cents, :presence => true
   validates :monto_final_currency, :presence => true
-  validate  :monto_final_positivo
 
   validate :concordancia_entidad_reserva
 
@@ -24,11 +23,6 @@ class Deposito < Movimiento
   belongs_to :tdeposito
 
   private
-
-  def monto_final_positivo
-    errors.add(:monto_final, "debe ser positivo") if monto_final.cents <= 0
-  end
-
 
   def completar_monto
     if monto.zero? and monto_final.nonzero?

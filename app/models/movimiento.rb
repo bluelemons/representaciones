@@ -18,7 +18,6 @@ class Movimiento < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto_cents, :presence => true
   validates :monto_currency, :presence => true
-  validate  :monto_positivo
   validates_length_of :observaciones, maximum: 250
 
   # Los movimientos no pueden ser actualizados
@@ -52,12 +51,6 @@ class Movimiento < ActiveRecord::Base
       totales[moneda] = total
     end
     totales
-  end
-
-  private
-
-  def monto_positivo
-    errors.add(:monto, "debe ser positivo") if monto.cents <= 0
   end
 end
 
