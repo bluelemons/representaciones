@@ -18,7 +18,7 @@ class Movimiento < ActiveRecord::Base
   validates :entidad, :presence => true
   validates :monto_cents, :presence => true
   validates :monto_currency, :presence => true
-  validate  :monto_positivo
+  # validate  :monto_positivo
 
   # Los movimientos no pueden ser actualizados
   #def readonly?

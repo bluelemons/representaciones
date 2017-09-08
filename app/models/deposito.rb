@@ -14,7 +14,7 @@ class Deposito < Movimiento
 
   validates :monto_final_cents, :presence => true
   validates :monto_final_currency, :presence => true
-  validate  :monto_final_positivo
+  # validate  :monto_final_positivo
 
   validate :concordancia_entidad_reserva
 
