@@ -1,8 +1,12 @@
 <%= form_for @pase do |f| %>
-
   <p>
   <%= f.label :origen_id %>
   <%= f.select :origen_id, @pase.posibles_reservas %>
+  </p>
+
+  <p>
+  <%= f.label :monto %>
+  <%= f.number_field :monto %>
   </p>
 
   <p>
@@ -11,17 +15,10 @@
   </p>
 
   <p>
-  <%= f.label :monto %>
-  <%= f.text_field :monto %>
-  </p>
-
-  <p>
-  <%= f.label :cuentas_afectadas_agencia %>
-  <%= f.radio_button("cuentas_afectadas", "agencia") %>
-  <%= f.label :cuentas_afectadas_operadora %>
-  <%= f.radio_button("cuentas_afectadas", "operadora") %>
-  <%= f.label :cuentas_afectadas_ambas %>
-  <%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %>
+  <label>Cuentas afectadas</label>
+  <label><%= f.radio_button("cuentas_afectadas", "agencia") %> Agencia</label>
+  <label><%= f.radio_button("cuentas_afectadas", "operadora") %> Operadora</label>
+  <label><%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %> Ambas</label>
   </p>
 
   <p>
