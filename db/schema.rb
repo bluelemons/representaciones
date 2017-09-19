@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010001024) do
+ActiveRecord::Schema.define(:version => 20170919154628) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -175,6 +182,18 @@ ActiveRecord::Schema.define(:version => 20121010001024) do
   add_index "movimientos", ["entidad_id"], :name => "index_movimientos_on_entidad_id"
   add_index "movimientos", ["reserva_id"], :name => "index_movimientos_on_reserva_id"
   add_index "movimientos", ["type"], :name => "index_movimientos_on_type"
+
+  create_table "operaciones", :force => true do |t|
+    t.date     "fecha"
+    t.string   "type"
+    t.text     "observaciones"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "operaciones", ["fecha"], :name => "index_operaciones_on_fecha"
+  add_index "operaciones", ["type"], :name => "index_operaciones_on_type"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
