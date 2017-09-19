@@ -19,6 +19,7 @@ class Movimiento < ActiveRecord::Base
   validates :monto_cents, :presence => true
   validates :monto_currency, :presence => true
   # validate  :monto_positivo
+  validates_length_of :observaciones, maximum: 250
 
   # Los movimientos no pueden ser actualizados
   #def readonly?
