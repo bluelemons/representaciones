@@ -13,11 +13,10 @@
 
   <p>
   <%= f.label :monto %>
-  <%= f.text_field :monto %>
+  <%= f.number_field :monto, step: '0.01' %>
     <span id="origen_currency">USD<span>
   </p>
 
-  <p>
   <fieldset>
     <legend>Cuentas afectadas</legend>
     <label>
@@ -33,43 +32,21 @@
       Ambas
     </label>
   </fieldset>
-  </p>
 
   <div class="destinos">
-    <p>
-    <%= f.label :destino_id %>
-    <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
-    </p>
+    <fieldset>
+      <legend>Destino 1</legend>
+      <p>
+      <%= f.label :destino_id %>
+      <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
+      </p>
 
-    <p>
-    <%= f.label :monto %>
-    <%= f.text_field :monto %>
-    <span>USD<span>
-    </p>
-
-    <p>
-    <%= f.label :destino_id %>
-    <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
-    </p>
-
-    <p>
-    <%= f.label :monto %>
-    <%= f.text_field :monto %>
-    <span>USD<span>
-    </p>
-
-    <p>
-    <%= f.label :destino_id %>
-    <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
-    </p>
-
-    <!--<p><%# @pase_form.posibles_reservas %></p> -->
-
-    <p>
-    <%= f.label :monto %>
-    <%= f.text_field :monto %>
-    <span>USD<span>
-    </p>
+      <p>
+      <%= f.label :monto %>
+      <%= f.text_field :monto %>
+      <span>USD<span>
+      </p>
+    </fieldset>
   </div>
 
   <p>
@@ -81,6 +58,7 @@
 $(document).on('change', '#pase_origen_id', function (e) {
   const selected = $(this.selectedOptions[0])
   $('span.origen_currency').text(selected.data('currency'))
+  $('#pase_monto').val(selected.data('saldo'))
 })
 </script>
 
