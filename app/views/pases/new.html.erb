@@ -14,7 +14,7 @@
   <p>
   <%= f.label :monto %>
   <%= f.text_field :monto %>
-    <span>USD<span>
+    <span id="origen_currency">USD<span>
   </p>
 
   <p>
@@ -78,6 +78,10 @@
 <% end %>
 
 <script>
+$(document).on('change', '#pase_origen_id', function (e) {
+  const selected = $(this.selectedOptions[0])
+  $('span.origen_currency').text(selected.data('currency'))
+})
 </script>
 
 <style>
