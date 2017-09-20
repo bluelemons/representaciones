@@ -1,3 +1,4 @@
+<h1>Nuevo Pase</h1>
 <%= form_for @pase do |f| %>
 
   <p>
@@ -6,25 +7,92 @@
   </p>
 
   <p>
-  <%= f.label :destino_id %>
-  <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+  <%= f.label :fecha %>
+  <%= f.date_select :fecha, default: Date.today, end_year: Date.today.year %>
   </p>
 
   <p>
   <%= f.label :monto %>
   <%= f.text_field :monto %>
+    <span>USD<span>
   </p>
 
   <p>
-  <%= f.label :cuentas_afectadas_agencia %>
-  <%= f.radio_button("cuentas_afectadas", "agencia") %>
-  <%= f.label :cuentas_afectadas_operadora %>
-  <%= f.radio_button("cuentas_afectadas", "operadora") %>
-  <%= f.label :cuentas_afectadas_ambas %>
-  <%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %>
+  <fieldset>
+    <legend>Cuentas afectadas</legend>
+    <label>
+      <%= f.radio_button("cuentas_afectadas", "agencia") %>
+      Agencia
+    </label>
+    <label>
+      <%= f.radio_button("cuentas_afectadas", "operadora") %>
+      Operadora
+    </label>
+    <label>
+      <%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %>
+      Ambas
+    </label>
+  </fieldset>
   </p>
+
+  <div class="destinos">
+    <p>
+    <%= f.label :destino_id %>
+    <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+    </p>
+
+    <p>
+    <%= f.label :monto %>
+    <%= f.text_field :monto %>
+    <span>USD<span>
+    </p>
+
+    <p>
+    <%= f.label :destino_id %>
+    <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+    </p>
+
+    <p>
+    <%= f.label :monto %>
+    <%= f.text_field :monto %>
+    <span>USD<span>
+    </p>
+
+    <p>
+    <%= f.label :destino_id %>
+    <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+    </p>
+
+    <!--<p><%# @pase.posibles_reservas %></p> -->
+
+    <p>
+    <%= f.label :monto %>
+    <%= f.text_field :monto %>
+    <span>USD<span>
+    </p>
+  </div>
 
   <p>
   <%= f.submit %>
   </p>
 <% end %>
+
+<style>
+h1 {
+  margin: 20px;
+}
+
+form p label {
+  display: inline-block;
+  width: 90px;
+  text-align: right;
+}
+
+form p {
+  margin-bottom: 5px;
+}
+
+.destinos {
+  padding-left: 115px;
+}
+</style>
