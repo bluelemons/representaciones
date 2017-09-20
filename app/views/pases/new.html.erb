@@ -1,9 +1,9 @@
 <h1>Nuevo Pase</h1>
-<%= form_for @pase do |f| %>
+<%= form_for @pase_form.pase do |f| %>
 
   <p>
   <%= f.label :origen_id %>
-  <%= f.select :origen_id, @pase.posibles_reservas %>
+  <%= f.select :origen_id, @pase_form.reservas_con_saldo %>
   </p>
 
   <p>
@@ -38,7 +38,7 @@
   <div class="destinos">
     <p>
     <%= f.label :destino_id %>
-    <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+    <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
     </p>
 
     <p>
@@ -49,7 +49,7 @@
 
     <p>
     <%= f.label :destino_id %>
-    <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+    <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
     </p>
 
     <p>
@@ -60,10 +60,10 @@
 
     <p>
     <%= f.label :destino_id %>
-    <%= f.select :destino_id, @pase.posibles_reservas, prompt: "Indique destino del pase" %>
+    <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
     </p>
 
-    <!--<p><%# @pase.posibles_reservas %></p> -->
+    <!--<p><%# @pase_form.posibles_reservas %></p> -->
 
     <p>
     <%= f.label :monto %>

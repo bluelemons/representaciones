@@ -1,6 +1,6 @@
 class PasesController < ApplicationController
   def new
-    @pase = Pase.new Reserva.find(params[:reserva])
+    @pase_form = PaseForm.new Reserva.find(params[:reserva])
   end
 
   def create
