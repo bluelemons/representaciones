@@ -20,6 +20,8 @@ class PaseForm
   def reservas_con_saldo
     @reservas_con_saldo ||= Reserva
       .where(agency_id: @reserva.agency_id, operadora_id: @reserva.operadora_id)
+      .where('salida > ?', 6.months.ago)
+      .includes(:depositos)
       .select { |reserva| tiene_saldo? reserva }
       .map { |reserva| [reserva, reserva.id, { 'data-currency': reserva.total_currency }] }
   end
