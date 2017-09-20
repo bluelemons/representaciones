@@ -13,7 +13,7 @@
 
   <p>
   <%= f.label :monto %>
-  <%= f.number_field :monto, step: '0.01' %>
+  <%= f.number_field :monto, step: '0.01', min: 0, required: true %>
     <span id="origen_currency">USD<span>
   </p>
 
