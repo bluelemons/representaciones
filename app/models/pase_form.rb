@@ -12,7 +12,7 @@ class PaseForm
   def posibles_reservas
     @posibles_reservas ||= Reserva
       .where(agency_id: @reserva.agency_id, operadora_id: @reserva.operadora_id)
-      .map { |reserva| [reserva, reserva.id] }
+      .map { |reserva| [reserva, reserva.id, data_for(reserva)] }
   end
 
   def reservas_con_saldo
