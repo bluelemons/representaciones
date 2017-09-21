@@ -14,7 +14,7 @@
 
   <p>
   <%= f.label :monto %>
-  <%= f.number_field :monto, step: '0.01', min: 0, required: true %>
+  <%= f.number_field :monto, step: '0.01', min: 0, max: @pase_form.pase.monto, required: true %>
     <span id="origen_currency"><%= @pase_form.reserva.total_currency %><span>
   </p>
 
@@ -62,7 +62,7 @@ $(document).on('change', '#nuevo_destino', function (e) {
   const destino_html ='<fieldset><legend>Pase a ' +
         selected.text() +
         '</legend>' +
-        '<label>Monto <input name="pase[destinos][' +
+        '<label>Monto <input type=number name="pase[destinos][' +
         selected.val() +
         ']" min=0 max=' +
         selected.data('debt') +
