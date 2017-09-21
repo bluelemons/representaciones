@@ -38,7 +38,7 @@
       <legend>Destino 1</legend>
       <p>
       <%= f.label :destino_id %>
-      <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Indique destino del pase" %>
+      <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Destino del pase" %>
       </p>
 
       <p>
@@ -47,6 +47,14 @@
       <span>USD<span>
       </p>
     </fieldset>
+
+    <label>Agregar destino
+    <select id="nuevo_destino">
+      <option value="" selected disabled>Nueva reserva destino</option>
+      <%= options_for_select @pase_form.posibles_reservas %>
+    </select>
+    </label>
+
   </div>
 
   <p>
@@ -57,6 +65,19 @@
 <script>
 $(document).on('change', '#pase_origen_id', function (e) {
   const selected = $(this.selectedOptions[0])
+  $('span.origen_currency').text(selected.data('currency'))
+  $('#pase_monto').val(selected.data('saldo'))
+})
+
+$(document).on('change', '#nuevo_destino', function (e) {
+  const selected = $(this.selectedOptions[0])
+  console.log(selected)
+    $('.destinos').append('<fieldset><legend>Pase a ' +
+        selected.text() +
+        '</legend>' +
+        '<label>Monto <input name="pase[destinos][' +
+        selected.val() +
+        ']></label> <span>USD<span></fieldset>')
   $('span.origen_currency').text(selected.data('currency'))
   $('#pase_monto').val(selected.data('saldo'))
 })
