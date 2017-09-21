@@ -2,8 +2,9 @@
 <%= form_for @pase_form.pase do |f| %>
 
   <p>
-  <%= f.label :origen_id %>
-  <%= f.select :origen_id, [[@pase_form.reserva, @pase_form.reserva.id]] %>
+  <label>De</label>
+  <input disabled value="<%= @pase_form.reserva %>">
+  <%= f.hidden_field :origen_id, value: @pase_form.reserva.id %>
   </p>
 
   <p>
@@ -14,7 +15,7 @@
   <p>
   <%= f.label :monto %>
   <%= f.number_field :monto, step: '0.01', min: 0, required: true %>
-    <span id="origen_currency">USD<span>
+    <span id="origen_currency"><%= @pase_form.reserva.total_currency %><span>
   </p>
 
   <fieldset>
@@ -91,6 +92,15 @@ label input {
 
 form p {
   margin-bottom: 5px;
+}
+
+input[disabled] {
+  width: 20em;
+}
+
+input[type="number"] {
+  width: 16em;
+  line-height: 2em;
 }
 
 .destinos {
