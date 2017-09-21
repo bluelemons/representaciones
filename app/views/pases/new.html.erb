@@ -58,12 +58,17 @@ $(document).on('change', '#pase_origen_id', function (e) {
 
 $(document).on('change', '#nuevo_destino', function (e) {
   const selected = $(this.selectedOptions[0])
+  // TODO: mover a un template
   const destino_html ='<fieldset><legend>Pase a ' +
         selected.text() +
         '</legend>' +
         '<label>Monto <input name="pase[destinos][' +
         selected.val() +
-        ']"></label> <span>' +
+        ']" min=0 max=' +
+        selected.data('debt') +
+        ' value=' +
+        selected.data('debt') +
+        '></label> <span>' +
         selected.data('currency') +
         '<span></fieldset>'
   $('.destinos').append(destino_html)
