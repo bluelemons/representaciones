@@ -3,7 +3,7 @@
 
   <p>
   <%= f.label :origen_id %>
-  <%= f.select :origen_id, @pase_form.reservas_con_saldo %>
+  <%= f.select :origen_id, [[@pase_form.reserva, @pase_form.reserva.id]] %>
   </p>
 
   <p>
@@ -34,28 +34,14 @@
   </fieldset>
 
   <div class="destinos">
-    <fieldset>
-      <legend>Destino 1</legend>
-      <p>
-      <%= f.label :destino_id %>
-      <%= f.select :destino_id, @pase_form.posibles_reservas, prompt: "Destino del pase" %>
-      </p>
+  </div>
 
-      <p>
-      <%= f.label :monto %>
-      <%= f.text_field :monto %>
-      <span>USD<span>
-      </p>
-    </fieldset>
-
-    <label>Agregar destino
+  <label>Agregar reserva destino
     <select id="nuevo_destino">
       <option value="" selected disabled>Nueva reserva destino</option>
       <%= options_for_select @pase_form.posibles_reservas %>
     </select>
-    </label>
-
-  </div>
+  </label>
 
   <p>
   <%= f.submit %>
