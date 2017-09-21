@@ -1,8 +1,5 @@
 class PaseForm
-  extend ActiveModel::Naming
-  include ActiveModel::Conversion
-
-  attr_reader :pase
+  attr_reader :pase, :reserva
   attr_accessor :monto, :origen_id, :destino_id, :cuentas_afectadas, :fecha
 
   def initialize reserva
