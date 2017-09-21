@@ -14,9 +14,11 @@ class PaseForm
     @posibles_reservas ||= Reserva
       .where(agency_id: @reserva.agency_id)
       .where(operadora_id: @reserva.operadora_id)
+      .where('id <> ?', @reserva.id)
       .where('salida > ?', 10.months.ago)
       .includes(:depositos)
       .map { |reserva| [reserva, reserva.id, data_for(reserva)] }
+      .select { |option| option[2][:'data-debt'] > 0 }
   end
 
   private
