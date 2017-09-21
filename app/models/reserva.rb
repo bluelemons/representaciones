@@ -163,6 +163,10 @@ class Reserva < ActiveRecord::Base
     "Reserva ##{ id } #{ referencia_o_titular }"
   end
 
+  def saldo_positivo?
+    agencia_deuda.cents < 0 || operadora_deuda.cents < 0
+  end
+
   private
 
   def monto_total_si_hay_pagos
