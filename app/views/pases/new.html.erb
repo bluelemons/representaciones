@@ -1,36 +1,36 @@
 <h1>Nuevo Pase</h1>
-<%= form_for @pase_form.pase do |f| %>
+<%= form_for @pase do |f| %>
 
   <div id="datos_origen">
     <p>
     <label>De</label>
-    <input disabled value="<%= @pase_form.reserva %>">
-    <%= f.hidden_field :origen_id %>
+    <input disabled value="<%= @pase.source %>">
+    <%= f.hidden_field :source_id %>
     </p>
 
     <p>
-    <%= f.label :fecha %>
-    <%= f.date_select :fecha, default: Date.today, end_year: Date.today.year %>
+    <%= f.label :date %>
+    <%= f.date_select :date, default: Date.today, end_year: Date.today.year %>
     </p>
 
     <p>
-    <%= f.label :monto %>
-    <%= f.number_field :monto, step: '0.01', min: 0, max: @pase_form.pase.monto, required: true %>
-    <span id="origen_currency"><%= @pase_form.reserva.total_currency %><span>
+    <%= f.label :debit %>
+    <%= f.number_field :debit, step: '0.01', min: 0, max: @pase.debit, required: true %>
+    <span id="origen_currency"><%= @pase.source.total_currency %><span>
     </p>
 
     <fieldset>
       <legend>Cuentas afectadas</legend>
       <label>
-        <%= f.radio_button("cuentas_afectadas", "agencia") %>
+        <%= f.radio_button(:entities, "agencia") %>
         Agencia
       </label>
       <label>
-        <%= f.radio_button("cuentas_afectadas", "operadora") %>
+        <%= f.radio_button(:entities, "operadora") %>
         Operadora
       </label>
       <label>
-        <%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %>
+        <%= f.radio_button(:entities, "ambas", checked: true) %>
         Ambas
       </label>
     </fieldset>
@@ -43,13 +43,13 @@
     <label>Agregar reserva destino
       <select id="nuevo_destino">
         <option value="" selected disabled>Nueva reserva destino</option>
-        <%= options_for_select @pase_form.posibles_reservas %>
+        <%= options_for_select @pase.posibles_reservas %>
       </select>
     </label>
 
     <div class="info">
-      Saldo restante: <span id="remaining"><%= @pase_form.pase.monto %></span>
-      <span><%= @pase_form.reserva.total_currency %><span>
+      Saldo restante: <span id="remaining"><%= @pase.debit %></span>
+      <span><%= @pase.source.total_currency %><span>
     </div>
 
     <p>
