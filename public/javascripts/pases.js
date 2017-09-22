@@ -8,7 +8,7 @@ $(document).on('change', '#nuevo_destino', function (e) {
   const selected = $(this.selectedOptions[0])
 
   // el valor para llenar automáticamente
-  const current_ammount = Math.min($('#pase_monto').val(),
+  const current_ammount = Math.min($('#remaining').text(),
       selected.data('debt'))
 
   // agrego el formulario de destino
