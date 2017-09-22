@@ -1,0 +1,43 @@
+h1 {
+  margin: 20px;
+}
+
+form p label {
+  display: inline-block;
+  width: 90px;
+  text-align: right;
+}
+
+fieldset {
+  width: 400px;
+  margin: 20px;
+}
+
+label input {
+  margin: 3px;
+}
+
+form p {
+  margin-bottom: 5px;
+}
+
+input[disabled] {
+  width: 20em;
+}
+
+input[type="number"] {
+  width: 16em;
+  line-height: 2em;
+}
+
+.destinos {
+  padding-left: 115px;
+}
+
+.info {
+  margin: 5px auto;
+  max-width: 20em;
+  padding: 2px;
+  background: lightblue;
+  border: 1px solid #333;
+}
