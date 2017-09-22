@@ -37,6 +37,11 @@
   <div class="destinos">
   </div>
 
+  <div class="info">
+    Saldo restante: <span id="remaining"><%= @pase_form.pase.monto %></span>
+        <span><%= @pase_form.reserva.total_currency %><span>
+  </div>
+
   <label>Agregar reserva destino
     <select id="nuevo_destino">
       <option value="" selected disabled>Nueva reserva destino</option>
@@ -81,6 +86,11 @@ $(document).on('change', '#nuevo_destino', function (e) {
 
   // evitamos dos veces el mismo destino
   selected.prop({ disabled: true }).parent().val('')
+
+  // Actualizo saldo restante
+  $('#remaining').text(function (_, remaining) {
+    return (parseFloat(remaining) - parseFloat(current_ammount)).toFixed(2)
+  })
 })
 </script>
 
@@ -119,5 +129,13 @@ input[type="number"] {
 
 .destinos {
   padding-left: 115px;
+}
+
+.info {
+  margin: 5px auto;
+  max-width: 20em;
+  padding: 2px;
+  background: lightblue;
+  border: 1px solid #333;
 }
 </style>
