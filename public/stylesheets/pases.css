@@ -5,7 +5,9 @@
 }
 
 h1 {
-  margin: 20px;
+  text-align: center;
+  font-size: 3em;
+  margin: 30px;
 }
 
 form p label {
