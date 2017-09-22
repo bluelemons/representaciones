@@ -1,3 +1,9 @@
+#datos_origen , #datos_destino {
+  width 50%;
+  padding: 0 1em;
+  float: left;
+}
+
 h1 {
   margin: 20px;
 }
@@ -15,6 +21,7 @@ fieldset {
 
 label input {
   margin: 3px;
+  margin-left: 20px;
 }
 
 form p {
@@ -30,8 +37,9 @@ input[type="number"] {
   line-height: 2em;
 }
 
-.destinos {
-  padding-left: 115px;
+input[type="submit"] {
+  float: right;
+  margin: 1em;
 }
 
 .info {

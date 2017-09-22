@@ -1,57 +1,61 @@
 <h1>Nuevo Pase</h1>
 <%= form_for @pase_form.pase do |f| %>
 
-  <p>
-  <label>De</label>
-  <input disabled value="<%= @pase_form.reserva %>">
-  <%= f.hidden_field :origen_id, value: @pase_form.reserva.id %>
-  </p>
+  <div id="datos_origen">
+    <p>
+    <label>De</label>
+    <input disabled value="<%= @pase_form.reserva %>">
+    <%= f.hidden_field :origen_id %>
+    </p>
 
-  <p>
-  <%= f.label :fecha %>
-  <%= f.date_select :fecha, default: Date.today, end_year: Date.today.year %>
-  </p>
+    <p>
+    <%= f.label :fecha %>
+    <%= f.date_select :fecha, default: Date.today, end_year: Date.today.year %>
+    </p>
 
-  <p>
-  <%= f.label :monto %>
-  <%= f.number_field :monto, step: '0.01', min: 0, max: @pase_form.pase.monto, required: true %>
+    <p>
+    <%= f.label :monto %>
+    <%= f.number_field :monto, step: '0.01', min: 0, max: @pase_form.pase.monto, required: true %>
     <span id="origen_currency"><%= @pase_form.reserva.total_currency %><span>
-  </p>
+    </p>
 
-  <fieldset>
-    <legend>Cuentas afectadas</legend>
-    <label>
-      <%= f.radio_button("cuentas_afectadas", "agencia") %>
-      Agencia
-    </label>
-    <label>
-      <%= f.radio_button("cuentas_afectadas", "operadora") %>
-      Operadora
-    </label>
-    <label>
-      <%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %>
-      Ambas
-    </label>
-  </fieldset>
-
-  <div class="destinos">
+    <fieldset>
+      <legend>Cuentas afectadas</legend>
+      <label>
+        <%= f.radio_button("cuentas_afectadas", "agencia") %>
+        Agencia
+      </label>
+      <label>
+        <%= f.radio_button("cuentas_afectadas", "operadora") %>
+        Operadora
+      </label>
+      <label>
+        <%= f.radio_button("cuentas_afectadas", "ambas", checked: true) %>
+        Ambas
+      </label>
+    </fieldset>
   </div>
 
-  <div class="info">
-    Saldo restante: <span id="remaining"><%= @pase_form.pase.monto %></span>
-        <span><%= @pase_form.reserva.total_currency %><span>
+  <div id="datos_destino">
+    <div class="destinos">
+    </div>
+
+    <label>Agregar reserva destino
+      <select id="nuevo_destino">
+        <option value="" selected disabled>Nueva reserva destino</option>
+        <%= options_for_select @pase_form.posibles_reservas %>
+      </select>
+    </label>
+
+    <div class="info">
+      Saldo restante: <span id="remaining"><%= @pase_form.pase.monto %></span>
+      <span><%= @pase_form.reserva.total_currency %><span>
+    </div>
+
+    <p>
+    <%= f.submit %>
+    </p>
   </div>
-
-  <label>Agregar reserva destino
-    <select id="nuevo_destino">
-      <option value="" selected disabled>Nueva reserva destino</option>
-      <%= options_for_select @pase_form.posibles_reservas %>
-    </select>
-  </label>
-
-  <p>
-  <%= f.submit %>
-  </p>
 <% end %>
 
 <% content_for :head do %>
