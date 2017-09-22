@@ -1,9 +1,24 @@
 class PasesController < ApplicationController
   def new
-    @pase = Pase.new source: Reserva.find(params[:reserva])
+    @pase = Pase.new source_id: params[:reserva]
   end
 
   def create
+    @pase = Pase.new params[:pase]
+    if @pase.save
+      redirect_to @pase, notice: "El pase fue creado"
+    else
+      render :new
+    end
+  end
+
+  def show
+    @pase = Pase.new params[:id]
+    render text: @pase.inspect
+  end
+
+
+  def basura
     origen = Reserva.find(params[:pase][:origen_id])
     destino = Reserva.find(params[:pase][:destino_id])
     pase_params = params[:pase]

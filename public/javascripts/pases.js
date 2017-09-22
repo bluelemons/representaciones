@@ -16,12 +16,12 @@ $(document).on('change', '#nuevo_destino', function (e) {
   const destino_html ='<fieldset><legend>Pase a ' +
         selected.text() +
         '</legend>' +
-        '<label for="pase_destinos_' +
+        '<label for="pase_destinations_' +
         selected.val() +
         '">Monto</label>' +
-        '<input id="pase_destinos_' +
+        '<input id="pase_destinations_' +
         selected.val() +
-        '" type=number name="pase[destinos][' +
+        '" type=number name="pase[destinations][' +
         selected.val() +
         ']" min="0" step="0.01" max="' +
         selected.data('debt') +
