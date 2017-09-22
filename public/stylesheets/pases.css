@@ -16,7 +16,7 @@ form p label {
 
 fieldset {
   width: 400px;
-  margin: 20px;
+  margin-bottom: 20px;
 }
 
 label input {
