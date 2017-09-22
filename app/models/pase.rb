@@ -1,5 +1,10 @@
+# Un pase retira saldo de una reserva y lo distribuye en otras reservas de la
+# misma agencia y operadora.
+#
+# Un saldo positivo puede quedar remanente en una reserva debido a un
+# sobre-pago o una devolución realizada por la operadora, la agencia luego
+# mueve este saldo a otra reserva.
 class Pase < Action
-
   attr_reader :source, :source_id, :debit, :entities
 
   def source= reserva
