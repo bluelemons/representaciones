@@ -47,7 +47,8 @@ input[type="submit"] {
 .info {
   margin: 5px auto;
   max-width: 20em;
-  padding: 2px;
-  background: lightblue;
+  padding: 5px;
+  background: hsla(220, 35%, 90%, 1);
   border: 1px solid #333;
+  text-align: center;
 }
