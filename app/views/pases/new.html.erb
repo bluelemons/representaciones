@@ -58,6 +58,17 @@
   </div>
 <% end %>
 
+<template id="destino">
+  <fieldset>
+    <legend>Pase a {{ name }}</legend>
+    <label for="pase_destinations_{{ id }}">Monto</label>
+    <input id="pase_destinations_{{ id }}" type=number
+           name="pase[destinations][{{ id }}]" min="0" step="0.01" max="{{ max }}"
+           value="{{ value }}">
+    <span> {{ currency }}<span>
+  </fieldset>
+</template>
+
 <% content_for :head do %>
   <%= javascript_include_tag 'pases.js' %>
 <% end %>

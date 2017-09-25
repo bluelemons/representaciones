@@ -5,38 +5,34 @@ $(document).on('change', '#pase_origen_id', function (e) {
 })
 
 $(document).on('change', '#nuevo_destino', function (e) {
-  const selected = $(this.selectedOptions[0])
-
-  // el valor para llenar automáticamente
-  const current_ammount = Math.min($('#remaining').text(),
-      selected.data('debt'))
+  const fieldset = document.querySelector('#destino')
+    .content.querySelector('fieldset')
+  const destinos = document.querySelector('.destinos')
+  const clone = document.importNode(fieldset, true)
 
   // agrego el formulario de destino
-  // TODO: mover a un template
-  const destino_html ='<fieldset><legend>Pase a ' +
-        selected.text() +
-        '</legend>' +
-        '<label for="pase_destinations_' +
-        selected.val() +
-        '">Monto</label>' +
-        '<input id="pase_destinations_' +
-        selected.val() +
-        '" type=number name="pase[destinations][' +
-        selected.val() +
-        ']" min="0" step="0.01" max="' +
-        selected.data('debt') +
-        '" value="' +
-        current_ammount +
-        '"> <span>' +
-        selected.data('currency') +
-        '<span></fieldset>'
-  $('.destinos').append(destino_html)
+  const selected = this.selectedOptions[0]
+  document.sample_clone = clone
+  const remaining = document.querySelector('#remaining')
+  const current_value = Math.min(remaining.textContent, selected.dataset.debt)
+
+  const template_data = {
+    name: selected.innerText,
+    id: selected.value,
+    value: current_value,
+    max: selected.dataset.debt,
+    currency: selected.dataset.currency }
+
+  clone.innerHTML = clone.innerHTML.replace(/{{[^}]*}}/g, function (match) {
+    return template_data[match.slice(2, -2).trim()]
+  })
+  destinos.appendChild(clone);
 
   // evitamos dos veces el mismo destino
-  selected.prop({ disabled: true }).parent().val('')
+  selected.disabled = true
+  this.options[0].selected = true
+  console.log(selected.selected)
 
   // Actualizo saldo restante
-  $('#remaining').text(function (_, remaining) {
-    return (parseFloat(remaining) - parseFloat(current_ammount)).toFixed(2)
-  })
+  remaining.innerText = (parseFloat(remaining.innerText) - parseFloat(current_value)).toFixed(2)
 })
