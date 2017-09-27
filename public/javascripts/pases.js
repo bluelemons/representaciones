@@ -23,9 +23,23 @@
     selected.disabled = true
     this.options[0].selected = true
 
-    // Actualizo saldo restante
-    remaining.innerText = (parseFloat(remaining.innerText) - parseFloat(current_value)).toFixed(2)
+    actualizar_saldo_restante()
   })
+
+  function actualizar_saldo_restante () {
+    const remaining = document.querySelector('#remaining')
+    const debitar = parseFloat(document.querySelector('#pase_debit').value)
+    let acreditar = 0
+    const destinos = document.querySelectorAll('.destinos input')
+    for (var i = 0; i < destinos.length; ++i) {
+      const destino = destinos[i]
+      acreditar += parseFloat(destino.value)
+    }
+
+    const saldo = (debitar - acreditar).toFixed(2)
+    remaining.innerText = saldo
+    return saldo
+  }
 
   function render(template, data) {
     const clone = document.importNode(template, true)
