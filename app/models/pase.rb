@@ -100,6 +100,10 @@ class Pase < Action
   end
 
   def write_description
-    self.description = "a very good description"
+    self.description = <<-DESC
+Pase #{ date }
+Desde #{ debit } #{ source.total_currency } desde #{ source }
+A #{ destination_details }
+DESC
   end
 end

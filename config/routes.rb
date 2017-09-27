@@ -15,7 +15,7 @@ Representaciones::Application.routes.draw do
     resources :cuentas
   end
 
-  resources :pases, only: [:new, :create, :show]
+  resources :pases, only: [:new, :create, :show, :destroy]
 
   resources :operadoras
   resources :agencies

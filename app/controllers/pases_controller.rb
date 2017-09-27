@@ -13,7 +13,13 @@ class PasesController < ApplicationController
   end
 
   def show
-    @pase = Pase.new params[:id]
-    render text: @pase.inspect
+    @pase = Pase.find params[:id]
+  end
+
+  def destroy
+    @pase = Pase.find params[:id]
+    reserva = @pase.depositos.first.reserva
+    @pase.destroy
+    redirect_to reserva, notice: 'El pase fue eliminado'
   end
 end
