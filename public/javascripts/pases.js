@@ -1,9 +1,3 @@
-$(document).on('change', '#pase_origen_id', function (e) {
-  const selected = $(this.selectedOptions[0])
-  $('span.origen_currency').text(selected.data('currency'))
-  $('#pase_monto').val(selected.data('saldo'))
-})
-
 $(document).on('change', '#nuevo_destino', function (e) {
   const fieldset = document.querySelector('#destino')
     .content.querySelector('fieldset')
