@@ -10,7 +10,7 @@
     const current_value = Math.min(remaining.textContent, selected.dataset.debt)
 
     const template_data = {
-      name: selected.innerText,
+      name: selected.textContent,
       id: selected.value,
       value: current_value,
       max: selected.dataset.debt,
