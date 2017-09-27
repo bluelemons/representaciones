@@ -3,7 +3,6 @@
     const fieldset = document.querySelector('#destino')
       .content.querySelector('fieldset')
     const destinos = document.querySelector('.destinos')
-    const clone = document.importNode(fieldset, true)
 
     // agrego el formulario de destino
     const selected = this.selectedOptions[0]
@@ -17,10 +16,8 @@
       max: selected.dataset.debt,
       currency: selected.dataset.currency }
 
-    clone.innerHTML = clone.innerHTML.replace(/{{[^}]*}}/g, function (match) {
-      return template_data[match.slice(2, -2).trim()]
-    })
-    destinos.appendChild(clone);
+    const nuevo_destino = render(fieldset, template_data)
+    destinos.appendChild(nuevo_destino);
 
     // evitamos dos veces el mismo destino
     selected.disabled = true
@@ -29,4 +26,12 @@
     // Actualizo saldo restante
     remaining.innerText = (parseFloat(remaining.innerText) - parseFloat(current_value)).toFixed(2)
   })
+
+  function render(template, data) {
+    const clone = document.importNode(template, true)
+    clone.innerHTML = clone.innerHTML.replace(/{{[^}]*}}/g, function (match) {
+      return data[match.slice(2, -2).trim()]
+    })
+    return clone
+  }
 })()
