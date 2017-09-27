@@ -33,3 +33,9 @@
   margin-right: auto;
 }
 
+a.start_action {
+  background: hsla(206, 52%, 80%, 0.8);
+  border: #555 solid 1px;
+  border-radius: 5px;
+  padding: 4px 10px;
+}
