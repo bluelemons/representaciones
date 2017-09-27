@@ -52,3 +52,15 @@ input[type="submit"] {
   border: 1px solid #333;
   text-align: center;
 }
+
+.info.warning {
+  background: yellow;
+}
+
+.info.danger {
+  background: pink;
+}
+
+.info.success {
+  background: lightgreen;
+}

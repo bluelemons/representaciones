@@ -26,6 +26,10 @@
     actualizar_saldo_restante()
   })
 
+  $(document).on('change', '#pase_debit , .destinos input', function (e) {
+    actualizar_saldo_restante()
+  })
+
   function actualizar_saldo_restante () {
     const remaining = document.querySelector('#remaining')
     const debitar = parseFloat(document.querySelector('#pase_debit').value)
@@ -36,8 +40,16 @@
       acreditar += parseFloat(destino.value)
     }
 
-    const saldo = (debitar - acreditar).toFixed(2)
-    remaining.innerText = saldo
+    const saldo = debitar - acreditar
+    remaining.innerText = saldo.toFixed(2)
+    if (saldo < 0) {
+      remaining.parentNode.className = 'info danger'
+    } else if (saldo > 0) {
+      remaining.parentNode.className = 'info warning'
+    } else {
+      remaining.parentNode.className = 'info success'
+    }
+
     return saldo
   }
 
