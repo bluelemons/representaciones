@@ -48,8 +48,11 @@
     </label>
 
     <div class="info">
-      Saldo restante: <span id="remaining"><%= @pase.debit %></span>
+      <p>Saldo restante: <span id="remaining"><%= @pase.debit %></span>
       <span><%= @pase.source.total_currency %><span>
+      </p>
+      <label>Cambio ARS a USD: <input type="number" id="cambio_dolar" step="0.0001" value="15"></label>
+      <label>Cambio ARS a EUR: <input type="number" id="cambio_euro" step="0.0001" value="15"></label>
     </div>
 
     <p>
