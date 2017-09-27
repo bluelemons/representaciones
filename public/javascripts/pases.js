@@ -53,6 +53,33 @@
     return saldo
   }
 
+  function saldo_acreditado () {
+    let acreditado = 0
+    const destinos = document.querySelectorAll('.destinos input')
+    for (var i = 0; i < destinos.length; ++i) {
+      const destino = destinos[i]
+      acreditado += parseFloat(destino.value)
+    }
+    return acreditado
+  }
+
+  function exchange (money, currency) {
+    if (money.currency === currency) {
+      return money
+    }
+
+    const dolar = document.getElementById('cambio_dolar').value
+    const euro = document.querySelector('#cambio_euro').value
+
+    const matrix = {
+      ARS: { USD: 1 / dolar, EUR: 1 / euro },
+      USD: { ARS: dolar, EUR: dolar / euro },
+      EUR: { USD: euro / dolar, EUR: euro }}
+
+    return { ammount: money.ammount * matrix[money.currency][currency],
+             currency: currency }
+  }
+
   function render(template, data) {
     const clone = document.importNode(template, true)
     clone.innerHTML = clone.innerHTML.replace(/{{[^}]*}}/g, function (match) {
