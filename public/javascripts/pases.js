@@ -6,8 +6,8 @@
 
     // agrego el formulario de destino
     const selected = this.selectedOptions[0]
-    const remaining = document.querySelector('#remaining')
-    const current_value = Math.min(remaining.textContent, selected.dataset.debt)
+    const saldo = exchange(saldo_restante(), selected.dataset.currency)
+    const current_value = Math.min(saldo.amount, selected.dataset.debt)
 
     const template_data = {
       name: selected.textContent,
@@ -30,21 +30,25 @@
     actualizar_saldo_restante()
   })
 
+  function saldo_restante () {
+    const remaining = document.querySelector('#remaining')
+    const debit = document.querySelector('#pase_debit')
+
+    return { amount: parseFloat(remaining.textContent),
+             currency: debit.dataset.currency }
+  }
+
   function actualizar_saldo_restante () {
     const remaining = document.querySelector('#remaining')
-    const debitar = parseFloat(document.querySelector('#pase_debit').value)
-    let acreditar = 0
-    const destinos = document.querySelectorAll('.destinos input')
-    for (var i = 0; i < destinos.length; ++i) {
-      const destino = destinos[i]
-      acreditar += parseFloat(destino.value)
-    }
+    const debit = document.querySelector('#pase_debit')
+    const debit_amount = parseFloat(debit.value)
 
-    const saldo = debitar - acreditar
+    const saldo = debit_amount - saldo_asignado(debit.dataset.currency)
     remaining.innerText = saldo.toFixed(2)
-    if (saldo < 0) {
+
+    if (saldo < -0.001) {
       remaining.parentNode.className = 'info danger'
-    } else if (saldo > 0) {
+    } else if (saldo > 0.001) {
       remaining.parentNode.className = 'info warning'
     } else {
       remaining.parentNode.className = 'info success'
@@ -53,14 +57,17 @@
     return saldo
   }
 
-  function saldo_acreditado () {
-    let acreditado = 0
+  // calcula el saldo asignado en la moneda indicada
+  function saldo_asignado (currency) {
+    let asignado = 0
     const destinos = document.querySelectorAll('.destinos input')
     for (var i = 0; i < destinos.length; ++i) {
       const destino = destinos[i]
-      acreditado += parseFloat(destino.value)
+      asignado += exchange({ amount: parseFloat(destino.value),
+        currency: destino.dataset.currency },
+        currency).amount
     }
-    return acreditado
+    return asignado
   }
 
   function exchange (money, currency) {
@@ -76,7 +83,7 @@
       USD: { ARS: dolar, EUR: dolar / euro },
       EUR: { USD: euro / dolar, EUR: euro }}
 
-    return { ammount: money.ammount * matrix[money.currency][currency],
+    return { amount: money.amount * matrix[money.currency][currency],
              currency: currency }
   }
 
