@@ -43,6 +43,13 @@
     const debit_amount = parseFloat(debit.value)
 
     const saldo = debit_amount - saldo_asignado(debit.dataset.currency)
+
+    if (Number.isNaN(saldo)) {
+      remaining.innerText = 'No es posible calcular, ingrese valor de cambio'
+      remaining.parentNode.className = 'info danger'
+      return saldo
+    }
+
     remaining.innerText = saldo.toFixed(2)
 
     if (saldo < -0.001) {
@@ -52,6 +59,8 @@
     } else {
       remaining.parentNode.className = 'info success'
     }
+
+    recalcular_destinos_monto_nulo()
 
     return saldo
   }
@@ -80,7 +89,7 @@
     const matrix = {
       ARS: { USD: 1 / dolar, EUR: 1 / euro },
       USD: { ARS: dolar, EUR: dolar / euro },
-      EUR: { USD: euro / dolar, EUR: euro }}
+      EUR: { USD: euro / dolar, ARS: euro }}
 
     return { amount: money.amount * matrix[money.currency][currency],
              currency: currency }
@@ -92,5 +101,17 @@
       return data[match.slice(2, -2).trim()]
     })
     return clone
+  }
+
+  function recalcular_destinos_monto_nulo () {
+    const destinos = document.querySelectorAll('.destinos input')
+    for (var i = 0; i < destinos.length; ++i) {
+      const destino = destinos[i]
+      if (destino.value === '0') {
+        const saldo = exchange(saldo_restante(), destino.dataset.currency)
+        const value = Math.min(saldo.amount, destino.max)
+        destino.value = value
+      }
+    }
   }
 })()
