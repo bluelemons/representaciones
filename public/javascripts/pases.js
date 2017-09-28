@@ -26,9 +26,8 @@
     actualizar_saldo_restante()
   })
 
-  $(document).on('change', '#pase_debit , .destinos input', function (e) {
-    actualizar_saldo_restante()
-  })
+  $(document).on('change', '#pase_debit , .destinos input , .info input',
+    actualizar_saldo_restante)
 
   function saldo_restante () {
     const remaining = document.querySelector('#remaining')
