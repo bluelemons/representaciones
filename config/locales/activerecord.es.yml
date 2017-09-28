@@ -1,0 +1,7 @@
+es:
+  attributes:
+    date: Fecha
+  activerecord:
+    attributes:
+      pase:
+        debit: Debitar
