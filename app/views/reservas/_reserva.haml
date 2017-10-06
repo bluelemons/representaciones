@@ -21,6 +21,9 @@
     -else
       .red La Reserva NO está liquidada
 
+    - if @reserva.saldo_positivo?
+      = link_to "Crear pase", new_reserva_transfer_path(reserva_id: @reserva), class: 'start_action'
+
     =table_form(@reserva,
       [{:value =>:id},
       {:value =>:referencia},

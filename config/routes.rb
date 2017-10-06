@@ -29,6 +29,7 @@ Representaciones::Application.routes.draw do
 
   resources :reservas do
     resources :pagos
+    resources :transfers, only: [:new, :create, :show, :destroy], shallow: true
   end
 
   resources :tdepositos

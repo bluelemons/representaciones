@@ -1,0 +1,66 @@
+#datos_origen , #datos_destino {
+  width 50%;
+  padding: 0 1em;
+  float: left;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin: 30px;
+}
+
+form p label {
+  display: inline-block;
+  width: 90px;
+  text-align: right;
+}
+
+fieldset {
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+label input {
+  margin: 3px;
+  margin-left: 20px;
+}
+
+form p {
+  margin-bottom: 5px;
+}
+
+input[disabled] {
+  width: 20em;
+}
+
+input[type="number"] {
+  width: 16em;
+  line-height: 2em;
+}
+
+input[type="submit"] {
+  float: right;
+  margin: 1em;
+}
+
+.info {
+  margin: 5px auto;
+  max-width: 20em;
+  padding: 5px;
+  background: hsla(220, 35%, 90%, 1);
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.info.warning {
+  background: yellow;
+}
+
+.info.danger {
+  background: pink;
+}
+
+.info.success {
+  background: lightgreen;
+}
