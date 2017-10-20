@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+[ -v DEBUG ] && set -x
+
+if [ $# -ne 2 ]
+then
+  echo "Usage: $0 {MySQL_database_name} {MySQL_backup_file}"
+  echo "Drops all tables from a MySQL database and load a backup"
+  exit 1
+fi
+
+database_name="$1"
+backup_file="$2"
+
+[ -r $backup_file ] || ( echo 'Invalid backup file' ; exit 2 )
+
+echo 'Cleaning up database'
+TABLES=$(mysql $database_name -e 'show tables' | awk '{ print $1 }' | grep -v '^Tables' | paste -s | sed 's/\t/ , /g')
+mysql $database_name -e "drop table $TABLES;"
+
+echo 'Loading backup'
+cat $backup_file | gunzip | mysql $database_name
+
+echo 'done'
