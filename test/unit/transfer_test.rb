@@ -36,6 +36,14 @@ DESC
     refute_includes transfer.destinations_options.map(&:first), reservas(:grand_celebration)
   end
 
+  test "destination options are ordered by reference number" do
+    transfer = Transfer.new source_id: source.id
+    first = reservas(:ultra_park).clone
+    first.update_attributes(referencia: '9595', salida: 30.days.from_now)
+    assert_equal first, transfer.destinations_options.first.first
+    assert_equal reservas(:ultra_park), transfer.destinations_options.last.first
+  end
+
   test "debit all the money by default" do
     transfer = Transfer.new source_id: source.id
     assert_equal 30.48, transfer.debit

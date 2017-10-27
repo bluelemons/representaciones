@@ -29,7 +29,7 @@ class Transfer < Operation
       .where(operadora_id: source.operadora_id)
       .where('id <> ?', source.id)
       .where('salida > ?', 10.months.ago)
-      .reorder(:salida)
+      .reorder('cast(referencia as unsigned)')
       .includes(:depositos)
       .map { |reserva| [reserva, reserva.id, data_for(reserva)] }
       .select { |option| option[2][:'data-debt'] > 0 }
