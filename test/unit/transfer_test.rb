@@ -23,8 +23,8 @@ class TransferTest < ActiveSupport::TestCase
     assert_equal debt(destination), original_debt - 3048
     assert_equal <<DESC.chomp, transfer.description
 Pase #{ Date.yesterday }
-De: Reserva #930729311 ref: 1346266      |     -30.48 USD
- A: Reserva #116927674 ref: 123123123    |      30.48 USD
+De: Reserva ref:1346266 pax:MOLINARI #930729311         |     -30.48 USD
+ A: Reserva ref:123123123 #116927674                    |      30.48 USD
 DESC
   end
 

@@ -15,5 +15,8 @@ class ReservaTest < ActiveSupport::TestCase
     assert reserva_con_pagos.invalid?, "Me permite cambiar la moneda de una reserva con pagos"
   end
 
+  test "Representacion como string" do
+    assert_equal "Reserva ref:1346266 pax:MOLINARI ##{ @reserva.id }", @reserva.to_s
+  end
 end
 

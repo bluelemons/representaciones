@@ -95,7 +95,7 @@ class Transfer < Operation
     depositos.select{ |e| e.entidad.type == "Agency" }.map do |entry|
       amount = entry.monto_final
       de_a = amount.cents < 0 ? 'De' : 'A'
-      format '%2s: %-35s  | %10.2f %s', de_a, entry.reserva, amount, amount.currency
+      format '%2s: %-50s  | %10.2f %s', de_a, entry.reserva, amount, amount.currency
     end
   end
 end

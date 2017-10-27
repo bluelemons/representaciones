@@ -159,8 +159,9 @@ class Reserva < ActiveRecord::Base
   end
 
   def to_s
-    referencia_o_titular = referencia.present? ? "ref: #{ referencia }" : "pax: #{ titular }"
-    "Reserva ##{ id } #{ referencia_o_titular }"
+    ref = "ref:#{ referencia } " if referencia.present?
+    pax = "pax:#{ titular.split.first } " if titular.present?
+    "Reserva #{ ref }#{ pax }##{ id }"
   end
 
   def saldo_positivo?
