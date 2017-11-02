@@ -1,6 +1,8 @@
-require 'simplecov'
-SimpleCov.start 'rails' do
-  add_filter "/.gs/"
+if ENV['COVERAGE']
+  require 'simplecov'
+  SimpleCov.start 'rails' do
+    add_filter "/.gs/"
+  end
 end
 
 ENV["RAILS_ENV"] = "test"
@@ -25,7 +27,7 @@ end
 require 'capybara/rails'
 require 'capybara/minitest'
 
-Capybara.default_driver = :selenium
+Capybara.default_driver = ENV['CI'] ? :selenium_chrome_headless : :selenium
 
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests

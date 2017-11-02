@@ -1,7 +1,10 @@
+# Hay tres reservas, costa mágica es una reserva de una
+# agencia pequeña y una operadora pequeña, en cambio
+# grand celebration y ultra park son de vikingo (nuestra
+# agencia lider) e Ibero (la operadora de cruceros)
+
 costa_magica:
-  salida: 2012-03-19
-  reservado: GUSTAVO
-  operado: VIRGINIA
+  salida: <%= 10.days.from_now %>
   hotel: ! "COSTA MAGICA - CAT I2 - CABINA 2314 MOLINARI X 4 / CAT I2 - CABINA 2310 CETOLA X 4"
   periodo: 4 DIAS
   regimen: AI
@@ -10,49 +13,45 @@ costa_magica:
   iva: 21.5
   seguro: 144.0
   referencia: '9331954'
-  cancelada: 0
   activa: 0
   tarifa: 1235.0
   pago_minimo: 365.0
-  created_at: 2011-05-27 21:04:01.000000000Z
-  updated_at: 2011-07-06 20:44:10.000000000Z
-  hidden: 0
   user: susana
   version: 2
   total_cents: 221745
   total_currency: USD
-  liquido_agencia: 0
-  liquido_operadora: 0
   operadora: costa
   agency: litoraltur
   programa: punta_del_este
   thabitacion: cuadruple
 
 grand_celebration:
-  salida: 2011-12-27
+  salida: <%= 5.days.from_now %>
   reservado: ELIZABETH
   operado: ELIZABETH
   hotel: ! "GRAND CELEBRATION - CAT C - CABINA M173\r\nANTES DAMONTE X 6 - AHORA CUMINETTI X 4"
   periodo: 9 TNG
   regimen: C/ALL INC
-  obs: ''
   impuesto: 1388.8
   seguro: 120.0
   referencia: '1346266'
-  cancelada: 0
   activa: 0
   tarifa: 2856.0
   pago_minimo: 781.5
-  created_at: 2011-07-08 15:35:49.000000000Z
-  updated_at: 2011-07-08 15:35:49.000000000Z
-  hidden: 0
   version: 1
   total_cents: 396952
   total_currency: USD
-  liquido_agencia: 0
-  liquido_operadora: 0
   operadora: ibero
   agency: vikingo
   programa: cuba
   thabitacion: cuadruple
 
+ultra_park:
+  salida: <%= 20.days.from_now %>
+  referencia: '123123123'
+  total_cents: 260000
+  total_currency: USD
+  operadora: ibero
+  agency: vikingo
+  programa: cuba
+  thabitacion: cuadruple

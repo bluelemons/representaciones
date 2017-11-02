@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010001024) do
+ActiveRecord::Schema.define(:version => 20170922181211) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -170,11 +170,25 @@ ActiveRecord::Schema.define(:version => 20121010001024) do
     t.string   "observaciones"
     t.integer  "monto_final_cents"
     t.string   "monto_final_currency", :limit => 3
+    t.integer  "operation_id"
   end
 
   add_index "movimientos", ["entidad_id"], :name => "index_movimientos_on_entidad_id"
+  add_index "movimientos", ["operation_id"], :name => "index_movimientos_on_operation_id"
   add_index "movimientos", ["reserva_id"], :name => "index_movimientos_on_reserva_id"
   add_index "movimientos", ["type"], :name => "index_movimientos_on_type"
+
+  create_table "operations", :force => true do |t|
+    t.date     "date"
+    t.string   "type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "operations", ["date"], :name => "index_operations_on_date"
+  add_index "operations", ["type"], :name => "index_operations_on_type"
+  add_index "operations", ["user_id"], :name => "index_operations_on_user_id"
 
   create_table "pages", :force => true do |t|
     t.string   "title"

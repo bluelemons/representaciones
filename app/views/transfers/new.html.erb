@@ -1,0 +1,62 @@
+<h1>Nuevo Pase</h1>
+<%= form_for [@transfer.source, @transfer] do |f| %>
+
+  <div id="datos_origen">
+    <p>
+    <label>De</label>
+    <input disabled value="<%= @transfer.source %>">
+    <%= f.hidden_field :source_id %>
+    </p>
+
+    <p>
+    <%= f.label :date %>
+    <%= f.date_select :date, default: Date.today, end_year: Date.today.year %>
+    </p>
+
+    <p>
+    <%= f.label :debit %>
+    <%= f.number_field :debit, step: '0.01', min: 0, max: @transfer.debit, required: true, "data-currency": @transfer.source.total_currency %>
+    <span id="origen_currency"><%= @transfer.source.total_currency %></span>
+    </p>
+  </div>
+
+  <div id="datos_destino">
+    <div class="destinos">
+    </div>
+
+    <label>Agregar reserva destino
+      <select id="nuevo_destino">
+        <option value="" selected disabled>Nueva reserva destino</option>
+        <%= options_for_select @transfer.destinations_options %>
+      </select>
+    </label>
+
+    <div class="info">
+      <p>Saldo restante: <span id="remaining"><%= @transfer.debit %></span>
+      <span><%= @transfer.source.total_currency %><span>
+      </p>
+      <label>Cambio ARS a USD: <input type="number" id="cambio_dolar" step="0.0001"></label>
+      <label>Cambio ARS a EUR: <input type="number" id="cambio_euro" step="0.0001"></label>
+    </div>
+
+    <p>
+    <%= f.submit %>
+    </p>
+  </div>
+<% end %>
+
+<template id="destino">
+  <fieldset>
+    <legend>Pase a {{ name }}</legend>
+    <label for="transfer_destinations_{{ id }}">Monto</label>
+    <input id="transfer_destinations_{{ id }}" type=number
+           name="transfer[destinations][{{ id }}]" min="0" step="0.01" max="{{ max }}"
+           value="{{ value }}"
+           data-currency="{{ currency }}">
+    <span> {{ currency }}<span>
+  </fieldset>
+</template>
+
+<% content_for :head do %>
+  <%= javascript_include_tag 'transfers.js' %>
+<% end %>
