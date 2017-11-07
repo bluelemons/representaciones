@@ -1,0 +1,6 @@
+- if @reserva.operations.any?
+  %p
+    %b Historial de Operaciones:
+    - @reserva.operations.uniq.each do |op|
+      %pre
+        = op.description

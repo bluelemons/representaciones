@@ -21,6 +21,7 @@ class Deposito < Movimiento
   # Asociaciones
   #
   belongs_to :tdeposito
+  belongs_to :operation
 
   private
 
