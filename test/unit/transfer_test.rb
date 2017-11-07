@@ -17,6 +17,7 @@ class TransferTest < ActiveSupport::TestCase
       date: Date.yesterday,
       source_id: source.id,
       debit: "30.48",
+      balance: "0.00",
       destinations: { destination.id => "30.48" })
     assert transfer.valid?, transfer.errors.full_messages.join(" ")
     assert_equal 0, debt(source)

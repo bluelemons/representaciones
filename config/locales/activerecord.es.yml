@@ -5,3 +5,8 @@ es:
     attributes:
       transfer:
         debit: Debitar
+        destinations: Destinos
+    errors:
+      models:
+        transfer:
+          unbalanced: 'El saldo debitado debe ser igual al acreditado'

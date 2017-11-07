@@ -1,6 +1,14 @@
 <h1>Nuevo Pase</h1>
 <%= form_for [@transfer.source, @transfer] do |f| %>
 
+  <% if @transfer.errors.any? %>
+    <div class="info danger">
+      <% @transfer.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
   <div id="datos_origen">
     <p>
     <label>De</label>
@@ -32,7 +40,7 @@
     </label>
 
     <div class="info">
-      <p>Saldo restante: <span id="remaining"><%= @transfer.debit %></span>
+      <p>Saldo restante: <%= f.text_field :balance, size: nil, readonly: true %>
       <span><%= @transfer.source.total_currency %><span>
       </p>
       <label>Cambio ARS a USD: <input type="number" id="cambio_dolar" step="0.0001"></label>

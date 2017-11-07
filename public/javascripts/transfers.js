@@ -30,34 +30,34 @@
     actualizar_saldo_restante)
 
   function saldo_restante () {
-    const remaining = document.querySelector('#remaining')
+    const transfer_balance = document.querySelector('#transfer_balance')
     const debit = document.querySelector('#transfer_debit')
 
-    return { amount: parseFloat(remaining.textContent),
+    return { amount: parseFloat(transfer_balance.value),
              currency: debit.dataset.currency }
   }
 
   function actualizar_saldo_restante () {
-    const remaining = document.querySelector('#remaining')
+    const transfer_balance = document.querySelector('#transfer_balance')
     const debit = document.querySelector('#transfer_debit')
     const debit_amount = parseFloat(debit.value)
 
     const saldo = debit_amount - saldo_asignado(debit.dataset.currency)
 
     if (Number.isNaN(saldo)) {
-      remaining.innerText = 'No es posible calcular, ingrese valor de cambio'
-      remaining.parentNode.className = 'info danger'
+      transfer_balance.value = 'No es posible calcular, ingrese valor de cambio'
+      transfer_balance.parentNode.className = 'info danger'
       return saldo
     }
 
-    remaining.innerText = saldo.toFixed(2)
+    transfer_balance.value = saldo.toFixed(2)
 
     if (saldo < -0.001) {
-      remaining.parentNode.className = 'info danger'
+      transfer_balance.parentNode.className = 'info danger'
     } else if (saldo > 0.001) {
-      remaining.parentNode.className = 'info warning'
+      transfer_balance.parentNode.className = 'info warning'
     } else {
-      remaining.parentNode.className = 'info success'
+      transfer_balance.parentNode.className = 'info success'
     }
 
     recalcular_destinos_monto_nulo()

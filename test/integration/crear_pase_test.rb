@@ -10,9 +10,9 @@ class CrearPaseTest < ActionDispatch::IntegrationTest
       click_on 'Show'
     end
     click_on 'Crear pase'
-    assert_text 'Saldo restante: 30.48 USD'
+    assert find_field(id: 'transfer_balance') { |f| f.value == '30.48' }
     select reservas(:ultra_park).to_s, from: 'Agregar reserva destino'
-    assert_text 'Saldo restante: 0.00 USD'
+    assert find_field(id: 'transfer_balance') { |f| f.value == '0.00' }
     click_on 'Crear Transfer'
     assert_text 'El pase fue creado'
     accept_alert do

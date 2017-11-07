@@ -6,16 +6,18 @@
 # mueve este saldo a otra reserva.
 class Transfer < Operation
   attr_reader :source, :source_id, :destinations
-  attr_accessor :debit
+  attr_accessor :debit, :balance
 
   before_create :move_money
 
   validates_presence_of :date
   validates_presence_of :source
+  validate :balance_is_zero
 
   def source_id= reserva_id
     @source_id = reserva_id
     @debit ||= saldo(source)
+    @balance ||= @debit
   end
 
   def source
@@ -97,5 +99,9 @@ class Transfer < Operation
       de_a = amount.cents < 0 ? 'De' : 'A'
       format '%2s: %-50s  | %10.2f %s', de_a, entry.reserva, amount, amount.currency
     end
+  end
+
+  def balance_is_zero
+    errors.add(:base, :unbalanced) unless balance.to_f.zero?
   end
 end
