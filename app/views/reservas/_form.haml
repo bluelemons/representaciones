@@ -28,6 +28,10 @@
           %td= form.input :periodo,:input_html => {:size=>10}
       = form.input :hotel
       = render :partial => "tarifa",:locals=>{:form=>form}
+      = form.input :obs
+      = render "operations_history"
+      = render :partial => "pasajeros"
+
       = form.buttons
 
   %h3.ui-widget-header Alta de Pasajero

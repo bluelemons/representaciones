@@ -20,6 +20,8 @@ class Reserva < ActiveRecord::Base
     end
   end
 
+  has_many :operations, through: :depositos
+
   def pagos
     depositos
   end

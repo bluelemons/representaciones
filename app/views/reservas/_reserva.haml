@@ -42,6 +42,7 @@
     %p
       %b Observaciones:
       = @reserva.obs
+    = render "operations_history"
     %p
       = render :partial => "layouts/version",:locals=>{:model=>@reserva}
 
