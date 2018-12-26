@@ -13,4 +13,14 @@ namespace :deploy do
   end
 
   after :publishing, :'deploy:restart'
+
+  desc "Read revision log"
+  task :logs do
+    on release_roles(:all) do
+      within releases_path do
+        execute "cat #{ revision_log }"
+      end
+    end
+  end
+
 end
