@@ -66,6 +66,7 @@ class Reserva < ActiveRecord::Base
   # la referencia debe ser única, excepto en el caso en que no existe (algunas
   # operadoras no tienen número de referencia)
   validates_uniqueness_of :referencia, allow_blank: true,
+                                       scope: :operadora_id,
                                        message: 'ya está cargada'
 
   validate :monto_total_si_hay_pagos, :on => :update

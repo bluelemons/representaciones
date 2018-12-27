@@ -18,5 +18,13 @@ class ReservaTest < ActiveSupport::TestCase
   test "Representacion como string" do
     assert_equal "Reserva ref:1346266 pax:MOLINARI ##{ @reserva.id }", @reserva.to_s
   end
+
+  test "Referencias unicas por operadora" do
+    reserva = reservas(:costa_magica).dup
+    refute reserva.valid?
+    assert reserva.errors[:referencia] == ["ya está cargada"]
+    reserva.operadora = entidads(:ibero)
+    assert reserva.valid?
+  end
 end
 
