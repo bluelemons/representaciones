@@ -1,5 +1,6 @@
 <% if @entidad.destroyed? %>
-  alert('La entidad <%= @entidad.name %> ha sido eliminada.')
+  if (alert('La entidad <%= @entidad.name %> ha sido eliminada.')) {}
+  else { window.location.reload() }
 <% else %>
   alert('La entidad <%= @entidad.name %> no pudo ser eliminada por <%= @entidad.errors.full_messages.join(', ') %>')
 <% end %>
