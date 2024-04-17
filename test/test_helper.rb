@@ -27,7 +27,7 @@ end
 require 'capybara/rails'
 require 'capybara/minitest'
 
-Capybara.default_driver = ENV['CI'] ? :selenium_chrome_headless : :selenium
+Capybara.default_driver = ENV['CI'] ? :selenium_chrome_headless : :selenium_chrome
 
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
