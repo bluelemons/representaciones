@@ -97,6 +97,10 @@ class Entidad < ActiveRecord::Base
     @deudas_by_currency[currency.to_currency]
   end
 
+  def can_be_deleted?
+    reservas.empty? && cuentas.empty? && movimientos.empty? && pagos.empty?
+  end
+
   private
 
   def _deudas_by_currency
@@ -109,7 +113,7 @@ class Entidad < ActiveRecord::Base
   end
 
   def check_existing_child_records
-    unless reservas.empty? && cuentas.empty? && movimientos.empty? && pagos.empty?
+    unless can_be_deleted?
       errors.add(:base, "imposible eliminar una entidad con Reservas")
       false
     end
