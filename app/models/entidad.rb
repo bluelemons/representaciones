@@ -20,6 +20,8 @@ class Entidad < ActiveRecord::Base
   #validates :email, :presence => true
   #validates :web, :presence => true
 
+  before_destroy :check_existing_child_records
+
   #scopes
   default_scope order(:name)
 
@@ -105,5 +107,11 @@ class Entidad < ActiveRecord::Base
     end
     deudas_by_currency
   end
-end
 
+  def check_existing_child_records
+    unless reservas.empty? && cuentas.empty? && movimientos.empty? && pagos.empty?
+      errors.add(:base, "imposible eliminar una entidad con Reservas")
+      false
+    end
+  end
+end
