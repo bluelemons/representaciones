@@ -9,7 +9,9 @@ class CrearPaseTest < ActionDispatch::IntegrationTest
     within 'tr', text: '1346266' do
       click_on 'Show'
     end
-    using_wait_time 4 { click_on 'Crear pase' }
+    using_wait_time 4 do
+      click_on 'Crear pase'
+    end
     assert find_field(id: 'transfer_balance') { |f| f.value == '30.48' }
     select reservas(:ultra_park).to_s, from: 'Agregar reserva destino'
     assert find_field(id: 'transfer_balance') { |f| f.value == '0.00' }

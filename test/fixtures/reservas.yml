@@ -4,7 +4,7 @@
 # agencia lider) e Ibero (la operadora de cruceros)
 
 costa_magica:
-  salida: <%= 10.days.from_now %>
+  salida: <%= 10.days.from_now.to_date %>
   hotel: ! "COSTA MAGICA - CAT I2 - CABINA 2314 MOLINARI X 4 / CAT I2 - CABINA 2310 CETOLA X 4"
   periodo: 4 DIAS
   regimen: AI
@@ -26,7 +26,7 @@ costa_magica:
   thabitacion: cuadruple
 
 grand_celebration:
-  salida: <%= 5.days.from_now %>
+  salida: <%= 5.days.from_now.to_date %>
   reservado: ELIZABETH
   operado: ELIZABETH
   hotel: ! "GRAND CELEBRATION - CAT C - CABINA M173\r\nANTES DAMONTE X 6 - AHORA CUMINETTI X 4"
@@ -47,7 +47,7 @@ grand_celebration:
   thabitacion: cuadruple
 
 ultra_park:
-  salida: <%= 20.days.from_now %>
+  salida: <%= 20.days.from_now.to_date %>
   referencia: '123123123'
   total_cents: 260000
   total_currency: USD
