@@ -126,7 +126,7 @@ class ReservaReport < Prawn::Document
 
   def format_titular_and_pasajeros_count(reserva)
     if reserva.titular
-      "#{reserva.titular.split(/,/)[0][0,8]}(#{reserva.pasajeros.count})"
+      "#{reserva.titular.split(/,/)[0][0,8]}(#{reserva.pasajeros.size})"
     else
       "sin pasajeros"
     end
