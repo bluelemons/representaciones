@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170922181211) do
+ActiveRecord::Schema.define(:version => 20250618020831) do
 
   create_table "blogs", :force => true do |t|
     t.string   "title"
@@ -368,6 +368,7 @@ ActiveRecord::Schema.define(:version => 20170922181211) do
   add_index "reservas", ["agency_id"], :name => "index_reservas_on_agency_id"
   add_index "reservas", ["operadora_id"], :name => "index_reservas_on_operadora_id"
   add_index "reservas", ["programa_id"], :name => "index_reservas_on_programa_id"
+  add_index "reservas", ["salida"], :name => "index_reservas_on_salida"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

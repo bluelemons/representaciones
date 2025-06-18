@@ -77,14 +77,15 @@ class ReservaReport < Prawn::Document
                         Deuda-A
                         Deuda-O ] ]
 
-    valores_tabla = datos.all.map do |r|
-      data_row = %W[  #{r.id}-#{r.try(:referencia)}
-                      #{format_titular_and_pasajeros_count r}
-                      #{r.agency.try(:name)[0,10]}
-                      #{r.salida}
-                      #{r.total.format}
-                      #{r.agencia_deuda.format}
-                      #{r.operadora_deuda.format} ]
+    valores_tabla = []
+    datos.find_each do |r|
+      valores_tabla << %W[ #{r.id}-#{r.try(:referencia)}
+                           #{format_titular_and_pasajeros_count(r)}
+                           #{r.agency.try(:name)[0,10]}
+                           #{r.salida}
+                           #{r.total.format}
+                           #{r.agencia_deuda.format}
+                           #{r.operadora_deuda.format} ]
     end
 
     widths = { 1 => 60, 2 => 60, 3 => 60, 4 => 60, 5 => 60, 6 => 60 }
@@ -125,7 +126,7 @@ class ReservaReport < Prawn::Document
 
   def format_titular_and_pasajeros_count(reserva)
     if reserva.titular
-      "#{reserva.titular.split(/,/)[0][0,8]}(#{reserva.pasajeros.count})"
+      "#{reserva.titular.split(/,/)[0][0,8]}(#{reserva.pasajeros.size})"
     else
       "sin pasajeros"
     end
