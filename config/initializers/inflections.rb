@@ -14,3 +14,8 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym "RESTful"
 # end
+
+# El inflector por defecto no pluraliza "Cuenta"; heredado del app original.
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular "cuenta", "cuentas"
+end
