@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Postgres 18 (mise) para desarrollo, datos en tmp/pgdata, puerto 15432.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PGBIN="${PGBIN:-$HOME/.local/share/mise/installs/postgres/18/bin}"
+PORT=15432
+DATADIR="$ROOT/tmp/pgdata"
+LOGFILE="$ROOT/tmp/pg.log"
+
+case "${1:-start}" in
+  start)
+    if "$PGBIN/pg_ctl" -D "$DATADIR" status >/dev/null 2>&1; then
+      echo "postgres ya está corriendo (puerto $PORT)"
+    else
+      echo "arrancando postgres en el puerto $PORT"
+      "$PGBIN/pg_ctl" -D "$DATADIR" -l "$LOGFILE" \
+        -o "-p $PORT -k $ROOT/tmp -c listen_addresses=127.0.0.1" start
+    fi
+    ;;
+  stop)
+    "$PGBIN/pg_ctl" -D "$DATADIR" stop || true
+    ;;
+  status)
+    "$PGBIN/pg_ctl" -D "$DATADIR" status
+    ;;
+  *)
+    echo "uso: script/pg [start|stop|status]" >&2
+    exit 1
+    ;;
+esac
