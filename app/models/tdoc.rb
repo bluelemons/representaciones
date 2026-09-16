@@ -1,6 +1,6 @@
 class Tdoc < ActiveRecord::Base
   #clases
-  acts_as_versioned
+  # TODO: M4/M2b port of acts_as_versioned
   #asociaciones
   belongs_to :user #es el usuario que lo crea o modifica
   has_many :pasajeros
@@ -8,7 +8,7 @@ class Tdoc < ActiveRecord::Base
   #validaciones
   validates :name, :presence => true
   #scopes
-  scope :baja, where(:hidden=>0)
+  scope :baja, -> { where(hidden: 0) }
   
   #metodos
   

@@ -1,17 +1,8 @@
 class User < ActiveRecord::Base
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  attr_accessible(
-    :email,
-    :password,
-    :password_confirmation,
-    :username,
-    :role_ids
-  )
+  # M2b/M4: port de devise (no esta en el Gemfile nuevo).
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :trackable, :validatable
 
   has_many :permitions
   has_many :roles ,:through => :permitions

@@ -2,16 +2,17 @@ class Movimiento < ActiveRecord::Base
   # Callbacks
 #  before_destroy :deshacer
 
-  # Asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
-  belongs_to :reserva
+  # Asociaciones. En el modelo original nada era requerido salvo las
+  # validaciones explícitas; por eso se usan optional: true.
+  belongs_to :user, optional: true #es el usuario que lo crea o modifica
+  belongs_to :reserva, optional: true
   belongs_to :entidad
-  belongs_to :operadora
-  belongs_to :cuenta
-  belongs_to :movimiento,:dependent => :destroy
-  belongs_to :tdeposito
+  belongs_to :operadora, optional: true
+  belongs_to :cuenta, optional: true
+  belongs_to :movimiento, optional: true, :dependent => :destroy
+  belongs_to :tdeposito, optional: true
   has_many :movimientos
-  monetize   :monto
+# M2b money: monetize :monto, monetize :monto_final
 
   # Validaciones
   validates :fecha, :presence => true
@@ -27,30 +28,7 @@ class Movimiento < ActiveRecord::Base
 
   # scopes
 #  default_scope :include => [:reserva, :cuenta], :order => "id desc"
-  scope :baja, where(:hidden=>0)
+  scope :baja, -> { where(hidden: 0) }
 
-  # metodos
-
-  monetize   :monto
-  monetize   :monto_final
-
-  def format_monto
-    if self.monto == self.monto_final
-      self.monto_final.format
-    else
-      "#{self.monto.format} -> #{self.monto_final.format}"
-    end
-  end
-
-  def self.total(movs)
-    movs = movs.group_by { |m| m.monto.currency_as_string }
-    totales = {}
-    movs = movs.each do |moneda, mvs|
-      mvs = mvs.map { |a| a.monto }
-      total = mvs.reduce(:+)
-      totales[moneda] = total
-    end
-    totales
-  end
+  # M2b money: #format_monto y self.total dependen de monetize.
 end
-
