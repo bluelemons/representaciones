@@ -1,68 +1,235 @@
-#!/usr/bin/env bash
-# Restaura tmp/dump.sql.gz (snapshot de representaciones_production, MariaDB
-# 10.0.38) en la base de desarrollo local (representaciones_development, puerto
-# 13307). Después de correrlo, `bundle exec rails s` muestra los datos de
-# producción hasta la fecha del dump.
-set -euo pipefail
+#!/usr/bin/env ruby
+# Carga tmp/dump.sql.gz (mysqldump de representaciones_production, MariaDB
+# 10.0) en la base de desarrollo de Postgres, descartando los datos previos.
+# El esquema lo mantiene Rails (bin/rails db:prepare); acá solo se reemplazan
+# los datos. Se omiten el historial de acts_as_versioned (*_versions) y
+# schema_migrations (lo maneja Rails).
+#
+# Uso: script/refresh_db [DB] [DUMP]
+#   DB   nombre de la base (default: representaciones_development)
+#   DUMP ruta del mysqldump (.gz) (default: tmp/dump.sql.gz)
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-DUMP="$ROOT/tmp/dump.sql.gz"
+require "open3"
+require "tempfile"
+require "zlib"
 
-MARIADB_BASE="${MARIADB_BASE:-$HOME/.local/share/mariadb-100}"
-MARIADB_BIN="$MARIADB_BASE/bin"
-MARIADB_LIB="$MARIADB_BASE/lib"
+SKIP_TABLE = /\A.*_versions\z|^schema_migrations$/
 
-PORT=13307
-DB=representaciones_development
-DB_USER=representaciones
-DB_PASS=representaciones
+module Converter
+  extend self
 
-MYSQL_OPTS=(-h 127.0.0.1 -P "$PORT" -u "$DB_USER")
-export MYSQL_PWD="$DB_PASS"
-export LD_LIBRARY_PATH="$ROOT/vendor/shims:$MARIADB_LIB"
+  INSERT_RE = /\AINSERT INTO `([^`]+)` VALUES (.*);\n?\z/
 
-if [[ ! -f "$DUMP" ]]; then
-  echo "error: no encuentro $DUMP" >&2
-  exit 1
-fi
+  # tipo semántico de una columna; solo importa distinguir tinyint(1)
+  # (boolean) y las columnas de fecha/hora (admiten fecha cero de MySQL).
+  def semantic_type(type, size)
+    case type
+    when "tinyint" then size == "1" ? :boolean : :other
+    when "date", "datetime", "timestamp" then :date
+    else :other
+    end
+  end
 
-echo "== Servidor MariaDB (puerto $PORT)"
-if "$MARIADB_BIN/mysqladmin" "${MYSQL_OPTS[@]}" ping >/dev/null 2>&1; then
-  echo "   ya está corriendo"
-else
-  echo "   arrancando el servidor"
-  mkdir -p "$ROOT/tmp/mariadb-data"
-  setsid "$MARIADB_BIN/mysqld" --no-defaults \
-    --basedir="$MARIADB_BASE" \
-    --datadir="$ROOT/tmp/mariadb-data" \
-    --socket="$ROOT/tmp/mariadb.sock" \
-    --port="$PORT" \
-    --bind-address=127.0.0.1 \
-    --pid-file="$ROOT/tmp/mariadb.pid" \
-    --log-error="$ROOT/tmp/mariadb.log" \
-    --innodb-use-native-aio=0 >/dev/null 2>&1 &
-  for _ in {1..30}; do
-    if "$MARIADB_BIN/mysqladmin" "${MYSQL_OPTS[@]}" ping >/dev/null 2>&1; then
-      break
-    fi
-    sleep 1
-  done
-fi
+  # barre el dump y devuelve { tabla => { columna => semantico } } en el
+  # orden en que aparecen los bloques CREATE TABLE.
+  def column_types(dump_io)
+    types = {}
+    current = nil
+    dump_io.each_line do |line|
+      if (create = line.match(/^CREATE TABLE `([^`]+)`/))
+        current = create[1]
+        types[current] = {}
+      elsif current
+        if (col = line.match(/^\s*`([^`]+)`\s+([a-z]+)(\(\d+\))?/))
+          types[current][col[1]] = semantic_type(col[2], col[3]&.delete("()"))
+        elsif line =~ /^\) ENGINE=/
+          current = nil
+        end
+      end
+    end
+    types
+  end
 
-if ! "$MARIADB_BIN/mysqladmin" "${MYSQL_OPTS[@]}" ping >/dev/null 2>&1; then
-  echo "error: el servidor no responde (revisa $ROOT/tmp/mariadb.log)" >&2
-  exit 1
-fi
+  # divide los VALUES "(...),(...)" en tuplas de nivel superior
+  def split_rows(values)
+    rows = []
+    current = +""
+    depth = 0
+    in_str = false
+    prev = nil
+    values.each_char do |char|
+      if in_str
+        current << char
+        in_str = false if char == "'" && prev != "\\"
+      elsif char == "'"
+        in_str = true
+        current << char
+      elsif char == "("
+        depth += 1
+        current << char
+      elsif char == ")"
+        depth -= 1
+        current << char
+        if depth.zero?
+          rows << current
+          current = +""
+        end
+      else
+        current << char if depth.positive?
+      end
+      prev = char
+    end
+    rows
+  end
 
-echo "== Recreando $DB"
-"$MARIADB_BIN/mysql" "${MYSQL_OPTS[@]}" -e \
-  "DROP DATABASE IF EXISTS $DB; CREATE DATABASE $DB CHARACTER SET utf8;"
+  # divide una tupla "(a,b,'c')" en sus campos
+  def split_fields(row)
+    fields = []
+    current = +""
+    in_str = false
+    prev = nil
+    row[1..-2].each_char do |char|
+      if in_str
+        current << char
+        in_str = false if char == "'" && prev != "\\"
+      elsif char == "'"
+        in_str = true
+        current << char
+      elsif char == ","
+        fields << current
+        current = +""
+      else
+        current << char
+      end
+      prev = char
+    end
+    fields << current
+  end
 
-echo "== Restaurando $(basename "$DUMP") ($(du -h "$DUMP" | cut -f1), puede tardar)"
-zcat "$DUMP" | "$MARIADB_BIN/mysql" "${MYSQL_OPTS[@]}" "$DB"
+  # quita los escapes de cadena de MariaDB
+  def unescape(inner)
+    inner.gsub("\\'", "'").gsub("\\n", "\n").gsub("\\r", "\r").gsub("\\0", "\0")
+  end
 
-echo "== Tablas restauradas"
-"$MARIADB_BIN/mysql" "${MYSQL_OPTS[@]}" -N -e \
-  "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '$DB';"
+  def zero_date?(value)
+    value =~ /\A0{4}-0{2}-0{2}( 0{2}:0{2}:0{2}(\.\d+)?)?\z/
+  end
 
-echo "Listo: la base de desarrollo ahora tiene los datos de producción."
+  # transforma un campo al literal PG según el tipo de la columna
+  def transform_field(field, semantic)
+    if field == "NULL"
+      "NULL"
+    elsif semantic == :boolean
+      case field
+      when "0" then "false"
+      when "1" then "true"
+      else field
+      end
+    elsif field.start_with?("'")
+      value = unescape(field[1..-2])
+      if semantic == :date && zero_date?(value)
+        "NULL"
+      else
+        "'#{value.gsub("'", "''")}'"
+      end
+    else
+      field
+    end
+  end
+
+  # tupla "(...)" con los campos ya transformados
+  def transform_row(row, semantics)
+    fields = split_fields(row)
+    raise "columnas: esperaba #{semantics.size}, vi #{fields.size}" if fields.size != semantics.size
+    fields.each_with_index.map { |field, i| transform_field(field, semantics[i]) }
+  end
+
+  # una línea INSERT -> SQL PostgreSQL (multi-fila). Devuelve [sql, n_filas]
+  def transform_insert(line, table, semantics)
+    values = line.match(INSERT_RE)[2]
+    rows = split_rows(values).map { |row| transform_row(row, semantics.values) }
+    sql = "INSERT INTO #{table} VALUES\n" + rows.map { |r| "(#{r.join(",")})" }.join(",\n") + ";"
+    [sql, rows.size]
+  end
+end
+
+def dump_reader(path)
+  if File.binread(path, 2) == "\x1F\x8B".b
+    Zlib::GzipReader.open(path) { |io| yield io }
+  else
+    File.open(path) { |io| yield io }
+  end
+end
+
+def run
+  root = File.expand_path("..", __dir__)
+  pgb = ENV["PGBIN"] || File.expand_path("~/.local/share/mise/installs/postgres/18/bin")
+  db  = ARGV[0] || "representaciones_development"
+  dump = ARGV[1] || File.join(root, "tmp", "dump.sql.gz")
+
+  unless File.file?(dump)
+    warn "error: no encuentro #{dump}"
+    exit 1
+  end
+
+  system(File.join(root, "script", "pg"), "start") || exit(1)
+
+  types = dump_reader(dump) { |io| Converter.column_types(io) }
+  tables = types.reject { |name, _| SKIP_TABLE.match?(name) }.to_h
+  puts "== Tablas a poblar (#{tables.size}): #{tables.keys.join(", ")}"
+
+  out = Tempfile.new("refresh_db")
+  out.write("BEGIN;\n\\set ON_ERROR_STOP on\n")
+  out.write("TRUNCATE TABLE #{tables.keys.join(", ")} RESTART IDENTITY;\n")
+
+  dump_rows = Hash.new(0)
+  dump_reader(dump) do |io|
+    io.each_line do |line|
+      if (table = line.match(Converter::INSERT_RE)&.[](1)) && tables.key?(table)
+        sql, count = Converter.transform_insert(line, table, tables[table])
+        dump_rows[table] += count
+        out.write(sql)
+        out.write("\n")
+      end
+    end
+  end
+
+  tables.each do |table, cols|
+    next unless cols.key?("id")
+    out.write("SELECT setval(pg_get_serial_sequence('#{table}', 'id'),\n")
+    out.write("              (SELECT COALESCE(MAX(id), 0) + 1 FROM #{table}), false);\n")
+  end
+  out.write("COMMIT;\n")
+  out.flush
+
+  puts "== Cargando #{dump} (#{File.size(dump) / 1024 / 1024} MB, puede tardar)"
+  psql = ["#{pgb}/psql", "-q", "-d", db, "-h", File.join(root, "tmp"), "-p", "15432", "-f", out.path]
+  stdout, stderr, status = Open3.capture3(*psql)
+
+  unless status.success?
+    warn stderr
+    warn "error: psql falló. El SQL quedó en #{out.path} para depurar."
+    exit 1
+  end
+  puts stdout
+
+  puts "== Filas por tabla (dump → pg)"
+  ok = true
+  dump_rows.each_key do |table|
+    count_cmd = ["#{pgb}/psql", "-q", "-t", "-A", "-d", db,
+                 "-h", File.join(root, "tmp"), "-p", "15432",
+                 "-c", "SELECT count(*) FROM #{table};"]
+    pg_count = Open3.capture3(*count_cmd)[0].to_i
+    match = dump_rows[table] == pg_count ? "OK" : "DIFF"
+    ok &&= dump_rows[table] == pg_count
+    puts format("%-20s %10d %10d  %s", table, dump_rows[table], pg_count, match)
+  end
+
+  if ok
+    puts "Listo: la base de desarrollo tiene los datos de producción."
+  else
+    puts "¡Ojo: hay diferencias de conteo entre el dump y Postgres!"
+  end
+end
+
+run if $PROGRAM_NAME == __FILE__
