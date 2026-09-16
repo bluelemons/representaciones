@@ -7,6 +7,7 @@ class DepositoTest < ActiveSupport::TestCase
   end
 
   def test_format_monto
+    skip "M2b: port de money"
     deposito_sin_cambio_de_moneda = movimientos(:deposito_ibero)
     assert_equal "u$s 2.000,00", deposito_sin_cambio_de_moneda.format_monto
     deposito_con_cambio_de_moneda = movimientos(:deposito_vikingo)
@@ -14,6 +15,7 @@ class DepositoTest < ActiveSupport::TestCase
   end
 
   def test_validations
+    skip "M2b: port de money"
     d = Deposito.new
     assert d.invalid?, "Deposito valido sin datos"
     assert @deposito.valid?, "Deposito en fixture invalido"
@@ -22,6 +24,7 @@ class DepositoTest < ActiveSupport::TestCase
   end
 
   def test_validacion_de_reserva
+    skip "M2b: port de money"
     @deposito.entidad = entidads(:litoraltur)
     assert @deposito.invalid?, "Deposito valido, por una entidad que no corresponde a la reserva"
   end

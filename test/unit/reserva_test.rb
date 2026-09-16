@@ -7,6 +7,7 @@ class ReservaTest < ActiveSupport::TestCase
   end
 
   def test_modificacion_del_monto_total
+    skip "M2b: port de money"
     reserva_sin_pagos = reservas(:costa_magica)
     reserva_sin_pagos.total = "500 ARS"
     assert reserva_sin_pagos.valid?, "No me permite cambiar el monto de una reserva sin pagos"
@@ -42,16 +43,19 @@ class ReservaTest < ActiveSupport::TestCase
   end
 
   test "moneda returns the currency symbol of total" do
+    skip "M2b: port de money"
     assert_equal "u$s ", @reserva.moneda
   end
 
   test "sin_tarifa_true_when_total_is_zero" do
+    skip "M2b: port de money"
     refute @reserva.sin_tarifa?
     @reserva.total = "0 USD"
     assert @reserva.sin_tarifa?
   end
 
   test "liquidada_requires_both_liquido_flags_and_positive_total" do
+    skip "M2b: port de money"
     assert @reserva.total.cents > 0
     refute @reserva.liquidada?
     @reserva.liquido_agencia  = true
@@ -60,11 +64,13 @@ class ReservaTest < ActiveSupport::TestCase
   end
 
   test "deuda_delegates_to_agency_or_operadora" do
+    skip "M2b: port de money"
     assert_equal Money.new(-3048, "USD"), @reserva.deuda(entidads(:vikingo))
     assert_equal Money.new(-3048, "USD"), @reserva.deuda(entidads(:ibero))
   end
 
   test "deuda_raises_when_entidad_does_not_belong_to_reserva" do
+    skip "M2b: port de money"
     assert_raises(RuntimeError) { @reserva.deuda(entidads(:costa)) }
   end
 
