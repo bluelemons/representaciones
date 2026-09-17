@@ -66,3 +66,5 @@ group :test do
 end
 
 gem "cancancan", "~> 3.6"
+
+gem "money-rails", "~> 3.0"
