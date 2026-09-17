@@ -5,15 +5,13 @@ require 'test_helper'
 # pin them with black-box tests over the persisted Cuenta.
 class EntidadTest < ActiveSupport::TestCase
 
-  setup { skip "M2b: port de money" }
-
   def test_deposit_crea_una_cuenta_por_moneda
     entidad = entidads(:costa)
     assert entidad.deposit("5000 USD")
-    assert_equal 1, entidad.cuentas(true).count
-    assert_equal Money.new(500000, "USD"), entidad.cuentas(true).first.monto
+    assert_equal 1, entidad.cuentas.reload.count
+    assert_equal Money.new(500000, "USD"), entidad.cuentas.reload.first.monto
     assert entidad.deposit("100 ARS")
-    assert_equal 2, entidad.cuentas(true).count
+    assert_equal 2, entidad.cuentas.reload.count
     assert_equal Money.new(10000, "ARS"), entidad.cuenta(:ars).monto
   end
 
@@ -21,7 +19,7 @@ class EntidadTest < ActiveSupport::TestCase
     entidad = entidads(:costa)
     entidad.deposit("5000 USD")
     entidad.deposit("3000 USD")
-    assert_equal Money.new(800000, "USD"), entidad.cuentas(true).first.monto
+    assert_equal Money.new(800000, "USD"), entidad.cuentas.reload.first.monto
   end
 
   def test_deposit_separa_las_cuentas_por_operadora
@@ -29,7 +27,7 @@ class EntidadTest < ActiveSupport::TestCase
     operadora = entidads(:ibero)
     entidad.deposit("500 USD")
     entidad.deposit("500 USD", operadora)
-    assert_equal 2, entidad.cuentas(true).count
+    assert_equal 2, entidad.cuentas.reload.count
     assert_equal Money.new(50000, "USD"), entidad.cuenta(:usd).monto
     assert_equal Money.new(50000, "USD"), entidad.cuenta("USD", operadora.id).monto
   end

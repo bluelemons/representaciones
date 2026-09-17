@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class TransferTest < ActiveSupport::TestCase
-
-  setup { skip "M2b: port de money" }
-
   def debt booking
     booking.agencia_deuda.cents
   end
@@ -43,7 +40,7 @@ DESC
   test "destination options are ordered by reference number" do
     transfer = Transfer.new source_id: source.id
     first = reservas(:ultra_park).clone
-    first.update_attributes(referencia: '9595', salida: 30.days.from_now)
+    first.update(referencia: '9595', salida: 30.days.from_now)
     assert_equal first, transfer.destinations_options.first.first
     assert_equal reservas(:ultra_park), transfer.destinations_options.last.first
   end
