@@ -25,7 +25,7 @@ class Deposito < Movimiento
   private
 
   def completar_monto
-    if monto.zero? and monto_final.nonzero?
+    if monto && monto.zero? and monto_final && monto_final.nonzero?
       self.monto = monto_final
     end
   end
