@@ -1,0 +1,28 @@
+<h1>Reservas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Referencia</th>
+      <th>Salida</th>
+      <th>Operadora</th>
+      <th>Agencia</th>
+      <th>Pasajeros</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservas.each do |reserva| %>
+      <tr>
+        <td><%= link_to reserva.id, reserva %></td>
+        <td><%= reserva.referencia %></td>
+        <td><%= reserva.salida %></td>
+        <td><%= reserva.operadora.name %></td>
+        <td><%= reserva.agency.name %></td>
+        <td><%= reserva.pasajeros.count %></td>
+        <td><%= reserva.total.format %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,18 @@
+<h1>Reserva <%= @reserva.id %>: <%= @reserva.referencia %></h1>
+
+<dl>
+  <dt>Salida</dt>
+  <dd><%= @reserva.salida %></dd>
+  <dt>Operadora</dt>
+  <dd><%= @reserva.operadora.name %></dd>
+  <dt>Agencia</dt>
+  <dd><%= @reserva.agency.name %></dd>
+  <dt>Hotel</dt>
+  <dd><%= @reserva.hotel %></dd>
+  <dt>Total</dt>
+  <dd><%= @reserva.total.format %></dd>
+  <dt>Pasajeros</dt>
+  <dd><%= @reserva.pasajeros.names.join(", ") %></dd>
+</dl>
+
+<%= link_to "Volver", reservas_path %>
