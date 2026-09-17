@@ -14,11 +14,11 @@ class EntidadReport < Prawn::Document
 
     #a cada uno de los datos enviados por el controlador los pongo en el array myrow
     datos.each do |r|
-      deuda = Array.new(4,0)
+      deuda = Hash.new { |h, iso| h[iso] = Money.new(0, iso) }
       r.reservas.each do |reserva|
-        deuda[reserva.moneda_id] += reserva.send((r.type.downcase + "_deuda").to_sym)
+        deuda[reserva.total.currency.iso_code] += reserva.send((r.type.downcase + "_deuda").to_sym)
       end
-      myrow += [["#{r.id}","#{r.name}" ,"#{r.cuit}" ,"#{r.telefono}" ,"#{r.legajo}" , r.calle,"#{deuda[0]}","#{deuda[1]}","#{deuda[2]}"]]
+      myrow += [["#{r.id}","#{r.name}" ,"#{r.cuit}" ,"#{r.telefono}" ,"#{r.legajo}" , r.calle,"#{deuda["ARS"].format}","#{deuda["USD"].format}","#{deuda["EUR"].format}"]]
 
     end
 

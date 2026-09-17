@@ -29,7 +29,7 @@ class ReservaReport < Prawn::Document
             rows = myrowheader
 
             reservas.each do|r|
-              rows += [["#{r.id}-#{r.try(:referencia)}","#{r.pasajeros.count}","#{r.titular}","#{r.salida}","#{r.hotel[0..15]}","#{r.programa[0..15]}","#{r.total.format}","#{r.agency.try(:name)}" ,"#{r.agencia_pago.format}","#{r.agencia_deuda.format}","#{r.operadora_pago.format}","#{r.operadora_deuda.format}"]]
+              rows += [["#{r.id}-#{r.try(:referencia)}","#{r.pasajeros.count}","#{r.titular}","#{r.salida}","#{r.hotel.to_s[0..15]}","#{r.programa.to_s[0..15]}","#{r.total.format}","#{r.agency.try(:name)}" ,"#{r.agencia_pago.format}","#{r.agencia_deuda.format}","#{r.operadora_pago.format}","#{r.operadora_deuda.format}"]]
             end
 
             table(rows,{:row_colors => %w[e2f0fb ffffff],
@@ -101,7 +101,7 @@ class ReservaReport < Prawn::Document
 
     bounding_box [20, bounds.top - 30], :width => 500, :height => bounds.top-30*2 do
 
-      informacion_de_busqueda(datos)
+informacion_de_busqueda(params)
 
       move_down 10
 
@@ -131,12 +131,9 @@ class ReservaReport < Prawn::Document
     end
   end
 
-  def informacion_de_busqueda(datos)
-    busqueda = {}
-    datos.search_attributes.except('meta_sort').select {|k, v| v.present?}.each do |key, value|
-      busqueda[datos.class.human_attribute_name(key.dup)] = value
-    end
-    text busqueda.to_yaml
+  def informacion_de_busqueda(params)
+    filtros = params.symbolize_keys.except(:meta_sort).select { |_k, v| v.present? }
+    text filtros.to_yaml unless filtros.empty?
   end
 
   def calcular_totales(datos)

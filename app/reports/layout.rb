@@ -7,7 +7,7 @@ module Layout
         #stroke do
         #  line bounds.bottom_left, bounds.bottom_right
         #end
-        image("#{RAILS_ROOT}/public/images/Sol_Lineas_Aereas.jpg",:at => [430,730],:scale=>0.35)
+        image("#{Rails.root}/public/images/Sol_Lineas_Aereas.jpg",:at => [430,730],:scale=>0.35)
         fill_color '000000'
 
       end
@@ -15,7 +15,7 @@ module Layout
       font_size 6 do
         draw_text "Impreso: #{Date.today}",:at => [0,0]
         draw_text "#{title}",:at => [100,0]
-        image("#{RAILS_ROOT}/public/images/blue-lemons.png",:at => [bounds.right - 150, 8],:scale=>0.30)
+        image("#{Rails.root}/public/images/blue-lemons.png",:at => [bounds.right - 150, 8],:scale=>0.30)
 
       end
     end
