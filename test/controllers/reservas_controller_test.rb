@@ -14,4 +14,23 @@ class ReservasControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match /COSTA MAGICA/, response.body
   end
+
+  def test_index_pagina
+    20.times do
+      Reserva.create!(salida: Date.today,
+                      thabitacion: thabitacions(:cuadruple),
+                      programa: programas(:punta_del_este),
+                      operadora: entidads(:costa),
+                      agency: entidads(:litoraltur),
+                      total: Money.new(100, "USD"))
+    end
+
+    get reservas_path
+    assert_response :success
+    assert_select "nav.pagy"
+
+    get reservas_path, params: { page: 2 }
+    assert_response :success
+    assert_select "nav.pagy"
+  end
 end

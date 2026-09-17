@@ -1,6 +1,6 @@
 class ReservasController < ApplicationController
   def index
-    @reservas = Reserva.baja.order(:id)
+    @pagy, @reservas = pagy(Reserva.baja.order(:id))
   end
 
   def show
