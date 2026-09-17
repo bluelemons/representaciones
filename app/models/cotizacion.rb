@@ -28,8 +28,8 @@ class Cotizacion < ActiveRecord::Base
   end
 
   def self.buscar(f,curr_1,curr_2)
-    curr_1 = curr_1.currency.id
-    curr_2 = curr_2.currency.id
+    curr_1 = curr_1.currency.iso_code
+    curr_2 = curr_2.currency.iso_code
     self.find_by(fecha: f, moneda_compra: curr_1, moneda_venta: curr_2) ||
       self.find_by(fecha: f, moneda_compra: curr_2, moneda_venta: curr_1)
   end
