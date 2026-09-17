@@ -12,7 +12,9 @@ class Movimiento < ActiveRecord::Base
   belongs_to :movimiento, optional: true, :dependent => :destroy
   belongs_to :tdeposito, optional: true
   has_many :movimientos
-# M2b money: monetize :monto, monetize :monto_final
+
+  monetize :monto_cents, as: :monto
+  monetize :monto_final_cents, as: :monto_final
 
   # Validaciones
   validates :fecha, :presence => true
@@ -30,5 +32,23 @@ class Movimiento < ActiveRecord::Base
 #  default_scope :include => [:reserva, :cuenta], :order => "id desc"
   scope :baja, -> { where(hidden: 0) }
 
-  # M2b money: #format_monto y self.total dependen de monetize.
+  # metodos
+
+  def format_monto
+    if monto == monto_final
+      monto_final.format
+    else
+      "#{monto.format} -> #{monto_final.format}"
+    end
+  end
+
+  def self.total(movs)
+    movs = movs.group_by { |m| m.monto.currency.iso_code }
+    totales = {}
+    movs.each do |moneda, mvs|
+      total = mvs.map(&:monto).reduce(:+)
+      totales[moneda] = total
+    end
+    totales
+  end
 end

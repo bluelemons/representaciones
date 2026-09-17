@@ -4,7 +4,7 @@ class Cuenta < ActiveRecord::Base
   # asociaciones
   belongs_to :entidad
   belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id"
-# M2b money: monetize :monto
+monetize :monto_cents, as: :monto
 
   # validacioness
   validates_presence_of :entidad, :monto_cents, :monto_currency
