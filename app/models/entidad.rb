@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Entidad < ActiveRecord::Base
   # asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
+  belongs_to :user, optional: true #es el usuario que lo crea o modifica
   has_many :cuentas, :dependent => :destroy  #cuando se borra la entidad se borra la cuenta.
   has_many :movimientos
   has_many :pagos
@@ -21,18 +21,16 @@ class Entidad < ActiveRecord::Base
 
   scope :baja, -> { where(hidden: 0) }
 
-  # M2b: #deposit, #withdraw, #cuenta, #deudas y #deuda dependen del port de money.
-
   # Consulta la cuenta de una entidad en la moneda especificada.
   #
   # @param  [#to_currency] moneda de la cuenta buscada.
   # @param  [Integer] operadora_id id de la operadora que dispone del dinero.
   # @return [Cuenta, nil]
   #
-  # def cuenta(moneda, operadora_id = nil)
-  #   moneda = Money::Currency.new(moneda).to_s
-  #   cuentas.find_by_monto_currency_and_operadora_id(moneda, operadora_id)
-  # end
+  def cuenta(moneda, operadora_id = nil)
+    moneda = Money::Currency.new(moneda).to_s
+    cuentas.find_by(monto_currency: moneda, operadora_id: operadora_id)
+  end
 
   # Incrementa la cuenta de la entidad segun un monto.
   # Si la cuenta no existe es creada.
@@ -41,17 +39,20 @@ class Entidad < ActiveRecord::Base
   # @param  [Operadora] operadora_id operadora que dispone del dinero.
   # @return [Bool]
   #
-  # def deposit(money, operadora = nil)
-  #   money = money.to_money
-  #   moneda = money.currency_as_string
-  #   unless operadora.nil?
-  #     operadora = operadora.id unless operadora.kind_of? Integer
-  #   end
-  #   s = Cuenta.find_or_initialize_by_entidad_id_and_monto_currency_and_operadora_id( \
-  #     id, moneda, operadora, {:monto_cents => 0})
-  #   s.monto += money
-  #   s.save
-  # end
+  def deposit(money, operadora = nil)
+    money = money.to_money
+    moneda = money.currency.iso_code
+    # permite que el metodo acepte tanto operadora como id.
+    unless operadora.nil?
+      operadora = operadora.id unless operadora.kind_of? Integer
+    end
+    s = Cuenta.find_or_initialize_by(entidad_id: id,
+                                     monto_currency: moneda,
+                                     operadora_id: operadora)
+    s.monto_cents = 0 if s.monto_cents.nil?
+    s.monto += money
+    s.save
+  end
 
   # Sustrae un monto de la cuenta de la entidad.
   # Si el saldo es insuficiente, da un error.
@@ -61,33 +62,34 @@ class Entidad < ActiveRecord::Base
   # @return [Bool]
   # @raise  ["saldo insuficiente"]
   #
-  # def withdraw(monto, operadora_id = nil)
-  #   monto = monto.to_money
-  #   moneda = monto.currency_as_string
-  #   c = cuenta(moneda, operadora_id)
-  #   if (monto - c.monto).cents < 3
-  #     monto = c.monto
-  #   end
-  #   c && c.monto >= monto && deposit(monto * -1, operadora_id)
-  # end
+  def withdraw(monto, operadora_id = nil)
+    monto = monto.to_money
+    moneda = monto.currency.iso_code
+    c = cuenta(moneda, operadora_id)
+    # TODO fix it nicely.
+    if (monto - c.monto).cents < 3
+      monto = c.monto
+    end
+    c && c.monto >= monto && deposit(monto * -1, operadora_id)
+  end
 
   # Consulta las deudas de la entidad en todas las reservas.
   #
   # @return [Hash] deudas de la entidad por moneda
   #
-  # def deudas
-  #   @deudas_by_currency ||= _deudas_by_currency
-  #   @deudas_by_currency
-  # end
+  def deudas
+    @deudas_by_currency ||= _deudas_by_currency
+    @deudas_by_currency
+  end
 
   # Consulta las deudas de la entidad en cada reserva en una moneda.
   #
   # @return [Money]
   #
-  # def deuda(currency)
-  #   @deudas_by_currency ||= _deudas_by_currency || 1
-  #   @deudas_by_currency[currency.to_currency]
-  # end
+  def deuda(currency)
+    @deudas_by_currency ||= _deudas_by_currency || 1
+    @deudas_by_currency[currency.to_currency]
+  end
 
   def can_be_deleted?
     reservas.empty? && cuentas.empty? && movimientos.empty? && pagos.empty?
@@ -95,13 +97,13 @@ class Entidad < ActiveRecord::Base
 
   private
 
-  # def _deudas_by_currency
-  #   deudas_by_currency = {}
-  #   reservas.deudas.group_by { |m| m.currency }.each do |c, d|
-  #     deudas_by_currency[c] = d.sum(:+)
-  #   end
-  #   deudas_by_currency
-  # end
+  def _deudas_by_currency
+    deudas_by_currency = {}
+    reservas.deudas.group_by { |m| m.currency }.each do |c, d|
+      deudas_by_currency[c] = d.sum(:+)
+    end
+    deudas_by_currency
+  end
 
   def check_existing_child_records
     unless can_be_deleted?

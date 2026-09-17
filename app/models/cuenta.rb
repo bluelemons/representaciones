@@ -3,7 +3,7 @@ class Cuenta < ActiveRecord::Base
   # clases
   # asociaciones
   belongs_to :entidad
-  belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id"
+  belongs_to :operadora, :class_name => "Entidad", :foreign_key => "operadora_id", :optional => true
 monetize :monto_cents, as: :monto
 
   # validacioness

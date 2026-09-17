@@ -39,7 +39,7 @@ class Reserva < ActiveRecord::Base
      self.created_at.strftime("%d-%m-%Y")
   end
 
-# M2b money: monetize :total
+monetize :total_cents, as: :total
 
   #validaciones
   validates :salida, :presence => true
@@ -53,7 +53,7 @@ class Reserva < ActiveRecord::Base
   validates :programa_id, :presence => true
   validates :operadora_id, :presence => true
   validates :agency_id, :presence => true
-  # M2b money: validates :total (el atributo lo provee monetize)
+  validates :total, :presence => true
 
   # la referencia debe ser única, excepto en el caso en que no existe (algunas
   # operadoras no tienen número de referencia)
@@ -61,7 +61,7 @@ class Reserva < ActiveRecord::Base
                                        scope: :operadora_id,
                                        message: 'ya está cargada'
 
-  #validate :monto_total_si_hay_pagos, :on => :update
+  validate :monto_total_si_hay_pagos, :on => :update
   #scopes
 
   default_scope { order("id desc") }
@@ -73,66 +73,66 @@ class Reserva < ActiveRecord::Base
   # M5 searches: search_methods :sin_voucher (ransack)
   scope :sin_voucher, -> { where("voucher is null") }
 
-  # M2b money: los metodos de deuda, pagos y liquidacion dependen de monetize.
+  #metodos
 
-  # def deuda(entidad)
-  #   if entidad == agency
-  #     agencia_deuda
-  #   elsif operadora == entidad
-  #     operadora_deuda
-  #   else
-  #     raise "Se ha pedido la deuda de #{entidad} en la reserva: #{self}, pero esta entidad no tiene nada que ver"
-  #   end
-  # end
-  #
-  # def actualizar_liquidadas
-  #   self.liquido_agencia = agencia_deuda.zero?
-  #   self.liquido_operadora = operadora_deuda.zero?
-  #   self.save
-  # end
+  def deuda(entidad)
+    if entidad == agency
+      agencia_deuda
+    elsif operadora == entidad
+      operadora_deuda
+    else
+      raise "Se ha pedido la deuda de #{entidad} en la reserva: #{self}, pero esta entidad no tiene nada que ver"
+    end
+  end
+
+  def actualizar_liquidadas
+    self.liquido_agencia = agencia_deuda.zero?
+    self.liquido_operadora = operadora_deuda.zero?
+    self.save
+  end
 
   def titular
     pasajeros.first.try(:name)
   end
 
-  # def moneda
-  #   total.currency.symbol
-  # end
-  #
-  # def sin_tarifa?
-  #   total.cents <= 0
-  # end
-  #
-  # def liquidada?
-  #   !self.sin_tarifa? and self.liquido_agencia and self.liquido_operadora
-  # end
-  #
-  # def agencia_pago
-  #   pagos.by_entidad(agency).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
-  # end
-  #
-  # def operadora_pago
-  #   pagos.by_entidad(operadora).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
-  #   rescue
-  #   puts "Reserva con errores id:#{reserva_id}"
-  # end
-  #
-  # def agencia_deuda
-  #   total - agencia_pago
-  # end
-  # alias :agency_deuda :agencia_deuda
-  #
-  # def operadora_deuda
-  #   total - operadora_pago
-  # end
-  #
-  # def operadora_deuda_format
-  #   operadora_deuda.format
-  # end
-  #
-  # def agencia_deuda_format
-  #   agencia_deuda.format
-  # end
+  def moneda
+    total.currency.symbol
+  end
+
+  def sin_tarifa?
+    total.cents <= 0
+  end
+
+  def liquidada?
+    !self.sin_tarifa? and self.liquido_agencia and self.liquido_operadora
+  end
+
+  def agencia_pago
+    pagos.by_entidad(agency).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
+  end
+
+  def operadora_pago
+    pagos.by_entidad(operadora).map {|p| p.monto_final.to_money }.reduce(:+) || Money.empty(total.currency)
+    rescue
+    puts "Reserva con errores id:#{id}"
+  end
+
+  def agencia_deuda
+    total - agencia_pago
+  end
+  alias :agency_deuda :agencia_deuda
+
+  def operadora_deuda
+    total - operadora_pago
+  end
+
+  def operadora_deuda_format
+    operadora_deuda.format
+  end
+
+  def agencia_deuda_format
+    agencia_deuda.format
+  end
 
   def pasajero
     warn "`pasajero` is deprecated. Use `pasajeros.names` instead."
@@ -160,17 +160,17 @@ class Reserva < ActiveRecord::Base
     "Reserva #{ ref }#{ pax }##{ id }"
   end
 
-  # def saldo_positivo?
-  #   agencia_deuda.cents < 0 || operadora_deuda.cents < 0
-  # end
+  def saldo_positivo?
+    agencia_deuda.cents < 0 || operadora_deuda.cents < 0
+  end
 
   private
 
-  # def monto_total_si_hay_pagos
-  #   if depositos and total
-  #     errors.add(:total, "No se puede cambiar la moneda de la reserva habiendo pagos cargados, borre primero los pagos") unless
-  #       pagos.all? { |p| p.monto_final.currency == total.currency }
-  #   end
-  # end
+  def monto_total_si_hay_pagos
+    if depositos and total
+      errors.add(:total, "No se puede cambiar la moneda de la reserva habiendo pagos cargados, borre primero los pagos") unless
+        pagos.all? { |p| p.monto_final.currency == total.currency }
+    end
+  end
 
 end
