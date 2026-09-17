@@ -6,20 +6,20 @@ class Monto < ActiveRecord::Base
 
   default_scope { includes(:moneda) }
 
-  # M2b money: #to_money usaba el gem Money y #to_pesos/#dolares/#pesos
-  # dependian de Cotizacion.a_la_fecha que no existe (bug preexistente).
-  # def to_money
-  #   currency = case self.moneda.name
-  #     when "Pesos"
-  #       :ars
-  #     when "Dolares"
-  #       :usd
-  #     when "Euros"
-  #       :eur
-  #   end
-  #   Money.new((self.valor * 100).round, currency)
-  # end
-  #
+  # M2b money: #to_pesos/#dolares/#pesos dependían de
+  # Cotizacion.a_la_fecha que no existe (bug preexistente).
+  def to_money
+    currency = case moneda.name
+      when "Pesos"
+        :ars
+      when "Dolares"
+        :usd
+      when "Euros"
+        :eur
+    end
+    Money.new((valor * 100).round, currency)
+  end
+
   # def to_pesos(date)
   #   monto=valor
   #   if moneda_id >1

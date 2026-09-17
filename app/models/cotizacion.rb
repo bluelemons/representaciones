@@ -21,17 +21,16 @@ class Cotizacion < ActiveRecord::Base
   #scope :baja, -> { where(hidden: 0) }
   #metodos
 
-  # M2b money: #add_rate y self.buscar dependen del port de money.
-
   # Agrega la cotización al default_bank.
-  # def add_rate
-  #   Money.add_rate(moneda_venta, moneda_compra, compra)
-  #   Money.add_rate(moneda_compra, moneda_venta, 1.0/compra)
-  # end
-  # def self.buscar(f,curr_1,curr_2)
-  #   curr_1 = curr_1.currency.id
-  #   curr_2 = curr_2.currency.id
-  #   self.find_by_fecha_and_moneda_compra_and_moneda_venta(f,curr_1, curr_2) ||
-  #     self.find_by_fecha_and_moneda_compra_and_moneda_venta(f,curr_2, curr_1)
-  # end
+  def add_rate
+    Money.add_rate(moneda_venta, moneda_compra, compra)
+    Money.add_rate(moneda_compra, moneda_venta, 1.0/compra)
+  end
+
+  def self.buscar(f,curr_1,curr_2)
+    curr_1 = curr_1.currency.id
+    curr_2 = curr_2.currency.id
+    self.find_by(fecha: f, moneda_compra: curr_1, moneda_venta: curr_2) ||
+      self.find_by(fecha: f, moneda_compra: curr_2, moneda_venta: curr_1)
+  end
 end
