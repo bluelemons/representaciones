@@ -1,7 +1,7 @@
 class Reserva < ActiveRecord::Base
   # M2b: port de acts_as_versioned
   # asociaciones
-  belongs_to :user #es el usuario que lo crea o modifica
+  belongs_to :user, optional: true #es el usuario que lo crea o modifica
   belongs_to :thabitacion
   belongs_to :programa
 
