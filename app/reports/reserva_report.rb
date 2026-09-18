@@ -2,6 +2,8 @@
 #Generado con vistas generator 2011-02-10 19:32:11 -0300 'lib/generators/vistas'
 include Layout
 class ReservaReport < Prawn::Document
+  include Layout
+  include ReportFont
 
   def regular(datos, params)
 

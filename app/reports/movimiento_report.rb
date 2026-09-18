@@ -1,5 +1,6 @@
-include Layout
 class MovimientoReport < Prawn::Document
+  include Layout
+  include ReportFont
 
   def to_pdf(datos,totales)
     self.font_size = 7
