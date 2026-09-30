@@ -71,3 +71,5 @@ gem "money-rails", "~> 3.0"
 
 gem "prawn", "~> 2.4"
 gem "prawn-table", "~> 0.2"
+
+gem "pagy", "~> 9.0"
